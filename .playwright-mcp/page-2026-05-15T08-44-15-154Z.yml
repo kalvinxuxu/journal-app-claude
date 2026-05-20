@@ -1,0 +1,87 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：🗑️ 空数据
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e36]:
+        - article [ref=e37]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。 播放日记内容 日记语音栏" [ref=e38]:
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - paragraph [ref=e41]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e42]
+              - generic [ref=e43]:
+                - generic [ref=e44]: 当天累计
+                - generic [ref=e45]:
+                  - generic [ref=e46]: ❤️
+                  - generic [ref=e47]: 开心
+            - paragraph [ref=e48]: 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。
+            - button "播放日记内容" [ref=e49] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e50]:
+              - generic [ref=e51]:
+                - button "早安" [ref=e52] [cursor=pointer]
+                - button "午后" [ref=e53] [cursor=pointer]
+                - button "晚安" [ref=e54] [cursor=pointer]
+              - generic [ref=e55]:
+                - generic [ref=e56]:
+                  - generic [ref=e57]:
+                    - paragraph [ref=e58]: 语音留言
+                    - strong [ref=e59]: 早安留言
+                  - button "展开" [ref=e60] [cursor=pointer]
+                - button "播放 0:12" [ref=e61] [cursor=pointer]:
+                  - generic [ref=e63]: 播放
+                  - generic [ref=e64]: 0:12
+                - paragraph [ref=e65]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e76]:
+          - button "5月15日 周五 开心 手账 她写的 ❤️ 开心 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。 播放日记内容 日记语音栏" [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - paragraph [ref=e80]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e81]
+              - generic [ref=e82]:
+                - generic [ref=e83]: 她写的
+                - generic [ref=e84]:
+                  - generic [ref=e85]: ❤️
+                  - generic [ref=e86]: 开心
+            - paragraph [ref=e87]: 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。
+            - button "播放日记内容" [ref=e88] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e89]:
+              - generic [ref=e90]:
+                - button "早安" [ref=e91] [cursor=pointer]
+                - button "午后" [ref=e92] [cursor=pointer]
+                - button "晚安" [ref=e93] [cursor=pointer]
+              - generic [ref=e94]:
+                - generic [ref=e95]:
+                  - generic [ref=e96]:
+                    - paragraph [ref=e97]: 语音留言
+                    - strong [ref=e98]: 早安留言
+                  - button "展开" [ref=e99] [cursor=pointer]
+                - button "播放 0:12" [ref=e100] [cursor=pointer]:
+                  - generic [ref=e102]: 播放
+                  - generic [ref=e103]: 0:12
+                - paragraph [ref=e104]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e115]:
+        - generic [ref=e117]:
+          - paragraph [ref=e118]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e119]
+        - paragraph [ref=e120]: 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。
+      - button "＋" [ref=e31] [cursor=pointer]

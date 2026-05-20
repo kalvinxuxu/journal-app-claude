@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - paragraph [ref=e36]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e37]
+          - paragraph [ref=e38]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e39] [cursor=pointer]
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]: 日期
+          - textbox "日期" [ref=e43]: 2026-05-15
+        - generic [ref=e44]:
+          - generic [ref=e45]: 心情
+          - generic [ref=e46]:
+            - button "❤️ 开心" [ref=e47] [cursor=pointer]:
+              - generic [ref=e48]:
+                - generic [ref=e49]: ❤️
+                - generic [ref=e50]: 开心
+            - button "🌙 想念" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: 🌙
+                - generic [ref=e54]: 想念
+            - button "💧 感动" [ref=e55] [cursor=pointer]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: 💧
+                - generic [ref=e58]: 感动
+            - button "🍃 平静" [ref=e59] [cursor=pointer]:
+              - generic [ref=e60]:
+                - generic [ref=e61]: 🍃
+                - generic [ref=e62]: 平静
+            - button "✨ 调皮" [ref=e63] [cursor=pointer]:
+              - generic [ref=e64]:
+                - generic [ref=e65]: ✨
+                - generic [ref=e66]: 调皮
+        - generic [ref=e67]:
+          - generic [ref=e68]: 日记内容
+          - textbox "日记内容" [ref=e69]: 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。
+        - generic [ref=e70]:
+          - generic [ref=e71]: 语音留言预览
+          - generic [ref=e72]:
+            - article [ref=e73]:
+              - strong [ref=e74]: 早安
+              - paragraph [ref=e75]: 宝贝起床啦！阳光这么好，今天也要开开心心
+              - text: 0:12
+            - article [ref=e76]:
+              - strong [ref=e77]: 午后
+              - paragraph [ref=e78]: 记得喝点水休息一下，下午茶时间到啦，
+              - text: 0:15
+            - article [ref=e79]:
+              - strong [ref=e80]: 晚安
+              - paragraph [ref=e81]: 星星都睡了，你也要乖乖闭眼，梦里见哦～
+              - text: 0:18
+      - generic [ref=e82]:
+        - button "取消" [ref=e83] [cursor=pointer]
+        - button "写好并请她补全" [ref=e84] [cursor=pointer]

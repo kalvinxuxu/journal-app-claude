@@ -1,0 +1,51 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - paragraph [ref=e123]: 语音页
+          - heading "开心 的声音" [level=2] [ref=e124]
+          - paragraph [ref=e125]: 这里先展示语音播放器和文字稿，后续可以接真实音频。
+        - generic "语音概览" [ref=e126]:
+          - generic [ref=e127]: 自动生成
+          - generic [ref=e128]: 3 条留言
+          - generic [ref=e129]: 可展开文字稿
+      - generic [ref=e130]:
+        - button "上一条" [ref=e131] [cursor=pointer]: ‹ 早安
+        - generic [ref=e132]: 2 / 3
+        - button "下一条" [active] [ref=e133] [cursor=pointer]: 晚安›
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - generic [ref=e172]:
+            - paragraph [ref=e173]: 语音留言
+            - strong [ref=e174]: 午后留言
+          - button "展开" [ref=e175] [cursor=pointer]
+        - button "播放 0:12" [ref=e176] [cursor=pointer]:
+          - generic [ref=e178]: 播放
+          - generic [ref=e179]: 0:12
+        - paragraph [ref=e180]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - paragraph [ref=e158]: 完整语音稿
+            - heading "今天这一组留言" [level=3] [ref=e159]
+          - generic [ref=e160]: 3 条
+        - article [ref=e161]:
+          - strong [ref=e162]: 早安
+          - paragraph [ref=e163]: 早安呀，今天的阳光很好。我一醒来就想到你了。
+        - article [ref=e164]:
+          - strong [ref=e165]: 午后
+          - paragraph [ref=e166]: 刚刚喝到那杯拿铁，味道和我记得的一样。你应该会喜欢。
+        - article [ref=e167]:
+          - strong [ref=e168]: 晚安
+          - paragraph [ref=e169]: 晚安，今天也辛苦了。明天见面的话，我想先抱抱你。

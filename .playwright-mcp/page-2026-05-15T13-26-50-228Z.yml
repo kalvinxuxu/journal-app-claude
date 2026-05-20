@@ -1,0 +1,149 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e354]:
+      - generic [ref=e355]:
+        - generic [ref=e356]:
+          - paragraph [ref=e357]: 本月手账
+          - heading "5月" [level=2] [ref=e358]
+          - paragraph [ref=e359]: 数据来源：💾 本地存储
+        - generic [ref=e360]:
+          - button "卡片流" [ref=e361] [cursor=pointer]
+          - button "月历" [ref=e362] [cursor=pointer]
+          - button "我来写" [ref=e363] [cursor=pointer]
+          - button "请她写" [ref=e364] [cursor=pointer]
+      - generic [ref=e365]:
+        - article [ref=e366]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。 播放日记内容 日记语音栏" [ref=e367]:
+            - generic [ref=e368]:
+              - generic [ref=e369]:
+                - paragraph [ref=e370]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e371]
+              - generic [ref=e372]:
+                - generic [ref=e373]: 当天累计
+                - generic [ref=e374]:
+                  - generic [ref=e375]: ❤️
+                  - generic [ref=e376]: 开心
+            - paragraph [ref=e377]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。
+            - button "播放日记内容" [ref=e378] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e379]:
+              - generic [ref=e380]:
+                - button "早安" [ref=e381] [cursor=pointer]
+                - button "午后" [ref=e382] [cursor=pointer]
+                - button "晚安" [ref=e383] [cursor=pointer]
+                - button "早安" [ref=e384] [cursor=pointer]
+                - button "午后" [ref=e385] [cursor=pointer]
+                - button "晚安" [ref=e386] [cursor=pointer]
+                - button "早安" [ref=e387] [cursor=pointer]
+                - button "午后" [ref=e388] [cursor=pointer]
+                - button "晚安" [ref=e389] [cursor=pointer]
+              - generic [ref=e390]:
+                - generic [ref=e391]:
+                  - generic [ref=e392]:
+                    - paragraph [ref=e393]: 语音留言
+                    - strong [ref=e394]: 早安留言
+                  - button "展开" [ref=e395] [cursor=pointer]
+                - button "播放 0:12" [ref=e396] [cursor=pointer]:
+                  - generic [ref=e398]: 播放
+                  - generic [ref=e399]: 0:12
+                - paragraph [ref=e400]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e411]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。 播放日记内容 日记语音栏" [ref=e412]:
+            - generic [ref=e413]:
+              - generic [ref=e414]:
+                - paragraph [ref=e415]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e416]
+              - generic [ref=e417]:
+                - generic [ref=e418]: 我写的
+                - generic [ref=e419]:
+                  - generic [ref=e420]: ❤️
+                  - generic [ref=e421]: 开心
+            - paragraph [ref=e422]: 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。
+            - button "播放日记内容" [ref=e423] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e424]:
+              - generic [ref=e425]:
+                - button "早安" [ref=e426] [cursor=pointer]
+                - button "午后" [ref=e427] [cursor=pointer]
+                - button "晚安" [ref=e428] [cursor=pointer]
+              - generic [ref=e429]:
+                - generic [ref=e430]:
+                  - generic [ref=e431]:
+                    - paragraph [ref=e432]: 语音留言
+                    - strong [ref=e433]: 早安留言
+                  - button "展开" [ref=e434] [cursor=pointer]
+                - button "播放 0:12" [ref=e435] [cursor=pointer]:
+                  - generic [ref=e437]: 播放
+                  - generic [ref=e438]: 0:12
+                - paragraph [ref=e439]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e450]:
+          - button "5月15日 周五 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 播放日记内容 日记语音栏" [ref=e451]:
+            - generic [ref=e452]:
+              - generic [ref=e453]:
+                - paragraph [ref=e454]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e455]
+              - generic [ref=e456]:
+                - generic [ref=e457]: 她写的
+                - generic [ref=e458]:
+                  - generic [ref=e459]: ❤️
+                  - generic [ref=e460]: 开心
+            - paragraph [ref=e461]: 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。
+            - button "播放日记内容" [ref=e462] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e463]:
+              - generic [ref=e464]:
+                - button "早安" [ref=e465] [cursor=pointer]
+                - button "午后" [ref=e466] [cursor=pointer]
+                - button "晚安" [ref=e467] [cursor=pointer]
+              - generic [ref=e468]:
+                - generic [ref=e469]:
+                  - generic [ref=e470]:
+                    - paragraph [ref=e471]: 语音留言
+                    - strong [ref=e472]: 早安留言
+                  - button "展开" [ref=e473] [cursor=pointer]
+                - button "播放 0:12" [ref=e474] [cursor=pointer]:
+                  - generic [ref=e476]: 播放
+                  - generic [ref=e477]: 0:12
+                - paragraph [ref=e478]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e489]:
+          - button "5月15日 周五 调皮 手账 她写的 ✨ 调皮 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 播放日记内容 日记语音栏" [ref=e490]:
+            - generic [ref=e491]:
+              - generic [ref=e492]:
+                - paragraph [ref=e493]: 5月15日 周五
+                - heading "调皮 手账" [level=3] [ref=e494]
+              - generic [ref=e495]:
+                - generic [ref=e496]: 她写的
+                - generic [ref=e497]:
+                  - generic [ref=e498]: ✨
+                  - generic [ref=e499]: 调皮
+            - paragraph [ref=e500]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！
+            - button "播放日记内容" [ref=e501] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e502]:
+              - generic [ref=e503]:
+                - button "早安" [ref=e504] [cursor=pointer]
+                - button "午后" [ref=e505] [cursor=pointer]
+                - button "晚安" [ref=e506] [cursor=pointer]
+              - generic [ref=e507]:
+                - generic [ref=e508]:
+                  - generic [ref=e509]:
+                    - paragraph [ref=e510]: 语音留言
+                    - strong [ref=e511]: 早安留言
+                  - button "展开" [ref=e512] [cursor=pointer]
+                - button "播放 0:12" [ref=e513] [cursor=pointer]:
+                  - generic [ref=e515]: 播放
+                  - generic [ref=e516]: 0:12
+                - paragraph [ref=e517]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e528]:
+        - generic [ref=e530]:
+          - paragraph [ref=e531]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e532]
+        - paragraph [ref=e533]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。
+      - button "＋" [ref=e534] [cursor=pointer]

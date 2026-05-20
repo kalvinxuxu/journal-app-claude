@@ -1,0 +1,47 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [active] [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e195]:
+      - generic [ref=e196]:
+        - generic [ref=e197]:
+          - paragraph [ref=e198]: 设置
+          - heading "先把偏好记住" [level=2] [ref=e199]
+          - paragraph [ref=e200]: 提醒时间、语音风格、导出方式都先用本地状态占位。
+        - generic "设置摘要" [ref=e201]:
+          - generic [ref=e202]: 本地保存
+          - generic [ref=e203]: 可后续同步
+          - generic [ref=e204]: 适合原型
+      - generic [ref=e205]:
+        - generic [ref=e206]:
+          - generic [ref=e207]:
+            - paragraph [ref=e208]: 偏好配置
+            - heading "先把最常用的项放在前面" [level=3] [ref=e209]
+          - generic [ref=e210]: 保持轻量
+        - generic [ref=e211]:
+          - generic [ref=e212]:
+            - generic [ref=e213]: 提醒时间
+            - textbox "提醒时间" [ref=e214]: 21:30
+          - generic [ref=e215]:
+            - generic [ref=e216]: 语音风格
+            - combobox "语音风格" [ref=e217]:
+              - option "温暖" [selected]
+              - option "轻柔"
+              - option "调皮"
+          - generic [ref=e218]:
+            - generic [ref=e219]: 导出方式
+            - combobox "导出方式" [ref=e220]:
+              - option "PDF" [selected]
+              - option "图片"
+              - option "暂不导出"
+      - generic [ref=e221]:
+        - paragraph [ref=e222]: 下一步
+        - paragraph [ref=e223]: 等你确认后，我可以继续接入真实生成接口、记忆持久化和语音能力。

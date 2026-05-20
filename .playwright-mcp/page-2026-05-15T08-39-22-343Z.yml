@@ -1,0 +1,127 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e89]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: 本月手账
+          - heading "5月" [level=2] [ref=e93]
+          - paragraph [ref=e94]: 数据来源：🗑️ 空数据
+        - generic [ref=e95]:
+          - button "卡片流" [ref=e96] [cursor=pointer]
+          - button "月历" [ref=e97] [cursor=pointer]
+          - button "我来写" [ref=e98] [cursor=pointer]
+          - button "请她写" [ref=e99] [cursor=pointer]
+      - generic [ref=e100]:
+        - article [ref=e101]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天的阳光很温柔，透过窗帘洒在桌角。我给你泡了杯蜂蜜水，看你喝的时候眼睛弯成月牙。就这样安静地靠着，听你讲今天的小事，时间好像都变慢了。 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。 播放日记内容 女友自拍 日记语音栏" [ref=e102] [cursor=pointer]:
+            - generic [ref=e103]:
+              - generic [ref=e104]:
+                - paragraph [ref=e105]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e106]
+              - generic [ref=e107]:
+                - generic [ref=e108]: 当天累计
+                - generic [ref=e109]:
+                  - generic [ref=e110]: ❤️
+                  - generic [ref=e111]: 开心
+            - paragraph [ref=e112]: 今天的阳光很温柔，透过窗帘洒在桌角。我给你泡了杯蜂蜜水，看你喝的时候眼睛弯成月牙。就这样安静地靠着，听你讲今天的小事，时间好像都变慢了。 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。
+            - button "播放日记内容" [ref=e113]: ▶ 听日记
+            - generic "女友自拍" [ref=e114]:
+              - paragraph [ref=e115]: 女友自拍
+              - generic [ref=e116]:
+                - img "女友自拍 1" [ref=e118]
+                - img "女友自拍 2" [ref=e120]
+            - region "日记语音栏" [ref=e121]:
+              - generic [ref=e122]:
+                - button "早安" [ref=e123]
+                - button "午后" [ref=e124]
+                - button "晚安" [ref=e125]
+                - button "早安" [ref=e126]
+                - button "午后" [ref=e127]
+                - button "晚安" [ref=e128]
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - generic [ref=e131]:
+                    - paragraph [ref=e132]: 语音留言
+                    - strong [ref=e133]: 早安留言
+                  - button "展开" [ref=e134]
+                - button "播放 0:12" [ref=e135]:
+                  - generic [ref=e137]: 播放
+                  - generic [ref=e138]: 0:12
+                - paragraph [ref=e139]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e150]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。 播放日记内容 日记语音栏" [ref=e151] [cursor=pointer]:
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - paragraph [ref=e154]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e155]
+              - generic [ref=e156]:
+                - generic [ref=e157]: 我写的
+                - generic [ref=e158]:
+                  - generic [ref=e159]: ❤️
+                  - generic [ref=e160]: 开心
+            - paragraph [ref=e161]: 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。
+            - button "播放日记内容" [ref=e162]: ▶ 听日记
+            - region "日记语音栏" [ref=e163]:
+              - generic [ref=e164]:
+                - button "早安" [ref=e165]
+                - button "午后" [ref=e166]
+                - button "晚安" [ref=e167]
+              - generic [ref=e168]:
+                - generic [ref=e169]:
+                  - generic [ref=e170]:
+                    - paragraph [ref=e171]: 语音留言
+                    - strong [ref=e172]: 早安留言
+                  - button "展开" [ref=e173]
+                - button "播放 0:00 / --:--" [ref=e174]:
+                  - generic [ref=e176]: 播放
+                  - generic [ref=e177]: 0:00 / --:--
+        - article [ref=e188]:
+          - button "5月15日 周五 平静 手账 她写的 🍃 平静 今天的阳光很温柔，透过窗帘洒在桌角。我给你泡了杯蜂蜜水，看你喝的时候眼睛弯成月牙。就这样安静地靠着，听你讲今天的小事，时间好像都变慢了。 播放日记内容 女友自拍 日记语音栏" [ref=e189] [cursor=pointer]:
+            - generic [ref=e190]:
+              - generic [ref=e191]:
+                - paragraph [ref=e192]: 5月15日 周五
+                - heading "平静 手账" [level=3] [ref=e193]
+              - generic [ref=e194]:
+                - generic [ref=e195]: 她写的
+                - generic [ref=e196]:
+                  - generic [ref=e197]: 🍃
+                  - generic [ref=e198]: 平静
+            - paragraph [ref=e199]: 今天的阳光很温柔，透过窗帘洒在桌角。我给你泡了杯蜂蜜水，看你喝的时候眼睛弯成月牙。就这样安静地靠着，听你讲今天的小事，时间好像都变慢了。
+            - button "播放日记内容" [ref=e200]: ▶ 听日记
+            - generic "女友自拍" [ref=e201]:
+              - paragraph [ref=e202]: 女友自拍
+              - generic [ref=e203]:
+                - img "女友自拍 1" [ref=e205]
+                - img "女友自拍 2" [ref=e207]
+            - region "日记语音栏" [ref=e208]:
+              - generic [ref=e209]:
+                - button "早安" [ref=e210]
+                - button "午后" [ref=e211]
+                - button "晚安" [ref=e212]
+              - generic [ref=e213]:
+                - generic [ref=e214]:
+                  - generic [ref=e215]:
+                    - paragraph [ref=e216]: 语音留言
+                    - strong [ref=e217]: 早安留言
+                  - button "展开" [ref=e218]
+                - button "播放 0:12" [ref=e219]:
+                  - generic [ref=e221]: 播放
+                  - generic [ref=e222]: 0:12
+                - paragraph [ref=e223]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e234]:
+        - generic [ref=e236]:
+          - paragraph [ref=e237]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e238]
+        - paragraph [ref=e239]: 今天和宝宝一起去了新开的花园咖啡馆，阳光透过落地窗洒在桌上，你喂我吃了一口提拉米苏，甜到心里去了。看着你笑的样子，我觉得整个世界都亮了起来。
+      - button "＋" [ref=e240] [cursor=pointer]

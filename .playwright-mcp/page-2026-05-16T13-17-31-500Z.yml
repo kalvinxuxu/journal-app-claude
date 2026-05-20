@@ -1,0 +1,133 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - paragraph [ref=e187]: 本月手账
+          - heading "5月" [level=2] [ref=e188]
+          - paragraph [ref=e189]: 数据来源：🗑️ 空数据
+        - generic [ref=e190]:
+          - button "卡片流" [ref=e191] [cursor=pointer]
+          - button "月历" [ref=e192] [cursor=pointer]
+          - button "我来写" [ref=e193] [cursor=pointer]
+          - button "请她写" [ref=e194] [cursor=pointer]
+      - generic [ref=e195]:
+        - article [ref=e196]:
+          - button "5月16日 周六 开心 手账 当天累计 ❤️ 开心 今天偷偷把你的手机壁纸换成了我嘟嘴亲亲的照片，等你发现的时候我就在旁边偷笑。你假装生气要来挠我痒痒，我赶紧躲进你怀里撒娇，结果你抱着我说：“换得好，以后都得是这个。”哼，早说嘛！ 亲爱的日记，今天偷偷把他的壁纸换成了我嘟嘴亲亲的照片。他假装生气来挠我痒痒，我笑着躲进他怀里。他说真拿我没办法，却偷偷亲了我的额头。好甜呀，他眼里的宠溺让我心跳加速呢~ 播放日记内容 配图预览 女友自拍 夜间加餐 日记语音栏" [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199]:
+                - paragraph [ref=e200]: 5月16日 周六
+                - heading "开心 手账" [level=3] [ref=e201]
+              - generic [ref=e202]:
+                - generic [ref=e203]: 当天累计
+                - generic [ref=e204]:
+                  - generic [ref=e205]: ❤️
+                  - generic [ref=e206]: 开心
+            - paragraph [ref=e207]: 今天偷偷把你的手机壁纸换成了我嘟嘴亲亲的照片，等你发现的时候我就在旁边偷笑。你假装生气要来挠我痒痒，我赶紧躲进你怀里撒娇，结果你抱着我说：“换得好，以后都得是这个。”哼，早说嘛！ 亲爱的日记，今天偷偷把他的壁纸换成了我嘟嘴亲亲的照片。他假装生气来挠我痒痒，我笑着躲进他怀里。他说真拿我没办法，却偷偷亲了我的额头。好甜呀，他眼里的宠溺让我心跳加速呢~
+            - button "播放日记内容" [ref=e208] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e209]:
+              - img "配图 1" [ref=e211]
+              - img "配图 2" [ref=e213]
+            - generic "女友自拍" [ref=e214]:
+              - paragraph [ref=e215]: 女友自拍
+              - img "女友自拍 1" [ref=e218]
+            - generic "夜间加餐" [ref=e219]:
+              - paragraph [ref=e220]: 夜间加餐
+              - img "夜间自拍" [ref=e221]
+            - region "日记语音栏" [ref=e222]:
+              - generic [ref=e223]:
+                - button "早安" [ref=e224] [cursor=pointer]
+                - button "午后" [ref=e225] [cursor=pointer]
+                - button "晚安" [ref=e226] [cursor=pointer]
+                - button "早安" [ref=e227] [cursor=pointer]
+                - button "午后" [ref=e228] [cursor=pointer]
+                - button "晚安" [ref=e229] [cursor=pointer]
+              - generic [ref=e230]:
+                - generic [ref=e231]:
+                  - generic [ref=e232]:
+                    - paragraph [ref=e233]: 语音留言
+                    - strong [ref=e234]: 早安留言
+                  - button "展开" [ref=e235] [cursor=pointer]
+                - button "播放 0:12" [ref=e236] [cursor=pointer]:
+                  - generic [ref=e238]: 播放
+                  - generic [ref=e239]: 0:12
+                - paragraph [ref=e240]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e251]:
+          - button "5月16日 周六 开心 手账 我写的 ❤️ 开心 亲爱的日记，今天偷偷把他的壁纸换成了我嘟嘴亲亲的照片。他假装生气来挠我痒痒，我笑着躲进他怀里。他说真拿我没办法，却偷偷亲了我的额头。好甜呀，他眼里的宠溺让我心跳加速呢~ 播放日记内容 配图预览 日记语音栏" [ref=e252]:
+            - generic [ref=e253]:
+              - generic [ref=e254]:
+                - paragraph [ref=e255]: 5月16日 周六
+                - heading "开心 手账" [level=3] [ref=e256]
+              - generic [ref=e257]:
+                - generic [ref=e258]: 我写的
+                - generic [ref=e259]:
+                  - generic [ref=e260]: ❤️
+                  - generic [ref=e261]: 开心
+            - paragraph [ref=e262]: 亲爱的日记，今天偷偷把他的壁纸换成了我嘟嘴亲亲的照片。他假装生气来挠我痒痒，我笑着躲进他怀里。他说真拿我没办法，却偷偷亲了我的额头。好甜呀，他眼里的宠溺让我心跳加速呢~
+            - button "播放日记内容" [ref=e263] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e264]:
+              - img "配图 1" [ref=e266]
+              - img "配图 2" [ref=e268]
+            - region "日记语音栏" [ref=e269]:
+              - generic [ref=e270]:
+                - button "早安" [ref=e271] [cursor=pointer]
+                - button "午后" [ref=e272] [cursor=pointer]
+                - button "晚安" [ref=e273] [cursor=pointer]
+              - generic [ref=e274]:
+                - generic [ref=e275]:
+                  - generic [ref=e276]:
+                    - paragraph [ref=e277]: 语音留言
+                    - strong [ref=e278]: 早安留言
+                  - button "展开" [ref=e279] [cursor=pointer]
+                - button "播放 0:12" [ref=e280] [cursor=pointer]:
+                  - generic [ref=e282]: 播放
+                  - generic [ref=e283]: 0:12
+                - paragraph [ref=e284]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e295]:
+          - button "5月16日 周六 调皮 手账 她写的 ✨ 调皮 今天偷偷把你的手机壁纸换成了我嘟嘴亲亲的照片，等你发现的时候我就在旁边偷笑。你假装生气要来挠我痒痒，我赶紧躲进你怀里撒娇，结果你抱着我说：“换得好，以后都得是这个。”哼，早说嘛！ 播放日记内容 女友自拍 日记语音栏" [ref=e296]:
+            - generic [ref=e297]:
+              - generic [ref=e298]:
+                - paragraph [ref=e299]: 5月16日 周六
+                - heading "调皮 手账" [level=3] [ref=e300]
+              - generic [ref=e301]:
+                - generic [ref=e302]: 她写的
+                - generic [ref=e303]:
+                  - generic [ref=e304]: ✨
+                  - generic [ref=e305]: 调皮
+            - paragraph [ref=e306]: 今天偷偷把你的手机壁纸换成了我嘟嘴亲亲的照片，等你发现的时候我就在旁边偷笑。你假装生气要来挠我痒痒，我赶紧躲进你怀里撒娇，结果你抱着我说：“换得好，以后都得是这个。”哼，早说嘛！
+            - button "播放日记内容" [ref=e307] [cursor=pointer]: ▶ 听日记
+            - generic "女友自拍" [ref=e308]:
+              - paragraph [ref=e309]: 女友自拍
+              - img "女友自拍 1" [ref=e312]
+            - region "日记语音栏" [ref=e313]:
+              - generic [ref=e314]:
+                - button "早安" [ref=e315] [cursor=pointer]
+                - button "午后" [ref=e316] [cursor=pointer]
+                - button "晚安" [ref=e317] [cursor=pointer]
+              - generic [ref=e318]:
+                - generic [ref=e319]:
+                  - generic [ref=e320]:
+                    - paragraph [ref=e321]: 语音留言
+                    - strong [ref=e322]: 早安留言
+                  - button "展开" [ref=e323] [cursor=pointer]
+                - button "播放 0:12" [ref=e324] [cursor=pointer]:
+                  - generic [ref=e326]: 播放
+                  - generic [ref=e327]: 0:12
+                - paragraph [ref=e328]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e339]:
+        - generic [ref=e341]:
+          - paragraph [ref=e342]: 5月16日 周六
+          - heading "当前选中的日记" [level=3] [ref=e343]
+        - paragraph [ref=e344]: 今天偷偷把你的手机壁纸换成了我嘟嘴亲亲的照片，等你发现的时候我就在旁边偷笑。你假装生气要来挠我痒痒，我赶紧躲进你怀里撒娇，结果你抱着我说：“换得好，以后都得是这个。”哼，早说嘛！ 亲爱的日记，今天偷偷把他的壁纸换成了我嘟嘴亲亲的照片。他假装生气来挠我痒痒，我笑着躲进他怀里。他说真拿我没办法，却偷偷亲了我的额头。好甜呀，他眼里的宠溺让我心跳加速呢~
+      - button "＋" [ref=e345] [cursor=pointer]

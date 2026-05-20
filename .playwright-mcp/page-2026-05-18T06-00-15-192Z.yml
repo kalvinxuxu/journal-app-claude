@@ -1,0 +1,59 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e175]:
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - paragraph [ref=e178]: 请她写
+          - heading "让她来记录这一天" [level=2] [ref=e179]
+          - paragraph [ref=e180]: 选一个心情，她来生成配图、语音和内容。
+        - button "返回首页" [ref=e181] [cursor=pointer]
+      - generic [ref=e182]:
+        - generic [ref=e183]:
+          - generic [ref=e184]: 日期
+          - textbox "日期" [ref=e185]: 2026-05-18
+        - generic [ref=e186]:
+          - generic [ref=e187]: 心情
+          - generic [ref=e188]:
+            - button "❤️ 开心" [ref=e189] [cursor=pointer]:
+              - generic [ref=e190]:
+                - generic [ref=e191]: ❤️
+                - generic [ref=e192]: 开心
+            - button "🌙 想念" [ref=e193] [cursor=pointer]:
+              - generic [ref=e194]:
+                - generic [ref=e195]: 🌙
+                - generic [ref=e196]: 想念
+            - button "💧 感动" [ref=e197] [cursor=pointer]:
+              - generic [ref=e198]:
+                - generic [ref=e199]: 💧
+                - generic [ref=e200]: 感动
+            - button "🍃 平静" [ref=e201] [cursor=pointer]:
+              - generic [ref=e202]:
+                - generic [ref=e203]: 🍃
+                - generic [ref=e204]: 平静
+            - button "✨ 调皮" [ref=e205] [cursor=pointer]:
+              - generic [ref=e206]:
+                - generic [ref=e207]: ✨
+                - generic [ref=e208]: 调皮
+        - generic [ref=e209]:
+          - generic [ref=e210]: 场景提示（可选）
+          - textbox "场景提示（可选）" [ref=e211]:
+            - /placeholder: 比如：今天下雨了，想念我们一起撑伞的时候
+      - generic [ref=e216]:
+        - generic [ref=e218]:
+          - paragraph [ref=e219]: 预览
+          - heading "她写的日记" [level=3] [ref=e220]
+        - paragraph [ref=e221]: 亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手，还买了棉花糖给我。看着他傻笑的样子，心里甜甜的。希望每天都这样简单又幸福。
+      - generic [ref=e212]:
+        - button "取消" [ref=e213] [cursor=pointer]
+        - button "保存日记" [disabled] [ref=e222] [cursor=pointer]

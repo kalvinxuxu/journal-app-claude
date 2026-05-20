@@ -1,0 +1,112 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e423]:
+      - generic [ref=e424]:
+        - generic [ref=e425]:
+          - paragraph [ref=e426]: 本月手账
+          - heading "5月" [level=2] [ref=e427]
+          - paragraph [ref=e428]: 页面先跑起来，情绪和记忆先占位，后面再接真实生成。
+        - generic [ref=e429]:
+          - button "卡片流" [ref=e430] [cursor=pointer]
+          - button "月历" [ref=e431] [cursor=pointer]
+          - button "写一篇新的" [ref=e432] [cursor=pointer]
+      - generic [ref=e433]:
+        - article [ref=e434]:
+          - button "5月11日 周一 开心 手账 ❤️ 开心 2026-05-11 晴 今天阳光特别好，照进窗子暖洋洋的。我泡了你喜欢的茉莉花茶，坐在沙发上发呆。手机里翻来覆去看着我们的合照，嘴角不自觉上扬。好想快点见到你呀，等你回来，我要给你一个大大的拥抱。 配图预览 ♪ 0:12 今天阳光好温柔，想和你一起在公园里慢慢散" [ref=e435] [cursor=pointer]:
+            - generic [ref=e436]:
+              - generic [ref=e437]:
+                - paragraph [ref=e438]: 5月11日 周一
+                - heading "开心 手账" [level=3] [ref=e439]
+              - generic [ref=e440]:
+                - generic [ref=e441]: ❤️
+                - generic [ref=e442]: 开心
+            - paragraph [ref=e443]: 2026-05-11 晴 今天阳光特别好，照进窗子暖洋洋的。我泡了你喜欢的茉莉花茶，坐在沙发上发呆。手机里翻来覆去看着我们的合照，嘴角不自觉上扬。好想快点见到你呀，等你回来，我要给你一个大大的拥抱。
+            - generic "配图预览" [ref=e444]:
+              - img "配图 1" [ref=e446]
+              - img "配图 2" [ref=e448]
+            - generic [ref=e449]:
+              - generic [ref=e450]: ♪
+              - generic [ref=e451]: 0:12
+              - generic [ref=e452]: 今天阳光好温柔，想和你一起在公园里慢慢散
+        - article [ref=e453]:
+          - button "5月13日 周三 开心 手账 ❤️ 开心 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。 配图预览 ♪ 0:12 宝贝，今天天气超好，心情像阳光一样灿烂哦" [ref=e454] [cursor=pointer]:
+            - generic [ref=e455]:
+              - generic [ref=e456]:
+                - paragraph [ref=e457]: 5月13日 周三
+                - heading "开心 手账" [level=3] [ref=e458]
+              - generic [ref=e459]:
+                - generic [ref=e460]: ❤️
+                - generic [ref=e461]: 开心
+            - paragraph [ref=e462]: 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。
+            - generic "配图预览" [ref=e463]:
+              - img "配图 1" [ref=e465]
+              - img "配图 2" [ref=e467]
+            - generic [ref=e468]:
+              - generic [ref=e469]: ♪
+              - generic [ref=e470]: 0:12
+              - generic [ref=e471]: 宝贝，今天天气超好，心情像阳光一样灿烂哦
+        - article [ref=e472]:
+          - button "5月9日 周六 开心 手账 ❤️ 开心 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。 配图预览 ♪ 0:15 早安呀，今天的阳光很好。我一醒来就想到你了。" [ref=e473] [cursor=pointer]:
+            - generic [ref=e474]:
+              - generic [ref=e475]:
+                - paragraph [ref=e476]: 5月9日 周六
+                - heading "开心 手账" [level=3] [ref=e477]
+              - generic [ref=e478]:
+                - generic [ref=e479]: ❤️
+                - generic [ref=e480]: 开心
+            - paragraph [ref=e481]: 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。
+            - generic "配图预览" [ref=e482]:
+              - img "配图 1" [ref=e484]
+              - img "配图 2" [ref=e486]
+            - generic [ref=e487]:
+              - generic [ref=e488]: ♪
+              - generic [ref=e489]: 0:15
+              - generic [ref=e490]: 早安呀，今天的阳光很好。我一醒来就想到你了。
+        - article [ref=e491]:
+          - button "5月8日 周五 想念 手账 🌙 想念 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。 配图预览 ♪ 0:10 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。" [ref=e492] [cursor=pointer]:
+            - generic [ref=e493]:
+              - generic [ref=e494]:
+                - paragraph [ref=e495]: 5月8日 周五
+                - heading "想念 手账" [level=3] [ref=e496]
+              - generic [ref=e497]:
+                - generic [ref=e498]: 🌙
+                - generic [ref=e499]: 想念
+            - paragraph [ref=e500]: 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。
+            - generic "配图预览" [ref=e501]:
+              - img "配图 1" [ref=e503]
+            - generic [ref=e504]:
+              - generic [ref=e505]: ♪
+              - generic [ref=e506]: 0:10
+              - generic [ref=e507]: 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。
+        - article [ref=e508]:
+          - button "5月7日 周四 调皮 手账 ✨ 调皮 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。 ♪ 0:09 我猜你现在又在忙，没关系，记得喝水。" [ref=e509] [cursor=pointer]:
+            - generic [ref=e510]:
+              - generic [ref=e511]:
+                - paragraph [ref=e512]: 5月7日 周四
+                - heading "调皮 手账" [level=3] [ref=e513]
+              - generic [ref=e514]:
+                - generic [ref=e515]: ✨
+                - generic [ref=e516]: 调皮
+            - paragraph [ref=e517]: 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。
+            - generic [ref=e518]:
+              - generic [ref=e519]: ♪
+              - generic [ref=e520]: 0:09
+              - generic [ref=e521]: 我猜你现在又在忙，没关系，记得喝水。
+      - generic [ref=e522]:
+        - generic [ref=e523]:
+          - generic [ref=e524]:
+            - paragraph [ref=e525]: 5月11日 周一
+            - heading "当前选中的日记" [level=3] [ref=e526]
+          - button "看语音" [ref=e527] [cursor=pointer]
+        - paragraph [ref=e528]: 2026-05-11 晴 今天阳光特别好，照进窗子暖洋洋的。我泡了你喜欢的茉莉花茶，坐在沙发上发呆。手机里翻来覆去看着我们的合照，嘴角不自觉上扬。好想快点见到你呀，等你回来，我要给你一个大大的拥抱。
+      - button "＋" [ref=e529] [cursor=pointer]

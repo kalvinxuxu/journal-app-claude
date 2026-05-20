@@ -1,0 +1,158 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：💾 本地存储
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜意暖到心底，有他在，每一天都是被爱包裹的。 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜得心里都暖暖的，他笑着看我吃，眼睛里有星星。 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。 播放日记内容 女友自拍 日记语音栏" [ref=e30] [cursor=pointer]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - paragraph [ref=e33]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e34]
+              - generic [ref=e35]:
+                - generic [ref=e36]: 当天累计
+                - generic [ref=e37]:
+                  - generic [ref=e38]: ❤️
+                  - generic [ref=e39]: 开心
+            - paragraph [ref=e40]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜意暖到心底，有他在，每一天都是被爱包裹的。 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜得心里都暖暖的，他笑着看我吃，眼睛里有星星。 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。
+            - button "播放日记内容" [ref=e41]: ▶ 听日记
+            - generic "女友自拍" [ref=e42]:
+              - paragraph [ref=e43]: 女友自拍
+              - generic [ref=e44]:
+                - img "女友自拍 1" [ref=e46]
+                - img "女友自拍 2" [ref=e48]
+            - region "日记语音栏" [ref=e49]:
+              - generic [ref=e50]:
+                - button "早安" [ref=e51]
+                - button "午后" [ref=e52]
+                - button "晚安" [ref=e53]
+                - button "早安" [ref=e54]
+                - button "午后" [ref=e55]
+                - button "晚安" [ref=e56]
+                - button "早安" [ref=e57]
+                - button "午后" [ref=e58]
+                - button "晚安" [ref=e59]
+              - generic [ref=e60]:
+                - generic [ref=e61]:
+                  - generic [ref=e62]:
+                    - paragraph [ref=e63]: 语音留言
+                    - strong [ref=e64]: 早安留言
+                  - button "展开" [ref=e65]
+                - button "播放 0:12" [ref=e66]:
+                  - generic [ref=e68]: 播放
+                  - generic [ref=e69]: 0:12
+                - paragraph [ref=e70]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e81]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。 播放日记内容 日记语音栏" [active] [ref=e82] [cursor=pointer]:
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - paragraph [ref=e85]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e86]
+              - generic [ref=e87]:
+                - generic [ref=e88]: 我写的
+                - generic [ref=e89]:
+                  - generic [ref=e90]: ❤️
+                  - generic [ref=e91]: 开心
+            - paragraph [ref=e92]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。
+            - button "播放日记内容" [ref=e93]: ▶ 听日记
+            - region "日记语音栏" [ref=e94]:
+              - generic [ref=e95]:
+                - button "早安" [ref=e96]
+                - button "午后" [ref=e97]
+                - button "晚安" [ref=e98]
+              - generic [ref=e99]:
+                - generic [ref=e100]:
+                  - generic [ref=e101]:
+                    - paragraph [ref=e102]: 语音留言
+                    - strong [ref=e103]: 早安留言
+                  - button "展开" [ref=e104]
+                - button "播放 0:00 / 0:02" [ref=e211]:
+                  - generic [ref=e107]: 播放
+                  - generic [ref=e108]: 0:00 / 0:02
+        - article [ref=e119]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜得心里都暖暖的，他笑着看我吃，眼睛里有星星。 播放日记内容 日记语音栏" [ref=e120] [cursor=pointer]:
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - paragraph [ref=e123]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e124]
+              - generic [ref=e125]:
+                - generic [ref=e126]: 我写的
+                - generic [ref=e127]:
+                  - generic [ref=e128]: ❤️
+                  - generic [ref=e129]: 开心
+            - paragraph [ref=e130]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜得心里都暖暖的，他笑着看我吃，眼睛里有星星。
+            - button "播放日记内容" [ref=e131]: ▶ 听日记
+            - region "日记语音栏" [ref=e132]:
+              - generic [ref=e133]:
+                - button "早安" [ref=e134]
+                - button "午后" [ref=e135]
+                - button "晚安" [ref=e136]
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - generic [ref=e139]:
+                    - paragraph [ref=e140]: 语音留言
+                    - strong [ref=e141]: 早安留言
+                  - button "展开" [ref=e142]
+                - button "播放 0:12" [ref=e143]:
+                  - generic [ref=e145]: 播放
+                  - generic [ref=e146]: 0:12
+                - paragraph [ref=e147]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e158]:
+          - button "5月15日 周五 感动 手账 她写的 💧 感动 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜意暖到心底，有他在，每一天都是被爱包裹的。 播放日记内容 女友自拍 日记语音栏" [ref=e159] [cursor=pointer]:
+            - generic [ref=e160]:
+              - generic [ref=e161]:
+                - paragraph [ref=e162]: 5月15日 周五
+                - heading "感动 手账" [level=3] [ref=e163]
+              - generic [ref=e164]:
+                - generic [ref=e165]: 她写的
+                - generic [ref=e166]:
+                  - generic [ref=e167]: 💧
+                  - generic [ref=e168]: 感动
+            - paragraph [ref=e169]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜意暖到心底，有他在，每一天都是被爱包裹的。
+            - button "播放日记内容" [ref=e170]: ▶ 听日记
+            - generic "女友自拍" [ref=e171]:
+              - paragraph [ref=e172]: 女友自拍
+              - generic [ref=e173]:
+                - img "女友自拍 1" [ref=e175]
+                - img "女友自拍 2" [ref=e177]
+            - region "日记语音栏" [ref=e178]:
+              - generic [ref=e179]:
+                - button "早安" [ref=e180]
+                - button "午后" [ref=e181]
+                - button "晚安" [ref=e182]
+              - generic [ref=e183]:
+                - generic [ref=e184]:
+                  - generic [ref=e185]:
+                    - paragraph [ref=e186]: 语音留言
+                    - strong [ref=e187]: 早安留言
+                  - button "展开" [ref=e188]
+                - button "播放 0:12" [ref=e189]:
+                  - generic [ref=e191]: 播放
+                  - generic [ref=e192]: 0:12
+                - paragraph [ref=e193]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e204]:
+        - generic [ref=e206]:
+          - paragraph [ref=e207]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e208]
+        - paragraph [ref=e209]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。
+      - button "＋" [ref=e210] [cursor=pointer]

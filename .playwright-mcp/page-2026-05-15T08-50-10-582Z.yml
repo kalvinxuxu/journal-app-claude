@@ -1,0 +1,117 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：💾 本地存储
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天阳光很好，窗外的风吹动了桌角的书页。你轻轻枕在我腿上，呼吸均匀，像一只慵懒的猫。我低头看你，世界就安静了。这样的午后，真希望可以一直一直延续下去。 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。 播放日记内容 日记语音栏" [ref=e30]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - paragraph [ref=e33]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e34]
+              - generic [ref=e35]:
+                - generic [ref=e36]: 当天累计
+                - generic [ref=e37]:
+                  - generic [ref=e38]: ❤️
+                  - generic [ref=e39]: 开心
+            - paragraph [ref=e40]: 今天阳光很好，窗外的风吹动了桌角的书页。你轻轻枕在我腿上，呼吸均匀，像一只慵懒的猫。我低头看你，世界就安静了。这样的午后，真希望可以一直一直延续下去。 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。
+            - button "播放日记内容" [ref=e41] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e42]:
+              - generic [ref=e43]:
+                - button "早安" [ref=e44] [cursor=pointer]
+                - button "午后" [ref=e45] [cursor=pointer]
+                - button "晚安" [ref=e46] [cursor=pointer]
+                - button "早安" [ref=e47] [cursor=pointer]
+                - button "午后" [ref=e48] [cursor=pointer]
+                - button "晚安" [ref=e49] [cursor=pointer]
+              - generic [ref=e50]:
+                - generic [ref=e51]:
+                  - generic [ref=e52]:
+                    - paragraph [ref=e53]: 语音留言
+                    - strong [ref=e54]: 早安留言
+                  - button "展开" [ref=e55] [cursor=pointer]
+                - button "播放 0:12" [ref=e56] [cursor=pointer]:
+                  - generic [ref=e58]: 播放
+                  - generic [ref=e59]: 0:12
+                - paragraph [ref=e60]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e71]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。 播放日记内容 日记语音栏" [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - paragraph [ref=e75]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e76]
+              - generic [ref=e77]:
+                - generic [ref=e78]: 我写的
+                - generic [ref=e79]:
+                  - generic [ref=e80]: ❤️
+                  - generic [ref=e81]: 开心
+            - paragraph [ref=e82]: 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。
+            - button "播放日记内容" [ref=e83] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e84]:
+              - generic [ref=e85]:
+                - button "早安" [ref=e86] [cursor=pointer]
+                - button "午后" [ref=e87] [cursor=pointer]
+                - button "晚安" [ref=e88] [cursor=pointer]
+              - generic [ref=e89]:
+                - generic [ref=e90]:
+                  - generic [ref=e91]:
+                    - paragraph [ref=e92]: 语音留言
+                    - strong [ref=e93]: 早安留言
+                  - button "展开" [ref=e94] [cursor=pointer]
+                - button "播放 0:00 / --:--" [ref=e95] [cursor=pointer]:
+                  - generic [ref=e97]: 播放
+                  - generic [ref=e98]: 0:00 / --:--
+        - article [ref=e109]:
+          - button "5月15日 周五 平静 手账 她写的 🍃 平静 今天阳光很好，窗外的风吹动了桌角的书页。你轻轻枕在我腿上，呼吸均匀，像一只慵懒的猫。我低头看你，世界就安静了。这样的午后，真希望可以一直一直延续下去。 播放日记内容 日记语音栏" [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - paragraph [ref=e113]: 5月15日 周五
+                - heading "平静 手账" [level=3] [ref=e114]
+              - generic [ref=e115]:
+                - generic [ref=e116]: 她写的
+                - generic [ref=e117]:
+                  - generic [ref=e118]: 🍃
+                  - generic [ref=e119]: 平静
+            - paragraph [ref=e120]: 今天阳光很好，窗外的风吹动了桌角的书页。你轻轻枕在我腿上，呼吸均匀，像一只慵懒的猫。我低头看你，世界就安静了。这样的午后，真希望可以一直一直延续下去。
+            - button "播放日记内容" [ref=e121] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e122]:
+              - generic [ref=e123]:
+                - button "早安" [ref=e124] [cursor=pointer]
+                - button "午后" [ref=e125] [cursor=pointer]
+                - button "晚安" [ref=e126] [cursor=pointer]
+              - generic [ref=e127]:
+                - generic [ref=e128]:
+                  - generic [ref=e129]:
+                    - paragraph [ref=e130]: 语音留言
+                    - strong [ref=e131]: 早安留言
+                  - button "展开" [ref=e132] [cursor=pointer]
+                - button "播放 0:12" [ref=e133] [cursor=pointer]:
+                  - generic [ref=e135]: 播放
+                  - generic [ref=e136]: 0:12
+                - paragraph [ref=e137]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e148]:
+        - generic [ref=e150]:
+          - paragraph [ref=e151]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e152]
+        - paragraph [ref=e153]: 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。
+      - button "＋" [ref=e154] [cursor=pointer]

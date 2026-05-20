@@ -1,0 +1,46 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [active] [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e148]:
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - paragraph [ref=e151]: 语音页
+          - heading "开心 的声音" [level=2] [ref=e152]
+          - paragraph [ref=e153]: 这里先展示语音播放器和文字稿，后续可以接真实音频。
+        - generic "语音概览" [ref=e154]:
+          - generic [ref=e155]: 自动生成
+          - generic [ref=e156]: 2-3 条留言
+          - generic [ref=e157]: 可展开文字稿
+      - generic [ref=e158]:
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - paragraph [ref=e161]: 语音留言
+            - strong [ref=e162]: 早安留言
+          - button "展开" [ref=e163] [cursor=pointer]
+        - button "播放 0:15" [ref=e164] [cursor=pointer]:
+          - generic [ref=e166]: 播放
+          - generic [ref=e167]: 0:15
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - paragraph [ref=e182]: 完整语音稿
+            - heading "今天这一组留言" [level=3] [ref=e183]
+          - generic [ref=e184]: 3 条
+        - article [ref=e185]:
+          - strong [ref=e186]: 早安
+          - paragraph [ref=e187]: 早安呀，今天的阳光很好。我一醒来就想到你了。
+        - article [ref=e188]:
+          - strong [ref=e189]: 午后
+          - paragraph [ref=e190]: 刚刚喝到那杯拿铁，味道和我记得的一样。你应该会喜欢。
+        - article [ref=e191]:
+          - strong [ref=e192]: 晚安
+          - paragraph [ref=e193]: 晚安，今天也辛苦了。明天见面的话，我想先抱抱你。

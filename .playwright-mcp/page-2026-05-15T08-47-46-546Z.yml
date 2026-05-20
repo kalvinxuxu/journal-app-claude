@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e19]:
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - generic [ref=e121]:
+          - paragraph [ref=e122]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e123]
+          - paragraph [ref=e124]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e125] [cursor=pointer]
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - generic [ref=e128]: 日期
+          - textbox "日期" [ref=e129]: 2026-05-15
+        - generic [ref=e130]:
+          - generic [ref=e131]: 心情
+          - generic [ref=e132]:
+            - button "❤️ 开心" [ref=e133] [cursor=pointer]:
+              - generic [ref=e134]:
+                - generic [ref=e135]: ❤️
+                - generic [ref=e136]: 开心
+            - button "🌙 想念" [ref=e137] [cursor=pointer]:
+              - generic [ref=e138]:
+                - generic [ref=e139]: 🌙
+                - generic [ref=e140]: 想念
+            - button "💧 感动" [ref=e141] [cursor=pointer]:
+              - generic [ref=e142]:
+                - generic [ref=e143]: 💧
+                - generic [ref=e144]: 感动
+            - button "🍃 平静" [ref=e145] [cursor=pointer]:
+              - generic [ref=e146]:
+                - generic [ref=e147]: 🍃
+                - generic [ref=e148]: 平静
+            - button "✨ 调皮" [ref=e149] [cursor=pointer]:
+              - generic [ref=e150]:
+                - generic [ref=e151]: ✨
+                - generic [ref=e152]: 调皮
+        - generic [ref=e153]:
+          - generic [ref=e154]: 日记内容
+          - textbox "日记内容" [ref=e155]: 今天的阳光真暖和，你靠在我身边看书，头发垂下来扫过我的手背。我偷偷亲了你一下，你笑着抬头，眼睛亮晶晶的。好想时间就停在这一刻。
+        - generic [ref=e156]:
+          - generic [ref=e157]: 语音留言预览
+          - generic [ref=e158]:
+            - article [ref=e159]:
+              - strong [ref=e160]: 早安
+              - paragraph [ref=e161]: 今天天气真好，阳光照进心里暖洋洋的，
+              - text: 0:12
+            - article [ref=e162]:
+              - strong [ref=e163]: 午后
+              - paragraph [ref=e164]: 午后的微风轻轻吹过，让我想起你微笑的样子
+              - text: 0:15
+            - article [ref=e165]:
+              - strong [ref=e166]: 晚安
+              - paragraph [ref=e167]: 星星在眨眼，月亮在微笑，带着今天的开心，
+              - text: 0:18
+      - generic [ref=e168]:
+        - button "取消" [ref=e169] [cursor=pointer]
+        - button "写好并请她补全" [ref=e170] [cursor=pointer]

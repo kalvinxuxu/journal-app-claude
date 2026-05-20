@@ -1,0 +1,28 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：🗑️ 空数据
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - heading "还没有日记" [level=3] [ref=e29]
+        - paragraph [ref=e30]: 先写第一篇吧，首页会立刻有内容。
+      - button "＋" [ref=e31] [cursor=pointer]

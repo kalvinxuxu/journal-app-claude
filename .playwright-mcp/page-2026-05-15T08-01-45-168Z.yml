@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - paragraph [ref=e36]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e37]
+          - paragraph [ref=e38]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e39] [cursor=pointer]
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]: 日期
+          - textbox "日期" [ref=e43]: 2026-05-15
+        - generic [ref=e44]:
+          - generic [ref=e45]: 心情
+          - generic [ref=e46]:
+            - button "❤️ 开心" [ref=e47] [cursor=pointer]:
+              - generic [ref=e48]:
+                - generic [ref=e49]: ❤️
+                - generic [ref=e50]: 开心
+            - button "🌙 想念" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: 🌙
+                - generic [ref=e54]: 想念
+            - button "💧 感动" [ref=e55] [cursor=pointer]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: 💧
+                - generic [ref=e58]: 感动
+            - button "🍃 平静" [ref=e59] [cursor=pointer]:
+              - generic [ref=e60]:
+                - generic [ref=e61]: 🍃
+                - generic [ref=e62]: 平静
+            - button "✨ 调皮" [ref=e63] [cursor=pointer]:
+              - generic [ref=e64]:
+                - generic [ref=e65]: ✨
+                - generic [ref=e66]: 调皮
+        - generic [ref=e67]:
+          - generic [ref=e68]: 日记内容
+          - textbox "日记内容" [ref=e69]: 今天阳光特别好，你突然从背后抱住我，下巴轻轻搁在我肩上。我们就这样静静地站了一会儿，你身上有好闻的洗衣粉味道。真想时间停在这一刻呀。
+        - generic [ref=e70]:
+          - generic [ref=e71]: 语音留言预览
+          - generic [ref=e72]:
+            - article [ref=e73]:
+              - strong [ref=e74]: 早安
+              - paragraph [ref=e75]: 宝贝早上好呀，今天阳光真好，
+              - text: 0:12
+            - article [ref=e76]:
+              - strong [ref=e77]: 午后
+              - paragraph [ref=e78]: 下午茶时间到啦，好想和你分享这份甜蜜与快
+              - text: 0:15
+            - article [ref=e79]:
+              - strong [ref=e80]: 晚安
+              - paragraph [ref=e81]: 梦里见哦，今天的一切美好都想装进你的梦里
+              - text: 0:18
+      - generic [ref=e82]:
+        - button "取消" [ref=e83] [cursor=pointer]
+        - button "写好并请她补全" [ref=e84] [cursor=pointer]

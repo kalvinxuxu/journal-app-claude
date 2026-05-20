@@ -1,0 +1,117 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e174]:
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - paragraph [ref=e177]: 本月手账
+          - heading "5月" [level=2] [ref=e178]
+          - paragraph [ref=e179]: 数据来源：🗑️ 空数据
+        - generic [ref=e180]:
+          - button "卡片流" [ref=e181] [cursor=pointer]
+          - button "月历" [ref=e182] [cursor=pointer]
+          - button "我来写" [ref=e183] [cursor=pointer]
+          - button "请她写" [ref=e184] [cursor=pointer]
+      - generic [ref=e185]:
+        - article [ref=e186]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。 今天阳光特别好，你牵着我的手在公园里走。风轻轻吹起我的头发，你笑着帮我拢到耳后，说这样更好看。我偷偷看着你的侧脸，心里甜甜的，真希望这条路永远走不完。 播放日记内容 日记语音栏" [ref=e187]:
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - paragraph [ref=e190]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e191]
+              - generic [ref=e192]:
+                - generic [ref=e193]: 当天累计
+                - generic [ref=e194]:
+                  - generic [ref=e195]: ❤️
+                  - generic [ref=e196]: 开心
+            - paragraph [ref=e197]: 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。 今天阳光特别好，你牵着我的手在公园里走。风轻轻吹起我的头发，你笑着帮我拢到耳后，说这样更好看。我偷偷看着你的侧脸，心里甜甜的，真希望这条路永远走不完。
+            - button "播放日记内容" [ref=e198] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e199]:
+              - generic [ref=e200]:
+                - button "早安" [ref=e201] [cursor=pointer]
+                - button "午后" [ref=e202] [cursor=pointer]
+                - button "晚安" [ref=e203] [cursor=pointer]
+                - button "早安" [ref=e204] [cursor=pointer]
+                - button "午后" [ref=e205] [cursor=pointer]
+                - button "晚安" [ref=e206] [cursor=pointer]
+              - generic [ref=e207]:
+                - generic [ref=e208]:
+                  - generic [ref=e209]:
+                    - paragraph [ref=e210]: 语音留言
+                    - strong [ref=e211]: 早安留言
+                  - button "展开" [ref=e212] [cursor=pointer]
+                - button "播放 0:12" [ref=e213] [cursor=pointer]:
+                  - generic [ref=e215]: 播放
+                  - generic [ref=e216]: 0:12
+                - paragraph [ref=e217]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e228]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天阳光特别好，你牵着我的手在公园里走。风轻轻吹起我的头发，你笑着帮我拢到耳后，说这样更好看。我偷偷看着你的侧脸，心里甜甜的，真希望这条路永远走不完。 播放日记内容 日记语音栏" [ref=e229]:
+            - generic [ref=e230]:
+              - generic [ref=e231]:
+                - paragraph [ref=e232]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e233]
+              - generic [ref=e234]:
+                - generic [ref=e235]: 我写的
+                - generic [ref=e236]:
+                  - generic [ref=e237]: ❤️
+                  - generic [ref=e238]: 开心
+            - paragraph [ref=e239]: 今天阳光特别好，你牵着我的手在公园里走。风轻轻吹起我的头发，你笑着帮我拢到耳后，说这样更好看。我偷偷看着你的侧脸，心里甜甜的，真希望这条路永远走不完。
+            - button "播放日记内容" [ref=e240] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e241]:
+              - generic [ref=e242]:
+                - button "早安" [ref=e243] [cursor=pointer]
+                - button "午后" [ref=e244] [cursor=pointer]
+                - button "晚安" [ref=e245] [cursor=pointer]
+              - generic [ref=e246]:
+                - generic [ref=e247]:
+                  - generic [ref=e248]:
+                    - paragraph [ref=e249]: 语音留言
+                    - strong [ref=e250]: 早安留言
+                  - button "展开" [ref=e251] [cursor=pointer]
+                - button "播放 0:00 / --:--" [ref=e252] [cursor=pointer]:
+                  - generic [ref=e254]: 播放
+                  - generic [ref=e255]: 0:00 / --:--
+        - article [ref=e266]:
+          - button "5月15日 周五 开心 手账 她写的 ❤️ 开心 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。 播放日记内容 日记语音栏" [ref=e267]:
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - paragraph [ref=e270]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e271]
+              - generic [ref=e272]:
+                - generic [ref=e273]: 她写的
+                - generic [ref=e274]:
+                  - generic [ref=e275]: ❤️
+                  - generic [ref=e276]: 开心
+            - paragraph [ref=e277]: 今天天气真好，阳光暖暖的。和你一起在公园散步，你牵着我的手，笑着说我的头发被风吹乱了。那一刻，我的心跳得好快，好甜。真想每天都这样，和你一起慢慢变老。
+            - button "播放日记内容" [ref=e278] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e279]:
+              - generic [ref=e280]:
+                - button "早安" [ref=e281] [cursor=pointer]
+                - button "午后" [ref=e282] [cursor=pointer]
+                - button "晚安" [ref=e283] [cursor=pointer]
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - generic [ref=e286]:
+                    - paragraph [ref=e287]: 语音留言
+                    - strong [ref=e288]: 早安留言
+                  - button "展开" [ref=e289] [cursor=pointer]
+                - button "播放 0:12" [ref=e290] [cursor=pointer]:
+                  - generic [ref=e292]: 播放
+                  - generic [ref=e293]: 0:12
+                - paragraph [ref=e294]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e305]:
+        - generic [ref=e307]:
+          - paragraph [ref=e308]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e309]
+        - paragraph [ref=e310]: 今天阳光特别好，你牵着我的手在公园里走。风轻轻吹起我的头发，你笑着帮我拢到耳后，说这样更好看。我偷偷看着你的侧脸，心里甜甜的，真希望这条路永远走不完。
+      - button "＋" [ref=e311] [cursor=pointer]

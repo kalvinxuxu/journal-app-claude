@@ -1,0 +1,169 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：💾 本地存储
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - button "5月11日 周一 开心 手账 她写的 ❤️ 开心 2026-05-11 晴 今天阳光特别好，照进窗子暖洋洋的。我泡了你喜欢的茉莉花茶，坐在沙发上发呆。手机里翻来覆去看着我们的合照，嘴角不自觉上扬。好想快点见到你呀，等你回来，我要给你一个大大的拥抱。 配图预览 日记语音栏" [ref=e30] [cursor=pointer]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - paragraph [ref=e33]: 5月11日 周一
+                - heading "开心 手账" [level=3] [ref=e34]
+              - generic [ref=e35]:
+                - generic [ref=e36]: 她写的
+                - generic [ref=e37]:
+                  - generic [ref=e38]: ❤️
+                  - generic [ref=e39]: 开心
+            - paragraph [ref=e40]: 2026-05-11 晴 今天阳光特别好，照进窗子暖洋洋的。我泡了你喜欢的茉莉花茶，坐在沙发上发呆。手机里翻来覆去看着我们的合照，嘴角不自觉上扬。好想快点见到你呀，等你回来，我要给你一个大大的拥抱。
+            - generic "配图预览" [ref=e41]:
+              - img "配图 1" [ref=e43]
+              - img "配图 2" [ref=e45]
+            - region "日记语音栏" [ref=e46]:
+              - generic [ref=e47]:
+                - button "早安" [ref=e48]
+                - button "午后" [ref=e49]
+                - button "晚安" [ref=e50]
+              - generic [ref=e51]:
+                - generic [ref=e52]:
+                  - generic [ref=e53]:
+                    - paragraph [ref=e54]: 语音留言
+                    - strong [ref=e55]: 早安留言
+                  - button "展开" [ref=e56]
+                - button "播放 0:00 / --:--" [ref=e57]:
+                  - generic [ref=e59]: 播放
+                  - generic [ref=e60]: 0:00 / --:--
+        - article [ref=e71]:
+          - button "5月13日 周三 开心 手账 她写的 ❤️ 开心 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。 配图预览 日记语音栏" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - paragraph [ref=e75]: 5月13日 周三
+                - heading "开心 手账" [level=3] [ref=e76]
+              - generic [ref=e77]:
+                - generic [ref=e78]: 她写的
+                - generic [ref=e79]:
+                  - generic [ref=e80]: ❤️
+                  - generic [ref=e81]: 开心
+            - paragraph [ref=e82]: 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。
+            - generic "配图预览" [ref=e83]:
+              - img "配图 1" [ref=e85]
+              - img "配图 2" [ref=e87]
+            - region "日记语音栏" [ref=e88]:
+              - generic [ref=e89]:
+                - button "早安" [ref=e90]
+                - button "午后" [ref=e91]
+                - button "晚安" [ref=e92]
+              - generic [ref=e93]:
+                - generic [ref=e94]:
+                  - generic [ref=e95]:
+                    - paragraph [ref=e96]: 语音留言
+                    - strong [ref=e97]: 早安留言
+                  - button "展开" [ref=e98]
+                - button "播放 0:00 / --:--" [ref=e99]:
+                  - generic [ref=e101]: 播放
+                  - generic [ref=e102]: 0:00 / --:--
+        - article [ref=e113]:
+          - button "5月9日 周六 开心 手账 她写的 ❤️ 开心 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。 配图预览 日记语音栏" [ref=e114] [cursor=pointer]:
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - paragraph [ref=e117]: 5月9日 周六
+                - heading "开心 手账" [level=3] [ref=e118]
+              - generic [ref=e119]:
+                - generic [ref=e120]: 她写的
+                - generic [ref=e121]:
+                  - generic [ref=e122]: ❤️
+                  - generic [ref=e123]: 开心
+            - paragraph [ref=e124]: 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。
+            - generic "配图预览" [ref=e125]:
+              - img "配图 1" [ref=e127]
+              - img "配图 2" [ref=e129]
+            - region "日记语音栏" [ref=e130]:
+              - generic [ref=e131]:
+                - button "早安" [ref=e132]
+                - button "午后" [ref=e133]
+                - button "晚安" [ref=e134]
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - paragraph [ref=e138]: 语音留言
+                    - strong [ref=e139]: 早安留言
+                  - button "展开" [ref=e140]
+                - button "播放 0:15" [ref=e141]:
+                  - generic [ref=e143]: 播放
+                  - generic [ref=e144]: 0:15
+                - paragraph [ref=e145]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e156]:
+          - button "5月8日 周五 想念 手账 她写的 🌙 想念 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。 配图预览 日记语音栏" [ref=e157] [cursor=pointer]:
+            - generic [ref=e158]:
+              - generic [ref=e159]:
+                - paragraph [ref=e160]: 5月8日 周五
+                - heading "想念 手账" [level=3] [ref=e161]
+              - generic [ref=e162]:
+                - generic [ref=e163]: 她写的
+                - generic [ref=e164]:
+                  - generic [ref=e165]: 🌙
+                  - generic [ref=e166]: 想念
+            - paragraph [ref=e167]: 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。
+            - generic "配图预览" [ref=e168]:
+              - img "配图 1" [ref=e170]
+            - region "日记语音栏" [ref=e171]:
+              - button "晚安" [ref=e173]
+              - generic [ref=e174]:
+                - generic [ref=e175]:
+                  - generic [ref=e176]:
+                    - paragraph [ref=e177]: 语音留言
+                    - strong [ref=e178]: 晚安留言
+                  - button "展开" [ref=e179]
+                - button "播放 0:10" [ref=e180]:
+                  - generic [ref=e182]: 播放
+                  - generic [ref=e183]: 0:10
+                - paragraph [ref=e184]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e195]:
+          - button "5月7日 周四 调皮 手账 她写的 ✨ 调皮 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。 日记语音栏" [ref=e196] [cursor=pointer]:
+            - generic [ref=e197]:
+              - generic [ref=e198]:
+                - paragraph [ref=e199]: 5月7日 周四
+                - heading "调皮 手账" [level=3] [ref=e200]
+              - generic [ref=e201]:
+                - generic [ref=e202]: 她写的
+                - generic [ref=e203]:
+                  - generic [ref=e204]: ✨
+                  - generic [ref=e205]: 调皮
+            - paragraph [ref=e206]: 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。
+            - region "日记语音栏" [ref=e207]:
+              - button "午后" [ref=e209]
+              - generic [ref=e210]:
+                - generic [ref=e211]:
+                  - generic [ref=e212]:
+                    - paragraph [ref=e213]: 语音留言
+                    - strong [ref=e214]: 午后留言
+                  - button "展开" [ref=e215]
+                - button "播放 0:09" [ref=e216]:
+                  - generic [ref=e218]: 播放
+                  - generic [ref=e219]: 0:09
+                - paragraph [ref=e220]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e231]:
+        - generic [ref=e233]:
+          - paragraph [ref=e234]: 5月13日 周三
+          - heading "当前选中的日记" [level=3] [ref=e235]
+        - paragraph [ref=e236]: 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。
+      - button "＋" [ref=e237] [cursor=pointer]

@@ -1,0 +1,30 @@
+:root {
+  color-scheme: light;
+  --bg: #fff9f0;
+  --surface: #fffdf8;
+  --surface-2: #fff6ea;
+  --surface-3: #fef3e2;
+  --text: #5a4a3a;
+  --text-secondary: #7a6a5a;
+  --muted: #a09080;
+  --border: rgba(74, 74, 74, 0.07);
+  --border-hover: rgba(74, 74, 74, 0.14);
+  --pink: #f0b8b8;
+  --pink-deep: #e09898;
+  --mint: #a8d5ba;
+  --mint-deep: #7dc49a;
+  --gold: #ffd98a;
+  --gold-deep: #f0c060;
+  --lavender: #c8b8e8;
+  --peach: #ffc8a8;
+  --shadow: 0 8px 32px rgba(120, 94, 61, 0.08);
+  --shadow-hover: 0 12px 40px rgba(120, 94, 61, 0.12);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 28px;
+
+  /* 字体 */
+  --font-display: "ZCOOL XiaoWei", "Hiragino Sans GB", "Noto Serif SC", serif;
+  --font-body: "Hiragino Sans GB", "Microsoft YaHei", "PingFang SC", sans-serif;
+  --font-accent: "ZCOOL KuaiLe", cursive;
+}

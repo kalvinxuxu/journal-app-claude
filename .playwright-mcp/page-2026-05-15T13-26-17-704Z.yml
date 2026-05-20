@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e302]:
+      - generic [ref=e303]:
+        - generic [ref=e304]:
+          - paragraph [ref=e305]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e306]
+          - paragraph [ref=e307]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e308] [cursor=pointer]
+      - generic [ref=e309]:
+        - generic [ref=e310]:
+          - generic [ref=e311]: 日期
+          - textbox "日期" [ref=e312]: 2026-05-15
+        - generic [ref=e313]:
+          - generic [ref=e314]: 心情
+          - generic [ref=e315]:
+            - button "❤️ 开心" [ref=e316] [cursor=pointer]:
+              - generic [ref=e317]:
+                - generic [ref=e318]: ❤️
+                - generic [ref=e319]: 开心
+            - button "🌙 想念" [ref=e320] [cursor=pointer]:
+              - generic [ref=e321]:
+                - generic [ref=e322]: 🌙
+                - generic [ref=e323]: 想念
+            - button "💧 感动" [ref=e324] [cursor=pointer]:
+              - generic [ref=e325]:
+                - generic [ref=e326]: 💧
+                - generic [ref=e327]: 感动
+            - button "🍃 平静" [ref=e328] [cursor=pointer]:
+              - generic [ref=e329]:
+                - generic [ref=e330]: 🍃
+                - generic [ref=e331]: 平静
+            - button "✨ 调皮" [ref=e332] [cursor=pointer]:
+              - generic [ref=e333]:
+                - generic [ref=e334]: ✨
+                - generic [ref=e335]: 调皮
+        - generic [ref=e336]:
+          - generic [ref=e337]: 日记内容
+          - textbox "日记内容" [ref=e338]: 亲爱的日记，今天他又给我写了小纸条，藏在早餐盒里。他说我是他每天醒来的第一个笑容。午休时他特意跑来给我送奶茶，还偷偷在我额头亲了一下。我的心跳得好快，好想永远和他在一起。
+        - generic [ref=e339]:
+          - generic [ref=e340]: 语音留言预览
+          - generic [ref=e341]:
+            - article [ref=e342]:
+              - strong [ref=e343]: 早安
+              - paragraph [ref=e344]: 今天阳光真好，想和你一起散步，
+              - text: 0:12
+            - article [ref=e345]:
+              - strong [ref=e346]: 午后
+              - paragraph [ref=e347]: 刚喝了杯冰咖啡，心情像蓝天一样清爽，
+              - text: 0:15
+            - article [ref=e348]:
+              - strong [ref=e349]: 晚安
+              - paragraph [ref=e350]: 星星都亮起来了，梦里也要记得我在想你哦，
+              - text: 0:18
+      - generic [ref=e351]:
+        - button "取消" [ref=e352] [cursor=pointer]
+        - button "写好并请她补全" [ref=e353] [cursor=pointer]

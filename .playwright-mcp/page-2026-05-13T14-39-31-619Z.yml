@@ -1,0 +1,75 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - paragraph [ref=e123]: 写日记
+          - heading "今天的情绪是什么？" [level=2] [ref=e124]
+          - paragraph [ref=e125]: 先用模板把骨架搭起来，后面再接真实模型输出。
+        - button "返回首页" [ref=e126] [cursor=pointer]
+      - generic [ref=e127]:
+        - generic [ref=e128]:
+          - generic [ref=e129]: 日期
+          - textbox "日期" [ref=e130]: 2026-05-13
+        - generic [ref=e131]:
+          - generic [ref=e132]: 心情
+          - generic [ref=e133]:
+            - button "❤️ 开心" [ref=e134] [cursor=pointer]:
+              - generic [ref=e135]:
+                - generic [ref=e136]: ❤️
+                - generic [ref=e137]: 开心
+            - button "🌙 想念" [ref=e138] [cursor=pointer]:
+              - generic [ref=e139]:
+                - generic [ref=e140]: 🌙
+                - generic [ref=e141]: 想念
+            - button "💧 感动" [ref=e142] [cursor=pointer]:
+              - generic [ref=e143]:
+                - generic [ref=e144]: 💧
+                - generic [ref=e145]: 感动
+            - button "🍃 平静" [ref=e146] [cursor=pointer]:
+              - generic [ref=e147]:
+                - generic [ref=e148]: 🍃
+                - generic [ref=e149]: 平静
+            - button "✨ 调皮" [ref=e150] [cursor=pointer]:
+              - generic [ref=e151]:
+                - generic [ref=e152]: ✨
+                - generic [ref=e153]: 调皮
+        - generic [ref=e154]:
+          - generic [ref=e155]: 日记内容
+          - textbox "日记内容" [active] [ref=e156]: 你说想试试那家咖啡店的拿铁，我就偷偷去买了。还加了你最爱的焦糖酱，店员说这样配最好喝。等你下班，我们一起喝，就像上次那样，你靠在我肩膀，我喂你喝第一口。
+        - generic [ref=e157]:
+          - generic [ref=e158]: 语音留言预览
+          - generic [ref=e159]:
+            - article [ref=e179]:
+              - strong [ref=e180]: 早安
+              - paragraph [ref=e181]: 宝贝，今天天气超好，心情像阳光一样灿烂哦
+              - text: 0:12
+            - article [ref=e182]:
+              - strong [ref=e183]: 午后
+              - paragraph [ref=e184]: 午后的阳光暖暖的，想和你一起散步聊天呢。
+              - text: 0:15
+            - article [ref=e185]:
+              - strong [ref=e186]: 晚安
+              - paragraph [ref=e187]: 星星都亮了，今天好开心，希望梦里也有你呀
+              - text: 0:18
+        - generic [ref=e169]:
+          - generic [ref=e170]: 添加图片
+          - generic [ref=e171]:
+            - button "+ 添加图片" [ref=e174] [cursor=pointer]
+            - paragraph [ref=e175]: 最多 3 张图片
+      - generic [ref=e188]:
+        - paragraph [ref=e189]: MiniMax 结果
+        - paragraph [ref=e190]: 正在生成图片和语音，请稍等一下。
+      - generic [ref=e176]:
+        - button "取消" [ref=e177] [cursor=pointer]
+        - button "生成中..." [disabled] [ref=e191] [cursor=pointer]

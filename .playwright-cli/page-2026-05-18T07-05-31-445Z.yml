@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e261]:
+      - generic [ref=e262]:
+        - generic [ref=e263]:
+          - paragraph [ref=e264]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e265]
+          - paragraph [ref=e266]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e267] [cursor=pointer]
+      - generic [ref=e268]:
+        - generic [ref=e269]:
+          - generic [ref=e270]: 日期
+          - textbox "日期" [ref=e271]: 2026-05-18
+        - generic [ref=e272]:
+          - generic [ref=e273]: 心情
+          - generic [ref=e274]:
+            - button "❤️ 开心" [ref=e275] [cursor=pointer]:
+              - generic [ref=e276]:
+                - generic [ref=e277]: ❤️
+                - generic [ref=e278]: 开心
+            - button "🌙 想念" [ref=e279] [cursor=pointer]:
+              - generic [ref=e280]:
+                - generic [ref=e281]: 🌙
+                - generic [ref=e282]: 想念
+            - button "💧 感动" [ref=e283] [cursor=pointer]:
+              - generic [ref=e284]:
+                - generic [ref=e285]: 💧
+                - generic [ref=e286]: 感动
+            - button "🍃 平静" [ref=e287] [cursor=pointer]:
+              - generic [ref=e288]:
+                - generic [ref=e289]: 🍃
+                - generic [ref=e290]: 平静
+            - button "✨ 调皮" [ref=e291] [cursor=pointer]:
+              - generic [ref=e292]:
+                - generic [ref=e293]: ✨
+                - generic [ref=e294]: 调皮
+        - generic [ref=e295]:
+          - generic [ref=e296]: 日记内容
+          - textbox "日记内容" [disabled] [ref=e297]: 正在生成日记内容...
+        - generic [ref=e298]:
+          - generic [ref=e299]: 语音留言预览
+          - generic [ref=e300]:
+            - article [ref=e301]:
+              - strong [ref=e302]: 早安
+              - paragraph
+              - text: 0:12
+            - article [ref=e303]:
+              - strong [ref=e304]: 午后
+              - paragraph
+              - text: 0:15
+            - article [ref=e305]:
+              - strong [ref=e306]: 晚安
+              - paragraph
+              - text: 0:18
+      - generic [ref=e307]:
+        - button "取消" [ref=e308] [cursor=pointer]
+        - button "写好并请她补全" [disabled] [ref=e309] [cursor=pointer]

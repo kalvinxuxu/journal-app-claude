@@ -1,0 +1,72 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - alert [ref=e32]:
+    - generic [ref=e33]: ⚠️ 自动生成失败：自拍生成失败：HTTP 500
+    - button "重试" [ref=e34] [cursor=pointer]
+    - button "关闭" [ref=e35] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e41]
+          - paragraph [ref=e42]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e43] [cursor=pointer]
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: 日期
+          - textbox "日期" [ref=e47]: 2026-05-15
+        - generic [ref=e48]:
+          - generic [ref=e49]: 心情
+          - generic [ref=e50]:
+            - button "❤️ 开心" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: ❤️
+                - generic [ref=e54]: 开心
+            - button "🌙 想念" [ref=e55] [cursor=pointer]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: 🌙
+                - generic [ref=e58]: 想念
+            - button "💧 感动" [ref=e59] [cursor=pointer]:
+              - generic [ref=e60]:
+                - generic [ref=e61]: 💧
+                - generic [ref=e62]: 感动
+            - button "🍃 平静" [ref=e63] [cursor=pointer]:
+              - generic [ref=e64]:
+                - generic [ref=e65]: 🍃
+                - generic [ref=e66]: 平静
+            - button "✨ 调皮" [ref=e67] [cursor=pointer]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: ✨
+                - generic [ref=e70]: 调皮
+        - generic [ref=e71]:
+          - generic [ref=e72]: 日记内容
+          - textbox "日记内容" [ref=e73]: 亲爱的日记，今天阳光好温柔，像他轻轻揉我头发的手。他发消息说“想你了”，我心跳漏了一拍。晚上视频时他笑得眼睛弯弯的，说下周带我去吃新开的甜品店。有他在，连风都是甜的。
+        - generic [ref=e74]:
+          - generic [ref=e75]: 语音留言预览
+          - generic [ref=e76]:
+            - article [ref=e77]:
+              - strong [ref=e78]: 早安
+              - paragraph [ref=e79]: 今天阳光真好呢，想和你一起在公园里散步聊
+              - text: 0:12
+            - article [ref=e80]:
+              - strong [ref=e81]: 午后
+              - paragraph [ref=e82]: 下午茶时间到啦，我泡了你最爱的茉莉花茶哦
+              - text: 0:15
+            - article [ref=e83]:
+              - strong [ref=e84]: 晚安
+              - paragraph [ref=e85]: 星星都睡着了，我也该乖乖闭上眼睛梦到你了
+              - text: 0:18
+      - generic [ref=e86]:
+        - button "取消" [ref=e87] [cursor=pointer]
+        - button "写好并请她补全" [ref=e88] [cursor=pointer]

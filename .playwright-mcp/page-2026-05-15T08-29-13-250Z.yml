@@ -1,0 +1,127 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：💾 本地存储
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间能停在这样温柔的午后。 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间就停在这一刻，永远被你这样宠着。 播放日记内容 女友自拍 日记语音栏" [ref=e30] [cursor=pointer]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - paragraph [ref=e33]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e34]
+              - generic [ref=e35]:
+                - generic [ref=e36]: 当天累计
+                - generic [ref=e37]:
+                  - generic [ref=e38]: ❤️
+                  - generic [ref=e39]: 开心
+            - paragraph [ref=e40]: 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间能停在这样温柔的午后。 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间就停在这一刻，永远被你这样宠着。
+            - button "播放日记内容" [ref=e41]: ▶ 听日记
+            - generic "女友自拍" [ref=e42]:
+              - paragraph [ref=e43]: 女友自拍
+              - generic [ref=e44]:
+                - img "女友自拍 1" [ref=e46]
+                - img "女友自拍 2" [ref=e48]
+            - region "日记语音栏" [ref=e49]:
+              - generic [ref=e50]:
+                - button "早安" [ref=e51]
+                - button "午后" [ref=e52]
+                - button "晚安" [ref=e53]
+                - button "早安" [ref=e54]
+                - button "午后" [ref=e55]
+                - button "晚安" [ref=e56]
+              - generic [ref=e57]:
+                - generic [ref=e58]:
+                  - generic [ref=e59]:
+                    - paragraph [ref=e60]: 语音留言
+                    - strong [ref=e61]: 早安留言
+                  - button "展开" [ref=e62]
+                - button "播放 0:12" [ref=e63]:
+                  - generic [ref=e65]: 播放
+                  - generic [ref=e66]: 0:12
+                - paragraph [ref=e67]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e78]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间就停在这一刻，永远被你这样宠着。 播放日记内容 日记语音栏" [ref=e79] [cursor=pointer]:
+            - generic [ref=e80]:
+              - generic [ref=e81]:
+                - paragraph [ref=e82]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e83]
+              - generic [ref=e84]:
+                - generic [ref=e85]: 我写的
+                - generic [ref=e86]:
+                  - generic [ref=e87]: ❤️
+                  - generic [ref=e88]: 开心
+            - paragraph [ref=e89]: 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间就停在这一刻，永远被你这样宠着。
+            - button "播放日记内容" [ref=e90]: ▶ 听日记
+            - region "日记语音栏" [ref=e91]:
+              - generic [ref=e92]:
+                - button "早安" [ref=e93]
+                - button "午后" [ref=e94]
+                - button "晚安" [ref=e95]
+              - generic [ref=e96]:
+                - generic [ref=e97]:
+                  - generic [ref=e98]:
+                    - paragraph [ref=e99]: 语音留言
+                    - strong [ref=e100]: 早安留言
+                  - button "展开" [ref=e101]
+                - button "播放 0:00 / --:--" [ref=e102]:
+                  - generic [ref=e104]: 播放
+                  - generic [ref=e105]: 0:00 / --:--
+        - article [ref=e116]:
+          - button "5月15日 周五 开心 手账 她写的 ❤️ 开心 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间能停在这样温柔的午后。 播放日记内容 女友自拍 日记语音栏" [ref=e117] [cursor=pointer]:
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - paragraph [ref=e120]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e121]
+              - generic [ref=e122]:
+                - generic [ref=e123]: 她写的
+                - generic [ref=e124]:
+                  - generic [ref=e125]: ❤️
+                  - generic [ref=e126]: 开心
+            - paragraph [ref=e127]: 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间能停在这样温柔的午后。
+            - button "播放日记内容" [ref=e128]: ▶ 听日记
+            - generic "女友自拍" [ref=e129]:
+              - paragraph [ref=e130]: 女友自拍
+              - generic [ref=e131]:
+                - img "女友自拍 1" [ref=e133]
+                - img "女友自拍 2" [ref=e135]
+            - region "日记语音栏" [ref=e136]:
+              - generic [ref=e137]:
+                - button "早安" [ref=e138]
+                - button "午后" [ref=e139]
+                - button "晚安" [ref=e140]
+              - generic [ref=e141]:
+                - generic [ref=e142]:
+                  - generic [ref=e143]:
+                    - paragraph [ref=e144]: 语音留言
+                    - strong [ref=e145]: 早安留言
+                  - button "展开" [ref=e146]
+                - button "播放 0:12" [ref=e147]:
+                  - generic [ref=e149]: 播放
+                  - generic [ref=e150]: 0:12
+                - paragraph [ref=e151]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e162]:
+        - generic [ref=e164]:
+          - paragraph [ref=e165]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e166]
+        - paragraph [ref=e167]: 今天和你一起在阳台晒太阳，你突然说我的睫毛在发光。我笑着躲进你怀里，你轻轻揉了揉我的头发。真希望时间就停在这一刻，永远被你这样宠着。
+      - button "＋" [ref=e168] [cursor=pointer]

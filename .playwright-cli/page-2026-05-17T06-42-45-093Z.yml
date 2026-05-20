@@ -1,0 +1,57 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 本月手账
+          - heading "5月" [level=2] [ref=e21]
+          - paragraph [ref=e22]: 数据来源：💾 本地存储
+        - generic [ref=e23]:
+          - button "卡片流" [ref=e24] [cursor=pointer]
+          - button "月历" [ref=e25] [cursor=pointer]
+          - button "我来写" [ref=e26] [cursor=pointer]
+          - button "请她写" [ref=e27] [cursor=pointer]
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - button "5月17日 周日 开心 手账 当天累计 ❤️ 开心 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 播放日记内容" [ref=e30]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - paragraph [ref=e33]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e34]
+              - generic [ref=e35]:
+                - generic [ref=e36]: 当天累计
+                - generic [ref=e37]:
+                  - generic [ref=e38]: ❤️
+                  - generic [ref=e39]: 开心
+            - paragraph [ref=e40]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。
+            - button "播放日记内容" [ref=e41] [cursor=pointer]: ▶ 听日记
+        - article [ref=e42]:
+          - button "5月17日 周日 开心 手账 她写的 ❤️ 开心 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 播放日记内容" [ref=e43]:
+            - generic [ref=e44]:
+              - generic [ref=e45]:
+                - paragraph [ref=e46]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e47]
+              - generic [ref=e48]:
+                - generic [ref=e49]: 她写的
+                - generic [ref=e50]:
+                  - generic [ref=e51]: ❤️
+                  - generic [ref=e52]: 开心
+            - paragraph [ref=e53]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。
+            - button "播放日记内容" [ref=e54] [cursor=pointer]: ▶ 听日记
+      - generic [ref=e55]:
+        - generic [ref=e57]:
+          - paragraph [ref=e58]: 5月17日 周日
+          - heading "当前选中的日记" [level=3] [ref=e59]
+        - paragraph [ref=e60]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。
+      - button "＋" [ref=e61] [cursor=pointer]

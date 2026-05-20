@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [active] [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e171]:
+      - generic [ref=e172]:
+        - generic [ref=e173]:
+          - paragraph [ref=e174]: 我来写
+          - heading "把今天记下来" [level=2] [ref=e175]
+          - paragraph [ref=e176]: 你写正文，她来补全配图、语音和自拍。
+        - button "返回首页" [ref=e177] [cursor=pointer]
+      - generic [ref=e178]:
+        - generic [ref=e179]:
+          - generic [ref=e180]: 日期
+          - textbox "日期" [ref=e181]: 2026-05-15
+        - generic [ref=e182]:
+          - generic [ref=e183]: 心情
+          - generic [ref=e184]:
+            - button "❤️ 开心" [ref=e185] [cursor=pointer]:
+              - generic [ref=e186]:
+                - generic [ref=e187]: ❤️
+                - generic [ref=e188]: 开心
+            - button "🌙 想念" [ref=e189] [cursor=pointer]:
+              - generic [ref=e190]:
+                - generic [ref=e191]: 🌙
+                - generic [ref=e192]: 想念
+            - button "💧 感动" [ref=e193] [cursor=pointer]:
+              - generic [ref=e194]:
+                - generic [ref=e195]: 💧
+                - generic [ref=e196]: 感动
+            - button "🍃 平静" [ref=e197] [cursor=pointer]:
+              - generic [ref=e198]:
+                - generic [ref=e199]: 🍃
+                - generic [ref=e200]: 平静
+            - button "✨ 调皮" [ref=e201] [cursor=pointer]:
+              - generic [ref=e202]:
+                - generic [ref=e203]: ✨
+                - generic [ref=e204]: 调皮
+        - generic [ref=e205]:
+          - generic [ref=e206]: 日记内容
+          - textbox "日记内容" [ref=e207]: 今天他加班到很晚，却记得给我带了热乎乎的糖炒栗子。我说过想吃好久了，他居然一直放在心上。剥开一颗，甜丝丝的，就像此刻心里满满的幸福。他揉揉我的头发说“趁热吃”，眼睛里有星星在闪。
+        - generic [ref=e208]:
+          - generic [ref=e209]: 语音留言预览
+          - generic [ref=e210]:
+            - article [ref=e211]:
+              - strong [ref=e212]: 早安
+              - paragraph [ref=e213]: 今天阳光特别好，你起床了吗？
+              - text: 0:12
+            - article [ref=e214]:
+              - strong [ref=e215]: 午后
+              - paragraph [ref=e216]: 午后的风轻轻吹，记得休息一下哦，
+              - text: 0:15
+            - article [ref=e217]:
+              - strong [ref=e218]: 晚安
+              - paragraph [ref=e219]: 今天开心的事很多，最开心的是有你在心里，
+              - text: 0:18
+      - generic [ref=e220]:
+        - button "取消" [ref=e221] [cursor=pointer]
+        - button "写好并请她补全" [ref=e222] [cursor=pointer]

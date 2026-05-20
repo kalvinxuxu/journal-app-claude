@@ -1,0 +1,27 @@
+app = "journal-api"
+primary_region = "hkg"
+
+[build]
+
+[deploy]
+  min_machines_running = 1
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+
+  [http_service.health_checks]
+    path = "/health"
+    interval = "10s"
+    timeout = "5s"
+    grace_period = "5s"
+
+[[mounts]]
+  source = "journal_data"
+  destination = "/data"
+
+[env]
+  PORT = "3001"
+  NODE_ENV = "production"

@@ -1,0 +1,108 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [active] [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - paragraph [ref=e187]: 本月手账
+          - heading "5月" [level=2] [ref=e188]
+          - paragraph [ref=e189]: 页面先跑起来，情绪和记忆先占位，后面再接真实生成。
+        - generic [ref=e190]:
+          - button "卡片流" [ref=e191] [cursor=pointer]
+          - button "月历" [ref=e192] [cursor=pointer]
+          - button "写一篇新的" [ref=e193] [cursor=pointer]
+      - generic [ref=e194]:
+        - article [ref=e195]:
+          - button "5月13日 周三 调皮 手账 ✨ 调皮 今天也在这里陪着你。 女友自拍" [ref=e196] [cursor=pointer]:
+            - generic [ref=e197]:
+              - generic [ref=e198]:
+                - paragraph [ref=e199]: 5月13日 周三
+                - heading "调皮 手账" [level=3] [ref=e200]
+              - generic [ref=e201]:
+                - generic [ref=e202]: ✨
+                - generic [ref=e203]: 调皮
+            - paragraph [ref=e204]: 今天也在这里陪着你。
+            - generic "女友自拍" [ref=e205]:
+              - paragraph [ref=e206]: 女友自拍
+              - generic [ref=e207]:
+                - img "女友自拍 1" [ref=e209]
+                - img "女友自拍 2" [ref=e211]
+        - article [ref=e212]:
+          - button "5月13日 周三 开心 手账 ❤️ 开心 今天也在这里陪着你。 女友自拍" [ref=e213] [cursor=pointer]:
+            - generic [ref=e214]:
+              - generic [ref=e215]:
+                - paragraph [ref=e216]: 5月13日 周三
+                - heading "开心 手账" [level=3] [ref=e217]
+              - generic [ref=e218]:
+                - generic [ref=e219]: ❤️
+                - generic [ref=e220]: 开心
+            - paragraph [ref=e221]: 今天也在这里陪着你。
+            - generic "女友自拍" [ref=e222]:
+              - paragraph [ref=e223]: 女友自拍
+              - generic [ref=e224]:
+                - img "女友自拍 1" [ref=e226]
+                - img "女友自拍 2" [ref=e228]
+        - article [ref=e229]:
+          - button "5月9日 周六 开心 手账 ❤️ 开心 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。 配图预览 ♪ 0:15 早安呀，今天的阳光很好。我一醒来就想到你了。" [ref=e230] [cursor=pointer]:
+            - generic [ref=e231]:
+              - generic [ref=e232]:
+                - paragraph [ref=e233]: 5月9日 周六
+                - heading "开心 手账" [level=3] [ref=e234]
+              - generic [ref=e235]:
+                - generic [ref=e236]: ❤️
+                - generic [ref=e237]: 开心
+            - paragraph [ref=e238]: 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。
+            - generic "配图预览" [ref=e239]:
+              - img "配图 1" [ref=e241]
+              - img "配图 2" [ref=e243]
+            - generic [ref=e244]:
+              - generic [ref=e245]: ♪
+              - generic [ref=e246]: 0:15
+              - generic [ref=e247]: 早安呀，今天的阳光很好。我一醒来就想到你了。
+        - article [ref=e248]:
+          - button "5月8日 周五 想念 手账 🌙 想念 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。 配图预览 ♪ 0:10 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。" [ref=e249] [cursor=pointer]:
+            - generic [ref=e250]:
+              - generic [ref=e251]:
+                - paragraph [ref=e252]: 5月8日 周五
+                - heading "想念 手账" [level=3] [ref=e253]
+              - generic [ref=e254]:
+                - generic [ref=e255]: 🌙
+                - generic [ref=e256]: 想念
+            - paragraph [ref=e257]: 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。
+            - generic "配图预览" [ref=e258]:
+              - img "配图 1" [ref=e260]
+            - generic [ref=e261]:
+              - generic [ref=e262]: ♪
+              - generic [ref=e263]: 0:10
+              - generic [ref=e264]: 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。
+        - article [ref=e265]:
+          - button "5月7日 周四 调皮 手账 ✨ 调皮 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。 ♪ 0:09 我猜你现在又在忙，没关系，记得喝水。" [ref=e266] [cursor=pointer]:
+            - generic [ref=e267]:
+              - generic [ref=e268]:
+                - paragraph [ref=e269]: 5月7日 周四
+                - heading "调皮 手账" [level=3] [ref=e270]
+              - generic [ref=e271]:
+                - generic [ref=e272]: ✨
+                - generic [ref=e273]: 调皮
+            - paragraph [ref=e274]: 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。
+            - generic [ref=e275]:
+              - generic [ref=e276]: ♪
+              - generic [ref=e277]: 0:09
+              - generic [ref=e278]: 我猜你现在又在忙，没关系，记得喝水。
+      - generic [ref=e279]:
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - paragraph [ref=e282]: 5月13日 周三
+            - heading "当前选中的日记" [level=3] [ref=e283]
+          - button "看语音" [ref=e284] [cursor=pointer]
+        - paragraph [ref=e285]: 今天也在这里陪着你。
+      - button "＋" [ref=e286] [cursor=pointer]

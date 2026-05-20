@@ -1,0 +1,92 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: Physics Playground
+      - heading "物理趣味交互实验室" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 先玩起来，再理解原理。
+    - generic [ref=e9]:
+      - strong [ref=e10]: 经典 8 实验馆
+      - generic [ref=e11]: 自由探索 / 小挑战 / 从力学到光与电磁
+  - region "实验选择" [ref=e12]:
+    - button "NEWTON 牛顿三大定律 推一推、拉一拉，看看物体为什么会这样运动。" [ref=e13] [cursor=pointer]:
+      - generic [ref=e14]: NEWTON
+      - strong [ref=e15]: 牛顿三大定律
+      - paragraph [ref=e16]: 推一推、拉一拉，看看物体为什么会这样运动。
+    - button "GRAVITY 重力与自由落体 换高度、换重力，观察下落速度的变化。" [ref=e17] [cursor=pointer]:
+      - generic [ref=e18]: GRAVITY
+      - strong [ref=e19]: 重力与自由落体
+      - paragraph [ref=e20]: 换高度、换重力，观察下落速度的变化。
+    - button "MOMENTUM 动量守恒与碰撞 让两辆小车撞一撞，看看碰撞前后发生了什么。" [ref=e21] [cursor=pointer]:
+      - generic [ref=e22]: MOMENTUM
+      - strong [ref=e23]: 动量守恒与碰撞
+      - paragraph [ref=e24]: 让两辆小车撞一撞，看看碰撞前后发生了什么。
+    - button "PENDULUM 单摆实验 拖动摆球再松手，听时间藏在摆动里。" [ref=e25] [cursor=pointer]:
+      - generic [ref=e26]: PENDULUM
+      - strong [ref=e27]: 单摆实验
+      - paragraph [ref=e28]: 拖动摆球再松手，听时间藏在摆动里。
+    - button "PRISM 牛顿棱镜实验 让白光穿过棱镜，拆开一条彩虹。" [ref=e29] [cursor=pointer]:
+      - generic [ref=e30]: PRISM
+      - strong [ref=e31]: 牛顿棱镜实验
+      - paragraph [ref=e32]: 让白光穿过棱镜，拆开一条彩虹。
+    - button "INDUCTION 法拉第电磁感应 拖动磁铁穿过线圈，观察电流表醒过来。" [ref=e33] [cursor=pointer]:
+      - generic [ref=e34]: INDUCTION
+      - strong [ref=e35]: 法拉第电磁感应
+      - paragraph [ref=e36]: 拖动磁铁穿过线圈，观察电流表醒过来。
+    - button "INTERFERENCE 双缝干涉 让光穿过两条缝，看明暗条纹怎样出现。" [ref=e37] [cursor=pointer]:
+      - generic [ref=e38]: INTERFERENCE
+      - strong [ref=e39]: 双缝干涉
+      - paragraph [ref=e40]: 让光穿过两条缝，看明暗条纹怎样出现。
+    - button "CAVENDISH 卡文迪许实验 靠近两颗铅球，放大看见微弱引力。" [ref=e41] [cursor=pointer]:
+      - generic [ref=e42]: CAVENDISH
+      - strong [ref=e43]: 卡文迪许实验
+      - paragraph [ref=e44]: 靠近两颗铅球，放大看见微弱引力。
+  - generic [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e48]:
+        - paragraph [ref=e49]: 实验 1
+        - heading "牛顿三大定律" [level=2] [ref=e50]
+        - paragraph [ref=e51]: 把推力、摩擦和质量调一调，看看小车会怎么动。
+      - generic [ref=e52]: 目标：让小车越过终点线
+    - generic [ref=e53]:
+      - generic [ref=e56]:
+        - button "开始实验" [ref=e57] [cursor=pointer]
+        - button "推一把" [ref=e58] [cursor=pointer]
+        - button "重置" [ref=e59] [cursor=pointer]
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - text: 质量
+            - strong [ref=e63]: "6.00"
+          - slider "质量 6.00" [ref=e64]: "6"
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - text: 推力
+            - strong [ref=e67]: "18.00"
+          - slider "推力 18.00" [ref=e68]: "18"
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - text: 摩擦
+            - strong [ref=e71]: "4.00"
+          - slider "摩擦 4.00" [ref=e72]: "4"
+        - complementary [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: 未解锁
+            - strong [ref=e76]: 探索进度 0/2
+          - paragraph [ref=e77]: 先玩一玩实验再来验证
+          - button "先试一试实验，再来验证" [disabled] [ref=e78]
+        - complementary [ref=e79]:
+          - heading "结果面板" [level=3] [ref=e80]
+          - generic [ref=e81]:
+            - generic [ref=e83]:
+              - strong [ref=e84]: 净力
+              - generic [ref=e85]: 14.00 N
+            - generic [ref=e87]:
+              - strong [ref=e88]: 加速度
+              - generic [ref=e89]: 2.33 m/s²
+            - generic [ref=e91]:
+              - strong [ref=e92]: 用时
+              - generic [ref=e93]: 0.00 s
+            - generic [ref=e95]:
+              - strong [ref=e96]: 星级分
+              - generic [ref=e97]: 60 分
+          - paragraph [ref=e98]: 力会改变运动状态，惯性会让物体继续保持原来的状态。

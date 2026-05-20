@@ -1,0 +1,70 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e115]:
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - paragraph [ref=e118]: 本月手账
+          - heading "5月" [level=2] [ref=e119]
+          - paragraph [ref=e120]: 数据来源：💾 本地存储
+        - generic [ref=e121]:
+          - button "卡片流" [ref=e122] [cursor=pointer]
+          - button "月历" [ref=e123] [cursor=pointer]
+          - button "我来写" [ref=e124] [cursor=pointer]
+          - button "请她写" [ref=e125] [cursor=pointer]
+      - generic [ref=e126]:
+        - article [ref=e127]:
+          - button "5月17日 周日 开心 手账 当天累计 ❤️ 开心 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 今天你做了我最爱吃的番茄炒蛋，饭后我们窝在沙发看老电影。你偷偷把草莓塞进我嘴里，甜得我眯起眼睛。你笑着亲了亲我的额头说“小傻瓜”，那一刻连月光都变得温柔。 播放日记内容" [ref=e128]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - paragraph [ref=e131]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e132]
+              - generic [ref=e133]:
+                - generic [ref=e134]: 当天累计
+                - generic [ref=e135]:
+                  - generic [ref=e136]: ❤️
+                  - generic [ref=e137]: 开心
+            - paragraph [ref=e138]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 今天你做了我最爱吃的番茄炒蛋，饭后我们窝在沙发看老电影。你偷偷把草莓塞进我嘴里，甜得我眯起眼睛。你笑着亲了亲我的额头说“小傻瓜”，那一刻连月光都变得温柔。
+            - button "播放日记内容" [ref=e139] [cursor=pointer]: ▶ 听日记
+        - article [ref=e140]:
+          - button "5月17日 周日 开心 手账 她写的 ❤️ 开心 今天你做了我最爱吃的番茄炒蛋，饭后我们窝在沙发看老电影。你偷偷把草莓塞进我嘴里，甜得我眯起眼睛。你笑着亲了亲我的额头说“小傻瓜”，那一刻连月光都变得温柔。 播放日记内容" [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - paragraph [ref=e144]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e145]
+              - generic [ref=e146]:
+                - generic [ref=e147]: 她写的
+                - generic [ref=e148]:
+                  - generic [ref=e149]: ❤️
+                  - generic [ref=e150]: 开心
+            - paragraph [ref=e151]: 今天你做了我最爱吃的番茄炒蛋，饭后我们窝在沙发看老电影。你偷偷把草莓塞进我嘴里，甜得我眯起眼睛。你笑着亲了亲我的额头说“小傻瓜”，那一刻连月光都变得温柔。
+            - button "播放日记内容" [ref=e152] [cursor=pointer]: ▶ 听日记
+        - article [ref=e153]:
+          - button "5月17日 周日 开心 手账 她写的 ❤️ 开心 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 播放日记内容" [ref=e154]:
+            - generic [ref=e155]:
+              - generic [ref=e156]:
+                - paragraph [ref=e157]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e158]
+              - generic [ref=e159]:
+                - generic [ref=e160]: 她写的
+                - generic [ref=e161]:
+                  - generic [ref=e162]: ❤️
+                  - generic [ref=e163]: 开心
+            - paragraph [ref=e164]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。
+            - button "播放日记内容" [ref=e165] [cursor=pointer]: ▶ 听日记
+      - generic [ref=e166]:
+        - generic [ref=e168]:
+          - paragraph [ref=e169]: 5月17日 周日
+          - heading "当前选中的日记" [level=3] [ref=e170]
+        - paragraph [ref=e171]: 今天你做了我最爱吃的番茄炒蛋，还偷偷在我碗底藏了一颗草莓。我假装没发现，咬了一口酸得皱眉，你赶紧把糖罐推过来，笑得好傻。和你在一起的每一天，都像草莓一样甜。 今天你做了我最爱吃的番茄炒蛋，饭后我们窝在沙发看老电影。你偷偷把草莓塞进我嘴里，甜得我眯起眼睛。你笑着亲了亲我的额头说“小傻瓜”，那一刻连月光都变得温柔。
+      - button "＋" [ref=e172] [cursor=pointer]

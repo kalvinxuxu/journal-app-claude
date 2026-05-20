@@ -1,0 +1,118 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e162]:
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - paragraph [ref=e165]: 本月手账
+          - heading "5月" [level=2] [ref=e166]
+          - paragraph [ref=e167]: 数据来源：💾 本地存储
+        - generic [ref=e168]:
+          - button "卡片流" [ref=e169] [cursor=pointer]
+          - button "月历" [ref=e170] [cursor=pointer]
+          - button "我来写" [ref=e171] [cursor=pointer]
+          - button "请她写" [ref=e172] [cursor=pointer]
+      - generic [ref=e173]:
+        - article [ref=e174]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 播放日记内容 日记语音栏" [ref=e175]:
+            - generic [ref=e176]:
+              - generic [ref=e177]:
+                - paragraph [ref=e178]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e179]
+              - generic [ref=e180]:
+                - generic [ref=e181]: 当天累计
+                - generic [ref=e182]:
+                  - generic [ref=e183]: ❤️
+                  - generic [ref=e184]: 开心
+            - paragraph [ref=e185]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。
+            - button "播放日记内容" [ref=e186] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e187]:
+              - generic [ref=e188]:
+                - button "早安" [ref=e189] [cursor=pointer]
+                - button "午后" [ref=e190] [cursor=pointer]
+                - button "晚安" [ref=e191] [cursor=pointer]
+                - button "早安" [ref=e192] [cursor=pointer]
+                - button "午后" [ref=e193] [cursor=pointer]
+                - button "晚安" [ref=e194] [cursor=pointer]
+              - generic [ref=e195]:
+                - generic [ref=e196]:
+                  - generic [ref=e197]:
+                    - paragraph [ref=e198]: 语音留言
+                    - strong [ref=e199]: 早安留言
+                  - button "展开" [ref=e200] [cursor=pointer]
+                - button "播放 0:12" [ref=e201] [cursor=pointer]:
+                  - generic [ref=e203]: 播放
+                  - generic [ref=e204]: 0:12
+                - paragraph [ref=e205]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e216]:
+          - button "5月15日 周五 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。 播放日记内容 日记语音栏" [ref=e217]:
+            - generic [ref=e218]:
+              - generic [ref=e219]:
+                - paragraph [ref=e220]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e221]
+              - generic [ref=e222]:
+                - generic [ref=e223]: 她写的
+                - generic [ref=e224]:
+                  - generic [ref=e225]: ❤️
+                  - generic [ref=e226]: 开心
+            - paragraph [ref=e227]: 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。
+            - button "播放日记内容" [ref=e228] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e229]:
+              - generic [ref=e230]:
+                - button "早安" [ref=e231] [cursor=pointer]
+                - button "午后" [ref=e232] [cursor=pointer]
+                - button "晚安" [ref=e233] [cursor=pointer]
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]:
+                    - paragraph [ref=e237]: 语音留言
+                    - strong [ref=e238]: 早安留言
+                  - button "展开" [ref=e239] [cursor=pointer]
+                - button "播放 0:12" [ref=e240] [cursor=pointer]:
+                  - generic [ref=e242]: 播放
+                  - generic [ref=e243]: 0:12
+                - paragraph [ref=e244]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e255]:
+          - button "5月15日 周五 调皮 手账 她写的 ✨ 调皮 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 播放日记内容 日记语音栏" [ref=e256]:
+            - generic [ref=e257]:
+              - generic [ref=e258]:
+                - paragraph [ref=e259]: 5月15日 周五
+                - heading "调皮 手账" [level=3] [ref=e260]
+              - generic [ref=e261]:
+                - generic [ref=e262]: 她写的
+                - generic [ref=e263]:
+                  - generic [ref=e264]: ✨
+                  - generic [ref=e265]: 调皮
+            - paragraph [ref=e266]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！
+            - button "播放日记内容" [ref=e267] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e268]:
+              - generic [ref=e269]:
+                - button "早安" [ref=e270] [cursor=pointer]
+                - button "午后" [ref=e271] [cursor=pointer]
+                - button "晚安" [ref=e272] [cursor=pointer]
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - generic [ref=e275]:
+                    - paragraph [ref=e276]: 语音留言
+                    - strong [ref=e277]: 早安留言
+                  - button "展开" [ref=e278] [cursor=pointer]
+                - button "播放 0:12" [ref=e279] [cursor=pointer]:
+                  - generic [ref=e281]: 播放
+                  - generic [ref=e282]: 0:12
+                - paragraph [ref=e283]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e294]:
+        - generic [ref=e296]:
+          - paragraph [ref=e297]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e298]
+        - paragraph [ref=e299]: 今天偷偷在你的咖啡里多放了一颗糖，看你喝第一口时皱眉的样子，我在旁边憋笑到肚子疼。你发现后追着我挠痒痒，我求饶说下次不敢了——其实，下次还敢！ 亲爱的日记，今天和他一起去看了日落。他轻轻握着我的手，说我的眼睛比晚霞还好看。回家的路上，他偷偷在我包里塞了一颗我最爱的草莓糖。这样的小日子，真希望能一直过下去呀。
+      - button "＋" [ref=e300] [cursor=pointer]

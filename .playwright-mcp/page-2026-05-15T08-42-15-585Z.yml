@@ -1,0 +1,126 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e89]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: 本月手账
+          - heading "5月" [level=2] [ref=e93]
+          - paragraph [ref=e94]: 数据来源：🗑️ 空数据
+        - generic [ref=e95]:
+          - button "卡片流" [ref=e96] [cursor=pointer]
+          - button "月历" [ref=e97] [cursor=pointer]
+          - button "我来写" [ref=e98] [cursor=pointer]
+          - button "请她写" [ref=e99] [cursor=pointer]
+      - generic [ref=e100]:
+        - article [ref=e101]:
+          - button "5月15日 周五 开心 手账 当天累计 ❤️ 开心 今天阳光真好，下午泡了杯茉莉花茶，靠在窗边看云。天空蓝得像你的眼睛，软软的云朵慢慢飘过。突然好想你，想靠在你肩膀上，一起看天荒地老。 今天和宝宝一起去看了海边的日落，晚霞把我们的影子拉得好长好长。你偷偷在我脸颊亲了一下，说要永远记住这个瞬间。傻瓜，和你在一起的每一天，我都想好好珍藏。 播放日记内容 女友自拍 日记语音栏" [ref=e102]:
+            - generic [ref=e103]:
+              - generic [ref=e104]:
+                - paragraph [ref=e105]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e106]
+              - generic [ref=e107]:
+                - generic [ref=e108]: 当天累计
+                - generic [ref=e109]:
+                  - generic [ref=e110]: ❤️
+                  - generic [ref=e111]: 开心
+            - paragraph [ref=e112]: 今天阳光真好，下午泡了杯茉莉花茶，靠在窗边看云。天空蓝得像你的眼睛，软软的云朵慢慢飘过。突然好想你，想靠在你肩膀上，一起看天荒地老。 今天和宝宝一起去看了海边的日落，晚霞把我们的影子拉得好长好长。你偷偷在我脸颊亲了一下，说要永远记住这个瞬间。傻瓜，和你在一起的每一天，我都想好好珍藏。
+            - button "播放日记内容" [ref=e113] [cursor=pointer]: ▶ 听日记
+            - generic "女友自拍" [ref=e114]:
+              - paragraph [ref=e115]: 女友自拍
+              - generic [ref=e116]:
+                - img "女友自拍 1" [ref=e118]
+                - img "女友自拍 2" [ref=e120]
+            - region "日记语音栏" [ref=e121]:
+              - generic [ref=e122]:
+                - button "早安" [ref=e123] [cursor=pointer]
+                - button "午后" [ref=e124] [cursor=pointer]
+                - button "晚安" [ref=e125] [cursor=pointer]
+                - button "早安" [ref=e126] [cursor=pointer]
+                - button "午后" [ref=e127] [cursor=pointer]
+                - button "晚安" [ref=e128] [cursor=pointer]
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - generic [ref=e131]:
+                    - paragraph [ref=e132]: 语音留言
+                    - strong [ref=e133]: 早安留言
+                  - button "展开" [ref=e134] [cursor=pointer]
+                - button "播放 0:00 / --:--" [ref=e243] [cursor=pointer]:
+                  - generic [ref=e137]: 播放
+                  - generic [ref=e138]: 0:00 / --:--
+        - article [ref=e152]:
+          - button "5月15日 周五 开心 手账 我写的 ❤️ 开心 今天和宝宝一起去看了海边的日落，晚霞把我们的影子拉得好长好长。你偷偷在我脸颊亲了一下，说要永远记住这个瞬间。傻瓜，和你在一起的每一天，我都想好好珍藏。 播放日记内容 日记语音栏" [active] [ref=e153]:
+            - generic [ref=e154]:
+              - generic [ref=e155]:
+                - paragraph [ref=e156]: 5月15日 周五
+                - heading "开心 手账" [level=3] [ref=e157]
+              - generic [ref=e158]:
+                - generic [ref=e159]: 我写的
+                - generic [ref=e160]:
+                  - generic [ref=e161]: ❤️
+                  - generic [ref=e162]: 开心
+            - paragraph [ref=e163]: 今天和宝宝一起去看了海边的日落，晚霞把我们的影子拉得好长好长。你偷偷在我脸颊亲了一下，说要永远记住这个瞬间。傻瓜，和你在一起的每一天，我都想好好珍藏。
+            - button "播放日记内容" [ref=e164] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e165]:
+              - generic [ref=e166]:
+                - button "早安" [ref=e167] [cursor=pointer]
+                - button "午后" [ref=e168] [cursor=pointer]
+                - button "晚安" [ref=e169] [cursor=pointer]
+              - generic [ref=e170]:
+                - generic [ref=e171]:
+                  - generic [ref=e172]:
+                    - paragraph [ref=e173]: 语音留言
+                    - strong [ref=e174]: 早安留言
+                  - button "展开" [ref=e175] [cursor=pointer]
+                - button "播放 0:00 / --:--" [ref=e176] [cursor=pointer]:
+                  - generic [ref=e178]: 播放
+                  - generic [ref=e179]: 0:00 / --:--
+        - article [ref=e190]:
+          - button "5月15日 周五 平静 手账 她写的 🍃 平静 今天阳光真好，下午泡了杯茉莉花茶，靠在窗边看云。天空蓝得像你的眼睛，软软的云朵慢慢飘过。突然好想你，想靠在你肩膀上，一起看天荒地老。 播放日记内容 女友自拍 日记语音栏" [ref=e191]:
+            - generic [ref=e192]:
+              - generic [ref=e193]:
+                - paragraph [ref=e194]: 5月15日 周五
+                - heading "平静 手账" [level=3] [ref=e195]
+              - generic [ref=e196]:
+                - generic [ref=e197]: 她写的
+                - generic [ref=e198]:
+                  - generic [ref=e199]: 🍃
+                  - generic [ref=e200]: 平静
+            - paragraph [ref=e201]: 今天阳光真好，下午泡了杯茉莉花茶，靠在窗边看云。天空蓝得像你的眼睛，软软的云朵慢慢飘过。突然好想你，想靠在你肩膀上，一起看天荒地老。
+            - button "播放日记内容" [ref=e202] [cursor=pointer]: ▶ 听日记
+            - generic "女友自拍" [ref=e203]:
+              - paragraph [ref=e204]: 女友自拍
+              - generic [ref=e205]:
+                - img "女友自拍 1" [ref=e207]
+                - img "女友自拍 2" [ref=e209]
+            - region "日记语音栏" [ref=e210]:
+              - generic [ref=e211]:
+                - button "早安" [ref=e212] [cursor=pointer]
+                - button "午后" [ref=e213] [cursor=pointer]
+                - button "晚安" [ref=e214] [cursor=pointer]
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - generic [ref=e217]:
+                    - paragraph [ref=e218]: 语音留言
+                    - strong [ref=e219]: 早安留言
+                  - button "展开" [ref=e220] [cursor=pointer]
+                - button "播放 0:12" [ref=e221] [cursor=pointer]:
+                  - generic [ref=e223]: 播放
+                  - generic [ref=e224]: 0:12
+                - paragraph [ref=e225]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+      - generic [ref=e236]:
+        - generic [ref=e238]:
+          - paragraph [ref=e239]: 5月15日 周五
+          - heading "当前选中的日记" [level=3] [ref=e240]
+        - paragraph [ref=e241]: 今天和宝宝一起去看了海边的日落，晚霞把我们的影子拉得好长好长。你偷偷在我脸颊亲了一下，说要永远记住这个瞬间。傻瓜，和你在一起的每一天，我都想好好珍藏。
+      - button "＋" [ref=e242] [cursor=pointer]

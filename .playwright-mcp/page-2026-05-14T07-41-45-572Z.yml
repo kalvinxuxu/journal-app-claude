@@ -1,0 +1,63 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "我来写" [ref=e11] [cursor=pointer]
+      - button "请她写" [ref=e12] [cursor=pointer]
+      - button "语音页" [ref=e13] [cursor=pointer]
+      - button "设置" [ref=e14] [cursor=pointer]
+  - main [ref=e15]:
+    - generic [ref=e241]:
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - paragraph [ref=e244]: 设置
+          - heading "先把偏好记住" [level=2] [ref=e245]
+          - paragraph [ref=e246]: 提醒时间、语音风格、导出方式都先用本地状态占位。
+        - generic "设置摘要" [ref=e247]:
+          - generic [ref=e248]: 本地保存
+          - generic [ref=e249]: 可后续同步
+          - generic [ref=e250]: 适合原型
+      - generic [ref=e251]:
+        - generic [ref=e252]:
+          - generic [ref=e253]:
+            - paragraph [ref=e254]: 偏好配置
+            - heading "先把最常用的项放在前面" [level=3] [ref=e255]
+          - generic [ref=e256]: 保持轻量
+        - generic [ref=e257]:
+          - generic [ref=e258]:
+            - generic [ref=e259]: 提醒时间
+            - textbox "提醒时间 每天 21:30 提醒" [ref=e260]: 21:30
+            - generic [ref=e261]: 每天 21:30 提醒
+          - generic [ref=e262]:
+            - generic [ref=e263]: 语音风格
+            - combobox "语音风格" [ref=e264]:
+              - option "温暖" [selected]
+              - option "轻柔"
+              - option "调皮"
+          - generic [ref=e265]:
+            - generic [ref=e266]: 导出方式
+            - combobox "导出方式 确认导出" [ref=e267]:
+              - option "PDF" [selected]
+              - option "图片"
+              - option "暂不导出"
+            - button "确认导出" [ref=e268] [cursor=pointer]
+      - generic [ref=e269]:
+        - paragraph [ref=e270]: 下一步
+        - paragraph [ref=e271]: 等你确认后，我可以继续接入真实生成接口、记忆持久化和语音能力。
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - generic [ref=e274]:
+            - paragraph [ref=e275]: 女友形象
+            - heading "人物一致性" [level=3] [ref=e276]
+          - button "生成中..." [disabled] [ref=e285] [cursor=pointer]
+        - generic "生成中" [ref=e286]
+      - generic [ref=e279]:
+        - paragraph [ref=e280]: 关于
+        - heading "情侣日记" [level=3] [ref=e281]
+        - paragraph [ref=e282]: 版本 0.1.0 (原型)
+        - paragraph [ref=e283]: 一个记录情感、维护记忆的私人日记应用。每日生成专属内容，配合语音留言功能，用温柔的方式陪伴彼此。
+        - generic [ref=e284]: React + TypeScriptMiniMax APIVite + Vitest

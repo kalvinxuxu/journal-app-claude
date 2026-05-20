@@ -1,0 +1,72 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [active] [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e363]:
+      - generic [ref=e364]:
+        - generic [ref=e365]:
+          - paragraph [ref=e366]: 写日记
+          - heading "今天的情绪是什么？" [level=2] [ref=e367]
+          - paragraph [ref=e368]: 先用模板把骨架搭起来，后面再接真实模型输出。
+        - button "返回首页" [ref=e369] [cursor=pointer]
+      - generic [ref=e370]:
+        - generic [ref=e371]:
+          - generic [ref=e372]: 日期
+          - textbox "日期" [ref=e373]: 2026-05-11
+        - generic [ref=e374]:
+          - generic [ref=e375]: 心情
+          - generic [ref=e376]:
+            - button "❤️ 开心" [ref=e377] [cursor=pointer]:
+              - generic [ref=e378]:
+                - generic [ref=e379]: ❤️
+                - generic [ref=e380]: 开心
+            - button "🌙 想念" [ref=e381] [cursor=pointer]:
+              - generic [ref=e382]:
+                - generic [ref=e383]: 🌙
+                - generic [ref=e384]: 想念
+            - button "💧 感动" [ref=e385] [cursor=pointer]:
+              - generic [ref=e386]:
+                - generic [ref=e387]: 💧
+                - generic [ref=e388]: 感动
+            - button "🍃 平静" [ref=e389] [cursor=pointer]:
+              - generic [ref=e390]:
+                - generic [ref=e391]: 🍃
+                - generic [ref=e392]: 平静
+            - button "✨ 调皮" [ref=e393] [cursor=pointer]:
+              - generic [ref=e394]:
+                - generic [ref=e395]: ✨
+                - generic [ref=e396]: 调皮
+        - generic [ref=e397]:
+          - generic [ref=e398]: 日记内容
+          - textbox "日记内容" [ref=e399]: 今天阳光透过窗帘洒进来，暖暖的。我泡了你爱的茉莉花茶，坐在沙发上想你。昨天偷偷买了那家的拿铁，加了焦糖酱，等你下班一起喝。窗外的风轻轻吹着，像你的手抚过我的头发。有你在，每一天都好甜。
+        - generic [ref=e400]:
+          - generic [ref=e401]: 语音留言预览
+          - generic [ref=e402]:
+            - article [ref=e403]:
+              - strong [ref=e404]: 早安
+              - paragraph [ref=e405]: 今天阳光真好呀，像你的笑容一样温暖，早安
+              - text: 0:12
+            - article [ref=e406]:
+              - strong [ref=e407]: 午后
+              - paragraph [ref=e408]: 下午茶时间到啦，想和你分享这片蓝天和甜甜
+              - text: 0:15
+            - article [ref=e409]:
+              - strong [ref=e410]: 晚安
+              - paragraph [ref=e411]: 月亮都困了，快闭上眼睛吧，梦里继续和你玩
+              - text: 0:18
+        - generic [ref=e412]:
+          - generic [ref=e413]: 添加图片
+          - generic [ref=e414]:
+            - button "+ 添加图片" [ref=e417] [cursor=pointer]
+            - paragraph [ref=e418]: 最多 3 张图片
+      - generic [ref=e419]:
+        - button "取消" [ref=e420] [cursor=pointer]
+        - button "保存日记" [ref=e421] [cursor=pointer]

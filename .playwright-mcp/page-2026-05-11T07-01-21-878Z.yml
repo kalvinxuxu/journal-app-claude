@@ -1,0 +1,72 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [active] [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - paragraph [ref=e91]: 写日记
+          - heading "今天的情绪是什么？" [level=2] [ref=e92]
+          - paragraph [ref=e93]: 先用模板把骨架搭起来，后面再接真实模型输出。
+        - button "返回首页" [ref=e94] [cursor=pointer]
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]: 日期
+          - textbox "日期" [ref=e98]: 2026-05-11
+        - generic [ref=e99]:
+          - generic [ref=e100]: 心情
+          - generic [ref=e101]:
+            - button "❤️ 开心" [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]:
+                - generic [ref=e104]: ❤️
+                - generic [ref=e105]: 开心
+            - button "🌙 想念" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: 🌙
+                - generic [ref=e109]: 想念
+            - button "💧 感动" [ref=e110] [cursor=pointer]:
+              - generic [ref=e111]:
+                - generic [ref=e112]: 💧
+                - generic [ref=e113]: 感动
+            - button "🍃 平静" [ref=e114] [cursor=pointer]:
+              - generic [ref=e115]:
+                - generic [ref=e116]: 🍃
+                - generic [ref=e117]: 平静
+            - button "✨ 调皮" [ref=e118] [cursor=pointer]:
+              - generic [ref=e119]:
+                - generic [ref=e120]: ✨
+                - generic [ref=e121]: 调皮
+        - generic [ref=e122]:
+          - generic [ref=e123]: 日记内容
+          - textbox "日记内容" [ref=e124]: 我今天特别开心，你知道为什么吗？ 新的一周开始了，一起加油吧。 想想你，嘴角就忍不住上扬。
+        - generic [ref=e125]:
+          - generic [ref=e126]: 语音留言预览
+          - generic [ref=e127]:
+            - article [ref=e128]:
+              - strong [ref=e129]: 早安
+              - paragraph [ref=e130]: 早安：今天也想把好心情分你一半。
+              - text: 0:12
+            - article [ref=e131]:
+              - strong [ref=e132]: 午后
+              - paragraph [ref=e133]: 午后：我刚刚想到你，嘴角就上去了。
+              - text: 0:15
+            - article [ref=e134]:
+              - strong [ref=e135]: 晚安
+              - paragraph [ref=e136]: 晚安：有些开心不说出来，反而会更明显。
+              - text: 0:18
+        - generic [ref=e137]:
+          - generic [ref=e138]: 添加图片
+          - generic [ref=e139]:
+            - button "+ 添加图片" [ref=e142] [cursor=pointer]
+            - paragraph [ref=e143]: 最多 3 张图片
+      - generic [ref=e144]:
+        - button "取消" [ref=e145] [cursor=pointer]
+        - button "保存日记" [ref=e146] [cursor=pointer]

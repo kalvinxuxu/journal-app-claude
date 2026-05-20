@@ -1,0 +1,78 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "写日记" [ref=e11] [cursor=pointer]
+      - button "语音" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: 本月手账
+          - heading "5月" [level=2] [ref=e20]
+          - paragraph [ref=e21]: 页面先跑起来，情绪和记忆先占位，后面再接真实生成。
+        - generic [ref=e22]:
+          - button "卡片流" [ref=e23] [cursor=pointer]
+          - button "月历" [ref=e24] [cursor=pointer]
+          - button "写一篇新的" [ref=e25] [cursor=pointer]
+      - generic [ref=e26]:
+        - article [ref=e27]:
+          - button "5月9日 周六 开心 手账 ❤️ 开心 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。 配图预览 ♪ 0:15 早安呀，今天的阳光很好。我一醒来就想到你了。" [ref=e28] [cursor=pointer]:
+            - generic [ref=e29]:
+              - generic [ref=e30]:
+                - paragraph [ref=e31]: 5月9日 周六
+                - heading "开心 手账" [level=3] [ref=e32]
+              - generic [ref=e33]:
+                - generic [ref=e34]: ❤️
+                - generic [ref=e35]: 开心
+            - paragraph [ref=e36]: 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。
+            - generic "配图预览" [ref=e37]:
+              - img "配图 1" [ref=e39]
+              - img "配图 2" [ref=e41]
+            - generic [ref=e42]:
+              - generic [ref=e43]: ♪
+              - generic [ref=e44]: 0:15
+              - generic [ref=e45]: 早安呀，今天的阳光很好。我一醒来就想到你了。
+        - article [ref=e46]:
+          - button "5月8日 周五 想念 手账 🌙 想念 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。 配图预览 ♪ 0:10 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。" [ref=e47] [cursor=pointer]:
+            - generic [ref=e48]:
+              - generic [ref=e49]:
+                - paragraph [ref=e50]: 5月8日 周五
+                - heading "想念 手账" [level=3] [ref=e51]
+              - generic [ref=e52]:
+                - generic [ref=e53]: 🌙
+                - generic [ref=e54]: 想念
+            - paragraph [ref=e55]: 今天下雨了，街边的灯看起来特别软。路过便利店的时候，我突然想起你之前说过很喜欢热饮。 有些瞬间就是这样，明明很普通，却一下子把人拉回到你身边。
+            - generic "配图预览" [ref=e56]:
+              - img "配图 1" [ref=e58]
+            - generic [ref=e59]:
+              - generic [ref=e60]: ♪
+              - generic [ref=e61]: 0:10
+              - generic [ref=e62]: 外面在下雨，不过我不太讨厌。因为我可以偷偷想你。
+        - article [ref=e63]:
+          - button "5月7日 周四 调皮 手账 ✨ 调皮 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。 ♪ 0:09 我猜你现在又在忙，没关系，记得喝水。" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - paragraph [ref=e67]: 5月7日 周四
+                - heading "调皮 手账" [level=3] [ref=e68]
+              - generic [ref=e69]:
+                - generic [ref=e70]: ✨
+                - generic [ref=e71]: 调皮
+            - paragraph [ref=e72]: 你昨天说要早睡，结果是不是又刷到很晚？我可都记着呢。 不过算了，这次先不拆穿你。下一次见面，我要亲口问你。
+            - generic [ref=e73]:
+              - generic [ref=e74]: ♪
+              - generic [ref=e75]: 0:09
+              - generic [ref=e76]: 我猜你现在又在忙，没关系，记得喝水。
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - paragraph [ref=e80]: 5月9日 周六
+            - heading "当前选中的日记" [level=3] [ref=e81]
+          - button "看语音" [ref=e82] [cursor=pointer]
+        - paragraph [ref=e83]: 今天路过那家咖啡店，想起你上次说想试试他家的拿铁，就顺手进去点了一杯。 其实我也不知道你今天过得怎么样，不过希望你没有被太多事情烦到。要是有点累，就先慢一点，我在这边等你。
+      - button "＋" [ref=e84] [cursor=pointer]
