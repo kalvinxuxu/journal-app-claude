@@ -3,8 +3,9 @@ WORKDIR /app
 
 # Install dependencies
 FROM base AS deps
+RUN apk add --no-cache python3 make g++
 COPY package.json package-lock.json* ./
-RUN npm ci --ignore-scripts
+RUN npm ci
 
 # Build TypeScript
 FROM deps AS builder

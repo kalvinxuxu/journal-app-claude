@@ -1,27 +1,39 @@
-app = "journal-api"
-primary_region = "hkg"
+# fly.toml app configuration file generated for journal-api-shy-pebble-9077 on 2026-05-20T10:41:19+08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'journal-api-shy-pebble-9077'
+primary_region = 'sin'
 
 [build]
 
 [deploy]
-  min_machines_running = 1
+
+[env]
+  DATA_DIR = '/data'
+  HOST = '0.0.0.0'
+  NODE_ENV = 'production'
+  PORT = '3001'
+
+[[mounts]]
+  source = 'journal_data'
+  destination = '/data'
 
 [http_service]
   internal_port = 3001
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = 'off'
   auto_start_machines = true
 
-  [http_service.health_checks]
-    path = "/health"
-    interval = "10s"
-    timeout = "5s"
-    grace_period = "5s"
+  [[http_service.checks]]
+    interval = '15s'
+    timeout = '5s'
+    grace_period = '10s'
+    method = 'get'
+    path = '/health'
 
-[[mounts]]
-  source = "journal_data"
-  destination = "/data"
-
-[env]
-  PORT = "3001"
-  NODE_ENV = "production"
+[[vm]]
+  memory = '1gb'
+  cpus = 1
+  memory_mb = 1024
