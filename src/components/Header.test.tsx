@@ -9,9 +9,10 @@ afterEach(() => {
 });
 
 describe("Header", () => {
-  it("renders voice page entry in top-level navigation", () => {
+  it("renders photo wall entry and hides the old voice page entry", () => {
     render(<Header activePage="home" onNavigate={() => {}} />);
 
-    expect(screen.getByRole("button", { name: "语音页" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "照片墙" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "语音页" })).toBeNull();
   });
 });

@@ -177,5 +177,8 @@ export function createTaskRepository(dbPath: string) {
       const rows = db.prepare(sql).all(...params) as Record<string, unknown>[];
       return rows.map(rowToTask);
     },
+
+    // Expose db for use by other stores (e.g., greetingSettingsStore)
+    _db: db as unknown,
   };
 }

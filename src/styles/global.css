@@ -1168,3 +1168,53 @@ h3 {
   color: var(--mint-deep);
   border: 1px solid rgba(168, 213, 186, 0.3);
 }
+
+/* ===== 照片墙 ===== */
+.photo-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.photo-polaroid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 12px 18px;
+  background: #fffdf8;
+  border: 1px solid rgba(126, 104, 86, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 16px 30px rgba(92, 74, 56, 0.12);
+  filter: sepia(0.12) saturate(0.9) contrast(0.96);
+  cursor: pointer;
+}
+
+.photo-polaroid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.photo-polaroid span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.image-gallery-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.image-gallery-overlay img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+}

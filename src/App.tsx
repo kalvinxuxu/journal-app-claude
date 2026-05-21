@@ -4,7 +4,8 @@ import { HomePage } from "./pages/HomePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { WritePage } from "./pages/WritePage";
 import { AskHerPage } from "./pages/AskHerPage";
-import { VoicePage } from "./pages/VoicePage";
+import { PhotoWallPage } from "./pages/PhotoWallPage";
+import { GreetingPage } from "./pages/GreetingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
 import { addJournalToMemory, getMemoryEngine } from "./services/generator";
 import {
@@ -28,6 +29,7 @@ import { shouldTriggerMorningSelfie, shouldTriggerNightBonus } from "./services/
 import { generateJournalDraft } from "./services/journalGeneration";
 import { isDailySummary, toJournalEntry } from "./services/journalAggregation";
 import { taskStore } from './services/generation/taskStore';
+import { greetingStore, type GreetingCard } from './services/greetingStore';
 import type { AppPage, Journal, Preferences, Mood } from "./types/journal";
 
 function getTodayString() {
@@ -390,6 +392,38 @@ export function App() {
       });
   }, [journals]);
 
+  // Poll for daily greeting tasks
+  const greetingPollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  useEffect(() => {
+    async function pollGreetings() {
+      try {
+        const res = await fetch("/api/generation/tasks?type=daily_greeting&status=succeeded");
+        if (!res.ok) return;
+        const data = await res.json() as { tasks?: Array<{ id: string; output: Record<string, unknown>; completedAt?: string }> };
+        if (!data.tasks?.length) return;
+        const existingIds = greetingStore.getGreetingIds();
+        for (const task of data.tasks) {
+          if (existingIds.has(task.id)) continue;
+          const output = task.output ?? {};
+          const card: GreetingCard = {
+            id: task.id,
+            timing: (output.timing as GreetingCard["timing"]) ?? "morning",
+            content: (output.greetingContent as string) ?? "",
+            audioUrl: (output.audioUrl as string) || undefined,
+            deliveredAt: task.completedAt ?? new Date().toISOString(),
+          };
+          greetingStore.addGreeting(card);
+        }
+      } catch { /* silent */ }
+    }
+
+    pollGreetings();
+    greetingPollRef.current = setInterval(pollGreetings, 30_000);
+    return () => {
+      if (greetingPollRef.current) clearInterval(greetingPollRef.current);
+    };
+  }, []);
+
   function handleSaveJournal(journal: Journal) {
     const entry = toJournalEntry(journal);
     // Update UI state immediately
@@ -491,17 +525,20 @@ export function App() {
             />
           ) : null}
 
-          {activePage === "voice" ? (
-            <VoicePage
-              journals={journals}
-              selectedJournalId={selectedJournalId}
-            />
+          {activePage === "photo-wall" ? (
+            <PhotoWallPage journals={journals} />
           ) : null}
 
           {activePage === "settings" ? (
             <SettingsPage
               preferences={preferences}
               onChange={setPreferences}
+            />
+          ) : null}
+
+          {activePage === "greetings" ? (
+            <GreetingPage
+              onBack={() => handleNavigate("home")}
             />
           ) : null}
         </div>

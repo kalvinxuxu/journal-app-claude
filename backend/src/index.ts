@@ -7,6 +7,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const HOST = process.env.HOST || "0.0.0.0";
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 // ---------------------------------------------------------------------------
 // MiniMax config (image + TTS)
@@ -21,8 +23,30 @@ const MINIMAX_BASE_URL = process.env.MINIMAX_BASE_URL || "https://api.minimaxi.c
 const ZIMAGE_API_KEY = process.env.ZIMAGE_API_KEY;
 const ZIMAGE_BASE_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation";
 
+const corsOrigins = (process.env.CORS_ORIGIN ?? "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN ?? false,
+  origin(origin, callback) {
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
+
+    if (corsOrigins.length === 0) {
+      callback(NODE_ENV === "production" ? new Error("CORS_ORIGIN is not configured") : null, NODE_ENV !== "production");
+      return;
+    }
+
+    if (corsOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error("CORS origin not allowed"));
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: "50mb" }));
@@ -369,6 +393,10 @@ import { createTaskRecovery } from "./generation/taskRecovery.js";
 import { createDraftRunner } from "./generation/runners/draftRunner.js";
 import { createMediaRunner } from "./generation/runners/mediaRunner.js";
 import { executeMediaTask } from "./generation/runners/executeMediaTask.js";
+import { createGreetingRunner } from "./generation/runners/greetingRunner.js";
+import { createGreetingScheduler } from "./generation/greetingScheduler.js";
+import { createGreetingRoutes } from "./generation/routes/greetingRoutes.js";
+import { createGreetingSettingsStore } from "./storage/greetingSettingsStore.js";
 import { saveImage, saveAudio, generateImageFilename, generateAudioFilename } from "./storage/mediaStore.js";
 
 const DATA_DIR = process.env.DATA_DIR ?? path.resolve(process.cwd());
@@ -399,12 +427,17 @@ const mediaRunner = createMediaRunner({
   runMedia: async (input: Record<string, unknown>) => executeMediaTask(Number(PORT), input),
 });
 
+const greetingSettingsStore = createGreetingSettingsStore(taskRepository["_db"] as Parameters<typeof createGreetingSettingsStore>[0]);
+
+const greetingRunner = createGreetingRunner({ port: Number(PORT) });
+
 const scheduler = createTaskScheduler({
   repository: taskRepository,
   runners: {
     draft_generation: draftRunner,
     media_generation: mediaRunner,
     selfie_generation: async () => ({ output: {}, resultSummary: { outcome: "full_success" } }),
+    daily_greeting: greetingRunner,
   },
   leaseMs: 30_000,
   workerId: "api-process-1",
@@ -418,6 +451,20 @@ setInterval(() => {
 }, 1_000);
 
 app.use("/api/generation/tasks", createGenerationRoutes(generationTaskService));
+app.use("/api/greetings", createGreetingRoutes({
+  settingsStore: greetingSettingsStore,
+  taskService: generationTaskService,
+}));
+
+// Start greeting scheduler after 5-second delay
+setTimeout(() => {
+  const stopGreetingScheduler = createGreetingScheduler({
+    settingsStore: greetingSettingsStore,
+    taskService: generationTaskService,
+  }).start();
+  console.log("[greetingScheduler] Started");
+  // On shutdown: stopGreetingScheduler()
+}, 5_000);
 
 // ---------------------------------------------------------------------------
 // Media storage API endpoints
@@ -556,8 +603,8 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: "Internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+app.listen(Number(PORT), HOST, () => {
+  console.log(`Backend server running on http://${HOST}:${PORT}`);
   console.log(`Content provider: ${CONTENT_PROVIDER}`);
   if (!MINIMAX_API_KEY) {
     console.warn("Warning: MINIMAX_API_KEY not set in environment");

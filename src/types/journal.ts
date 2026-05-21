@@ -36,7 +36,7 @@ export type Journal = {
   selfieStatus?: JournalStatus;  // 自拍生成状态，防止并发
 };
 
-export type AppPage = "home" | "write" | "ask-her" | "voice" | "settings";
+export type AppPage = "home" | "write" | "ask-her" | "photo-wall" | "settings" | "greetings";
 
 export type Preferences = {
   reminderTime: string;

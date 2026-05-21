@@ -1,4 +1,4 @@
-export type GenerationTaskType = "draft_generation" | "media_generation" | "selfie_generation";
+export type GenerationTaskType = "draft_generation" | "media_generation" | "selfie_generation" | "daily_greeting";
 
 export type GenerationTaskStatus =
   | "queued"
@@ -32,7 +32,7 @@ export interface GenerationTaskRecord {
 }
 
 export interface CreateTaskRequest {
-  type: "draft_generation" | "media_generation" | "selfie_generation";
+  type: "draft_generation" | "media_generation" | "selfie_generation" | "daily_greeting";
   input: Record<string, unknown>;
   priority?: number;
 }

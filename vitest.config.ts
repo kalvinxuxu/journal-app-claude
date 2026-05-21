@@ -3,7 +3,8 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'jsdom',
-    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    environmentMatchGlobs: [['backend/src/migration/**/*.test.ts', 'node']],
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'backend/src/migration/**/*.test.ts'],
     globals: true,
   },
 });

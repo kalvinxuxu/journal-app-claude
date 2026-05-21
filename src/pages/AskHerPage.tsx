@@ -15,21 +15,43 @@ type AskHerPageProps = {
 
 const moods: Mood[] = ["开心", "想念", "感动", "平静", "调皮"];
 
+export type AskHerPhase =
+  | "idle"
+  | "draft-generating"
+  | "image-generating"
+  | "voice-generating"
+  | "preview-ready"
+  | "partial-error"
+  | "fatal-error";
+
 export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
   const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [mood, setMood] = useState<Mood>("开心");
   const [sceneHint, setSceneHint] = useState("");
-  const [saveState, setSaveState] = useState<"idle" | "generating" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [phase, setPhase] = useState<AskHerPhase>("idle");
+  const [fatalError, setFatalError] = useState<string | null>(null);
   const [generationErrors, setGenerationErrors] = useState<{ image?: string; voice?: string } | null>(null);
   const [previewDraft, setPreviewDraft] = useState<Awaited<ReturnType<typeof generateJournalDraft>> | null>(null);
-  const [previewContent, setPreviewContent] = useState<string | null>(null);
+  const [previewJournal, setPreviewJournal] = useState<Journal | null>(null);
+
+  const phaseButtonLabel: Record<AskHerPhase, string> = {
+    "idle": "请她写",
+    "draft-generating": "正在生成日记",
+    "image-generating": "正在根据日记生成配图",
+    "voice-generating": "正在生成语音",
+    "preview-ready": "保存日记",
+    "partial-error": "保存日记",
+    "fatal-error": "请她写",
+  };
+
+  const isLoading = phase === "draft-generating" || phase === "image-generating" || phase === "voice-generating";
 
   async function handleGenerate() {
-    if (saveState === "generating") return;
-    setSaveState("generating");
-    setErrorMsg(null);
-    setPreviewContent(null);
+    if (isLoading) return;
+    setPhase("draft-generating");
+    setFatalError(null);
+    setGenerationErrors(null);
+    setPreviewJournal(null);
 
     try {
       const draft = await generateJournalDraft({
@@ -40,124 +62,117 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
         voiceStyle,
       });
       setPreviewDraft(draft);
-      setPreviewContent(draft.content);
-      setSaveState("idle");
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : String(err));
-      setSaveState("error");
-    }
-  }
 
-  async function handleSave() {
-    if (!previewContent || saveState === "generating") return;
-    setSaveState("generating");
+      const selectedDate = new Date(`${date}T12:00:00`);
+      const weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][selectedDate.getDay()];
 
-    const selectedDate = new Date(`${date}T12:00:00`);
-    const weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][selectedDate.getDay()];
+      const draftJournal: Journal = {
+        id: `journal-${date}-${Date.now()}`,
+        date,
+        weekday,
+        mood,
+        source: "girlfriend",
+        content: draft.content,
+        voiceMessages: draft.voiceMessages,
+        voiceStyle,
+      };
 
-    const draft: Journal = {
-      id: `journal-${date}`,
-      date,
-      weekday,
-      mood,
-      source: "girlfriend",
-      content: previewContent,
-      voiceMessages: previewDraft?.voiceMessages ?? [],
-      voiceStyle,
-    };
+      setPhase("image-generating");
 
-    // Try task-based media generation
-    try {
-      const imagePrompt = buildJournalImagePrompt(draft, { referenceImage: loadReferenceImage() ?? undefined, sceneHint: sceneHint || undefined });
-      const voiceScripts = draft.voiceMessages.map(vm => ({ timing: vm.timing, transcript: vm.transcript }));
+      let journal = draftJournal;
+      let errors: { image?: string; voice?: string } = {};
 
-      const created = await createGenerationTask({
-        type: "media_generation",
-        input: {
-          prompt: imagePrompt,
-          mood,
-          voiceStyle,
-          voiceScripts,
-          aspectRatio: "1:1",
-          n: 1,
-        },
-        priority: 5,
-      });
+      // Try task-based media generation first
+      try {
+        const imagePrompt = buildJournalImagePrompt(journal, { referenceImage: loadReferenceImage() ?? undefined, sceneHint: sceneHint || undefined });
+        const voiceScripts = journal.voiceMessages.map(vm => ({ timing: vm.timing, transcript: vm.transcript }));
 
-      const finalTask = await pollGenerationTask(created.task.id);
+        const created = await createGenerationTask({
+          type: "media_generation",
+          input: {
+            prompt: imagePrompt,
+            mood,
+            voiceStyle,
+            voiceScripts,
+            aspectRatio: "1:1",
+            n: 1,
+          },
+          priority: 5,
+        });
 
-      if (finalTask.status === "succeeded" && finalTask.output) {
-        const mediaOutput = finalTask.output as {
-          images?: string[];
-          voiceMessages?: typeof draft.voiceMessages;
-          errors?: { image?: string; voice?: string; tts?: string };
-        };
-        const hasImages = Array.isArray(mediaOutput.images) && mediaOutput.images.length > 0;
-        const hasVoiceMessages = Array.isArray(mediaOutput.voiceMessages) && mediaOutput.voiceMessages.length > 0;
+        const finalTask = await pollGenerationTask(created.task.id);
 
-        if (!hasImages || !hasVoiceMessages) {
-          console.warn("Media generation task returned incomplete output, falling back to direct API.");
-          throw new Error("incomplete media task output");
+        if (finalTask.status === "succeeded" && finalTask.output) {
+          const mediaOutput = finalTask.output as {
+            images?: string[];
+            voiceMessages?: typeof journal.voiceMessages;
+            errors?: { image?: string; voice?: string; tts?: string };
+          };
+          const hasImages = Array.isArray(mediaOutput.images) && mediaOutput.images.length > 0;
+          const hasVoiceMessages = Array.isArray(mediaOutput.voiceMessages) && mediaOutput.voiceMessages.length > 0;
+
+          if (hasImages && hasVoiceMessages) {
+            const persistedImages = await persistImagesIfNeeded(mediaOutput.images!);
+            setPhase("voice-generating");
+            const persistedVoiceMessages = await persistAudiosIfNeeded(mediaOutput.voiceMessages!);
+
+            journal = {
+              ...journal,
+              images: persistedImages,
+              voiceMessages: persistedVoiceMessages,
+            };
+
+            if (finalTask.error) {
+              const errorMsgText = finalTask.error.message || "";
+              const imgErrorMatch = errorMsgText.match(/图片生成失败：([^;]+)/);
+              const voiceErrorMatch = errorMsgText.match(/语音生成失败：([^;]+)/);
+              errors = {
+                image: imgErrorMatch ? `图片生成失败：${imgErrorMatch[1].trim()}` : mediaOutput.errors?.image,
+                voice: voiceErrorMatch ? `语音生成失败：${voiceErrorMatch[1].trim()}` : (mediaOutput.errors?.voice ?? mediaOutput.errors?.tts),
+              };
+            }
+
+            setPreviewJournal(journal);
+            setGenerationErrors(errors);
+            setPhase(errors.image || errors.voice ? "partial-error" : "preview-ready");
+            return;
+          }
         }
-
-        const enrichedJournal: Journal = {
-          ...draft,
-          images: mediaOutput.images,
-          voiceMessages: mediaOutput.voiceMessages ?? draft.voiceMessages,
-        };
 
         if (finalTask.error) {
-          const errorMsgText = finalTask.error.message || "";
-          const imgErrorMatch = errorMsgText.match(/图片生成失败：([^;]+)/);
-          const voiceErrorMatch = errorMsgText.match(/语音生成失败：([^;]+)/);
-          setGenerationErrors({
-            image: imgErrorMatch ? `图片生成失败：${imgErrorMatch[1].trim()}` : mediaOutput.errors?.image,
-            voice: voiceErrorMatch ? `语音生成失败：${voiceErrorMatch[1].trim()}` : (mediaOutput.errors?.voice ?? mediaOutput.errors?.tts),
-          });
+          console.warn("Media generation task failed, falling back to direct API:", finalTask.error.message);
         }
-
-        // P2-1/P2-2: Persist task output data URLs to stable backend URLs before saving
-        const [persistedImages, persistedVoiceMessages] = await Promise.all([
-          mediaOutput.images ? persistImagesIfNeeded(mediaOutput.images) : Promise.resolve(undefined),
-          mediaOutput.voiceMessages ? persistAudiosIfNeeded(mediaOutput.voiceMessages) : Promise.resolve(undefined),
-        ]);
-        const persistedJournal: Journal = {
-          ...draft,
-          images: persistedImages ?? draft.images,
-          voiceMessages: persistedVoiceMessages ?? draft.voiceMessages,
-        };
-
-        await onSave(persistedJournal);
-        setSaveState(finalTask.error ? "error" : "idle");
-        return;
+      } catch (error) {
+        console.warn("Media generation task system unavailable, falling back to direct API:", error);
       }
 
-      // Task failed or returned unexpected state - fall back to direct API
-      if (finalTask.error) {
-        console.warn("Media generation task failed, falling back to direct API:", finalTask.error.message);
-      }
-    } catch (error) {
-      console.warn("Media generation task system unavailable, falling back to direct API:", error);
-    }
-
-    // Fallback: direct buildJournalMedia (handles selfies and sceneHint correctly)
-    try {
-      const result = await buildJournalMedia(draft, {
+      // Fallback: direct buildJournalMedia
+      setPhase("image-generating");
+      const result = await buildJournalMedia(journal, {
         referenceImage: loadReferenceImage() ?? undefined,
         generateSelfies: false,
         sceneHint: sceneHint || undefined,
       });
-      setGenerationErrors(result.errors);
-      await onSave(result.journal);
-      setSaveState(result.errors.image || result.errors.voice ? "error" : "idle");
+
+      setPhase("voice-generating");
+      journal = result.journal;
+      errors = result.errors;
+      setPreviewJournal(journal);
+      setGenerationErrors(errors);
+      setPhase(errors.image || errors.voice ? "partial-error" : "preview-ready");
     } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : String(err));
-      setGenerationErrors({ image: err instanceof Error ? err.message : String(err) });
-      setSaveState("error");
+      setFatalError(err instanceof Error ? err.message : String(err));
+      setPhase("fatal-error");
     }
   }
 
-  const saveButtonLabel = saveState === "generating" ? "生成中..." : previewContent ? "保存日记" : "请她写";
+  async function handleSave() {
+    if (!previewJournal || isLoading) return;
+    await onSave(previewJournal);
+  }
+
+  const isSavePhase = phase === "preview-ready" || phase === "partial-error";
+  const handlePrimaryAction = isSavePhase ? handleSave : handleGenerate;
 
   return (
     <section className="page-stack">
@@ -173,7 +188,7 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
       <div className="form-grid">
         <label className="field">
           <span>日期</span>
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} disabled={isLoading} />
         </label>
 
         <div className="field">
@@ -185,6 +200,7 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
                 type="button"
                 className={m === mood ? "mood-picker__item is-active" : "mood-picker__item"}
                 onClick={() => setMood(m)}
+                disabled={isLoading}
               >
                 <MoodTag mood={m} />
               </button>
@@ -199,11 +215,21 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
             value={sceneHint}
             onChange={(e) => setSceneHint(e.target.value)}
             placeholder="比如：今天下雨了，想念我们一起撑伞的时候"
+            disabled={isLoading}
           />
         </label>
       </div>
 
-      {previewContent ? (
+      {isLoading && (
+        <div className="generation-status card is-info" role="status">
+          <p className="section-label">生成进度</p>
+          {phase === "draft-generating" && <p>正在生成日记</p>}
+          {phase === "image-generating" && <p>正在根据日记生成配图</p>}
+          {phase === "voice-generating" && <p>正在生成语音</p>}
+        </div>
+      )}
+
+      {previewJournal ? (
         <div className="detail-card card">
           <div className="detail-card__top">
             <div>
@@ -211,36 +237,48 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
               <h3>她写的日记</h3>
             </div>
           </div>
-          <p>{previewContent}</p>
+          <p>{previewJournal.content}</p>
+
+          {previewJournal.images && previewJournal.images.length > 0 && (
+            <div style={{ marginTop: "16px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+              {previewJournal.images.map((img, i) => (
+                <img key={i} src={img} alt={`Generated ${i + 1}`} style={{ width: "100%", borderRadius: "8px" }} />
+              ))}
+            </div>
+          )}
+
+          {previewJournal.voiceMessages.length > 0 && (
+            <div style={{ marginTop: "16px" }}>
+              {previewJournal.voiceMessages.map((vm) => (
+                <div key={vm.id} style={{ fontSize: "13px", color: "#424242" }}>
+                  <span style={{ fontWeight: 500 }}>{vm.timing}</span>: {vm.transcript}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ) : null}
 
-      {generationErrors ? (
+      {generationErrors && (phase === "preview-ready" || phase === "partial-error") ? (
         <div className="generation-status card is-warning" role="status">
-          <p className="section-label">部分生成结果</p>
-          {generationErrors.image ? <p>图片：生成失败</p> : <p style={{color: "#2E7D32"}}>图片：生成成功</p>}
-          {generationErrors.voice ? <p>语音：生成失败</p> : <p style={{color: "#2E7D32"}}>语音：生成成功</p>}
+          <p className="section-label">生成结果</p>
+          {generationErrors.image ? <p style={{color: "#E65100"}}>图片：生成失败</p> : <p style={{color: "#2E7D32"}}>图片：生成成功</p>}
+          {generationErrors.voice ? <p style={{color: "#E65100"}}>语音：生成失败</p> : <p style={{color: "#2E7D32"}}>语音：生成成功</p>}
         </div>
       ) : null}
 
-      {errorMsg ? (
+      {fatalError ? (
         <div className="generation-status card is-error" role="alert">
           <p className="section-label">生成失败</p>
-          <p>{errorMsg}</p>
+          <p>{fatalError}</p>
         </div>
       ) : null}
 
       <div className="action-row">
         <button type="button" className="ghost-button" onClick={onCancel}>取消</button>
-        {!previewContent ? (
-          <button type="button" className="primary-button" onClick={handleGenerate} disabled={saveState === "generating"}>
-            {saveButtonLabel}
-          </button>
-        ) : (
-          <button type="button" className="primary-button" onClick={handleSave} disabled={saveState === "generating"}>
-            保存日记
-          </button>
-        )}
+        <button type="button" className="primary-button" onClick={handlePrimaryAction} disabled={isLoading}>
+          {phaseButtonLabel[phase]}
+        </button>
       </div>
     </section>
   );
