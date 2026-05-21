@@ -48,7 +48,7 @@ describe("minimax service", () => {
 
   it("treats morning selfie success as primary success even if evening fails", async () => {
     vi.mocked(generateSelfies)
-      .mockResolvedValueOnce({ selfies: ["morning-url"] })
+      .mockResolvedValueOnce({ selfies: ["http://localhost:3001/media/images/selfie-morning"] })
       .mockResolvedValueOnce({ selfies: [], error: "evening failed" });
 
     const result = await generateGirlfriendSelfies("开心", "ref-image");
@@ -69,13 +69,13 @@ describe("minimax service", () => {
   // ---- RED: buildJournalMedia parallel generation returns both images + selfies ----
 
   it("buildJournalMedia returns both journal images and selfies independently", async () => {
-    vi.mocked(generateImages).mockResolvedValue({ urls: ["journal-img-1", "journal-img-2"] });
+    vi.mocked(generateImages).mockResolvedValue({ urls: ["http://localhost:3001/media/images/journal-img-1", "http://localhost:3001/media/images/journal-img-2"] });
     vi.mocked(synthesizeSpeech).mockResolvedValue({
       audioDataUrl: "data:audio/mp3;base64,abc",
       error: undefined,
     });
     vi.mocked(generateSelfies).mockResolvedValue({
-      selfies: ["selfie-morning"],
+      selfies: ["http://localhost:3001/media/images/selfie-morning"],
       referenceImage: "ref",
     });
 
@@ -140,6 +140,14 @@ describe("minimax service", () => {
     expect(prompt).toContain("Expression:");
     expect(prompt).toContain("Clothing:");
     expect(prompt).toContain("Atmosphere:");
+  });
+
+  it("buildJournalImagePrompt includes vertical full-body composition guidance", () => {
+    const prompt = buildJournalImagePrompt(FIXTURE_JOURNAL);
+    expect(prompt).toContain("Vertical portrait composition.");
+    expect(prompt).toContain("Full-body framing preferred");
+    expect(prompt).toContain("Show the complete outfit");
+    expect(prompt).toContain("Only one person in the image");
   });
 
   it("buildJournalImagePrompt no longer contains random tokens", () => {

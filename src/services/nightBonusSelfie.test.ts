@@ -42,10 +42,12 @@ describe("nightBonusSelfie", () => {
       expect(prompt).toContain("开心");
     });
 
-    it("includes sleepwear and sweet keywords", () => {
+    it("includes full-body vertical and nightwear keywords", () => {
       const prompt = buildNightBonusPrompt("想念");
-      expect(prompt).toContain("睡衣自拍");
-      expect(prompt).toContain("甜心感");
+      expect(prompt).toContain("全身竖屏自拍");
+      expect(prompt).toContain("睡衣");
+      expect(prompt).toContain("轻裸露");
+      expect(prompt).toContain("Only one person in the image");
     });
 
     it("generates different prompts for different moods", () => {
