@@ -123,7 +123,7 @@ export function JournalCard({ journal, active, onSelect }: JournalCardProps) {
           ) : null}
 
           {journal.voiceMessages.length > 0 ? (
-            <InlineVoiceBar voiceMessages={journal.voiceMessages} />
+            <InlineVoiceBar voiceMessages={journal.voiceMessages} keyPrefix={journal.id} />
           ) : null}
         </div>
       </article>

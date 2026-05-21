@@ -59,12 +59,6 @@ export function HomePage({
           >
             月历
           </button>
-          <button type="button" className="primary-button" onClick={onCreateNew}>
-            我来写
-          </button>
-          <button type="button" className="ghost-button" onClick={onAskHerWrite}>
-            请她写
-          </button>
         </div>
       </div>
 

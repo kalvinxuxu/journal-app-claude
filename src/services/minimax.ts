@@ -73,8 +73,14 @@ export function buildJournalImagePrompt(
 
   const parts = [
     GIRLFRIEND_ANCHOR,
+    "Only one person in the image. Do not include two women or a group photo.",
     "写实生活摄影风格。",
     "像手机或轻写真记录下来的真实日常场景。",
+    "Vertical portrait composition.",
+    "Full-body framing preferred, subject fully visible in frame.",
+    "Show the complete outfit whenever possible.",
+    "Use lifestyle photography composition instead of face close-up.",
+    "Prefer standing, walking, seated full-body, or natural candid poses.",
     `Mood: ${journal.mood}.`,
     `Date: ${journal.date} ${journal.weekday}.`,
     `Scene: ${sceneContext.scene}.`,
@@ -336,7 +342,7 @@ export async function buildJournalMedia(
   const [imageResult, voiceResult] = await Promise.allSettled([
     images
       ? Promise.resolve(undefined)
-      : generateMinimaxImages(buildJournalImagePrompt(journal, { sceneHint }), { n: 2 }),
+      : generateMinimaxImages(buildJournalImagePrompt(journal, { sceneHint }), { n: 2, aspectRatio: "9:16" }),
     synthesizeVoiceMessages(journal.voiceMessages, {
       mood: journal.mood,
       voiceStyle: journal.voiceStyle,

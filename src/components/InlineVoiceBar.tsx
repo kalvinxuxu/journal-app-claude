@@ -4,6 +4,7 @@ import { VoicePlayer } from "./VoicePlayer";
 
 export type InlineVoiceBarProps = {
   voiceMessages: VoiceMessage[];
+  keyPrefix?: string;
 };
 
 function getTimingLabel(timing: string) {
@@ -12,7 +13,7 @@ function getTimingLabel(timing: string) {
   return "晚安";
 }
 
-export function InlineVoiceBar({ voiceMessages }: InlineVoiceBarProps) {
+export function InlineVoiceBar({ voiceMessages, keyPrefix }: InlineVoiceBarProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = voiceMessages[activeIndex];
 
@@ -23,7 +24,7 @@ export function InlineVoiceBar({ voiceMessages }: InlineVoiceBarProps) {
       <div className="inline-voice-tabs">
         {voiceMessages.map((msg, i) => (
           <button
-            key={msg.id}
+            key={`${keyPrefix ?? "voice"}-${msg.id}-${msg.timing}`}
             type="button"
             className={i === activeIndex ? "inline-voice-tab is-active" : "inline-voice-tab"}
             onClick={() => setActiveIndex(i)}
