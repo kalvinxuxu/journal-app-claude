@@ -404,6 +404,7 @@ import { createMediaRunner } from "./generation/runners/mediaRunner.js";
 import { executeMediaTask } from "./generation/runners/executeMediaTask.js";
 import { createGreetingRunner } from "./generation/runners/greetingRunner.js";
 import { createGreetingScheduler } from "./generation/greetingScheduler.js";
+import { createCompanionRoutes } from "./companion/routes/companionRoutes";
 import { createGreetingRoutes } from "./generation/routes/greetingRoutes.js";
 import { createGreetingSettingsStore } from "./storage/greetingSettingsStore.js";
 import { saveImage, saveAudio, generateImageFilename, generateAudioFilename } from "./storage/mediaStore.js";
@@ -460,6 +461,7 @@ setInterval(() => {
 }, 1_000);
 
 app.use("/api/generation/tasks", createGenerationRoutes(generationTaskService));
+app.use("/api/companion", createCompanionRoutes());
 app.use("/api/greetings", createGreetingRoutes({
   settingsStore: greetingSettingsStore,
   taskService: generationTaskService,
