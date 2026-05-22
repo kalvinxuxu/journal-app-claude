@@ -33,20 +33,26 @@ export function CompanionOnboardingPage({ onCompleted }: Props) {
 
     setAnswers(nextAnswers);
     setStage("generating");
-    const onboardingResult = await initializeCompanionOnboarding({
-      userId: getCurrentUserId(),
-      answers: nextAnswers,
-    });
-    const portraitImageUrl = await generateRevealPortrait(onboardingResult.reveal.appearancePrompt);
-    const hydratedResult = {
-      ...onboardingResult,
-      reveal: {
-        ...onboardingResult.reveal,
-        portraitImageUrl,
-      },
-    };
-    setResult(hydratedResult);
-    setStage("reveal");
+    try {
+      const onboardingResult = await initializeCompanionOnboarding({
+        userId: getCurrentUserId(),
+        answers: nextAnswers,
+      });
+      const portraitImageUrl = await generateRevealPortrait(onboardingResult.reveal.appearancePrompt);
+      const hydratedResult = {
+        ...onboardingResult,
+        reveal: {
+          ...onboardingResult.reveal,
+          portraitImageUrl,
+        },
+      };
+      setResult(hydratedResult);
+      setStage("reveal");
+    } catch (err) {
+      console.error("Failed to generate companion:", err);
+      setStage("questions");
+      setIndex(prompts.length - 1);
+    }
   }
 
   if (stage === "landing") {

@@ -496,8 +496,7 @@ export function App() {
     setAnimKey(k => k + 1);
   }
 
-  return (
-    companionReady === false ? (
+  return companionReady === false || companionReady === null ? (
       <CompanionOnboardingPage
         onCompleted={(result) => {
           window.localStorage.setItem("journal-app:companionReady", "true");
@@ -510,7 +509,7 @@ export function App() {
           }
         }}
       />
-    ) : companionReady === null ? null : (
+    ) : (
     <div className="app-shell">
       <Header activePage={activePage} onNavigate={handleNavigate} />
 
