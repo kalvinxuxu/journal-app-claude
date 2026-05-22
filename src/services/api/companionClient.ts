@@ -40,7 +40,9 @@ export async function fetchCompanionContext(userId: string) {
 
 export async function initializeCompanionOnboarding(payload: {
   userId: string;
-  answers: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
+  intake: { entryMode: "real" | "fantasy" };
+  userProfileAnswers: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
+  companionPreferenceAnswers: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
 }) {
   const response = await fetch(`${getBackendUrl()}/api/companion/onboarding/initialize`, {
     method: "POST",
@@ -53,6 +55,36 @@ export async function initializeCompanionOnboarding(payload: {
   }
 
   return response.json() as Promise<InitialCompanionResult>;
+}
+
+export async function persistCompanionRevealPortrait(payload: {
+  userId: string;
+  portraitImageUrl: string;
+}) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/onboarding/portrait`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Companion reveal portrait persistence failed with ${response.status}`);
+  }
+}
+
+export async function saveCompanionCustomName(payload: {
+  userId: string;
+  customName: string;
+}) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/onboarding/name`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Companion naming failed with ${response.status}`);
+  }
 }
 
 export async function checkCompanionOnboardingStatus(userId: string) {
