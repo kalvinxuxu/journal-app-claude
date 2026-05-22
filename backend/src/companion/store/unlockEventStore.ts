@@ -31,12 +31,21 @@ export function createUnlockEventStore(db: Database.Database) {
     ORDER BY created_at ASC
   `);
 
+  const markSurfacedStmt = db.prepare(`
+    UPDATE unlock_events
+    SET surfaced_at = ?
+    WHERE id = ?
+  `);
+
   return {
     insert(record: UnlockEventRecord) {
       insertStmt.run(record);
     },
     listUnsurfaced(userId: string) {
       return listUnsurfacedStmt.all(userId) as UnlockEventRecord[];
+    },
+    markSurfaced(id: string, surfacedAt: string) {
+      markSurfacedStmt.run(surfacedAt, id);
     },
   };
 }

@@ -19,9 +19,19 @@ export function createFeedbackStore(db: Database.Database) {
     )
   `);
 
+  const countStmt = db.prepare(`
+    SELECT COUNT(*) as count
+    FROM interaction_feedback
+    WHERE user_id = ?
+  `);
+
   return {
     insert(record: InteractionFeedbackRecord) {
       insertStmt.run(record);
+    },
+    countByUserId(userId: string) {
+      const row = countStmt.get(userId) as { count: number };
+      return row.count;
     },
   };
 }

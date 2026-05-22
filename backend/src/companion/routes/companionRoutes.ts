@@ -1,18 +1,23 @@
 import { Router } from "express";
+import type Database from "better-sqlite3";
 import { createAppDatabase } from "../../db/database";
 import { createCompanionProfileStore } from "../store/companionProfileStore";
 import { createRelationshipStateStore } from "../store/relationshipStateStore";
 import { createOnboardingAnswerStore } from "../store/onboardingAnswerStore";
 import { createOnboardingService } from "../services/onboardingService";
+import { createFeedbackStore } from "../store/feedbackStore";
+import { createUnlockEventStore } from "../store/unlockEventStore";
 
-export function createCompanionRoutes() {
-  const db = createAppDatabase();
+export function createCompanionRoutes(db?: Database.Database) {
+  const database = db ?? createAppDatabase();
   const router = Router();
   const onboardingService = createOnboardingService({
-    onboardingAnswerStore: createOnboardingAnswerStore(db),
-    companionProfileStore: createCompanionProfileStore(db),
-    relationshipStateStore: createRelationshipStateStore(db),
+    onboardingAnswerStore: createOnboardingAnswerStore(database),
+    companionProfileStore: createCompanionProfileStore(database),
+    relationshipStateStore: createRelationshipStateStore(database),
   });
+  const feedbackStore = createFeedbackStore(database);
+  const unlockEventStore = createUnlockEventStore(database);
 
   router.post("/onboarding/initialize", (req, res) => {
     const { userId, answers } = req.body as {
@@ -27,6 +32,42 @@ export function createCompanionRoutes() {
 
     const result = onboardingService.submitInitialAnswers(userId, answers);
     res.status(201).json(result);
+  });
+
+  router.post("/feedback", (req, res) => {
+    const { userId, journalId, feedbackKind, feedbackValue } = req.body as {
+      userId?: string;
+      journalId?: string;
+      feedbackKind?: string;
+      feedbackValue?: string;
+    };
+
+    if (!userId || !feedbackKind || !feedbackValue) {
+      res.status(400).json({ error: "userId, feedbackKind, and feedbackValue are required" });
+      return;
+    }
+
+    feedbackStore.insert({
+      id: `fb_${Date.now()}`,
+      userId,
+      journalId: journalId ?? null,
+      feedbackKind: feedbackKind as never,
+      feedbackValue,
+      createdAt: new Date().toISOString(),
+    });
+
+    res.status(201).json({ ok: true });
+  });
+
+  router.get("/unlocks/:userId", (req, res) => {
+    const rows = unlockEventStore.listUnsurfaced(req.params.userId);
+    const surfacedAt = new Date().toISOString();
+
+    for (const row of rows) {
+      unlockEventStore.markSurfaced(row.id, surfacedAt);
+    }
+
+    res.json({ unlocks: rows });
   });
 
   return router;

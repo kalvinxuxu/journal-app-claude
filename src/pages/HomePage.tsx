@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type { Journal } from "../types/journal";
 import { formatDate } from "../utils/formatDate";
 import { EmptyState } from "../components/EmptyState";
 import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
+import { fetchCompanionUnlocks } from "../services/api/companionClient";
 
 type HomePageProps = {
   journals: Journal[];
@@ -24,10 +25,19 @@ export function HomePage({
   onAskHerWrite,
 }: HomePageProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "calendar">("timeline");
+  const [unlockEvents, setUnlockEvents] = useState<Array<{ id: string; eventSummary: string }>>([]);
   const isDev = import.meta.env.DEV;
   const selectedJournal = journals.find((journal) => journal.id === selectedJournalId) ?? journals[0];
   const anchorDate = selectedJournal?.date ?? journals[0]?.date ?? new Date().toISOString();
   const monthTitle = useMemo(() => formatDate(anchorDate).month, [anchorDate]);
+
+  useEffect(() => {
+    fetchCompanionUnlocks("local-user").then((result) => {
+      setUnlockEvents(result.unlocks);
+    }).catch(() => {
+      // silently ignore unlock fetch errors
+    });
+  }, []);
 
   return (
     <section className="page-stack">
@@ -86,6 +96,11 @@ export function HomePage({
             <p>{selectedJournal.content}</p>
           </div>
           <CompanionEchoCard text="她还记得你说过，下雨天总会让你想躲起来。" />
+          {unlockEvents.length > 0 && (
+            <div style={{ fontSize: "13px", color: "#757575", padding: "8px 12px", background: "#F8F9FA", borderRadius: "6px", marginTop: "8px" }}>
+              解锁事件：{unlockEvents[0].eventSummary}
+            </div>
+          )}
         </>
       ) : (
         <EmptyState title="还没有日记" description="先写第一篇吧，首页会立刻有内容。" />

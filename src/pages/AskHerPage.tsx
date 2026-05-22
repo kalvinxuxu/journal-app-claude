@@ -8,6 +8,7 @@ import { CompanionHintLine } from "../components/companion/CompanionHintLine";
 import { CompanionFeedbackBar } from "../components/companion/CompanionFeedbackBar";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
+import { submitCompanionFeedback } from "../services/api/companionClient";
 
 type AskHerPageProps = {
   onSave: (journal: Journal) => void | Promise<void>;
@@ -260,7 +261,21 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
           )}
 
           <CompanionHintLine text="你刚刚提到的那段心事，会让她更懂你一点。" />
-          <CompanionFeedbackBar onSelect={() => {}} />
+          <CompanionFeedbackBar
+            onSelect={(value) =>
+              submitCompanionFeedback({
+                userId: "local-user",
+                journalId: previewJournal?.id,
+                feedbackKind:
+                  value === "tone_like"
+                    ? "tone_preference"
+                    : value === "less_initiative"
+                      ? "initiative_preference"
+                      : "recall_preference",
+                feedbackValue: value,
+              })
+            }
+          />
         </div>
       ) : null}
 
