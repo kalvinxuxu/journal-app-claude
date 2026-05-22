@@ -4,6 +4,8 @@ import { generateJournalDraft } from "../services/journalGeneration";
 import { buildJournalMedia, buildJournalImagePrompt, persistAudiosIfNeeded, persistImagesIfNeeded } from "../services/minimax";
 import { loadReferenceImage } from "../services/memory";
 import { MoodTag } from "../components/MoodTag";
+import { CompanionHintLine } from "../components/companion/CompanionHintLine";
+import { CompanionFeedbackBar } from "../components/companion/CompanionFeedbackBar";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
 
@@ -256,6 +258,9 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
               ))}
             </div>
           )}
+
+          <CompanionHintLine text="你刚刚提到的那段心事，会让她更懂你一点。" />
+          <CompanionFeedbackBar onSelect={() => {}} />
         </div>
       ) : null}
 

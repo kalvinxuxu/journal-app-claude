@@ -1218,3 +1218,27 @@ h3 {
   max-height: 90vh;
   border-radius: 8px;
 }
+
+/* ===== Companion UI Fragments ===== */
+.companion-echo-card p:last-child {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.companion-hint-line {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 13px;
+}
+
+.companion-feedback-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.companion-feedback-bar button {
+  border-radius: 999px;
+  opacity: 0.82;
+}

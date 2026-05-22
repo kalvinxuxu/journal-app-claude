@@ -9,6 +9,7 @@ import type { Journal, Mood } from "../types/journal";
 import type { JournalMediaErrors } from "../services/minimax";
 import { MoodTag } from "../components/MoodTag";
 import { SelfiePreviewModal } from "../components/SelfiePreviewModal";
+import { CompanionHintLine } from "../components/companion/CompanionHintLine";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
 import { taskStore } from "../services/generation/taskStore";
@@ -300,6 +301,8 @@ export function WritePage({ onSave, onCancel, voiceStyle }: WritePageProps) {
             disabled={!draftReady}
           />
         </label>
+
+        <CompanionHintLine text="你写下来的某些细节，会在以后被她慢慢记住。" />
 
         <div className="field field--full">
           <span>语音留言预览</span>

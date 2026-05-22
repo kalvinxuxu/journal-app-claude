@@ -4,6 +4,7 @@ import { formatDate } from "../utils/formatDate";
 import { EmptyState } from "../components/EmptyState";
 import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
+import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
 
 type HomePageProps = {
   journals: Journal[];
@@ -74,15 +75,18 @@ export function HomePage({
       )}
 
       {selectedJournal ? (
-        <div className="detail-card card">
-          <div className="detail-card__top">
-            <div>
-              <p className="section-label">{formatDate(selectedJournal.date).display}</p>
-              <h3>当前选中的日记</h3>
+        <>
+          <div className="detail-card card">
+            <div className="detail-card__top">
+              <div>
+                <p className="section-label">{formatDate(selectedJournal.date).display}</p>
+                <h3>当前选中的日记</h3>
+              </div>
             </div>
+            <p>{selectedJournal.content}</p>
           </div>
-          <p>{selectedJournal.content}</p>
-        </div>
+          <CompanionEchoCard text="她还记得你说过，下雨天总会让你想躲起来。" />
+        </>
       ) : (
         <EmptyState title="还没有日记" description="先写第一篇吧，首页会立刻有内容。" />
       )}
