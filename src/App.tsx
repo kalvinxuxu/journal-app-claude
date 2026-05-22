@@ -544,6 +544,7 @@ export function App() {
               onSelectJournal={handleSelectJournal}
               onCreateNew={() => handleNavigate("write")}
               onAskHerWrite={() => handleNavigate("ask-her")}
+              companionReveal={companionReveal}
             />
           ) : null}
 

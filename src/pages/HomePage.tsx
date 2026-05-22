@@ -1,11 +1,13 @@
 import { useMemo, useState, useEffect } from "react";
 import type { Journal } from "../types/journal";
+import type { CompanionRevealSummary } from "../types/companion";
 import { formatDate } from "../utils/formatDate";
 import { EmptyState } from "../components/EmptyState";
 import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
-import { fetchCompanionUnlocks } from "../services/api/companionClient";
+import { fetchCompanionUnlocks, fetchCompanionContext } from "../services/api/companionClient";
+import { getCurrentUserId } from "../services/memory";
 
 type HomePageProps = {
   journals: Journal[];
@@ -14,6 +16,7 @@ type HomePageProps = {
   onSelectJournal: (id: string) => void;
   onCreateNew: () => void;
   onAskHerWrite: () => void;
+  companionReveal: CompanionRevealSummary | null;
 };
 
 export function HomePage({
@@ -23,24 +26,45 @@ export function HomePage({
   onSelectJournal,
   onCreateNew,
   onAskHerWrite,
+  companionReveal,
 }: HomePageProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "calendar">("timeline");
   const [unlockEvents, setUnlockEvents] = useState<Array<{ id: string; eventSummary: string }>>([]);
+  const [recalledMemory, setRecalledMemory] = useState<string>("");
   const isDev = import.meta.env.DEV;
   const selectedJournal = journals.find((journal) => journal.id === selectedJournalId) ?? journals[0];
   const anchorDate = selectedJournal?.date ?? journals[0]?.date ?? new Date().toISOString();
   const monthTitle = useMemo(() => formatDate(anchorDate).month, [anchorDate]);
 
+  const userId = getCurrentUserId();
   useEffect(() => {
-    fetchCompanionUnlocks("local-user").then((result) => {
+    fetchCompanionUnlocks(userId).then((result) => {
       setUnlockEvents(result.unlocks);
     }).catch(() => {
       // silently ignore unlock fetch errors
     });
-  }, []);
+    fetchCompanionContext(userId).then((result) => {
+      if (result.recalledMemory) {
+        setRecalledMemory(result.recalledMemory);
+      }
+    }).catch(() => {
+      // silently ignore context fetch errors
+    });
+  }, [journals.length, selectedJournalId]);
 
   return (
     <section className="page-stack">
+      {companionReveal ? (
+        <div className="companion-home-hero card">
+          <div>
+            <p className="section-label">她已经来了</p>
+            <h2>{companionReveal.displayName}</h2>
+            <p className="hero-copy">{companionReveal.tagline}</p>
+            <p className="companion-home-hero__note">{companionReveal.portraitDescription}</p>
+          </div>
+        </div>
+      ) : null}
+
       <div className="page-hero card">
         <div>
           <p className="section-label">本月手账</p>
@@ -95,7 +119,7 @@ export function HomePage({
             </div>
             <p>{selectedJournal.content}</p>
           </div>
-          <CompanionEchoCard text="她还记得你说过，下雨天总会让你想躲起来。" />
+          <CompanionEchoCard text={recalledMemory || "她还记得你说过，下雨天总会让你想躲起来。"} />
           {unlockEvents.length > 0 && (
             <div style={{ fontSize: "13px", color: "#757575", padding: "8px 12px", background: "#F8F9FA", borderRadius: "6px", marginTop: "8px" }}>
               解锁事件：{unlockEvents[0].eventSummary}

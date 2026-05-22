@@ -1297,3 +1297,14 @@ h3 {
 .companion-reveal__match p {
   margin: 0;
 }
+
+/* ===== Companion Home Hero ===== */
+.companion-home-hero {
+  background: linear-gradient(135deg, rgba(255, 248, 242, 0.98), rgba(244, 233, 224, 0.94));
+  border: 1px solid rgba(170, 132, 104, 0.18);
+}
+
+.companion-home-hero__note {
+  color: #6f5643;
+  line-height: 1.75;
+}
