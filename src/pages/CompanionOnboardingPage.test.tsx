@@ -52,29 +52,24 @@ vi.mock("../services/companion", () => ({
 }));
 
 describe("CompanionOnboardingPage", () => {
-  it("submits the first 3 answers and calls onCompleted with the initial companion result", async () => {
+  it("shows landing first, then reveal, and only completes after the confirm CTA", async () => {
     const onCompleted = vi.fn();
 
     render(<CompanionOnboardingPage onCompleted={onCompleted} />);
+
+    expect(screen.getByText("她不会一开始就把自己交给你")).toBeDefined();
+    fireEvent.click(screen.getByRole("button", { name: "开始遇见她" }));
 
     fireEvent.click(screen.getByRole("button", { name: "更真实一点" }));
     fireEvent.click(screen.getByRole("button", { name: "刚好就好" }));
     fireEvent.click(screen.getByRole("button", { name: "温柔成熟" }));
 
+    expect(await screen.findByText("她正在慢慢成形")).toBeDefined();
+    expect(await screen.findByText("岚夕")).toBeDefined();
+    expect(screen.getByRole("button", { name: "和她开始今天的相处" })).toBeDefined();
+    expect(onCompleted).toHaveBeenCalledTimes(0);
+
+    fireEvent.click(screen.getByRole("button", { name: "和她开始今天的相处" }));
     await waitFor(() => expect(onCompleted).toHaveBeenCalledTimes(1));
-    const result = onCompleted.mock.calls[0][0];
-    expect(result.reveal.portraitImageUrl).toBe("http://localhost:3001/media/images/reveal-portrait.jpg");
-  });
-
-  it("renders the reveal page with the generated portrait image", async () => {
-    const onCompleted = vi.fn();
-
-    render(<CompanionOnboardingPage onCompleted={onCompleted} />);
-
-    fireEvent.click(screen.getByRole("button", { name: "更真实一点" }));
-    fireEvent.click(screen.getByRole("button", { name: "刚好就好" }));
-    fireEvent.click(screen.getByRole("button", { name: "温柔成熟" }));
-
-    expect(await screen.findByRole("img", { name: "岚夕立绘" })).toBeDefined();
   });
 });
