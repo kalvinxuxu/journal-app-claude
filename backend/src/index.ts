@@ -405,6 +405,13 @@ import { executeMediaTask } from "./generation/runners/executeMediaTask.js";
 import { createGreetingRunner } from "./generation/runners/greetingRunner.js";
 import { createGreetingScheduler } from "./generation/greetingScheduler.js";
 import { createCompanionRoutes } from "./companion/routes/companionRoutes";
+import { createMemoryItemStore } from "./companion/store/memoryItemStore";
+import { createRelationshipStateStore } from "./companion/store/relationshipStateStore";
+import { createUnlockEventStore } from "./companion/store/unlockEventStore";
+import { createMemoryExtractionService } from "./companion/services/memoryExtractionService";
+import { createRelationshipProgressionService } from "./companion/services/relationshipProgressionService";
+import { createUnlockEventService } from "./companion/services/unlockEventService";
+import { createJournalPostProcessor } from "./companion/services/journalPostProcessor";
 import { createGreetingRoutes } from "./generation/routes/greetingRoutes.js";
 import { createGreetingSettingsStore } from "./storage/greetingSettingsStore.js";
 import { saveImage, saveAudio, generateImageFilename, generateAudioFilename } from "./storage/mediaStore.js";
@@ -476,6 +483,28 @@ setTimeout(() => {
   console.log("[greetingScheduler] Started");
   // On shutdown: stopGreetingScheduler()
 }, 5_000);
+
+// ---------------------------------------------------------------------------
+// Companion domain — module-level stores, services, and post-processor
+// ---------------------------------------------------------------------------
+const memoryItemStore = createMemoryItemStore(appDb);
+const relationshipStateStore = createRelationshipStateStore(appDb);
+const unlockEventStore = createUnlockEventStore(appDb);
+
+const memoryExtractionService = createMemoryExtractionService();
+const relationshipProgressionService = createRelationshipProgressionService();
+const unlockEventService = createUnlockEventService();
+
+const journalPostProcessor = createJournalPostProcessor({
+  extractMemories: memoryExtractionService.extractFromJournal,
+  advanceRelationship: relationshipProgressionService.advance,
+  evaluateUnlocks: unlockEventService.evaluate,
+  insertMemory: (record) => memoryItemStore.insert(record),
+  saveRelationship: (record) => relationshipStateStore.upsert(record),
+  saveUnlock: (record) => unlockEventStore.insert(record),
+});
+
+console.log("[companion] Journal post-processor wired into journal save pipeline");
 
 // ---------------------------------------------------------------------------
 // Media storage API endpoints
@@ -555,6 +584,26 @@ app.post("/api/journals", async (req: Request, res: Response) => {
       return;
     }
     await saveJournal(journal);
+
+    // -------------------------------------------------------------------------
+    // COMPANION POST-PROCESSING HOOK (pending userId availability on Journal):
+    //
+    // const userId = (journal as any).userId;
+    // if (userId) {
+    //   const previousRelationship = relationshipStateStore.findByUserId(userId);
+    //   if (previousRelationship) {
+    //     journalPostProcessor.process({
+    //       userId,
+    //       journalId: journal.id,
+    //       content: journal.content,
+    //       previousRelationship,
+    //       journalCount: ...,
+    //       feedbackCount: ...,
+    //     });
+    //   }
+    // }
+    // -------------------------------------------------------------------------
+
     res.status(201).json(journal);
   } catch (error) {
     console.error("Failed to save journal:", error);
