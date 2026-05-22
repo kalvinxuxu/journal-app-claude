@@ -29,11 +29,11 @@ export function createOnboardingAnswerStore(db: Database.Database) {
   `);
 
   return {
-    insertMany(userId: string, answers: OnboardingAnswerInput[], nowIso: string) {
+    insertMany(userId: string, answers: OnboardingAnswerInput[], nowIso: string, answerPrefix = "") {
       const tx = db.transaction(() => {
         for (const [index, answer] of answers.entries()) {
           insertStmt.run({
-            id: `oa_${userId}_${index}_${Date.parse(nowIso)}`,
+            id: `oa_${userId}_${answerPrefix}_${index}_${Date.parse(nowIso)}`,
             userId,
             questionKey: answer.questionKey,
             answerValue: answer.answerValue,

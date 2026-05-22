@@ -37,3 +37,41 @@ export type CompanionReveal = {
   portraitDescription: string;
   matchExplanation: string;
 };
+
+export type OnboardingIntake = {
+  entryMode: "real" | "fantasy";
+};
+
+export type StructuredOnboardingAnswer = {
+  questionKey: string;
+  answerValue: string;
+  answerWeight?: number;
+};
+
+export type CompanionAppearanceProfile = {
+  hairStyle: string;
+  bodyPresence: string;
+  fashionAura: string;
+  gazeStyle: string;
+  poseStyle: string;
+};
+
+export type CompanionPersonalityProfile = {
+  temperament: string;
+  affectionStyle: string;
+  distanceStyle: string;
+  initiativeStyle: string;
+  expressionTone: string;
+};
+
+export type CompanionRevealV2 = {
+  systemDisplayName: string;
+  customName: string | null;
+  tagline: string;
+  appearancePrompt: string;
+  portraitImageUrl: string | null;
+  portraitDescription: string;
+  matchExplanation: string;
+  appearanceProfile: CompanionAppearanceProfile;
+  personalityProfile: CompanionPersonalityProfile;
+};
