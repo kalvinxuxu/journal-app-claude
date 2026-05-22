@@ -28,3 +28,12 @@ export type RelationshipStateRecord = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type CompanionReveal = {
+  displayName: string;
+  tagline: string;
+  appearancePrompt: string;
+  portraitImageUrl: string | null;
+  portraitDescription: string;
+  matchExplanation: string;
+};

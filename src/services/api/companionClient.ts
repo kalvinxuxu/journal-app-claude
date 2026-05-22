@@ -1,5 +1,5 @@
 import { getBackendUrl } from "../config";
-import type { InitialCompanionResult } from "../../types/companion";
+import type { InitialCompanionResult, CompanionRevealSummary } from "../../types/companion";
 
 export async function submitCompanionFeedback(payload: {
   userId: string;
@@ -53,4 +53,16 @@ export async function initializeCompanionOnboarding(payload: {
   }
 
   return response.json() as Promise<InitialCompanionResult>;
+}
+
+export async function checkCompanionOnboardingStatus(userId: string) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/onboarding/status/${userId}`);
+  if (!response.ok) {
+    throw new Error(`Companion onboarding status check failed with ${response.status}`);
+  }
+  return response.json() as Promise<{
+    completed: boolean;
+    archetype: string | null;
+    reveal: CompanionRevealSummary | null;
+  }>;
 }

@@ -8,7 +8,8 @@ import { createOnboardingService } from "../services/onboardingService";
 import { createFeedbackStore } from "../store/feedbackStore";
 import { createUnlockEventStore } from "../store/unlockEventStore";
 import { createMemoryItemStore } from "../store/memoryItemStore";
-import { createMemoryRecallService } from "../services/memoryRecallService";
+import { createJournalContextBuilder } from "../services/journalContextBuilder";
+import { createJournalPromptContextService } from "../services/journalPromptContextService";
 
 export function createCompanionRoutes(db?: Database.Database) {
   const database = db ?? createAppDatabase();
@@ -32,8 +33,31 @@ export function createCompanionRoutes(db?: Database.Database) {
       return;
     }
 
+    // Ensure user exists in the users table (FK dependency for companion tables)
+    const insertUser = database.prepare(`
+      INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)
+      ON CONFLICT(id) DO NOTHING
+    `);
+    const now = new Date().toISOString();
+    insertUser.run(userId, now, now);
+
     const result = onboardingService.submitInitialAnswers(userId, answers);
     res.status(201).json(result);
+  });
+
+  router.get("/onboarding/status/:userId", (req, res) => {
+    const profileStore = createCompanionProfileStore(database);
+    const relationshipStore = createRelationshipStateStore(database);
+    const profile = profileStore.findByUserId(req.params.userId);
+    const relationship = relationshipStore.findByUserId(req.params.userId);
+
+    if (!profile || !relationship) {
+      res.json({ completed: false, archetype: null, reveal: null });
+      return;
+    }
+
+    const reveal = onboardingService.buildRevealFromProfile(profile, relationship);
+    res.json({ completed: true, archetype: profile.archetype, reveal });
   });
 
   router.post("/feedback", (req, res) => {
@@ -48,6 +72,13 @@ export function createCompanionRoutes(db?: Database.Database) {
       res.status(400).json({ error: "userId, feedbackKind, and feedbackValue are required" });
       return;
     }
+
+    // Ensure user exists in the users table (FK dependency)
+    const insertUser = database.prepare(`
+      INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)
+      ON CONFLICT(id) DO NOTHING
+    `);
+    insertUser.run(userId, new Date().toISOString(), new Date().toISOString());
 
     feedbackStore.insert({
       id: `fb_${Date.now()}`,
@@ -83,13 +114,21 @@ export function createCompanionRoutes(db?: Database.Database) {
     }
 
     const memories = memoryItemStore.listByUserId(req.params.userId);
-    const recallService = createMemoryRecallService();
-    const selected = recallService.selectForJournal(memories, 3);
+    const contextBuilder = createJournalContextBuilder();
+    const promptService = createJournalPromptContextService();
+
+    const { recalledMemory, echoCandidates } = contextBuilder.build(memories);
+    const promptContext = promptService.build({
+      relationshipStage: relationship.stage,
+      recalledMemory,
+      initiativeScore: relationship.initiativeScore,
+    });
 
     res.json({
       relationshipStage: relationship.stage,
-      recalledMemory: selected.map((m) => m.summary).join("；"),
+      recalledMemory,
       initiativeScore: relationship.initiativeScore,
+      initiativeTone: promptContext.initiativeTone,
     });
   });
 

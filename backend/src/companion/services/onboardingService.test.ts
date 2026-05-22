@@ -30,4 +30,33 @@ describe("createOnboardingService", () => {
     expect(result.relationship.stage).toBe("initial");
     expect(result.relationship.initiativeScore).toBeGreaterThan(20);
   });
+
+  it("returns reveal content that can drive the frontend reveal page", () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+    db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(
+      "usr_1",
+      "2026-05-22T00:00:00.000Z",
+      "2026-05-22T00:00:00.000Z",
+    );
+
+    const service = createOnboardingService({
+      onboardingAnswerStore: createOnboardingAnswerStore(db),
+      companionProfileStore: createCompanionProfileStore(db),
+      relationshipStateStore: createRelationshipStateStore(db),
+    });
+
+    const result = service.submitInitialAnswers("usr_1", [
+      { questionKey: "entry_mode", answerValue: "real" },
+      { questionKey: "initiative_preference", answerValue: "balanced" },
+      { questionKey: "ideal_presence", answerValue: "gentle_older" },
+    ]);
+
+    expect(result.reveal.displayName).toBeTruthy();
+    expect(result.reveal.tagline).toContain("她");
+    expect(result.reveal.appearancePrompt).toContain("full body");
+    expect(result.reveal.portraitImageUrl).toBeNull();
+    expect(result.reveal.portraitDescription.length).toBeGreaterThan(40);
+    expect(result.reveal.matchExplanation.length).toBeGreaterThan(30);
+  });
 });
