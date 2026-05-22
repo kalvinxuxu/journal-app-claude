@@ -2,35 +2,12 @@ import { useState } from "react";
 import { initializeCompanionOnboarding } from "../services/api/companionClient";
 import type { InitialCompanionResult } from "../types/companion";
 import { OnboardingPrompt } from "../components/companion/OnboardingPrompt";
+import { getCurrentUserId } from "../services/memory";
+import { COMPANION_ONBOARDING_PROMPTS, generateRevealPortrait } from "../services/companion";
 
-const prompts = [
-  {
-    questionKey: "entry_mode",
-    prompt: "如果我开始靠近你，你希望我更像真实的人，还是只会出现在你这里的梦？",
-    options: [
-      { label: "更真实一点", value: "real" },
-      { label: "更像梦", value: "fantasy" },
-    ],
-  },
-  {
-    questionKey: "initiative_preference",
-    prompt: "你更喜欢她主动靠近，还是把分寸留给你来决定？",
-    options: [
-      { label: "更克制一点", value: "low" },
-      { label: "刚好就好", value: "balanced" },
-      { label: "更主动一点", value: "high" },
-    ],
-  },
-  {
-    questionKey: "ideal_presence",
-    prompt: "如果她第一次看向你，你更容易被怎样的感觉吸引？",
-    options: [
-      { label: "温柔成熟", value: "gentle_older" },
-      { label: "安静柔和", value: "soft_stable" },
-      { label: "有一点俏皮", value: "playful_warm" },
-    ],
-  },
-];
+const prompts = COMPANION_ONBOARDING_PROMPTS;
+
+type Stage = "onboarding" | "generating" | "reveal";
 
 type Props = {
   onCompleted: (result: InitialCompanionResult) => void;
@@ -39,6 +16,8 @@ type Props = {
 export function CompanionOnboardingPage({ onCompleted }: Props) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Array<{ questionKey: string; answerValue: string }>>([]);
+  const [stage, setStage] = useState<Stage>("onboarding");
+  const [result, setResult] = useState<InitialCompanionResult | null>(null);
 
   const current = prompts[index];
 
@@ -46,16 +25,41 @@ export function CompanionOnboardingPage({ onCompleted }: Props) {
     const nextAnswers = [...answers, { questionKey: current.questionKey, answerValue }];
 
     if (index === prompts.length - 1) {
-      const result = await initializeCompanionOnboarding({
-        userId: "local-user",
+      setStage("generating");
+      const onboardingResult = await initializeCompanionOnboarding({
+        userId: getCurrentUserId(),
         answers: nextAnswers,
       });
-      onCompleted(result);
+      const portraitImageUrl = await generateRevealPortrait(onboardingResult.reveal.appearancePrompt);
+      const hydratedResult = {
+        ...onboardingResult,
+        reveal: {
+          ...onboardingResult.reveal,
+          portraitImageUrl,
+        },
+      };
+      setResult(hydratedResult);
+      setStage("reveal");
+      onCompleted(hydratedResult);
       return;
     }
 
     setAnswers(nextAnswers);
     setIndex((value) => value + 1);
+  }
+
+  if (stage === "generating") {
+    return <div>Generating your companion...</div>;
+  }
+
+  if (stage === "reveal" && result) {
+    return (
+      <div>
+        <h2>{result.reveal.displayName}</h2>
+        <img src={result.reveal.portraitImageUrl ?? undefined} alt="岚夕立绘" />
+        <p>{result.reveal.tagline}</p>
+      </div>
+    );
   }
 
   return <OnboardingPrompt prompt={current.prompt} options={current.options} onSelect={handleSelect} />;
