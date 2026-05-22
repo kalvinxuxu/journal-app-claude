@@ -5,6 +5,15 @@ import path from "path";
 
 dotenv.config();
 
+// ---------------------------------------------------------------------------
+// App database with companion domain schema bootstrap
+// ---------------------------------------------------------------------------
+import { createAppDatabase } from "./db/database";
+import { ensureAppSchema } from "./db/schema";
+
+const appDb = createAppDatabase();
+ensureAppSchema(appDb);
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || "0.0.0.0";
