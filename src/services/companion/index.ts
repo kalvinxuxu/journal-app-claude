@@ -4,3 +4,4 @@
  */
 export { COMPANION_ONBOARDING_PROMPTS, type OnboardingAnswer } from "./onboardingQuestions";
 export { generateRevealPortrait } from "./portraitGeneration";
+export { loadCompanionReveal, saveCompanionReveal, clearCompanionReveal } from "./revealStorage";

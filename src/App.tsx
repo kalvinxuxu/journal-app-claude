@@ -8,6 +8,8 @@ import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { GreetingPage } from "./pages/GreetingPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
+import { checkCompanionOnboardingStatus } from "./services/api/companionClient";
+import { loadCompanionReveal, saveCompanionReveal } from "./services/companion";
 import { addJournalToMemory, getMemoryEngine } from "./services/generator";
 import {
   loadJournalsWithSource,
@@ -23,6 +25,7 @@ import {
   saveSelectedJournalId,
   saveReferenceImageAsBase64,
   migrateLocalStorageJournalsToBackend,
+  getCurrentUserId,
 } from "./services/memory";
 import { rebuildMemoryFromJournals } from "./services/memoryRebuild";
 import { generateGirlfriendSelfies, generateNightBonusSelfie, synthesizeVoiceMessages } from "./services/minimax";
@@ -58,28 +61,29 @@ export function App() {
   const [animKey, setAnimKey] = useState(0);
   const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">("checking");
   const [showStaleTaskNotice, setShowStaleTaskNotice] = useState(false);
+  const [companionReady, setCompanionReady] = useState<boolean | null>(null);
+  const [companionReveal, setCompanionReveal] = useState(() => loadCompanionReveal());
   const journalsInitRef = useRef(false);
 
-  // Companion onboarding gating for first-run users
-  const [companionReady, setCompanionReady] = useState(() => {
-    return window.localStorage.getItem("journal-app:companionReady") === "true";
-  });
-
-  if (!companionReady) {
-    return (
-      <CompanionOnboardingPage
-        onCompleted={() => {
-          window.localStorage.setItem("journal-app:companionReady", "true");
-          setCompanionReady(true);
-        }}
-      />
-    );
-  }
+  // Companion onboarding gating: check localStorage flag first, then verify with backend
+  useEffect(() => {
+    const userId = getCurrentUserId();
+    checkCompanionOnboardingStatus(userId).then((status) => {
+      setCompanionReady(status.completed);
+      if (status.reveal) {
+        saveCompanionReveal(status.reveal);
+        setCompanionReveal(status.reveal);
+      }
+    }).catch(() => {
+      setCompanionReady(window.localStorage.getItem("journal-app:companionReady") === "true");
+    });
+  }, []);
 
   const journals = journalsResult.journals;
 
   // Recover stale tasks on app startup - mark running tasks as failed
   useEffect(() => {
+    if (!companionReady) return;
     const tasks = taskStore.loadTasks();
     const runningTasks = tasks.filter((t) => t.status === "running");
 
@@ -99,7 +103,7 @@ export function App() {
       setShowStaleTaskNotice(true);
       setTimeout(() => setShowStaleTaskNotice(false), 5000);
     }
-  }, []);
+  }, [companionReady]);
 
   useEffect(() => {
     // Only save if we have actual data (not empty initial state)
@@ -118,13 +122,15 @@ export function App() {
 
   // Check backend health on mount
   useEffect(() => {
+    if (!companionReady) return;
     checkBackendHealth().then(ok => {
       setBackendStatus(ok ? "online" : "offline");
     });
-  }, []);
+  }, [companionReady]);
 
   // Load journals from backend on startup (with localStorage fallback)
   useEffect(() => {
+    if (!companionReady) return;
     if (journalsInitRef.current) return;
     journalsInitRef.current = true;
 
@@ -140,7 +146,7 @@ export function App() {
         setJournalsResult({ ...refreshed, journals: stripDailySummaries(refreshed.journals) });
       }
     });
-  }, []);
+  }, [companionReady]);
 
   // Auto-generate girlfriend selfies when app loads
   const [autoGenError, setAutoGenError] = useState<string | null>(null);
@@ -273,15 +279,17 @@ export function App() {
   }
 
   useEffect(() => {
+    if (!companionReady) return;
     // Rebuild memory from persisted journals exactly once on startup
     const rebuildResult = rebuildMemoryFromJournals(journalsResult.journals);
     getMemoryEngine().seed(rebuildResult.entries);
-  }, []);
+  }, [companionReady]);
 
   // Auto-generate today's journal exactly once using a ref to track initialization
   const initRef = useRef(false);
 
   useEffect(() => {
+    if (!companionReady) return;
     if (initRef.current) return;
     initRef.current = true;
 
@@ -364,14 +372,16 @@ export function App() {
     } else {
       ensureTodaySelfie();
     }
-  }, []);
+  }, [companionReady]);
 
   useEffect(() => {
+    if (!companionReady) return;
     ensureTodaySelfie();
-  }, [journals]);
+  }, [companionReady, journals]);
 
   // Night bonus selfie: generate at 21:00+ for today's summary if no night bonus yet
   useEffect(() => {
+    if (!companionReady) return;
     const today = getTodayString();
     const selected = findLatestJournalByDate(journals, today);
     if (!selected) return;
@@ -407,11 +417,12 @@ export function App() {
       .catch((err) => {
         console.error("[夜间加餐] 生成异常:", err);
       });
-  }, [journals]);
+  }, [companionReady, journals]);
 
   // Poll for daily greeting tasks
   const greetingPollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
+    if (!companionReady) return;
     async function pollGreetings() {
       try {
         const res = await fetch("/api/generation/tasks?type=daily_greeting&status=succeeded");
@@ -439,7 +450,7 @@ export function App() {
     return () => {
       if (greetingPollRef.current) clearInterval(greetingPollRef.current);
     };
-  }, []);
+  }, [companionReady]);
 
   function handleSaveJournal(journal: Journal) {
     const entry = toJournalEntry(journal);
@@ -475,6 +486,16 @@ export function App() {
   }
 
   return (
+    companionReady === false ? (
+      <CompanionOnboardingPage
+        onCompleted={(result) => {
+          window.localStorage.setItem("journal-app:companionReady", "true");
+          saveCompanionReveal(result.reveal);
+          setCompanionReveal(result.reveal);
+          setCompanionReady(true);
+        }}
+      />
+    ) : companionReady === null ? null : (
     <div className="app-shell">
       <Header activePage={activePage} onNavigate={handleNavigate} />
 
@@ -561,5 +582,6 @@ export function App() {
         </div>
       </main>
     </div>
+    )
   );
 }
