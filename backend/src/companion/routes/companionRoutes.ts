@@ -19,17 +19,20 @@ export function createCompanionRoutes(db?: Database.Database) {
     companionProfileStore: createCompanionProfileStore(database),
     relationshipStateStore: createRelationshipStateStore(database),
   });
+  const profileStore = createCompanionProfileStore(database);
   const feedbackStore = createFeedbackStore(database);
   const unlockEventStore = createUnlockEventStore(database);
 
   router.post("/onboarding/initialize", (req, res) => {
-    const { userId, answers } = req.body as {
+    const { userId, intake, userProfileAnswers, companionPreferenceAnswers } = req.body as {
       userId?: string;
-      answers?: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
+      intake?: { entryMode?: "real" | "fantasy" };
+      userProfileAnswers?: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
+      companionPreferenceAnswers?: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;
     };
 
-    if (!userId || !answers || answers.length < 3) {
-      res.status(400).json({ error: "userId and at least 3 answers are required" });
+    if (!userId || !intake || !userProfileAnswers || userProfileAnswers.length < 3 || !companionPreferenceAnswers || companionPreferenceAnswers.length < 7) {
+      res.status(400).json({ error: "userId, intake, 3 userProfileAnswers, and 7 companionPreferenceAnswers are required" });
       return;
     }
 
@@ -41,12 +44,31 @@ export function createCompanionRoutes(db?: Database.Database) {
     const now = new Date().toISOString();
     insertUser.run(userId, now, now);
 
-    const result = onboardingService.submitInitialAnswers(userId, answers);
+    const result = onboardingService.submitInitialAnswers(userId, {
+      intake: { entryMode: intake.entryMode === "fantasy" ? "fantasy" : "real" },
+      userProfileAnswers,
+      companionPreferenceAnswers,
+    });
     res.status(201).json(result);
   });
 
+  router.post("/onboarding/name", (req, res) => {
+    const { userId, customName } = req.body as { userId?: string; customName?: string };
+    if (!userId || !customName?.trim()) {
+      res.status(400).json({ error: "userId and customName are required" });
+      return;
+    }
+
+    const updated = profileStore.updateCustomName(userId, customName.trim(), new Date().toISOString());
+    if (!updated) {
+      res.status(404).json({ error: "Companion profile not found" });
+      return;
+    }
+
+    res.json({ ok: true });
+  });
+
   router.get("/onboarding/status/:userId", (req, res) => {
-    const profileStore = createCompanionProfileStore(database);
     const relationshipStore = createRelationshipStateStore(database);
     const profile = profileStore.findByUserId(req.params.userId);
     const relationship = relationshipStore.findByUserId(req.params.userId);
@@ -58,6 +80,31 @@ export function createCompanionRoutes(db?: Database.Database) {
 
     const reveal = onboardingService.buildRevealFromProfile(profile, relationship);
     res.json({ completed: true, archetype: profile.archetype, reveal });
+  });
+
+  router.post("/onboarding/portrait", (req, res) => {
+    const { userId, portraitImageUrl } = req.body as {
+      userId?: string;
+      portraitImageUrl?: string;
+    };
+
+    if (!userId || !portraitImageUrl) {
+      res.status(400).json({ error: "userId and portraitImageUrl are required" });
+      return;
+    }
+
+    const updated = profileStore.updatePortraitImageUrl(
+      userId,
+      portraitImageUrl,
+      new Date().toISOString(),
+    );
+
+    if (!updated) {
+      res.status(404).json({ error: "Companion profile not found" });
+      return;
+    }
+
+    res.json({ ok: true });
   });
 
   router.post("/feedback", (req, res) => {

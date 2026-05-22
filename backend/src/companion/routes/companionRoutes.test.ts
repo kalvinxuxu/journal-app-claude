@@ -38,20 +38,121 @@ describe("createCompanionRoutes", () => {
       .post("/api/companion/onboarding/initialize")
       .send({
         userId: "usr_reveal",
-        answers: [
-          { questionKey: "entry_mode", answerValue: "fantasy" },
-          { questionKey: "initiative_preference", answerValue: "high" },
-          { questionKey: "ideal_presence", answerValue: "playful_warm" },
+        intake: { entryMode: "fantasy" },
+        userProfileAnswers: [
+          { questionKey: "social_energy", answerValue: "slow_warm" },
+          { questionKey: "emotional_texture", answerValue: "sensitive_deep" },
+          { questionKey: "expression_style", answerValue: "restrained" },
+        ],
+        companionPreferenceAnswers: [
+          { questionKey: "temperament", answerValue: "gentle_steady" },
+          { questionKey: "affection_style", answerValue: "gentle_attentive" },
+          { questionKey: "distance_style", answerValue: "poised" },
+          { questionKey: "initiative_style", answerValue: "measured_forward" },
+          { questionKey: "expression_tone", answerValue: "soft_direct" },
+          { questionKey: "hair_style", answerValue: "long_wavy" },
+          { questionKey: "body_presence", answerValue: "balanced_mature" },
         ],
       });
 
     expect(initializeResponse.status).toBe(201);
-    expect(initializeResponse.body.reveal.displayName).toBeTruthy();
+    expect(initializeResponse.body.reveal.systemDisplayName).toBeTruthy();
 
     const statusResponse = await request(app).get("/api/companion/onboarding/status/usr_reveal");
 
     expect(statusResponse.status).toBe(200);
     expect(statusResponse.body.completed).toBe(true);
-    expect(statusResponse.body.reveal.displayName).toBe(initializeResponse.body.reveal.displayName);
+    expect(statusResponse.body.reveal.systemDisplayName).toBe(initializeResponse.body.reveal.systemDisplayName);
+  });
+
+  it("persists the reveal portrait url and returns it from onboarding status", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    await request(app)
+      .post("/api/companion/onboarding/initialize")
+      .send({
+        userId: "usr_portrait",
+        intake: { entryMode: "real" },
+        userProfileAnswers: [
+          { questionKey: "social_energy", answerValue: "slow_warm" },
+          { questionKey: "emotional_texture", answerValue: "sensitive_deep" },
+          { questionKey: "expression_style", answerValue: "restrained" },
+        ],
+        companionPreferenceAnswers: [
+          { questionKey: "temperament", answerValue: "gentle_steady" },
+          { questionKey: "affection_style", answerValue: "gentle_attentive" },
+          { questionKey: "distance_style", answerValue: "poised" },
+          { questionKey: "initiative_style", answerValue: "measured_forward" },
+          { questionKey: "expression_tone", answerValue: "soft_direct" },
+          { questionKey: "hair_style", answerValue: "long_wavy" },
+          { questionKey: "body_presence", answerValue: "balanced_mature" },
+        ],
+      })
+      .expect(201);
+
+    const persistResponse = await request(app)
+      .post("/api/companion/onboarding/portrait")
+      .send({
+        userId: "usr_portrait",
+        portraitImageUrl: "http://localhost:3001/media/images/reveal-portrait.jpg",
+      });
+
+    expect(persistResponse.status).toBe(200);
+
+    const statusResponse = await request(app).get("/api/companion/onboarding/status/usr_portrait");
+
+    expect(statusResponse.status).toBe(200);
+    expect(statusResponse.body.reveal.portraitImageUrl).toBe(
+      "http://localhost:3001/media/images/reveal-portrait.jpg",
+    );
+  });
+
+  it("returns richer reveal data and allows naming after reveal", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    const initializeResponse = await request(app)
+      .post("/api/companion/onboarding/initialize")
+      .send({
+        userId: "usr_named",
+        intake: { entryMode: "real" },
+        userProfileAnswers: [
+          { questionKey: "social_energy", answerValue: "slow_warm" },
+          { questionKey: "emotional_texture", answerValue: "sensitive_deep" },
+          { questionKey: "expression_style", answerValue: "restrained" },
+        ],
+        companionPreferenceAnswers: [
+          { questionKey: "temperament", answerValue: "mature_steady" },
+          { questionKey: "affection_style", answerValue: "gentle_attentive" },
+          { questionKey: "distance_style", answerValue: "poised" },
+          { questionKey: "initiative_style", answerValue: "measured_forward" },
+          { questionKey: "expression_tone", answerValue: "light_proud" },
+          { questionKey: "hair_style", answerValue: "long_hair" },
+          { questionKey: "body_presence", answerValue: "balanced_mature" },
+        ],
+      });
+
+    expect(initializeResponse.status).toBe(201);
+    expect(initializeResponse.body.reveal.systemDisplayName).toBeTruthy();
+    expect(initializeResponse.body.reveal.customName).toBeNull();
+
+    const namingResponse = await request(app)
+      .post("/api/companion/onboarding/name")
+      .send({ userId: "usr_named", customName: "晚晴" });
+
+    expect(namingResponse.status).toBe(200);
+
+    const statusResponse = await request(app).get("/api/companion/onboarding/status/usr_named");
+    expect(statusResponse.status).toBe(200);
+    expect(statusResponse.body.reveal.customName).toBe("晚晴");
   });
 });
