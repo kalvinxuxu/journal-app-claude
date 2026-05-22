@@ -20,12 +20,27 @@ vi.mock("../services/api/companionClient", () => ({
 describe("HomePage companion handoff", () => {
   it("shows the matched companion summary above the journal list", async () => {
     const companionReveal: CompanionRevealSummary = {
-      displayName: "岚夕",
+      systemDisplayName: "岚夕",
+      customName: null,
       tagline: "她像夜色里慢慢靠近的人，安静，却不会让你觉得遥远。",
       portraitImageUrl: null,
       appearancePrompt: "full body portrait",
       portraitDescription: "她站着的时候很稳。",
       matchExplanation: "她会先给你安全感。",
+      appearanceProfile: {
+        hairStyle: "long_hair",
+        bodyPresence: "balanced_mature",
+        fashionAura: "clean_refined",
+        gazeStyle: "steady_warm",
+        poseStyle: "poised_shifted_weight",
+      },
+      personalityProfile: {
+        temperament: "mature_steady",
+        affectionStyle: "gentle_attentive",
+        distanceStyle: "poised",
+        initiativeStyle: "measured_forward",
+        expressionTone: "light_proud",
+      },
     };
 
     render(
@@ -81,5 +96,46 @@ describe("HomePage companion echo", () => {
     );
 
     await waitFor(() => expect(mockFetchCompanionContext).toHaveBeenCalledTimes(1));
+  });
+});
+
+describe("HomePage companion handoff", () => {
+  it("prefers the custom name in the home handoff hero", () => {
+    render(
+      <HomePage
+        journals={[]}
+        dataSource="empty"
+        selectedJournalId=""
+        onSelectJournal={() => {}}
+        onCreateNew={() => {}}
+        onAskHerWrite={() => {}}
+        companionReveal={{
+          systemDisplayName: "临川",
+          customName: "晚晴",
+          tagline: "她看上去很稳，但并不冷。",
+          appearancePrompt: "",
+          portraitImageUrl: null,
+          portraitDescription: "她在这里。",
+          matchExplanation: "你们会遇见。",
+          appearanceProfile: {
+            hairStyle: "long_hair",
+            bodyPresence: "balanced_mature",
+            fashionAura: "clean_refined",
+            gazeStyle: "steady_warm",
+            poseStyle: "poised_shifted_weight",
+          },
+          personalityProfile: {
+            temperament: "mature_steady",
+            affectionStyle: "gentle_attentive",
+            distanceStyle: "poised",
+            initiativeStyle: "measured_forward",
+            expressionTone: "light_proud",
+          },
+        }}
+      />,
+    );
+
+    expect(screen.getByText("晚晴")).toBeDefined();
+    expect(screen.queryByText("临川")).toBeNull();
   });
 });

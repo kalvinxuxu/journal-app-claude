@@ -57,10 +57,12 @@ export function HomePage({
       {companionReveal ? (
         <div className="companion-home-hero card">
           <div>
-            <p className="section-label">她已经来了</p>
-            <h2>{companionReveal.displayName}</h2>
+            <p className="section-label">她已经在这里了</p>
+            <h2>{companionReveal?.customName || companionReveal?.systemDisplayName || ""}</h2>
             <p className="hero-copy">{companionReveal.tagline}</p>
-            <p className="companion-home-hero__note">{companionReveal.portraitDescription}</p>
+            <p className="companion-home-hero__note">
+              她会先读你今天留下来的东西，再慢慢学会怎么陪你。
+            </p>
           </div>
         </div>
       ) : null}

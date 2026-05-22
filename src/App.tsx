@@ -21,6 +21,7 @@ import {
   saveJournals,
   saveJournalToBackend,
   saveLatestSelfie,
+  saveReferenceImage,
   savePreferences,
   saveSelectedJournalId,
   saveReferenceImageAsBase64,
@@ -73,6 +74,9 @@ export function App() {
       if (status.reveal) {
         saveCompanionReveal(status.reveal);
         setCompanionReveal(status.reveal);
+        if (status.reveal.portraitImageUrl) {
+          saveReferenceImage(status.reveal.portraitImageUrl);
+        }
       }
     }).catch(() => {
       setCompanionReady(window.localStorage.getItem("journal-app:companionReady") === "true");
@@ -496,20 +500,28 @@ export function App() {
     setAnimKey(k => k + 1);
   }
 
-  return companionReady === false || companionReady === null ? (
+  if (companionReady === null) {
+    return null;
+  }
+
+  if (companionReady === false) {
+    return (
       <CompanionOnboardingPage
         onCompleted={(result) => {
           window.localStorage.setItem("journal-app:companionReady", "true");
           saveCompanionReveal(result.reveal);
           setCompanionReveal(result.reveal);
           setCompanionReady(true);
-          // Persist the reveal portrait as latest selfie so it's available to image-memory flows
           if (result.reveal.portraitImageUrl) {
             saveLatestSelfie(result.reveal.portraitImageUrl);
+            saveReferenceImage(result.reveal.portraitImageUrl);
           }
         }}
       />
-    ) : (
+    );
+  }
+
+  return (
     <div className="app-shell">
       <Header activePage={activePage} onNavigate={handleNavigate} />
 
@@ -597,6 +609,5 @@ export function App() {
         </div>
       </main>
     </div>
-    )
   );
 }
