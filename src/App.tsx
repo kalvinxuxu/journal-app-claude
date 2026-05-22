@@ -6,6 +6,7 @@ import { WritePage } from "./pages/WritePage";
 import { AskHerPage } from "./pages/AskHerPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { GreetingPage } from "./pages/GreetingPage";
+import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
 import { addJournalToMemory, getMemoryEngine } from "./services/generator";
 import {
@@ -58,6 +59,22 @@ export function App() {
   const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">("checking");
   const [showStaleTaskNotice, setShowStaleTaskNotice] = useState(false);
   const journalsInitRef = useRef(false);
+
+  // Companion onboarding gating for first-run users
+  const [companionReady, setCompanionReady] = useState(() => {
+    return window.localStorage.getItem("journal-app:companionReady") === "true";
+  });
+
+  if (!companionReady) {
+    return (
+      <CompanionOnboardingPage
+        onCompleted={() => {
+          window.localStorage.setItem("journal-app:companionReady", "true");
+          setCompanionReady(true);
+        }}
+      />
+    );
+  }
 
   const journals = journalsResult.journals;
 
