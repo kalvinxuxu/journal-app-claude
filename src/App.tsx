@@ -226,7 +226,11 @@ export function App() {
     if (todayJournal.selfieStatus === "loading") return;
     const todayId = todayJournal.id;
 
-    const referenceImage = todayJournal.selfies?.[todayJournal.selfies.length - 1] ?? todayJournal.referenceImage;
+    const revealReference = companionReveal?.portraitImageUrl;
+    const referenceImage =
+      todayJournal.selfies?.[todayJournal.selfies.length - 1]
+      ?? todayJournal.referenceImage
+      ?? revealReference;
 
     setJournalsResult((current) => ({
       ...current,
@@ -308,7 +312,10 @@ export function App() {
           return;
         }
 
-        const referenceImage = await loadValidReferenceImage();
+        const revealReference = companionReveal?.portraitImageUrl;
+        const referenceImage =
+          (await loadValidReferenceImage())
+          ?? revealReference;
         const moods: Mood[] = ["开心", "想念", "感动", "平静", "调皮"];
         const randomMood = moods[Math.floor(Math.random() * moods.length)];
 
@@ -389,8 +396,12 @@ export function App() {
     const hour = new Date().getHours();
     if (!shouldTriggerNightBonus({ hour, hasNightBonusSelfie: Boolean(selected.nightBonusSelfie) })) return;
 
-    // Use the last selfie as reference image for night bonus
-    const referenceImage = selected.selfies?.[selected.selfies.length - 1] ?? selected.referenceImage;
+    // Use the last selfie as reference image for night bonus, falling back to reveal portrait
+    const revealReference = companionReveal?.portraitImageUrl;
+    const referenceImage =
+      selected.selfies?.[selected.selfies.length - 1]
+      ?? selected.referenceImage
+      ?? revealReference;
     generateNightBonusSelfie(selected.mood, referenceImage)
       .then((result) => {
         if (result.error) {
@@ -493,6 +504,10 @@ export function App() {
           saveCompanionReveal(result.reveal);
           setCompanionReveal(result.reveal);
           setCompanionReady(true);
+          // Persist the reveal portrait as latest selfie so it's available to image-memory flows
+          if (result.reveal.portraitImageUrl) {
+            saveLatestSelfie(result.reveal.portraitImageUrl);
+          }
         }}
       />
     ) : companionReady === null ? null : (

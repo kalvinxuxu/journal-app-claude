@@ -220,6 +220,15 @@ describe("minimax service", () => {
     const firstCall = vi.mocked(generateSelfies).mock.calls[0][0];
     expect(firstCall.visualHints).toBeUndefined();
   });
+
+  it("uses the reveal portrait as the default selfie reference when no newer selfie exists", async () => {
+    vi.mocked(generateSelfies).mockResolvedValue({ selfies: ["url1"] });
+
+    await generateGirlfriendSelfies("开心", "http://localhost:3001/media/images/reveal-portrait.jpg");
+
+    const firstCall = vi.mocked(generateSelfies).mock.calls[0][0];
+    expect(firstCall.referenceImage).toContain("reveal-portrait.jpg");
+  });
 });
 
 // ============================================================================
