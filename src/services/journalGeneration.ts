@@ -25,6 +25,10 @@ export type GenerateJournalDraftParams = {
   memoryEngine: ReturnType<typeof createMemoryEngine>;
   voiceStyle?: "soft" | "warm" | "playful";
   sceneHint?: string;
+  companionContext?: {
+    relationshipStage: string;
+    recalledMemory: string;
+  };
 };
 
 export async function generateJournalDraft({
@@ -33,6 +37,7 @@ export async function generateJournalDraft({
   memoryEngine,
   voiceStyle,
   sceneHint,
+  companionContext,
 }: GenerateJournalDraftParams): Promise<JournalDraft> {
   // Try task-based generation first
   try {
@@ -45,7 +50,8 @@ export async function generateJournalDraft({
       input: {
         mood,
         date,
-        recalledMemory: memoryContext || undefined,
+        recalledMemory: (companionContext?.recalledMemory ?? memoryContext) || undefined,
+        relationshipStage: companionContext?.relationshipStage,
         voiceStyle,
         sceneHint,
       },

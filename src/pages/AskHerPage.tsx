@@ -8,7 +8,7 @@ import { CompanionHintLine } from "../components/companion/CompanionHintLine";
 import { CompanionFeedbackBar } from "../components/companion/CompanionFeedbackBar";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
-import { submitCompanionFeedback } from "../services/api/companionClient";
+import { submitCompanionFeedback, fetchCompanionContext } from "../services/api/companionClient";
 
 type AskHerPageProps = {
   onSave: (journal: Journal) => void | Promise<void>;
@@ -57,12 +57,27 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
     setPreviewJournal(null);
 
     try {
+      // Fetch companion context if available (userId "local-user" for now)
+      let companionContext: { relationshipStage: string; recalledMemory: string } | undefined;
+      try {
+        const context = await fetchCompanionContext("local-user");
+        if (context.recalledMemory) {
+          companionContext = {
+            relationshipStage: context.relationshipStage,
+            recalledMemory: context.recalledMemory,
+          };
+        }
+      } catch {
+        // Companion context not available - proceed without it
+      }
+
       const draft = await generateJournalDraft({
         mood,
         date,
         sceneHint: sceneHint || undefined,
         memoryEngine: { recall: () => [], seed: () => {}, addMemory: () => {}, memories: [] } as ReturnType<typeof import("../services/generator").getMemoryEngine>,
         voiceStyle,
+        companionContext,
       });
       setPreviewDraft(draft);
 

@@ -26,6 +26,18 @@ export async function fetchCompanionUnlocks(userId: string) {
   return response.json() as Promise<{ unlocks: Array<{ id: string; eventSummary: string }> }>;
 }
 
+export async function fetchCompanionContext(userId: string) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/context/${userId}`);
+  if (!response.ok) {
+    throw new Error(`Companion context fetch failed with ${response.status}`);
+  }
+  return response.json() as Promise<{
+    relationshipStage: string;
+    recalledMemory: string;
+    initiativeScore: number;
+  }>;
+}
+
 export async function initializeCompanionOnboarding(payload: {
   userId: string;
   answers: Array<{ questionKey: string; answerValue: string; answerWeight?: number }>;

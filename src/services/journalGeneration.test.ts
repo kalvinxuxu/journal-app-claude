@@ -167,4 +167,39 @@ describe("generateJournalDraft", () => {
     const fallbackInput = mockGenerate.mock.calls[0][0];
     expect(fallbackInput.sceneHint).toBe("雨中漫步");
   });
+
+  it("passes recalled memory and relationship context into draft generation input", async () => {
+    const createTask = vi.spyOn(apiTaskClient, "createGenerationTask").mockResolvedValue({
+      task: { id: "tsk_1" },
+      deduped: false,
+    } as never);
+
+    vi.spyOn(taskPolling, "pollGenerationTask").mockResolvedValue({
+      status: "succeeded",
+      output: {
+        journalContent: "她记得你说过下雨天会想躲起来。",
+        voiceScripts: [{ timing: "night", transcript: "我记得。", duration: "00:12" }],
+      },
+    } as never);
+
+    await generateJournalDraft({
+      mood: "想念",
+      date: "2026-05-22",
+      memoryEngine: createMemoryEngine(),
+      voiceStyle: "soft",
+      companionContext: {
+        relationshipStage: "familiar",
+        recalledMemory: "下雨天容易想躲起来",
+      },
+    });
+
+    expect(createTask).toHaveBeenCalledWith(
+      expect.objectContaining({
+        input: expect.objectContaining({
+          relationshipStage: "familiar",
+          recalledMemory: "下雨天容易想躲起来",
+        }),
+      }),
+    );
+  });
 });

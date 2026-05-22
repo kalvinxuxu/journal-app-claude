@@ -7,6 +7,8 @@ import { createOnboardingAnswerStore } from "../store/onboardingAnswerStore";
 import { createOnboardingService } from "../services/onboardingService";
 import { createFeedbackStore } from "../store/feedbackStore";
 import { createUnlockEventStore } from "../store/unlockEventStore";
+import { createMemoryItemStore } from "../store/memoryItemStore";
+import { createMemoryRecallService } from "../services/memoryRecallService";
 
 export function createCompanionRoutes(db?: Database.Database) {
   const database = db ?? createAppDatabase();
@@ -68,6 +70,27 @@ export function createCompanionRoutes(db?: Database.Database) {
     }
 
     res.json({ unlocks: rows });
+  });
+
+  router.get("/context/:userId", (req, res) => {
+    const relationshipStore = createRelationshipStateStore(database);
+    const memoryItemStore = createMemoryItemStore(database);
+
+    const relationship = relationshipStore.findByUserId(req.params.userId);
+    if (!relationship) {
+      res.status(404).json({ error: "No companion context found" });
+      return;
+    }
+
+    const memories = memoryItemStore.listByUserId(req.params.userId);
+    const recallService = createMemoryRecallService();
+    const selected = recallService.selectForJournal(memories, 3);
+
+    res.json({
+      relationshipStage: relationship.stage,
+      recalledMemory: selected.map((m) => m.summary).join("；"),
+      initiativeScore: relationship.initiativeScore,
+    });
   });
 
   return router;
