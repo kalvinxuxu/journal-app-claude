@@ -42,13 +42,13 @@ export function AskHerPage({ onSave, onCancel, voiceStyle, refreshToday }: AskHe
   const userId = "local-user";
 
   const phaseButtonLabel: Record<AskHerPhase, string> = {
-    "idle": "请她写",
-    "draft-generating": "正在生成日记",
-    "image-generating": "正在根据日记生成配图",
+    "idle": "重新记录今天",
+    "draft-generating": "正在记录这一天",
+    "image-generating": "正在生成配图",
     "voice-generating": "正在生成语音",
     "preview-ready": "保存日记",
     "partial-error": "保存日记",
-    "fatal-error": "请她写",
+    "fatal-error": "重新记录今天",
   };
 
   const isLoading = phase === "draft-generating" || phase === "image-generating" || phase === "voice-generating";
@@ -204,9 +204,9 @@ export function AskHerPage({ onSave, onCancel, voiceStyle, refreshToday }: AskHe
     <section className="page-stack">
       <div className="page-hero card">
         <div>
-          <p className="section-label">请她写</p>
-          <h2>让她来记录这一天</h2>
-          <p className="hero-copy">选一个心情，她来生成配图、语音和内容。</p>
+          <p className="section-label">日记墙</p>
+          <h2>她今天记录了这些</h2>
+          <p className="hero-copy">这是她今天为你准备的内容，记录这一天。</p>
         </div>
         <button type="button" className="ghost-button" onClick={onCancel}>返回首页</button>
       </div>
@@ -249,8 +249,8 @@ export function AskHerPage({ onSave, onCancel, voiceStyle, refreshToday }: AskHe
       {isLoading && (
         <div className="generation-status card is-info" role="status">
           <p className="section-label">生成进度</p>
-          {phase === "draft-generating" && <p>正在生成日记</p>}
-          {phase === "image-generating" && <p>正在根据日记生成配图</p>}
+          {phase === "draft-generating" && <p>正在记录这一天</p>}
+          {phase === "image-generating" && <p>正在生成配图</p>}
           {phase === "voice-generating" && <p>正在生成语音</p>}
         </div>
       )}
@@ -259,8 +259,8 @@ export function AskHerPage({ onSave, onCancel, voiceStyle, refreshToday }: AskHe
         <div className="detail-card card">
           <div className="detail-card__top">
             <div>
-              <p className="section-label">预览</p>
-              <h3>她写的日记</h3>
+              <p className="section-label">今日日记</p>
+              <h3>她记录的这一天</h3>
             </div>
           </div>
           <p>{previewJournal.content}</p>

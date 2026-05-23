@@ -90,12 +90,12 @@ describe("AskHerPage one-click flow", () => {
 
   it("renders the ask-her page hero", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
-    expect(screen.getByText("让她来记录这一天")).toBeDefined();
+    expect(screen.getByText("她今天记录了这些")).toBeDefined();
   });
 
   it("shows the generate button with correct label", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
-    expect(screen.getByRole("button", { name: "请她写" })).toBeDefined();
+    expect(screen.getByRole("button", { name: "重新记录今天" })).toBeDefined();
   });
 
   it("shows date and mood pickers", async () => {
@@ -112,7 +112,7 @@ describe("AskHerPage one-click flow", () => {
   it("one click triggers draft generation first, then media generation", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
     // Draft generated first
     await waitFor(() => expect(generateJournalDraft).toHaveBeenCalled());
@@ -127,7 +127,7 @@ describe("AskHerPage one-click flow", () => {
     const { buildJournalImagePrompt } = await import("../services/minimax");
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
     await waitFor(() => expect(generateJournalDraft).toHaveBeenCalled());
 
     // buildJournalImagePrompt is called after draft is generated
@@ -153,8 +153,8 @@ describe("AskHerPage one-click flow", () => {
 
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
-    await waitFor(() => expect(screen.getByRole("status").textContent).toContain("正在生成日记"));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
+    await waitFor(() => expect(screen.getByRole("status").textContent).toContain("正在记录这一天"));
 
     resolveDraft?.({
       content: "今天的阳光很温暖，想起你就会笑。",
@@ -167,7 +167,7 @@ describe("AskHerPage one-click flow", () => {
       source: "remote",
     });
 
-    await waitFor(() => expect(screen.getByRole("status").textContent).toContain("正在根据日记生成配图"));
+    await waitFor(() => expect(screen.getByRole("status").textContent).toContain("正在生成配图"));
 
     resolveImages?.(["https://example.com/image.png"]);
     await waitFor(() => expect(screen.getByRole("status").textContent).toContain("正在生成语音"));
@@ -184,10 +184,10 @@ describe("AskHerPage one-click flow", () => {
   it("shows preview text + image after successful one-click generation", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
     // Wait for preview to appear (all async work done)
-    await waitFor(() => expect(screen.getByText("她写的日记")).toBeDefined());
+    await waitFor(() => expect(screen.getByText("她记录的这一天")).toBeDefined());
     await waitFor(() => expect(screen.getByRole("button", { name: "保存日记" })).toBeDefined());
 
     // Verify image is shown in preview
@@ -198,7 +198,7 @@ describe("AskHerPage one-click flow", () => {
   it("uses a single primary save button after preview is ready", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
     await waitFor(() => expect(screen.getByRole("button", { name: "保存日记" })).toBeDefined());
     expect(screen.getAllByRole("button", { name: "保存日记" })).toHaveLength(1);
@@ -218,9 +218,9 @@ describe("AskHerPage one-click flow", () => {
 
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
-    await waitFor(() => expect(screen.getByText("她写的日记")).toBeDefined());
+    await waitFor(() => expect(screen.getByText("她记录的这一天")).toBeDefined());
     await waitFor(() => expect(screen.getByRole("button", { name: "保存日记" })).toBeDefined());
     await waitFor(() => expect(mockBuildJournalMedia).toHaveBeenCalled());
   });
@@ -230,11 +230,11 @@ describe("AskHerPage one-click flow", () => {
 
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
     await waitFor(() => expect(screen.getByText("生成失败")).toBeDefined());
-    await waitFor(() => expect(screen.getByRole("button", { name: "请她写" })).toBeDefined());
-    expect(screen.queryByText("她写的日记")).toBeNull();
+    await waitFor(() => expect(screen.getByRole("button", { name: "重新记录今天" })).toBeDefined());
+    expect(screen.queryByText("她记录的这一天")).toBeNull();
   });
 
   it("calls onSave with girlfriend source when content is saved", async () => {
@@ -243,9 +243,9 @@ describe("AskHerPage one-click flow", () => {
 
     render(<AskHerPage onSave={mockOnSave} onCancel={vi.fn()} />);
 
-    await waitFor(() => expect(screen.getByRole("button", { name: "请她写" })).toBeDefined());
+    await waitFor(() => expect(screen.getByRole("button", { name: "重新记录今天" })).toBeDefined());
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
     await waitFor(() => expect(screen.getByRole("button", { name: "保存日记" })).toBeDefined());
 
     fireEvent.click(screen.getByRole("button", { name: "保存日记" }));
@@ -262,7 +262,7 @@ describe("AskHerPage one-click flow", () => {
       target: { value: "看电影" },
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
 
     await waitFor(() => expect(generateJournalDraft).toHaveBeenCalledWith(
       expect.objectContaining({ sceneHint: "看电影" }),
@@ -283,7 +283,7 @@ describe("AskHerPage one-click flow", () => {
 
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
     // Wait for the full flow to complete including fallback
     await waitFor(() => expect(screen.getByRole("button", { name: "保存日记" })).toBeDefined());
 
@@ -305,8 +305,8 @@ describe("AskHerPage one-click flow", () => {
   it("preview shows journal content text", async () => {
     render(<AskHerPage onSave={vi.fn()} onCancel={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "请她写" }));
-    await waitFor(() => expect(screen.getByText("她写的日记")).toBeDefined());
+    fireEvent.click(screen.getByRole("button", { name: "重新记录今天" }));
+    await waitFor(() => expect(screen.getByText("她记录的这一天")).toBeDefined());
 
     // Should show the generated content
     expect(screen.getByText(/今天的阳光很温暖/)).toBeDefined();
