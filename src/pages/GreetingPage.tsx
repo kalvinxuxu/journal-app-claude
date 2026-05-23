@@ -1,9 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
-import { greetingStore, type GreetingCard } from "../services/greetingStore";
-
-type GreetingPageProps = {
-  onBack: () => void;
-};
+import { useState, useEffect, useCallback } from "react";
+import { greetingStore, type GreetingCard as GreetingCardType } from "../services/greetingStore";
+import { GreetingRevealView } from "../components/companion/GreetingRevealView";
+import { getCurrentUserId } from "../services/memory";
 
 const TIMING_LABELS: Record<string, string> = {
   morning: "早安",
@@ -11,8 +9,13 @@ const TIMING_LABELS: Record<string, string> = {
   night: "晚安",
 };
 
+type GreetingPageProps = {
+  onBack: () => void;
+};
+
 export function GreetingPage({ onBack }: GreetingPageProps) {
-  const [greetings, setGreetings] = useState<GreetingCard[]>([]);
+  const [greetings, setGreetings] = useState<GreetingCardType[]>([]);
+  const [revealedId, setRevealedId] = useState<string | null>(null);
 
   const refresh = useCallback(() => {
     setGreetings(greetingStore.getGreetings());
@@ -24,6 +27,12 @@ export function GreetingPage({ onBack }: GreetingPageProps) {
     const interval = setInterval(refresh, 5_000);
     return () => clearInterval(interval);
   }, [refresh]);
+
+  function handleRevealComplete(greetingId: string) {
+    greetingStore.markAsRead(greetingId);
+    setRevealedId(greetingId);
+    refresh();
+  }
 
   return (
     <section className="page-stack">
@@ -41,24 +50,36 @@ export function GreetingPage({ onBack }: GreetingPageProps) {
             <p style={{ color: "#757575", textAlign: "center" }}>暂无问候记录</p>
           </div>
         ) : (
-          greetings.map((greeting) => (
-            <div key={greeting.id} className="detail-card card">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span className="section-label">
-                  {TIMING_LABELS[greeting.timing] ?? greeting.timing}
-                </span>
-                <span style={{ color: "#757575", fontSize: "12px" }}>
-                  {new Date(greeting.deliveredAt).toLocaleDateString()}
-                </span>
-              </div>
-              <p style={{ marginTop: "8px", lineHeight: 1.6 }}>{greeting.content}</p>
-              {greeting.audioUrl && (
-                <div style={{ marginTop: "12px" }}>
-                  <audio controls src={greeting.audioUrl} style={{ width: "100%" }} />
+          greetings.map((greeting) => {
+            // Show typewriter reveal for unread greetings that haven't been revealed yet
+            if (!greeting.isRead && !revealedId) {
+              return (
+                <GreetingRevealView
+                  key={greeting.id}
+                  greeting={greeting}
+                  onComplete={() => handleRevealComplete(greeting.id)}
+                />
+              );
+            }
+            return (
+              <div key={greeting.id} className="detail-card card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span className="section-label">
+                    {TIMING_LABELS[greeting.timing] ?? greeting.timing}
+                  </span>
+                  <span style={{ color: "#757575", fontSize: "12px" }}>
+                    {new Date(greeting.deliveredAt).toLocaleDateString()}
+                  </span>
                 </div>
-              )}
-            </div>
-          ))
+                <p style={{ marginTop: "8px", lineHeight: 1.6 }}>{greeting.content}</p>
+                {greeting.audioUrl && (
+                  <div style={{ marginTop: "12px" }}>
+                    <audio controls src={greeting.audioUrl} style={{ width: "100%" }} />
+                  </div>
+                )}
+              </div>
+            );
+          })
         )}
       </div>
 
