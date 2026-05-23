@@ -6,6 +6,7 @@ import { EmptyState } from "../components/EmptyState";
 import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
+import { OotdCard } from "../components/companion/OotdCard";
 import { fetchCompanionUnlocks, fetchCompanionContext } from "../services/api/companionClient";
 import { getCurrentUserId } from "../services/memory";
 
@@ -107,6 +108,8 @@ export function HomePage({
           onSelectJournal={onSelectJournal}
         />
       )}
+
+      <OotdCard date={new Date().toISOString().split("T")[0]} />
 
       {selectedJournal ? (
         <>
