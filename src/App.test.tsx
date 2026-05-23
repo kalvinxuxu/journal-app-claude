@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { App } from "./App";
 
@@ -14,10 +14,6 @@ vi.mock("./pages/HomePage", () => ({
 
 vi.mock("./pages/SettingsPage", () => ({
   SettingsPage: () => <div>Settings</div>,
-}));
-
-vi.mock("./pages/WritePage", () => ({
-  WritePage: () => <div>Write</div>,
 }));
 
 vi.mock("./pages/AskHerPage", () => ({
@@ -37,9 +33,14 @@ vi.mock("./pages/CompanionOnboardingPage", () => ({
 }));
 
 const mockCheckCompanionOnboardingStatus = vi.fn(() => new Promise<never>(() => {}));
+const mockPersistCompanionRevealPortrait = vi.fn();
+const mockGenerateRevealPortrait = vi.fn();
+const mockSaveCompanionReveal = vi.fn();
+const mockSaveReferenceImage = vi.fn();
 
 vi.mock("./services/api/companionClient", () => ({
   checkCompanionOnboardingStatus: (...args: unknown[]) => mockCheckCompanionOnboardingStatus(...args),
+  persistCompanionRevealPortrait: (...args: unknown[]) => mockPersistCompanionRevealPortrait(...args),
 }));
 
 vi.mock("./services/api/mediaClient", () => ({
@@ -48,7 +49,8 @@ vi.mock("./services/api/mediaClient", () => ({
 
 vi.mock("./services/companion", () => ({
   loadCompanionReveal: vi.fn(() => null),
-  saveCompanionReveal: vi.fn(),
+  saveCompanionReveal: (...args: unknown[]) => mockSaveCompanionReveal(...args),
+  generateRevealPortrait: (...args: unknown[]) => mockGenerateRevealPortrait(...args),
 }));
 
 vi.mock("./services/generator", () => ({
@@ -58,18 +60,19 @@ vi.mock("./services/generator", () => ({
 
 vi.mock("./services/memory", () => ({
   loadJournalsWithSource: vi.fn(() => ({ journals: [], source: "empty" })),
-  loadJournalsWithBackendFallback: vi.fn(),
-  journalExistsOnBackend: vi.fn(),
+  loadJournalsWithBackendFallback: vi.fn(() => Promise.resolve({ journals: [], source: "empty" })),
+  journalExistsOnBackend: vi.fn(() => Promise.resolve(true)),
   loadPreferences: vi.fn(() => ({ voiceStyle: "soft" })),
   loadSelectedJournalId: vi.fn(() => ""),
   loadValidReferenceImage: vi.fn(),
   saveJournals: vi.fn(),
   saveJournalToBackend: vi.fn(),
   saveLatestSelfie: vi.fn(),
+  saveReferenceImage: (...args: unknown[]) => mockSaveReferenceImage(...args),
   savePreferences: vi.fn(),
   saveSelectedJournalId: vi.fn(),
   saveReferenceImageAsBase64: vi.fn(),
-  migrateLocalStorageJournalsToBackend: vi.fn(),
+  migrateLocalStorageJournalsToBackend: vi.fn(() => Promise.resolve({ migrated: 0 })),
   getCurrentUserId: vi.fn(() => "local-user"),
 }));
 
@@ -118,5 +121,55 @@ describe("App onboarding gating", () => {
 
     render(<App />);
     expect(await screen.findByText("Companion Onboarding")).toBeDefined();
+  });
+
+  it("regenerates reveal portrait when restored prompt is from the old style", async () => {
+    mockCheckCompanionOnboardingStatus.mockResolvedValue({
+      completed: true,
+      archetype: "mature_steady",
+      reveal: {
+        systemDisplayName: "临川",
+        customName: null,
+        portraitVersion: 1,
+        tagline: "安静，稳，也愿意靠近你。",
+        appearancePrompt: "full body portrait, japanese semi-realistic style, simple casual clothing",
+        portraitImageUrl: "http://localhost:3001/media/images/old.jpg",
+        portraitDescription: "她看起来安静，也更亲近。",
+        matchExplanation: "她更像能慢慢靠近你的人。",
+        appearanceProfile: {
+          hairStyle: "long_hair",
+          bodyPresence: "balanced_mature",
+          fashionAura: "clean_refined",
+          gazeStyle: "steady_warm",
+          poseStyle: "poised_shifted_weight",
+        },
+        personalityProfile: {
+          temperament: "mature_steady",
+          affectionStyle: "gentle_attentive",
+          distanceStyle: "poised",
+          initiativeStyle: "measured_forward",
+          expressionTone: "light_proud",
+        },
+      },
+    });
+    mockGenerateRevealPortrait.mockResolvedValue("http://localhost:3001/media/images/new.jpg");
+    mockPersistCompanionRevealPortrait.mockResolvedValue(undefined);
+
+    render(<App />);
+
+    await waitFor(() =>
+      expect(mockGenerateRevealPortrait).toHaveBeenCalledWith(
+        expect.stringContaining("simple casual clothing"),
+      ),
+    );
+    expect(mockPersistCompanionRevealPortrait).toHaveBeenCalledWith({
+      userId: "local-user",
+      portraitImageUrl: "http://localhost:3001/media/images/new.jpg",
+      portraitVersion: 2,
+    });
+    expect(mockSaveReferenceImage).toHaveBeenCalledWith("http://localhost:3001/media/images/new.jpg");
+    expect(mockSaveCompanionReveal).toHaveBeenCalledWith(
+      expect.objectContaining({ portraitImageUrl: "http://localhost:3001/media/images/new.jpg" }),
+    );
   });
 });

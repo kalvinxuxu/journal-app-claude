@@ -22,6 +22,7 @@ describe("HomePage companion handoff", () => {
     const companionReveal: CompanionRevealSummary = {
       systemDisplayName: "岚夕",
       customName: null,
+      portraitVersion: 2,
       tagline: "她像夜色里慢慢靠近的人，安静，却不会让你觉得遥远。",
       portraitImageUrl: null,
       appearancePrompt: "full body portrait",
@@ -49,7 +50,6 @@ describe("HomePage companion handoff", () => {
         dataSource="local"
         selectedJournalId="j1"
         onSelectJournal={vi.fn()}
-        onCreateNew={vi.fn()}
         onAskHerWrite={vi.fn()}
         companionReveal={companionReveal}
       />,
@@ -65,7 +65,6 @@ describe("HomePage companion echo", () => {
     const baseProps = {
       dataSource: "local" as const,
       onSelectJournal: vi.fn(),
-      onCreateNew: vi.fn(),
       onAskHerWrite: vi.fn(),
       companionReveal: null,
     };
@@ -107,11 +106,11 @@ describe("HomePage companion handoff", () => {
         dataSource="empty"
         selectedJournalId=""
         onSelectJournal={() => {}}
-        onCreateNew={() => {}}
         onAskHerWrite={() => {}}
         companionReveal={{
           systemDisplayName: "临川",
           customName: "晚晴",
+          portraitVersion: 2,
           tagline: "她看上去很稳，但并不冷。",
           appearancePrompt: "",
           portraitImageUrl: null,

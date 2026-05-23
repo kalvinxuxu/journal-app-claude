@@ -14,7 +14,6 @@ type HomePageProps = {
   dataSource: "local" | "mock" | "empty";
   selectedJournalId: string;
   onSelectJournal: (id: string) => void;
-  onCreateNew: () => void;
   onAskHerWrite: () => void;
   companionReveal: CompanionRevealSummary | null;
 };
@@ -24,7 +23,6 @@ export function HomePage({
   dataSource,
   selectedJournalId,
   onSelectJournal,
-  onCreateNew,
   onAskHerWrite,
   companionReveal,
 }: HomePageProps) {
@@ -132,7 +130,7 @@ export function HomePage({
         <EmptyState title="还没有日记" description="先写第一篇吧，首页会立刻有内容。" />
       )}
 
-      <button type="button" className="floating-button" onClick={onCreateNew}>
+      <button type="button" className="floating-button" onClick={onAskHerWrite}>
         ＋
       </button>
     </section>

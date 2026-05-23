@@ -2,14 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import { Header } from "./components/Header";
 import { HomePage } from "./pages/HomePage";
 import { SettingsPage } from "./pages/SettingsPage";
-import { WritePage } from "./pages/WritePage";
 import { AskHerPage } from "./pages/AskHerPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { GreetingPage } from "./pages/GreetingPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
-import { checkCompanionOnboardingStatus } from "./services/api/companionClient";
-import { loadCompanionReveal, saveCompanionReveal } from "./services/companion";
+import { checkCompanionOnboardingStatus, persistCompanionRevealPortrait } from "./services/api/companionClient";
+import { generateRevealPortrait, loadCompanionReveal, saveCompanionReveal } from "./services/companion";
 import { addJournalToMemory, getMemoryEngine } from "./services/generator";
 import {
   loadJournalsWithSource,
@@ -36,6 +35,9 @@ import { isDailySummary, toJournalEntry } from "./services/journalAggregation";
 import { taskStore } from './services/generation/taskStore';
 import { greetingStore, type GreetingCard } from './services/greetingStore';
 import type { AppPage, Journal, Preferences, Mood } from "./types/journal";
+import type { CompanionRevealSummary } from "./types/companion";
+
+const CURRENT_REVEAL_PORTRAIT_VERSION = 2;
 
 function getTodayString() {
   return new Date().toISOString().split("T")[0];
@@ -54,6 +56,10 @@ function findLatestJournalByDate(journals: Journal[], date: string) {
   return journals.find((journal) => journal.date === date && !isDailySummary(journal));
 }
 
+function shouldRefreshRevealPortrait(reveal: CompanionRevealSummary) {
+  return Boolean(reveal.portraitImageUrl) && reveal.portraitVersion < CURRENT_REVEAL_PORTRAIT_VERSION;
+}
+
 export function App() {
   const [activePage, setActivePage] = useState<AppPage>("home");
   const [journalsResult, setJournalsResult] = useState<{ journals: Journal[]; source: "local" | "mock" | "empty" }>(() => loadJournalsWithSource());
@@ -69,14 +75,29 @@ export function App() {
   // Companion onboarding gating: check localStorage flag first, then verify with backend
   useEffect(() => {
     const userId = getCurrentUserId();
-    checkCompanionOnboardingStatus(userId).then((status) => {
+    checkCompanionOnboardingStatus(userId).then(async (status) => {
       setCompanionReady(status.completed);
-      if (status.reveal) {
-        saveCompanionReveal(status.reveal);
-        setCompanionReveal(status.reveal);
-        if (status.reveal.portraitImageUrl) {
-          saveReferenceImage(status.reveal.portraitImageUrl);
-        }
+      if (!status.reveal) return;
+
+      let nextReveal = status.reveal;
+      if (shouldRefreshRevealPortrait(status.reveal)) {
+        const portraitImageUrl = await generateRevealPortrait(status.reveal.appearancePrompt);
+        await persistCompanionRevealPortrait({
+          userId,
+          portraitImageUrl,
+          portraitVersion: CURRENT_REVEAL_PORTRAIT_VERSION,
+        });
+        nextReveal = {
+          ...status.reveal,
+          portraitImageUrl,
+          portraitVersion: CURRENT_REVEAL_PORTRAIT_VERSION,
+        };
+      }
+
+      saveCompanionReveal(nextReveal);
+      setCompanionReveal(nextReveal);
+      if (nextReveal.portraitImageUrl) {
+        saveReferenceImage(nextReveal.portraitImageUrl);
       }
     }).catch(() => {
       setCompanionReady(window.localStorage.getItem("journal-app:companionReady") === "true");
@@ -568,17 +589,8 @@ export function App() {
               dataSource={journalsResult.source}
               selectedJournalId={selectedJournalId}
               onSelectJournal={handleSelectJournal}
-              onCreateNew={() => handleNavigate("write")}
               onAskHerWrite={() => handleNavigate("ask-her")}
               companionReveal={companionReveal}
-            />
-          ) : null}
-
-          {activePage === "write" ? (
-            <WritePage
-              onSave={handleSaveJournal}
-              onCancel={() => handleNavigate("home")}
-              voiceStyle={preferences.voiceStyle}
             />
           ) : null}
 
