@@ -75,3 +75,20 @@ export type CompanionRevealV2 = {
   appearanceProfile: CompanionAppearanceProfile;
   personalityProfile: CompanionPersonalityProfile;
 };
+
+// ---------------------------------------------------------------------------
+// OOTD (Outfit of the Day) types
+// ---------------------------------------------------------------------------
+
+export type OotdRecord = {
+  id: string;
+  userId: string;
+  date: string;
+  imageUrl: string | null;
+  title: string;
+  caption: string | null;
+  rationale: string | null;
+  styleTags: string[];
+  createdAt: string;
+  updatedAt: string;
+};

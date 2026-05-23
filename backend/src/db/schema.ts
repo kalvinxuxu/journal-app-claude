@@ -77,5 +77,20 @@ export function ensureAppSchema(db: Database.Database) {
       created_at TEXT NOT NULL,
       FOREIGN KEY(user_id) REFERENCES users(id)
     );
+
+    CREATE TABLE IF NOT EXISTS daily_ootd (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      date TEXT NOT NULL,
+      image_url TEXT,
+      title TEXT NOT NULL,
+      caption TEXT,
+      rationale TEXT,
+      style_tags TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(user_id, date),
+      FOREIGN KEY(user_id) REFERENCES users(id)
+    );
   `);
 }

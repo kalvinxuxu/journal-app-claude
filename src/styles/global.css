@@ -1219,6 +1219,28 @@ h3 {
   border-radius: 8px;
 }
 
+/* ===== OOTD Card ===== */
+.ootd-card {
+  background: #F3E5F5;
+  border: 1px solid #E0E0E0;
+}
+
+.ootd-card .section-label {
+  color: #6A1B9A;
+}
+
+.ootd-image-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.ootd-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ===== Companion UI Fragments ===== */
 .companion-echo-card p:last-child {
   margin: 0;

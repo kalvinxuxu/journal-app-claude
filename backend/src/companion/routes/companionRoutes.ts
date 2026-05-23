@@ -7,6 +7,8 @@ import { createOnboardingAnswerStore } from "../store/onboardingAnswerStore";
 import { createOnboardingService } from "../services/onboardingService";
 import { createFeedbackStore } from "../store/feedbackStore";
 import { createUnlockEventStore } from "../store/unlockEventStore";
+import { createOotdStore } from "../store/ootdStore";
+import { createOotdGenerator } from "../services/ootdService";
 import { createMemoryItemStore } from "../store/memoryItemStore";
 import { createJournalContextBuilder } from "../services/journalContextBuilder";
 import { createJournalPromptContextService } from "../services/journalPromptContextService";
@@ -177,6 +179,78 @@ export function createCompanionRoutes(db?: Database.Database) {
       initiativeScore: relationship.initiativeScore,
       initiativeTone: promptContext.initiativeTone,
     });
+  });
+
+  const ootdStore = createOotdStore(database);
+  const ootdGenerator = createOotdGenerator({
+    port: Number(process.env.PORT ?? 3000),
+    generateImage: async ({ prompt, aspectRatio }) => {
+      try {
+        const response = await fetch(`http://localhost:${process.env.PORT ?? 3000}/api/image-generation`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt, aspect_ratio: aspectRatio, n: 1 }),
+        });
+        const data = await response.json() as { data?: { image_urls?: string[] }; error?: string };
+        if (data.data?.image_urls?.[0]) {
+          return data.data.image_urls[0];
+        }
+        return null;
+      } catch {
+        return null;
+      }
+    },
+  });
+
+  // GET /api/companion/ootd/:date
+  router.get("/ootd/:date", async (req, res) => {
+    const userId = req.query.userId as string | undefined;
+    if (!userId) {
+      res.status(400).json({ error: "userId is required" });
+      return;
+    }
+
+    const ootd = ootdStore.findByUserIdAndDate(userId, req.params.date);
+    if (!ootd) {
+      res.status(404).json({ error: "OOTD not found for this date" });
+      return;
+    }
+
+    res.json({ ootd });
+  });
+
+  // POST /api/companion/ootd/regenerate
+  router.post("/ootd/regenerate", async (req, res) => {
+    const { userId, date } = req.body as { userId?: string; date?: string };
+    if (!userId || !date) {
+      res.status(400).json({ error: "userId and date are required" });
+      return;
+    }
+
+    // Ensure user exists
+    const insertUser = database.prepare(`
+      INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)
+      ON CONFLICT(id) DO NOTHING
+    `);
+    insertUser.run(userId, new Date().toISOString(), new Date().toISOString());
+
+    const result = await ootdGenerator(userId, date);
+    const now = new Date().toISOString();
+    const ootdRecord = {
+      id: `ootd_${Date.now()}`,
+      userId,
+      date,
+      imageUrl: result.imageUrl,
+      title: result.title,
+      caption: result.caption,
+      rationale: result.rationale,
+      styleTags: result.styleTags,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    ootdStore.upsert(ootdRecord);
+    res.status(201).json({ ootd: ootdRecord });
   });
 
   return router;

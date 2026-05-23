@@ -98,3 +98,41 @@ export async function checkCompanionOnboardingStatus(userId: string) {
     reveal: CompanionRevealSummary | null;
   }>;
 }
+
+export type OotdItem = {
+  id: string;
+  userId: string;
+  date: string;
+  imageUrl: string | null;
+  title: string;
+  caption: string | null;
+  rationale: string | null;
+  styleTags: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export async function fetchOotdByDate(userId: string, date: string): Promise<OotdItem | null> {
+  const response = await fetch(`${getBackendUrl()}/api/companion/ootd/${date}?userId=${userId}`);
+  if (response.status === 404) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`OOTD fetch failed with ${response.status}`);
+  }
+  const data = await response.json() as { ootd: OotdItem };
+  return data.ootd;
+}
+
+export async function regenerateOotd(userId: string, date: string): Promise<OotdItem> {
+  const response = await fetch(`${getBackendUrl()}/api/companion/ootd/regenerate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, date }),
+  });
+  if (!response.ok) {
+    throw new Error(`OOTD regenerate failed with ${response.status}`);
+  }
+  const data = await response.json() as { ootd: OotdItem };
+  return data.ootd;
+}
