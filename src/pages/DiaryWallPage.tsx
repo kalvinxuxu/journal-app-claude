@@ -3,13 +3,12 @@ import type { Journal, Mood } from "../types/journal";
 import { buildJournalMedia, buildJournalImagePrompt, persistAudiosIfNeeded, persistImagesIfNeeded } from "../services/minimax";
 import { loadReferenceImage, replaceJournalOnBackend } from "../services/memory";
 import { MoodTag } from "../components/MoodTag";
-import { CompanionHintLine } from "../components/companion/CompanionHintLine";
-import { CompanionFeedbackBar } from "../components/companion/CompanionFeedbackBar";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
-import { submitCompanionFeedback, generateDailyJournal, fetchOotdByDate, regenerateOotd, type OotdItem } from "../services/api/companionClient";
+import { generateDailyJournal, fetchOotdByDate, regenerateOotd, type OotdItem } from "../services/api/companionClient";
 import { GreetingCard } from "../components/companion/GreetingCard";
-import { greetingStore } from "../services/greetingStore";
+import { GreetingRevealView } from "../components/companion/GreetingRevealView";
+import { greetingStore, type GreetingCard as GreetingCardType } from "../services/greetingStore";
 import { getCurrentUserId } from "../services/memory";
 
 type DiaryWallPageProps = {
@@ -48,14 +47,22 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   // The journal being displayed / being refreshed
   const [displayedJournal, setDisplayedJournal] = useState<Journal | null>(todayJournal ?? null);
-  // Generation errors (partialsuccess)
-  const [genErrors, setGenErrors] = useState<{ image?: string; voice?: string } | null>(null);
   // OOTD state — auto-loaded on mount so it appears as a wall item automatically
   const [ootd, setOotd] = useState<OotdItem | null>(null);
   const [ootdLoading, setOotdLoading] = useState(false);
   const [ootdError, setOotdError] = useState<string | null>(null);
+  // Greeting reveal state — when an unread greeting is pending, allow it to be revealed inline
+  const [pendingGreeting, setPendingGreeting] = useState<GreetingCardType | null>(null);
 
   const isLoading = phase === "generating";
+
+  // Load latest unread greeting on mount — she left you a message
+  useEffect(() => {
+    const latest = greetingStore.getLatestGreeting();
+    if (latest && !latest.isRead) {
+      setPendingGreeting(latest);
+    }
+  }, []);
 
   // Auto-fetch OOTD on mount (she already picked something today)
   useEffect(() => {
@@ -91,11 +98,16 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
     }
   }
 
+  function handleGreetingRevealComplete() {
+    if (!pendingGreeting) return;
+    greetingStore.markAsRead(pendingGreeting.id);
+    setPendingGreeting(null);
+  }
+
   async function handleRefresh() {
     if (isLoading) return;
     setPhase("generating");
     setErrorMessage(null);
-    setGenErrors(null);
 
     try {
       const userId = getCurrentUserId();
@@ -206,10 +218,9 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
       }
 
       setDisplayedJournal(journal);
-      setGenErrors(errors);
       await replaceJournalOnBackend(journal);
       onJournalRefresh(journal);
-      setPhase(errors.image || errors.voice ? "error" : "done");
+      setPhase("done");
     } catch (err) {
       setErrorMessage(err instanceof Error ? err.message : String(err));
       setPhase("error");
@@ -259,33 +270,6 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
                   ))}
                 </div>
               )}
-
-              {displayedJournal.voiceMessages.length > 0 && (
-                <div style={{ marginTop: "16px" }}>
-                  {displayedJournal.voiceMessages.map((vm) => (
-                    <div key={vm.id} style={{ fontSize: "13px", color: "#424242" }}>
-                      <span style={{ fontWeight: 500 }}>{vm.timing}</span>: {vm.transcript}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <CompanionHintLine text="你刚刚提到的那段心事，会让她更懂你一点。" />
-              <CompanionFeedbackBar
-                onSelect={(value) =>
-                  submitCompanionFeedback({
-                    userId: getCurrentUserId(),
-                    journalId: displayedJournal?.id,
-                    feedbackKind:
-                      value === "tone_like"
-                        ? "tone_preference"
-                        : value === "less_initiative"
-                          ? "initiative_preference"
-                          : "recall_preference",
-                    feedbackValue: value,
-                  })
-                }
-              />
             </>
           )}
         </div>
@@ -310,30 +294,7 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
         </div>
       )}
 
-      {/* Generation errors shown inline */}
-      {genErrors && phase === "error" ? (
-        <div className="generation-status card is-warning" role="status">
-          <p className="section-label">生成结果</p>
-          {genErrors.image ? (
-            <p style={{ color: "#E65100" }}>图片：生成失败</p>
-          ) : (
-            <p style={{ color: "#2E7D32" }}>图片：生成成功</p>
-          )}
-          {genErrors.voice ? (
-            <p style={{ color: "#E65100" }}>语音：生成失败</p>
-          ) : (
-            <p style={{ color: "#2E7D32" }}>语音：生成成功</p>
-          )}
-        </div>
-      ) : null}
-
-      {errorMessage ? (
-        <div className="generation-status card is-error" role="alert">
-          <p className="section-label">生成失败</p>
-          <p>{errorMessage}</p>
-        </div>
-      ) : null}
-
+      
       {/* ===== Mood + Scene Hint — controls for regeneration ===== */}
       <div className="form-grid">
         <div className="field">
@@ -368,14 +329,14 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
       {/* ===== OOTD — auto-surfaced as a wall item (she picked this today) ===== */}
       {ootdLoading ? (
         <div className="detail-card card">
-          <p className="section-label">今日穿搭</p>
+          <p className="section-label">今日OOTD</p>
           <p style={{ color: "#757575", fontSize: "13px" }}>loading...</p>
         </div>
       ) : ootd ? (
         <div className="detail-card card">
           <div className="detail-card__top">
             <div>
-              <p className="section-label">今日穿搭</p>
+              <p className="section-label">今日OOTD</p>
               <h3>她今天想穿这套</h3>
             </div>
             <button
@@ -391,7 +352,7 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
             <div style={{ marginTop: "12px" }}>
               <img
                 src={ootd.imageUrl}
-                alt="今日穿搭"
+                alt="今日OOTD"
                 style={{ width: "100%", maxWidth: "240px", borderRadius: "8px" }}
               />
             </div>
@@ -406,7 +367,7 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
         </div>
       ) : ootdError ? (
         <div className="detail-card card">
-          <p className="section-label">今日穿搭</p>
+          <p className="section-label">今日OOTD</p>
           <p style={{ color: "#C62828", fontSize: "13px" }}>{ootdError}</p>
           <button type="button" className="toggle-button" onClick={handleOotdRefresh}>
             重试
@@ -414,8 +375,15 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
         </div>
       ) : null}
 
-      {/* ===== Greeting Card — pending companion greeting ===== */}
-      <GreetingCard onOpen={() => {}} />
+      {/* ===== Greeting — she left you a message (inline typewriter reveal if pending) ===== */}
+      {pendingGreeting ? (
+        <GreetingRevealView
+          greeting={pendingGreeting}
+          onComplete={handleGreetingRevealComplete}
+        />
+      ) : (
+        <GreetingCard onOpen={undefined} />
+      )}
 
       <div className="action-row">
         <button type="button" className="ghost-button" onClick={onCancel}>返回首页</button>
