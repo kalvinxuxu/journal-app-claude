@@ -24,10 +24,6 @@ vi.mock("./pages/PhotoWallPage", () => ({
   PhotoWallPage: () => <div>Photo Wall</div>,
 }));
 
-vi.mock("./pages/GreetingPage", () => ({
-  GreetingPage: () => <div>Greeting</div>,
-}));
-
 vi.mock("./pages/CompanionOnboardingPage", () => ({
   CompanionOnboardingPage: () => <div>Companion Onboarding</div>,
 }));

@@ -4,7 +4,6 @@ import { HomePage } from "./pages/HomePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { DiaryWallPage } from "./pages/DiaryWallPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
-import { GreetingPage } from "./pages/GreetingPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
 import { checkCompanionOnboardingStatus, persistCompanionRevealPortrait } from "./services/api/companionClient";
