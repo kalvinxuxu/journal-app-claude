@@ -51,6 +51,7 @@ describe("HomePage companion handoff", () => {
         selectedJournalId="j1"
         onSelectJournal={vi.fn()}
         onAskHerWrite={vi.fn()}
+        onGreetingOpen={vi.fn()}
         companionReveal={companionReveal}
       />,
     );
@@ -66,6 +67,7 @@ describe("HomePage companion echo", () => {
       dataSource: "local" as const,
       onSelectJournal: vi.fn(),
       onAskHerWrite: vi.fn(),
+      onGreetingOpen: vi.fn(),
       companionReveal: null,
     };
 
@@ -107,6 +109,7 @@ describe("HomePage companion handoff", () => {
         selectedJournalId=""
         onSelectJournal={() => {}}
         onAskHerWrite={() => {}}
+        onGreetingOpen={() => {}}
         companionReveal={{
           systemDisplayName: "临川",
           customName: "晚晴",

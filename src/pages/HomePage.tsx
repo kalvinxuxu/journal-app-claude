@@ -7,6 +7,7 @@ import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
 import { OotdCard } from "../components/companion/OotdCard";
+import { GreetingCard } from "../components/companion/GreetingCard";
 import { fetchCompanionUnlocks, fetchCompanionContext } from "../services/api/companionClient";
 import { getCurrentUserId } from "../services/memory";
 
@@ -16,6 +17,7 @@ type HomePageProps = {
   selectedJournalId: string;
   onSelectJournal: (id: string) => void;
   onAskHerWrite: () => void;
+  onGreetingOpen: () => void;
   companionReveal: CompanionRevealSummary | null;
 };
 
@@ -25,6 +27,7 @@ export function HomePage({
   selectedJournalId,
   onSelectJournal,
   onAskHerWrite,
+  onGreetingOpen,
   companionReveal,
 }: HomePageProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "calendar">("timeline");
@@ -110,6 +113,8 @@ export function HomePage({
       )}
 
       <OotdCard date={new Date().toISOString().split("T")[0]} />
+
+      <GreetingCard onOpen={onGreetingOpen} />
 
       {selectedJournal ? (
         <>

@@ -7,6 +7,7 @@ export interface GreetingCard {
   audioUrl?: string;
   deliveredAt: string;
   voiceStyle?: "soft" | "warm" | "playful";
+  isRead?: boolean;
 }
 
 const STORAGE_KEY = "journal-app:greetings";
@@ -27,12 +28,27 @@ export const greetingStore = {
     const current = loadGreetings();
     // Prevent duplicates by id
     if (current.some(g => g.id === greeting.id)) return;
-    const updated = [greeting, ...current].slice(0, 50);
+    const updated = [{ ...greeting, isRead: false }, ...current].slice(0, 50);
     saveGreetings(updated);
   },
 
   getGreetings(): GreetingCard[] {
     return loadGreetings();
+  },
+
+  getUnreadGreetings(): GreetingCard[] {
+    return loadGreetings().filter(g => !g.isRead);
+  },
+
+  getLatestGreeting(): GreetingCard | null {
+    const all = loadGreetings();
+    return all.length > 0 ? all[0] : null;
+  },
+
+  markAsRead(id: string) {
+    const current = loadGreetings();
+    const updated = current.map(g => g.id === id ? { ...g, isRead: true } : g);
+    saveGreetings(updated);
   },
 
   clearOld() {

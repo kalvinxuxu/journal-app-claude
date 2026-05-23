@@ -590,6 +590,7 @@ export function App() {
               selectedJournalId={selectedJournalId}
               onSelectJournal={handleSelectJournal}
               onAskHerWrite={() => handleNavigate("ask-her")}
+              onGreetingOpen={() => handleNavigate("greetings")}
               companionReveal={companionReveal}
             />
           ) : null}
