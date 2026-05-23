@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Header } from "./components/Header";
 import { HomePage } from "./pages/HomePage";
 import { SettingsPage } from "./pages/SettingsPage";
-import { AskHerPage } from "./pages/AskHerPage";
+import { DiaryWallPage } from "./pages/DiaryWallPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { GreetingPage } from "./pages/GreetingPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
@@ -30,12 +30,12 @@ import {
 import { rebuildMemoryFromJournals } from "./services/memoryRebuild";
 import { generateGirlfriendSelfies, generateNightBonusSelfie, synthesizeVoiceMessages } from "./services/minimax";
 import { shouldTriggerMorningSelfie, shouldTriggerNightBonus } from "./services/selfieSharing";
-import { generateJournalDraft } from "./services/journalGeneration";
 import { isDailySummary, toJournalEntry } from "./services/journalAggregation";
 import { taskStore } from './services/generation/taskStore';
 import { greetingStore, type GreetingCard } from './services/greetingStore';
 import type { AppPage, Journal, Preferences, Mood } from "./types/journal";
 import type { CompanionRevealSummary } from "./types/companion";
+import { generateDailyJournal, checkDailyJournal } from "./services/api/companionClient";
 
 const CURRENT_REVEAL_PORTRAIT_VERSION = 2;
 
@@ -328,60 +328,46 @@ export function App() {
 
     if (!todayJournal) {
       (async () => {
-        // Before generating, confirm with backend that no journal exists for today
-        const existsOnBackend = await journalExistsOnBackend(today);
-        if (existsOnBackend) {
+        const userId = getCurrentUserId();
+
+        // Before generating, check with backend whether today's journal already exists
+        const checkResult = await checkDailyJournal(userId, today);
+        if (checkResult.exists) {
           // Backend has today's journal — refresh from backend and skip generation
           const result = await loadJournalsWithBackendFallback();
           setJournalsResult(result);
           return;
         }
 
-        const revealReference = companionReveal?.portraitImageUrl;
-        const referenceImage =
-          (await loadValidReferenceImage())
-          ?? revealReference;
+        // Backend doesn't have it — generate via the unified backend endpoint
         const moods: Mood[] = ["开心", "想念", "感动", "平静", "调皮"];
         const randomMood = moods[Math.floor(Math.random() * moods.length)];
 
         try {
-          // Step 1: Generate journal content (text + voice scripts)
-          const draft = await generateJournalDraft({
-            mood: randomMood,
+          const result = await generateDailyJournal({
+            userId,
             date: today,
-            memoryEngine: getMemoryEngine(),
+            mood: randomMood,
             voiceStyle: preferences.voiceStyle,
           });
 
-          // Step 2: Generate selfies using stable reference image
-          const selfieResult = await generateGirlfriendSelfies(randomMood, referenceImage ?? undefined);
-
-          setAutoGenSource(draft.source);
-          // Morning selfie success = primary flow success; evening failure is just a warning
-          if (selfieResult.error) {
-            console.error("[自动生成] 女友自拍失败:", selfieResult.error);
-            setAutoGenError(selfieResult.error);
-          }
-          // Save latest selfie separately (NOT as character reference)
-          if (selfieResult.morningSelfie) {
-            saveLatestSelfie(selfieResult.morningSelfie);
-            // Also convert to stable base64 for future reference
-            await saveReferenceImageAsBase64(selfieResult.morningSelfie);
-          }
-          if (selfieResult.eveningWarning) {
-            console.warn("[自动生成] 晚间加餐失败:", selfieResult.eveningWarning);
-          }
+          const remoteJournal = result.journal;
+          const weekday = getWeekday(today);
 
           const newJournal: Journal = {
-            id: `auto-${today}`,
-            date: today,
-            weekday: getWeekday(today),
-            mood: randomMood,
+            id: remoteJournal.id,
+            date: remoteJournal.date,
+            weekday,
+            mood: remoteJournal.mood as Mood,
             source: "girlfriend",
-            content: draft.content,
-            selfies: selfieResult.morningSelfie ? [selfieResult.morningSelfie] : undefined,
-            referenceImage: referenceImage ?? undefined,  // Use stable reference, not latest selfie
-            voiceMessages: draft.voiceMessages,
+            content: remoteJournal.content,
+            voiceMessages: remoteJournal.voiceMessages.map((vm) => ({
+              id: vm.id,
+              timing: vm.timing as "morning" | "afternoon" | "night",
+              transcript: vm.transcript,
+              duration: vm.duration,
+            })),
+            voiceStyle: remoteJournal.voiceStyle as "soft" | "warm" | "playful" | undefined,
           };
 
           const entry = toJournalEntry(newJournal);
@@ -393,9 +379,7 @@ export function App() {
           addJournalToMemory(entry);
           ensureJournalVoices(entry);
 
-          saveJournalToBackend(entry).catch(err => {
-            console.error("[AutoGen] Failed to save to backend:", err);
-          });
+          setAutoGenSource("remote");
         } catch (err) {
           console.error("Failed to generate today's journal:", err);
           setAutoGenError("生成失败，请稍后重试");
@@ -589,15 +573,21 @@ export function App() {
               dataSource={journalsResult.source}
               selectedJournalId={selectedJournalId}
               onSelectJournal={handleSelectJournal}
-              onAskHerWrite={() => handleNavigate("ask-her")}
-              onGreetingOpen={() => handleNavigate("greetings")}
               companionReveal={companionReveal}
             />
           ) : null}
 
-          {activePage === "ask-her" ? (
-            <AskHerPage
-              onSave={handleSaveJournal}
+          {activePage === "diary-wall" ? (
+            <DiaryWallPage
+              todayJournal={findLatestJournalByDate(journals, getTodayString())}
+              onJournalRefresh={(journal) => {
+                const entry = toJournalEntry(journal);
+                setJournalsResult((current) => ({
+                  ...current,
+                  journals: current.journals.map((j) => j.id === entry.id ? entry : j),
+                }));
+                setSelectedJournalId(entry.id);
+              }}
               onCancel={() => handleNavigate("home")}
               voiceStyle={preferences.voiceStyle}
             />
@@ -614,12 +604,7 @@ export function App() {
             />
           ) : null}
 
-          {activePage === "greetings" ? (
-            <GreetingPage
-              onBack={() => handleNavigate("home")}
-            />
-          ) : null}
-        </div>
+                  </div>
       </main>
     </div>
   );

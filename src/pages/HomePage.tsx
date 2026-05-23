@@ -7,7 +7,6 @@ import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
 import { OotdCard } from "../components/companion/OotdCard";
-import { GreetingCard } from "../components/companion/GreetingCard";
 import { fetchCompanionUnlocks, fetchCompanionContext } from "../services/api/companionClient";
 import { getCurrentUserId } from "../services/memory";
 
@@ -16,8 +15,6 @@ type HomePageProps = {
   dataSource: "local" | "mock" | "empty";
   selectedJournalId: string;
   onSelectJournal: (id: string) => void;
-  onAskHerWrite: () => void;
-  onGreetingOpen: () => void;
   companionReveal: CompanionRevealSummary | null;
 };
 
@@ -26,8 +23,6 @@ export function HomePage({
   dataSource,
   selectedJournalId,
   onSelectJournal,
-  onAskHerWrite,
-  onGreetingOpen,
   companionReveal,
 }: HomePageProps) {
   const [viewMode, setViewMode] = useState<"timeline" | "calendar">("timeline");
@@ -71,7 +66,7 @@ export function HomePage({
 
       <div className="page-hero card">
         <div>
-          <p className="section-label">本月手账</p>
+          <p className="section-label">日记墙</p>
           <h2>{monthTitle}</h2>
           {isDev && (
             <p className="hero-copy" style={{ fontSize: 11, color: "#757575" }}>
@@ -114,8 +109,6 @@ export function HomePage({
 
       <OotdCard date={new Date().toISOString().split("T")[0]} />
 
-      <GreetingCard onOpen={onGreetingOpen} />
-
       {selectedJournal ? (
         <>
           <div className="detail-card card">
@@ -137,10 +130,6 @@ export function HomePage({
       ) : (
         <EmptyState title="还没有日记" description="先写第一篇吧，首页会立刻有内容。" />
       )}
-
-      <button type="button" className="floating-button" onClick={onAskHerWrite}>
-        ＋
-      </button>
     </section>
   );
 }
