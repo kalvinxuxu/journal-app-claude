@@ -2,7 +2,6 @@ import type { AppPage } from "../types/journal";
 
 const tabs: { id: AppPage; label: string }[] = [
   { id: "home", label: "首页" },
-  { id: "write", label: "我来写" },
   { id: "ask-her", label: "请她写" },
   { id: "greetings", label: "每日问候" },
   { id: "photo-wall", label: "照片墙" },
