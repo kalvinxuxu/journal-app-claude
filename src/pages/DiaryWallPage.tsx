@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { Journal, Mood } from "../types/journal";
 import { buildJournalMedia, buildJournalImagePrompt, persistAudiosIfNeeded, persistImagesIfNeeded } from "../services/minimax";
 import { loadReferenceImage, replaceJournalOnBackend } from "../services/memory";
@@ -6,10 +6,10 @@ import { MoodTag } from "../components/MoodTag";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
 import { generateDailyJournal, fetchOotdByDate, regenerateOotd, type OotdItem } from "../services/api/companionClient";
-import { GreetingCard } from "../components/companion/GreetingCard";
-import { GreetingRevealView } from "../components/companion/GreetingRevealView";
 import { greetingStore, type GreetingCard as GreetingCardType } from "../services/greetingStore";
 import { getCurrentUserId } from "../services/memory";
+import type { DiaryWallRenderableItem } from "../types/diaryWall";
+import { WallItemRenderer } from "../components/diaryWall/WallItemRenderer";
 
 type DiaryWallPageProps = {
   /** The journal already generated for today (if any) — shown as the wall's anchor item */
@@ -55,6 +55,12 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
   const [pendingGreeting, setPendingGreeting] = useState<GreetingCardType | null>(null);
 
   const isLoading = phase === "generating";
+
+const items = useMemo<DiaryWallRenderableItem[]>(() => [
+  { kind: "journal", date: today, journal: displayedJournal },
+  { kind: "ootd", date: today, ootd, loading: ootdLoading, error: ootdError ?? undefined },
+  { kind: "greeting", date: today, greeting: null, pending: !!pendingGreeting },
+], [today, displayedJournal, ootd, ootdLoading, ootdError, pendingGreeting]);
 
   // Load latest unread greeting on mount — she left you a message
   useEffect(() => {
@@ -239,62 +245,6 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
         <button type="button" className="ghost-button" onClick={onCancel}>返回首页</button>
       </div>
 
-      {/* ===== Today's Journal — the anchor wall item ===== */}
-      {displayedJournal ? (
-        <div className="detail-card card">
-          <div className="detail-card__top">
-            <div>
-              <p className="section-label">今日日记</p>
-              <h3>她记录了这一天</h3>
-            </div>
-            <button
-              type="button"
-              className="toggle-button"
-              onClick={handleRefresh}
-              disabled={isLoading}
-            >
-              {isLoading ? "记录中..." : "重新记录今天"}
-            </button>
-          </div>
-
-          {isLoading && phase === "generating" ? (
-            <p style={{ color: "#757575", fontSize: "13px" }}>正在重新生成日记...</p>
-          ) : (
-            <>
-              <p>{displayedJournal.content}</p>
-
-              {displayedJournal.images && displayedJournal.images.length > 0 && (
-                <div style={{ marginTop: "16px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
-                  {displayedJournal.images.map((img, i) => (
-                    <img key={i} src={img} alt={`Generated ${i + 1}`} style={{ width: "100%", borderRadius: "8px" }} />
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      ) : (
-        <div className="detail-card card">
-          <div className="detail-card__top">
-            <div>
-              <p className="section-label">今日日记</p>
-              <h3>她还没有记录今天</h3>
-            </div>
-          </div>
-          <p style={{ color: "#757575" }}>点击按钮，让她为你记录今天。</p>
-          <button
-            type="button"
-            className="primary-button"
-            onClick={handleRefresh}
-            disabled={isLoading}
-            style={{ marginTop: "12px" }}
-          >
-            {isLoading ? "记录中..." : "让她记录今天"}
-          </button>
-        </div>
-      )}
-
-      
       {/* ===== Mood + Scene Hint — controls for regeneration ===== */}
       <div className="form-grid">
         <div className="field">
@@ -326,64 +276,16 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
         </label>
       </div>
 
-      {/* ===== OOTD — auto-surfaced as a wall item (she picked this today) ===== */}
-      {ootdLoading ? (
-        <div className="detail-card card">
-          <p className="section-label">今日OOTD</p>
-          <p style={{ color: "#757575", fontSize: "13px" }}>loading...</p>
-        </div>
-      ) : ootd ? (
-        <div className="detail-card card">
-          <div className="detail-card__top">
-            <div>
-              <p className="section-label">今日OOTD</p>
-              <h3>她今天想穿这套</h3>
-            </div>
-            <button
-              type="button"
-              className="toggle-button"
-              onClick={handleOotdRefresh}
-              disabled={ootdLoading}
-            >
-              换一套
-            </button>
-          </div>
-          {ootd.imageUrl ? (
-            <div style={{ marginTop: "12px" }}>
-              <img
-                src={ootd.imageUrl}
-                alt="今日OOTD"
-                style={{ width: "100%", maxWidth: "240px", borderRadius: "8px" }}
-              />
-            </div>
-          ) : (
-            <div style={{ width: "100%", height: "160px", background: "#F3E5F5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "12px" }}>
-              <span style={{ color: "#6A1B9A", fontSize: "13px" }}>这是她今天想穿的</span>
-            </div>
-          )}
-          {ootd.caption && (
-            <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{ootd.caption}</p>
-          )}
-        </div>
-      ) : ootdError ? (
-        <div className="detail-card card">
-          <p className="section-label">今日OOTD</p>
-          <p style={{ color: "#C62828", fontSize: "13px" }}>{ootdError}</p>
-          <button type="button" className="toggle-button" onClick={handleOotdRefresh}>
-            重试
-          </button>
-        </div>
-      ) : null}
-
-      {/* ===== Greeting — she left you a message (inline typewriter reveal if pending) ===== */}
-      {pendingGreeting ? (
-        <GreetingRevealView
-          greeting={pendingGreeting}
-          onComplete={handleGreetingRevealComplete}
+      {items.map((item) => (
+        <WallItemRenderer
+          key={item.kind}
+          item={item}
+          onJournalRefresh={handleRefresh}
+          onOotdRefresh={handleOotdRefresh}
+          onGreetingRevealComplete={handleGreetingRevealComplete}
+          isLoading={isLoading}
         />
-      ) : (
-        <GreetingCard onOpen={undefined} />
-      )}
+      ))}
 
       <div className="action-row">
         <button type="button" className="ghost-button" onClick={onCancel}>返回首页</button>
