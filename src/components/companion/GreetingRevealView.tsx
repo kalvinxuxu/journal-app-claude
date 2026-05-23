@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type { GreetingCard } from "../../services/greetingStore";
 
 const TIMING_LABELS: Record<string, string> = {
@@ -22,8 +22,13 @@ export function GreetingRevealView({ greeting, onComplete }: Props) {
   const [displayedText, setDisplayedText] = useState("");
   const [isRevealing, setIsRevealing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const completeReveal = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
     setDisplayedText(greeting.content);
     setIsComplete(true);
     setIsRevealing(false);
@@ -39,19 +44,25 @@ export function GreetingRevealView({ greeting, onComplete }: Props) {
     let charIndex = 0;
     const content = greeting.content;
 
-    const intervalId = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       if (charIndex < content.length) {
         charIndex++;
         setDisplayedText(content.slice(0, charIndex));
       } else {
-        clearInterval(intervalId);
+        clearInterval(intervalRef.current!);
+        intervalRef.current = null;
         setIsRevealing(false);
         setIsComplete(true);
         onComplete?.();
       }
     }, TYPEWRITER_INTERVAL_MS);
 
-    return () => clearInterval(intervalId);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [greeting.content, onComplete]);
 
   function handleSkip() {
