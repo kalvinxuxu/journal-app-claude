@@ -294,6 +294,31 @@ export async function saveJournalToBackend(journal: Journal): Promise<boolean> {
   }
 }
 
+/**
+ * Replace (upsert) today's journal on the backend for a specific date.
+ * This is used for manual regeneration - it replaces any existing journal
+ * for that date without creating duplicates.
+ * Returns true on success, false on failure.
+ */
+export async function replaceJournalOnBackend(journal: Journal): Promise<boolean> {
+  try {
+    const journalWithUser = { ...journal, userId: getCurrentUserId() };
+    const response = await fetch(`${getApiBase()}/api/journals/date/${journal.date}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(journalWithUser),
+    });
+    if (!response.ok) {
+      console.warn(`[memory] Backend replace failed with ${response.status}`);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn("[memory] Failed to replace journal on backend:", err);
+    return false;
+  }
+}
+
 export function loadPreferences(): Preferences {
   if (!canUseStorage()) return defaultPreferences;
 

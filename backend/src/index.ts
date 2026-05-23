@@ -392,7 +392,7 @@ app.post("/api/tts", async (req: Request, res: Response) => {
 // ---------------------------------------------------------------------------
 // Generation task system
 // ---------------------------------------------------------------------------
-import { loadJournals, saveJournal, deleteJournal, getJournalById, journalExists } from "./storage/journalStore.js";
+import { loadJournals, saveJournal, deleteJournal, getJournalById, journalExists, countJournalsByUserId } from "./storage/journalStore.js";
 import type { Journal } from "./storage/journalStore.js";
 import { createTaskRepository } from "./generation/taskRepository.js";
 import { createGenerationTaskService } from "./generation/taskService.js";
@@ -634,6 +634,31 @@ app.delete("/api/journals/:id", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Failed to delete journal:", error);
     res.status(500).json({ error: "Failed to delete journal" });
+  }
+});
+
+// PUT /api/journals/date/:date — replace journal entry for a given date (used for manual refresh)
+app.put("/api/journals/date/:date", async (req: Request, res: Response) => {
+  try {
+    const dateToReplace = req.params.date;
+    const replacementJournal = req.body as Journal;
+    if (!replacementJournal || !replacementJournal.id || !replacementJournal.date) {
+      res.status(400).json({ error: "Invalid journal: id and date are required" });
+      return;
+    }
+    if (replacementJournal.date !== dateToReplace) {
+      res.status(400).json({ error: "Journal date does not match the requested date" });
+      return;
+    }
+    const allJournals = await loadJournals();
+    // Remove existing entries for this date (both the entry and any daily-summary)
+    const filtered = allJournals.filter((j) => j.date !== dateToReplace && j.id !== `journal-day-${dateToReplace}`);
+    filtered.push(replacementJournal);
+    await saveJournal(replacementJournal);
+    res.status(200).json(replacementJournal);
+  } catch (error) {
+    console.error("Failed to replace journal:", error);
+    res.status(500).json({ error: "Failed to replace journal" });
   }
 });
 

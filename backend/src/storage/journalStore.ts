@@ -47,6 +47,8 @@ export type Journal = {
   voiceStyle?: "soft" | "warm" | "playful";
   ttsStatus?: JournalStatus;
   selfieStatus?: JournalStatus;
+  /** User ID for companion system. Defaults to "local-user" if not provided. */
+  userId?: string;
 };
 
 // ---------------------------------------------------------------------------
@@ -126,4 +128,18 @@ export async function getJournalById(id: string): Promise<Journal | null> {
 export async function journalExists(date: string): Promise<boolean> {
   const journals = await readJournalFile();
   return journals.some((j) => j.date === date);
+}
+
+/**
+ * Count journals that belong to a specific user.
+ * Journals without a userId are treated as belonging to the legacy single-user
+ * local profile only when querying for "local-user".
+ */
+export function countJournalsByUserId(journals: Journal[], userId: string): number {
+  return journals.filter((journal) => {
+    if (journal.userId) {
+      return journal.userId === userId;
+    }
+    return userId === "local-user";
+  }).length;
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Journal, Mood } from "../types/journal";
 import { generateJournalDraft } from "../services/journalGeneration";
 import { buildJournalMedia, buildJournalImagePrompt, persistAudiosIfNeeded, persistImagesIfNeeded } from "../services/minimax";
-import { loadReferenceImage } from "../services/memory";
+import { loadReferenceImage, replaceJournalOnBackend } from "../services/memory";
 import { MoodTag } from "../components/MoodTag";
 import { CompanionHintLine } from "../components/companion/CompanionHintLine";
 import { CompanionFeedbackBar } from "../components/companion/CompanionFeedbackBar";
@@ -14,6 +14,8 @@ type AskHerPageProps = {
   onSave: (journal: Journal) => void | Promise<void>;
   onCancel: () => void;
   voiceStyle?: "soft" | "warm" | "playful";
+  /** When true, saving replaces today's journal instead of creating a duplicate (for manual refresh) */
+  refreshToday?: boolean;
 };
 
 const moods: Mood[] = ["开心", "想念", "感动", "平静", "调皮"];
@@ -27,7 +29,7 @@ export type AskHerPhase =
   | "partial-error"
   | "fatal-error";
 
-export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
+export function AskHerPage({ onSave, onCancel, voiceStyle, refreshToday }: AskHerPageProps) {
   const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [mood, setMood] = useState<Mood>("开心");
   const [sceneHint, setSceneHint] = useState("");
@@ -36,6 +38,8 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
   const [generationErrors, setGenerationErrors] = useState<{ image?: string; voice?: string } | null>(null);
   const [previewDraft, setPreviewDraft] = useState<Awaited<ReturnType<typeof generateJournalDraft>> | null>(null);
   const [previewJournal, setPreviewJournal] = useState<Journal | null>(null);
+  // Use a stable userId for the companion system
+  const userId = "local-user";
 
   const phaseButtonLabel: Record<AskHerPhase, string> = {
     "idle": "请她写",
@@ -186,6 +190,10 @@ export function AskHerPage({ onSave, onCancel, voiceStyle }: AskHerPageProps) {
 
   async function handleSave() {
     if (!previewJournal || isLoading) return;
+    if (refreshToday) {
+      // Replace today's journal on backend (no duplicates)
+      await replaceJournalOnBackend(previewJournal);
+    }
     await onSave(previewJournal);
   }
 
