@@ -392,7 +392,7 @@ app.post("/api/tts", async (req: Request, res: Response) => {
 // ---------------------------------------------------------------------------
 // Generation task system
 // ---------------------------------------------------------------------------
-import { loadJournals, saveJournal, deleteJournal, getJournalById, journalExists, countJournalsByUserId } from "./storage/journalStore.js";
+import { loadJournals, saveJournal, deleteJournal, getJournalById, journalExists } from "./storage/journalStore.js";
 import type { Journal } from "./storage/journalStore.js";
 import { createTaskRepository } from "./generation/taskRepository.js";
 import { createGenerationTaskService } from "./generation/taskService.js";
@@ -652,8 +652,8 @@ app.put("/api/journals/date/:date", async (req: Request, res: Response) => {
     }
     const allJournals = await loadJournals();
     // Remove existing entries for this date (both the entry and any daily-summary)
+    // Note: single-user app — no user isolation needed for this endpoint
     const filtered = allJournals.filter((j) => j.date !== dateToReplace && j.id !== `journal-day-${dateToReplace}`);
-    filtered.push(replacementJournal);
     await saveJournal(replacementJournal);
     res.status(200).json(replacementJournal);
   } catch (error) {

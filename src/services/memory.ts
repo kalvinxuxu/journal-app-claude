@@ -162,9 +162,23 @@ const characterIdKey = "journal-app:characterId";
 const referenceImageKey = "journal-app:referenceImage";
 const latestSelfieKey = "journal-app:latestSelfie";
 const migrationMarkerKey = "journal-app:migrationMarker";
+const userIdKey = "journal-app:userId";
 
 function canUseStorage() {
   return typeof window !== "undefined" && typeof window.localStorage !== "undefined";
+}
+
+/**
+ * Get or create a persistent device-based user ID.
+ * This ID is generated once and stored in localStorage, remaining stable across sessions.
+ */
+export function getCurrentUserId(): string {
+  if (!canUseStorage()) return "anonymous";
+  const stored = window.localStorage.getItem(userIdKey);
+  if (stored) return stored;
+  const newId = `device-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+  window.localStorage.setItem(userIdKey, newId);
+  return newId;
 }
 
 export type JournalLoadResult = {
