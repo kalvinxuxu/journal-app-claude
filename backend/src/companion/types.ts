@@ -92,3 +92,18 @@ export type OotdRecord = {
   createdAt: string;
   updatedAt: string;
 };
+
+// ---------------------------------------------------------------------------
+// OOTD Card types
+// ---------------------------------------------------------------------------
+
+export type OotdCardKind = "fullbody_selfie" | "makeup_closeup";
+
+export type OotdCard = {
+  id: string;
+  kind: OotdCardKind;
+  imageUrl: string | null;
+  caption: string | null;
+  poseTag?: "cute" | "sexy" | "elegant";
+  liked?: boolean;
+};
