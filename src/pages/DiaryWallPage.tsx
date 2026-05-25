@@ -5,7 +5,7 @@ import { loadReferenceImage, replaceJournalOnBackend } from "../services/memory"
 import { MoodTag } from "../components/MoodTag";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
-import { generateDailyJournal, fetchOotdByDate, regenerateOotd, type OotdItem } from "../services/api/companionClient";
+import { generateDailyJournal, fetchOotdByDate, regenerateOotd, submitCompanionFeedback, type OotdItem } from "../services/api/companionClient";
 import { greetingStore, type GreetingCard as GreetingCardType } from "../services/greetingStore";
 import { getCurrentUserId } from "../services/memory";
 import type { DiaryWallRenderableItem } from "../types/diaryWall";
@@ -323,6 +323,8 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => [
           onOotdRefresh={() => setOotdPickerOpen(true)}
           onGreetingRevealComplete={handleGreetingRevealComplete}
           isLoading={isLoading}
+          submitCompanionFeedback={submitCompanionFeedback}
+          userId={getCurrentUserId()}
         />
       ))}
 

@@ -336,4 +336,54 @@ describe("DiaryWallPage wall feed", () => {
     render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
     expect(screen.getByText("今日问候")).toBeDefined();
   });
+
+  it("clicking like button on outfit card submits ootd_reaction feedback with like_fullbody", async () => {
+    const { submitCompanionFeedback } = await import("../services/api/companionClient");
+    render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
+
+    await waitFor(() => expect(screen.getByText("她今天想穿这套")).toBeDefined());
+    fireEvent.click(screen.getByRole("button", { name: "喜欢这套" }));
+
+    expect(submitCompanionFeedback).toHaveBeenCalledWith(
+      expect.objectContaining({
+        feedbackKind: "ootd_reaction",
+        feedbackValue: "like_fullbody",
+      }),
+    );
+  });
+
+  it("clicking like button on makeup card submits ootd_reaction feedback with like_makeup", async () => {
+    const { submitCompanionFeedback, fetchOotdByDate } = await import("../services/api/companionClient");
+    vi.mocked(fetchOotdByDate).mockResolvedValueOnce({
+      id: "ootd-dual",
+      title: "今日OOTD",
+      imageUrl: "https://example.com/ootd.jpg",
+      caption: "OOTD caption",
+      date: "2026-05-23",
+      userId: "local-user",
+      rationale: null,
+      styleTags: [],
+      createdAt: "",
+      updatedAt: "",
+      cards: [
+        { id: "card-0", kind: "fullbody", imageUrl: "https://example.com/ootd.jpg", caption: "Outfit caption", liked: false },
+        { id: "card-1", kind: "makeup", imageUrl: "https://example.com/makeup.jpg", caption: "Makeup caption", liked: false },
+      ],
+    });
+
+    render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
+
+    await waitFor(() => expect(screen.getByText("她今天想穿这套")).toBeDefined());
+    await waitFor(() => expect(screen.getByText("近距离看看今天的妆")).toBeDefined());
+
+    // Click the makeup card's like button
+    fireEvent.click(screen.getByRole("button", { name: "喜欢这个妆" }));
+
+    expect(submitCompanionFeedback).toHaveBeenCalledWith(
+      expect.objectContaining({
+        feedbackKind: "ootd_reaction",
+        feedbackValue: "like_makeup",
+      }),
+    );
+  });
 });

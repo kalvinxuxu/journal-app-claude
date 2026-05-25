@@ -9,9 +9,16 @@ export type WallItemRendererProps = {
   onOotdRefresh: () => void;
   onGreetingRevealComplete: (id: string) => void;
   isLoading: boolean;
+  submitCompanionFeedback: (payload: {
+    userId: string;
+    journalId?: string;
+    feedbackKind: string;
+    feedbackValue: string;
+  }) => void;
+  userId: string;
 };
 
-export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGreetingRevealComplete, isLoading }: WallItemRendererProps) {
+export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGreetingRevealComplete, isLoading, submitCompanionFeedback, userId }: WallItemRendererProps) {
   switch (item.kind) {
     case "journal":
       return (
@@ -28,6 +35,8 @@ export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGree
           loading={item.loading}
           error={item.error}
           onRefresh={onOotdRefresh}
+          submitCompanionFeedback={submitCompanionFeedback}
+          userId={userId}
         />
       );
     case "greeting":

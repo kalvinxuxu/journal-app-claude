@@ -5,9 +5,16 @@ export type OotdWallItemProps = {
   loading?: boolean;
   error?: string;
   onRefresh: () => void;
+  userId: string;
+  submitCompanionFeedback: (payload: {
+    userId: string;
+    journalId?: string;
+    feedbackKind: string;
+    feedbackValue: string;
+  }) => void;
 };
 
-export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemProps) {
+export function OotdWallItem({ ootd, loading, error, onRefresh, userId, submitCompanionFeedback }: OotdWallItemProps) {
   if (loading) {
     return (
       <div className="detail-card card">
@@ -55,6 +62,14 @@ export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemPr
         {ootd.caption && (
           <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{ootd.caption}</p>
         )}
+        <button
+          type="button"
+          className="toggle-button"
+          style={{ marginTop: "10px" }}
+          onClick={() => submitCompanionFeedback({ userId, journalId: ootd.id, feedbackKind: "ootd_reaction", feedbackValue: "like_fullbody" })}
+        >
+          喜欢这套
+        </button>
       </div>
 
       {/* Second card — makeup closeup (rendered only when dual cards are available) */}
@@ -72,6 +87,14 @@ export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemPr
           {cards[1].caption && (
             <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{cards[1].caption}</p>
           )}
+          <button
+            type="button"
+            className="toggle-button"
+            style={{ marginTop: "10px" }}
+            onClick={() => submitCompanionFeedback({ userId, journalId: ootd.id, feedbackKind: "ootd_reaction", feedbackValue: "like_makeup" })}
+          >
+            喜欢这个妆
+          </button>
         </div>
       )}
     </>
