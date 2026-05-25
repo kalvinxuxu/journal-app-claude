@@ -15,6 +15,7 @@ type Deps = {
     journalCount: number;
     deepMemoryCount: number;
     feedbackCount: number;
+    ootdLikeCount?: number;
   }) => RelationshipStateRecord;
   evaluateUnlocks: (previous: RelationshipStateRecord, next: RelationshipStateRecord) => Array<{
     eventKey: string;
@@ -53,6 +54,7 @@ export function createJournalPostProcessor(deps: Deps) {
       previousRelationship: RelationshipStateRecord;
       journalCount: number;
       feedbackCount: number;
+      ootdLikeCount?: number;
     }) {
       const nowIso = new Date().toISOString();
       const memories = deps.extractMemories({
@@ -82,6 +84,7 @@ export function createJournalPostProcessor(deps: Deps) {
         journalCount: input.journalCount,
         deepMemoryCount: memories.filter((item) => item.salienceScore >= 85).length,
         feedbackCount: input.feedbackCount,
+        ootdLikeCount: input.ootdLikeCount,
       });
 
       deps.saveRelationship(nextRelationship);

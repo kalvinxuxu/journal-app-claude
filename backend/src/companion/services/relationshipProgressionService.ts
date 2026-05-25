@@ -5,6 +5,7 @@ type ProgressInput = {
   journalCount: number;
   deepMemoryCount: number;
   feedbackCount: number;
+  ootdLikeCount?: number;
 };
 
 export function createRelationshipProgressionService() {
@@ -15,6 +16,10 @@ export function createRelationshipProgressionService() {
       next.initiativeScore += input.journalCount >= 10 ? 5 : 0;
       next.recallScore += input.deepMemoryCount > 0 ? 4 : 1;
       next.styleAlignmentScore += input.feedbackCount > 0 ? 3 : 0;
+      if ((input.ootdLikeCount ?? 0) > 0) {
+        next.styleAlignmentScore += 4;
+        next.intimacyScore += 1;
+      }
 
       if (next.intimacyScore >= 40) next.stage = "familiar";
       if (next.intimacyScore >= 70) next.stage = "attuned";
