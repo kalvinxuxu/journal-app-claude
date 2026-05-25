@@ -1,6 +1,7 @@
 import type { DiaryWallRenderableItem } from "../../types/diaryWall";
 import { JournalWallItem } from "./JournalWallItem";
 import { OotdWallItem } from "./OotdWallItem";
+import { OotdCardWallItem } from "./OotdCardWallItem";
 import { GreetingWallItem } from "./GreetingWallItem";
 
 export type WallItemRendererProps = {
@@ -34,6 +35,16 @@ export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGree
           ootd={item.ootd}
           loading={item.loading}
           error={item.error}
+          onRefresh={onOotdRefresh}
+          submitCompanionFeedback={submitCompanionFeedback}
+          userId={userId}
+        />
+      );
+    case "ootd_card":
+      return (
+        <OotdCardWallItem
+          ootd={item.ootd}
+          ootdCard={item.ootdCard}
           onRefresh={onOotdRefresh}
           submitCompanionFeedback={submitCompanionFeedback}
           userId={userId}

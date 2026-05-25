@@ -386,4 +386,69 @@ describe("DiaryWallPage wall feed", () => {
       }),
     );
   });
+
+  it("renders two separate OOTD wall items when OOTD has dual cards", async () => {
+    const { fetchOotdByDate } = await import("../services/api/companionClient");
+    vi.mocked(fetchOotdByDate).mockResolvedValueOnce({
+      id: "ootd-dual",
+      title: "今日OOTD",
+      imageUrl: null,
+      caption: null,
+      date: "2026-05-23",
+      userId: "local-user",
+      rationale: null,
+      styleTags: [],
+      createdAt: "",
+      updatedAt: "",
+      cards: [
+        { id: "card-0", kind: "fullbody", imageUrl: "https://example.com/ootd.jpg", caption: "Outfit caption", liked: false },
+        { id: "card-1", kind: "makeup_closeup", imageUrl: "https://example.com/makeup.jpg", caption: "Makeup caption", liked: false },
+      ],
+    });
+
+    render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
+
+    // Should have two OOTD wall items in the feed
+    await waitFor(() => expect(screen.getByText("今日OOTD")).toBeDefined());
+    await waitFor(() => expect(screen.getByText("妆容特写")).toBeDefined());
+
+    // Each should have its own like button
+    await waitFor(() => expect(screen.getByRole("button", { name: "喜欢这套" })).toBeDefined());
+    await waitFor(() => expect(screen.getByRole("button", { name: "喜欢这个妆" })).toBeDefined());
+  });
+
+  it("each OOTD card wall item submits correct feedback value based on card kind", async () => {
+    const { submitCompanionFeedback, fetchOotdByDate } = await import("../services/api/companionClient");
+    vi.mocked(fetchOotdByDate).mockResolvedValueOnce({
+      id: "ootd-dual",
+      title: "今日OOTD",
+      imageUrl: null,
+      caption: null,
+      date: "2026-05-23",
+      userId: "local-user",
+      rationale: null,
+      styleTags: [],
+      createdAt: "",
+      updatedAt: "",
+      cards: [
+        { id: "card-0", kind: "fullbody", imageUrl: "https://example.com/ootd.jpg", caption: "Outfit caption", liked: false },
+        { id: "card-1", kind: "makeup_closeup", imageUrl: "https://example.com/makeup.jpg", caption: "Makeup caption", liked: false },
+      ],
+    });
+
+    render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
+
+    await waitFor(() => expect(screen.getByRole("button", { name: "喜欢这套" })).toBeDefined());
+    await waitFor(() => expect(screen.getByRole("button", { name: "喜欢这个妆" })).toBeDefined());
+
+    fireEvent.click(screen.getByRole("button", { name: "喜欢这套" }));
+    expect(submitCompanionFeedback).toHaveBeenLastCalledWith(
+      expect.objectContaining({ feedbackValue: "like_fullbody" }),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "喜欢这个妆" }));
+    expect(submitCompanionFeedback).toHaveBeenLastCalledWith(
+      expect.objectContaining({ feedbackValue: "like_makeup" }),
+    );
+  });
 });

@@ -63,11 +63,28 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
 
   const isLoading = phase === "generating";
 
-const items = useMemo<DiaryWallRenderableItem[]>(() => [
-  { kind: "journal", date: today, journal: displayedJournal },
-  { kind: "ootd", date: today, ootd, loading: ootdLoading, error: ootdError ?? undefined },
-  { kind: "greeting", date: today, greeting: null, pending: !!pendingGreeting },
-], [today, displayedJournal, ootd, ootdLoading, ootdError, pendingGreeting]);
+const items = useMemo<DiaryWallRenderableItem[]>(() => {
+  const base = [
+    { kind: "journal" as const, date: today, journal: displayedJournal },
+    { kind: "greeting" as const, date: today, greeting: null, pending: !!pendingGreeting },
+  ];
+
+  // Normalize OOTD cards into separate wall items when available
+  if (ootd?.cards && ootd.cards.length > 0) {
+    const ootdCardItems = ootd.cards.map((card) => ({
+      kind: "ootd_card" as const,
+      date: today,
+      ootd,
+      ootdCard: card,
+      submitCompanionFeedback,
+      userId: getCurrentUserId(),
+    }));
+    return [...base, ...ootdCardItems];
+  }
+
+  // Fallback to single OOTD item (handles legacy ootd without cards, loading, error states)
+  return [...base, { kind: "ootd" as const, date: today, ootd, loading: ootdLoading, error: ootdError ?? undefined }];
+}, [today, displayedJournal, ootd, ootdLoading, ootdError, pendingGreeting, submitCompanionFeedback]);
 
   // Load latest unread greeting on mount — she left you a message
   useEffect(() => {
@@ -317,7 +334,7 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => [
 
       {items.map((item) => (
         <WallItemRenderer
-          key={item.kind}
+          key={item.kind === "ootd_card" ? `ootd_card_${item.ootdCard.id}` : item.kind}
           item={item}
           onJournalRefresh={handleRefresh}
           onOotdRefresh={() => setOotdPickerOpen(true)}
