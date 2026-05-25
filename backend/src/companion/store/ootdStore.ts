@@ -2,11 +2,18 @@ import Database from "better-sqlite3";
 import type { OotdRecord } from "../types";
 
 export function createOotdStore(db: Database.Database) {
+  // Migration: add cards_json column if it doesn't exist
+  try {
+    db.exec(`ALTER TABLE daily_ootd ADD COLUMN cards_json TEXT`);
+  } catch {
+    // Column already exists, ignore
+  }
+
   const upsertStmt = db.prepare(`
     INSERT INTO daily_ootd (
-      id, user_id, date, image_url, title, caption, rationale, style_tags, created_at, updated_at
+      id, user_id, date, image_url, title, caption, rationale, style_tags, cards_json, created_at, updated_at
     ) VALUES (
-      @id, @userId, @date, @imageUrl, @title, @caption, @rationale, @styleTags, @createdAt, @updatedAt
+      @id, @userId, @date, @imageUrl, @title, @caption, @rationale, @styleTags, @cardsJson, @createdAt, @updatedAt
     )
     ON CONFLICT(user_id, date) DO UPDATE SET
       image_url = excluded.image_url,
@@ -14,6 +21,7 @@ export function createOotdStore(db: Database.Database) {
       caption = excluded.caption,
       rationale = excluded.rationale,
       style_tags = excluded.style_tags,
+      cards_json = excluded.cards_json,
       updated_at = excluded.updated_at
   `);
 
@@ -27,6 +35,7 @@ export function createOotdStore(db: Database.Database) {
       caption as caption,
       rationale as rationale,
       style_tags as styleTags,
+      cards_json as cardsJson,
       created_at as createdAt,
       updated_at as updatedAt
     FROM daily_ootd
@@ -43,6 +52,7 @@ export function createOotdStore(db: Database.Database) {
       caption as caption,
       rationale as rationale,
       style_tags as styleTags,
+      cards_json as cardsJson,
       created_at as createdAt,
       updated_at as updatedAt
     FROM daily_ootd
@@ -61,6 +71,7 @@ export function createOotdStore(db: Database.Database) {
       caption as caption,
       rationale as rationale,
       style_tags as styleTags,
+      cards_json as cardsJson,
       created_at as createdAt,
       updated_at as updatedAt
     FROM daily_ootd
@@ -79,6 +90,7 @@ export function createOotdStore(db: Database.Database) {
         caption: record.caption,
         rationale: record.rationale,
         styleTags: JSON.stringify(record.styleTags ?? []),
+        cardsJson: JSON.stringify(record.cards ?? null),
         createdAt: record.createdAt,
         updatedAt: record.updatedAt,
       });
@@ -98,7 +110,7 @@ export function createOotdStore(db: Database.Database) {
   };
 }
 
-function deserializeRow(row: OotdRecord): OotdRecord {
+function deserializeRow(row: OotdRecord & { cardsJson?: string | null }): OotdRecord {
   let styleTags: string[] = [];
   if (row.styleTags && typeof row.styleTags === "string") {
     try {
@@ -109,5 +121,15 @@ function deserializeRow(row: OotdRecord): OotdRecord {
   } else if (Array.isArray(row.styleTags)) {
     styleTags = row.styleTags;
   }
-  return { ...row, styleTags };
+
+  let cards = row.cards ?? undefined;
+  if (row.cardsJson && typeof row.cardsJson === "string") {
+    try {
+      cards = JSON.parse(row.cardsJson) as OotdRecord["cards"];
+    } catch {
+      cards = undefined;
+    }
+  }
+
+  return { ...row, styleTags, cards };
 }

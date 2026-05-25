@@ -1,17 +1,22 @@
 import { Router } from "express";
+import path from "path";
 import type Database from "better-sqlite3";
-import { createAppDatabase } from "../../db/database";
-import { createCompanionProfileStore } from "../store/companionProfileStore";
-import { createRelationshipStateStore } from "../store/relationshipStateStore";
-import { createOnboardingAnswerStore } from "../store/onboardingAnswerStore";
-import { createOnboardingService } from "../services/onboardingService";
-import { createFeedbackStore } from "../store/feedbackStore";
-import { createUnlockEventStore } from "../store/unlockEventStore";
-import { createOotdStore } from "../store/ootdStore";
-import { createOotdGenerator } from "../services/ootdService";
-import { createMemoryItemStore } from "../store/memoryItemStore";
-import { createJournalContextBuilder } from "../services/journalContextBuilder";
-import { createJournalPromptContextService } from "../services/journalPromptContextService";
+import { createAppDatabase } from "../../db/database.js";
+import { createCompanionProfileStore } from "../store/companionProfileStore.js";
+import { createRelationshipStateStore } from "../store/relationshipStateStore.js";
+import { createOnboardingAnswerStore } from "../store/onboardingAnswerStore.js";
+import { createOnboardingService } from "../services/onboardingService.js";
+import { createFeedbackStore } from "../store/feedbackStore.js";
+import { createUnlockEventStore } from "../store/unlockEventStore.js";
+import { createOotdStore } from "../store/ootdStore.js";
+import { createOotdGenerator } from "../services/ootdService.js";
+import { createMemoryItemStore } from "../store/memoryItemStore.js";
+import { createJournalContextBuilder } from "../services/journalContextBuilder.js";
+import { createJournalPromptContextService } from "../services/journalPromptContextService.js";
+import type { Journal } from "../../storage/journalStore.js";
+import { loadJournals, saveJournal, deleteJournalByDate } from "../../storage/journalStore.js";
+import { createTaskRepository } from "../../generation/taskRepository.js";
+import { createGenerationTaskService } from "../../generation/taskService.js";
 
 export function createCompanionRoutes(db?: Database.Database) {
   const database = db ?? createAppDatabase();
@@ -181,15 +186,208 @@ export function createCompanionRoutes(db?: Database.Database) {
     });
   });
 
+  // ---------------------------------------------------------------------------
+  // Daily journal generation endpoint
+  // Generates or regenerates a daily journal for the specified date.
+  // Uses the task system for draft generation (same path as App.tsx auto-gen
+  // and DiaryWallPage manual refresh), ensuring a single journal per day.
+  // ---------------------------------------------------------------------------
+
+  // GET /api/companion/daily-journal/check/:date — check if today's journal exists
+  router.get("/daily-journal/check/:date", async (req, res) => {
+    const userId = req.query.userId as string | undefined;
+    const date = req.params.date;
+
+    try {
+      const allJournals = await loadJournals();
+      const existing = allJournals.find(
+        (j) => j.date === date && !isDailySummary(j),
+      );
+      res.json({
+        exists: Boolean(existing),
+        journalId: existing?.id ?? null,
+      });
+    } catch (error) {
+      console.error("Failed to check daily journal:", error);
+      res.status(500).json({ error: "Failed to check journal existence" });
+    }
+  });
+
+  // POST /api/companion/daily-journal/generate — generate (or regenerate) today's journal
+  // Handles overwrite: removes any existing entry for the same date first.
+  router.post("/daily-journal/generate", async (req, res) => {
+    const {
+      userId,
+      date,
+      mood,
+      voiceStyle,
+      sceneHint,
+      recalledMemory,
+    } = req.body as {
+      userId?: string;
+      date?: string;
+      mood?: "开心" | "想念" | "感动" | "平静" | "调皮";
+      voiceStyle?: "soft" | "warm" | "playful";
+      sceneHint?: string;
+      recalledMemory?: string;
+    };
+
+    if (!userId || !date || !mood) {
+      res.status(400).json({ error: "userId, date, and mood are required" });
+      return;
+    }
+
+    // Ensure user exists
+    const insertUser = database.prepare(`
+      INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)
+      ON CONFLICT(id) DO NOTHING
+    `);
+    insertUser.run(userId, new Date().toISOString(), new Date().toISOString());
+
+    try {
+      // Remove existing entry for this date (overwrite semantics)
+      await deleteJournalByDate(date);
+
+      // Use the generation task system (same pipeline as auto-gen and manual refresh)
+      const DATA_DIR = process.env.DATA_DIR ?? path.resolve(process.cwd());
+      const taskRepository = createTaskRepository(
+        process.env.GENERATION_TASK_DB_PATH ?? path.join(DATA_DIR, "generation-tasks.db"),
+      );
+      const taskService = createGenerationTaskService(taskRepository);
+
+      const created = await taskService.createTask({
+        type: "draft_generation",
+        input: {
+          mood,
+          date,
+          voiceStyle,
+          sceneHint,
+          recalledMemory,
+        },
+        priority: 5,
+      });
+
+      // Poll for completion (synchronous for now; caller can also poll via GET /api/generation/tasks/:id)
+      let task = await taskService.getTask(created.task.id);
+      const maxAttempts = 60; // ~60s timeout
+      let attempts = 0;
+      while (
+        task &&
+        (task.status === "queued" ||
+        task.status === "leased" ||
+        task.status === "running")
+      ) {
+        if (attempts >= maxAttempts) {
+          res.status(504).json({ error: "Journal generation timed out" });
+          return;
+        }
+        await new Promise((r) => setTimeout(r, 1000));
+        task = await taskService.getTask(created.task.id);
+        attempts++;
+      }
+
+      if (!task || task.status !== "succeeded" || !task.output) {
+        res.status(500).json({
+          error: "Journal generation failed",
+          detail: task?.error?.message ?? "Unknown error",
+        });
+        return;
+      }
+
+      const output = task.output as {
+        journalContent: string;
+        voiceScripts: Array<{ timing: string; transcript: string; duration: string }>;
+      };
+
+      const weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][
+        new Date(`${date}T12:00:00`).getDay()
+      ];
+
+      const newJournal: Journal = {
+        id: `journal-${date}`,
+        date,
+        weekday,
+        mood,
+        source: "girlfriend",
+        content: output.journalContent,
+        voiceMessages: output.voiceScripts.map((v) => ({
+          id: `voice-${v.timing}`,
+          timing: v.timing as "morning" | "afternoon" | "night",
+          transcript: v.transcript,
+          duration: v.duration,
+        })),
+        voiceStyle,
+        userId,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      await saveJournal(newJournal);
+      res.status(201).json({ journal: newJournal });
+    } catch (error) {
+      console.error("Daily journal generation error:", error);
+      res.status(500).json({
+        error: "Failed to generate daily journal",
+        detail: error instanceof Error ? error.message : String(error),
+      });
+    }
+  });
+
+  function isDailySummary(journal: Journal): boolean {
+    return Boolean(journal.isDailySummary);
+  }
+
+  function getPortraitReference(userId: string) {
+    const profile = profileStore.findByUserId(userId);
+    if (!profile) return undefined;
+
+    try {
+      const presentationSeed = JSON.parse(profile.presentationSeedJson) as {
+        portraitImageUrl?: string;
+      };
+      return presentationSeed.portraitImageUrl;
+    } catch {
+      return undefined;
+    }
+  }
+
+  function getFashionAura(userId: string) {
+    const profile = profileStore.findByUserId(userId);
+    if (!profile) return undefined;
+
+    try {
+      const presentationSeed = JSON.parse(profile.presentationSeedJson) as {
+        appearanceProfile?: { fashionAura?: string };
+      };
+      return presentationSeed.appearanceProfile?.fashionAura;
+    } catch {
+      return undefined;
+    }
+  }
+
   const ootdStore = createOotdStore(database);
   const ootdGenerator = createOotdGenerator({
     port: Number(process.env.PORT ?? 3000),
-    generateImage: async ({ prompt, aspectRatio }) => {
+    generateImage: async ({ prompt, aspectRatio, subjectReference }) => {
       try {
         const response = await fetch(`http://localhost:${process.env.PORT ?? 3000}/api/image-generation`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, aspect_ratio: aspectRatio, n: 1 }),
+          body: JSON.stringify({
+            prompt,
+            aspect_ratio: aspectRatio,
+            n: 1,
+            ...(subjectReference
+              ? {
+                  subject_reference: [
+                    {
+                      type: "character",
+                      image_file: subjectReference,
+                    },
+                  ],
+                }
+              : {}),
+          }),
         });
         const data = await response.json() as { data?: { image_urls?: string[] }; error?: string };
         if (data.data?.image_urls?.[0]) {
@@ -203,6 +401,7 @@ export function createCompanionRoutes(db?: Database.Database) {
   });
 
   // GET /api/companion/ootd/:date
+  // Auto-generates OOTD for today if none exists (self-initiated feel)
   router.get("/ootd/:date", async (req, res) => {
     const userId = req.query.userId as string | undefined;
     if (!userId) {
@@ -210,10 +409,32 @@ export function createCompanionRoutes(db?: Database.Database) {
       return;
     }
 
-    const ootd = ootdStore.findByUserIdAndDate(userId, req.params.date);
+    let ootd = ootdStore.findByUserIdAndDate(userId, req.params.date);
+
+    // Auto-generate if no OOTD exists for this date (she picked something today)
     if (!ootd) {
-      res.status(404).json({ error: "OOTD not found for this date" });
-      return;
+      const result = await ootdGenerator(
+        userId,
+        req.params.date,
+        getPortraitReference(userId),
+        getFashionAura(userId),
+      );
+      const now = new Date().toISOString();
+      const ootdRecord = {
+        id: `ootd_${Date.now()}`,
+        userId,
+        date: req.params.date,
+        imageUrl: result.cards[0]?.imageUrl ?? null,
+        title: result.title,
+        caption: result.cards[0]?.caption ?? result.caption,
+        rationale: result.rationale,
+        styleTags: result.styleTags,
+        cards: result.cards,
+        createdAt: now,
+        updatedAt: now,
+      };
+      ootdStore.upsert(ootdRecord);
+      ootd = ootdRecord;
     }
 
     res.json({ ootd });
@@ -221,7 +442,11 @@ export function createCompanionRoutes(db?: Database.Database) {
 
   // POST /api/companion/ootd/regenerate
   router.post("/ootd/regenerate", async (req, res) => {
-    const { userId, date } = req.body as { userId?: string; date?: string };
+    const { userId, date, style } = req.body as {
+      userId?: string;
+      date?: string;
+      style?: "old_money" | "relaxed_minimal" | "y2k_playful" | "sweet_girly";
+    };
     if (!userId || !date) {
       res.status(400).json({ error: "userId and date are required" });
       return;
@@ -234,17 +459,23 @@ export function createCompanionRoutes(db?: Database.Database) {
     `);
     insertUser.run(userId, new Date().toISOString(), new Date().toISOString());
 
-    const result = await ootdGenerator(userId, date);
+    const result = await ootdGenerator(
+      userId,
+      date,
+      getPortraitReference(userId),
+      style ?? getFashionAura(userId),
+    );
     const now = new Date().toISOString();
     const ootdRecord = {
       id: `ootd_${Date.now()}`,
       userId,
       date,
-      imageUrl: result.imageUrl,
+      imageUrl: result.cards[0]?.imageUrl ?? null,
       title: result.title,
-      caption: result.caption,
+      caption: result.cards[0]?.caption ?? result.caption,
       rationale: result.rationale,
       styleTags: result.styleTags,
+      cards: result.cards,
       createdAt: now,
       updatedAt: now,
     };

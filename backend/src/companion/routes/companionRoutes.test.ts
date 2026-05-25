@@ -1,11 +1,15 @@
 import express from "express";
 import request from "supertest";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Database from "better-sqlite3";
 import { ensureAppSchema } from "../../db/schema";
 import { createCompanionRoutes } from "./companionRoutes";
 
 describe("createCompanionRoutes", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("accepts lightweight feedback and returns unsurfaced unlock events", async () => {
     const db = new Database(":memory:");
     ensureAppSchema(db);
@@ -154,5 +158,115 @@ describe("createCompanionRoutes", () => {
     const statusResponse = await request(app).get("/api/companion/onboarding/status/usr_named");
     expect(statusResponse.status).toBe(200);
     expect(statusResponse.body.reveal.customName).toBe("晚晴");
+  });
+
+  it("passes the reveal portrait as subject_reference for OOTD generation", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+
+    const fetchMock = vi.fn(async () => ({
+      json: async () => ({ data: { image_urls: ["https://example.com/ootd.jpg"] } }),
+    }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    await request(app)
+      .post("/api/companion/onboarding/initialize")
+      .send({
+        userId: "usr_ootd_ref",
+        intake: { entryMode: "real" },
+        userProfileAnswers: [
+          { questionKey: "social_energy", answerValue: "slow_warm" },
+          { questionKey: "emotional_texture", answerValue: "sensitive_deep" },
+          { questionKey: "expression_style", answerValue: "restrained" },
+        ],
+        companionPreferenceAnswers: [
+          { questionKey: "temperament", answerValue: "mature_steady" },
+          { questionKey: "affection_style", answerValue: "gentle_attentive" },
+          { questionKey: "distance_style", answerValue: "poised" },
+          { questionKey: "initiative_style", answerValue: "measured_forward" },
+          { questionKey: "expression_tone", answerValue: "light_proud" },
+          { questionKey: "hair_style", answerValue: "long_hair" },
+          { questionKey: "body_presence", answerValue: "balanced_mature" },
+        ],
+      })
+      .expect(201);
+
+    await request(app)
+      .post("/api/companion/onboarding/portrait")
+      .send({
+        userId: "usr_ootd_ref",
+        portraitImageUrl: "https://example.com/reveal-portrait.jpg",
+      })
+      .expect(200);
+
+    await request(app)
+      .get("/api/companion/ootd/2026-05-23")
+      .query({ userId: "usr_ootd_ref" })
+      .expect(200);
+
+    const firstCall = fetchMock.mock.calls[0] as unknown[] | undefined;
+    const requestInit = firstCall?.[1] as RequestInit;
+    const body = JSON.parse(String(requestInit.body)) as {
+      subject_reference?: Array<{ type: string; image_file: string }>;
+    };
+
+    expect(body.subject_reference?.[0]).toEqual({
+      type: "character",
+      image_file: "https://example.com/reveal-portrait.jpg",
+    });
+  });
+
+  it("passes a one-off OOTD style override to image generation", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+
+    const fetchMock = vi.fn(async () => ({
+      json: async () => ({ data: { image_urls: ["https://example.com/ootd.jpg"] } }),
+    }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    await request(app)
+      .post("/api/companion/ootd/regenerate")
+      .send({ userId: "usr_ootd_style", date: "2026-05-24", style: "sweet_girly" })
+      .expect(201);
+
+    const firstCall = fetchMock.mock.calls[0] as unknown[] | undefined;
+    const requestInit = firstCall?.[1] as RequestInit;
+    const body = JSON.parse(String(requestInit.body)) as { prompt?: string };
+
+    expect(body.prompt).toContain("sweet, pretty, softly feminine styling");
+  });
+
+  it("accepts ootd like feedback for a specific card", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+    db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(
+      "local-user",
+      new Date().toISOString(),
+      new Date().toISOString(),
+    );
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    const response = await request(app)
+      .post("/api/companion/feedback")
+      .send({
+        userId: "local-user",
+        journalId: "ootd_1",
+        feedbackKind: "ootd_reaction",
+        feedbackValue: "like_fullbody",
+      });
+
+    expect(response.status).toBe(201);
   });
 });

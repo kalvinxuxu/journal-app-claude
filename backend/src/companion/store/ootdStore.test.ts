@@ -163,4 +163,25 @@ describe("createOotdStore", () => {
     const list = store.listByUserId("user1");
     expect(list).toHaveLength(3);
   });
+
+  it("persists dual ootd cards as json and restores them", () => {
+    const store = createOotdStore(db);
+    const now = new Date().toISOString();
+    store.upsert({
+      id: "ootd_1",
+      userId: "user-1",
+      date: "2026-05-25",
+      title: "今日穿搭",
+      rationale: null,
+      styleTags: ["精致穿搭"],
+      cards: [
+        { id: "card_1", kind: "fullbody_selfie", imageUrl: "https://example.com/1.jpg", caption: "全身自拍" },
+        { id: "card_2", kind: "makeup_closeup", imageUrl: "https://example.com/2.jpg", caption: "妆容自拍" },
+      ],
+      createdAt: now,
+      updatedAt: now,
+    });
+
+    expect(store.findByUserIdAndDate("user-1", "2026-05-25")?.cards).toHaveLength(2);
+  });
 });

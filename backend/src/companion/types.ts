@@ -89,6 +89,7 @@ export type OotdRecord = {
   caption: string | null;
   rationale: string | null;
   styleTags: string[];
+  cards?: OotdCard[] | null;
   createdAt: string;
   updatedAt: string;
 };
