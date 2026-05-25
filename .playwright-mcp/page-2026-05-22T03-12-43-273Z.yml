@@ -1,0 +1,6 @@
+- generic [ref=e3]:
+  - paragraph [ref=e4]: 如果她第一次看向你，你更容易被怎样的感觉吸引？
+  - generic [ref=e5]:
+    - button "温柔成熟" [ref=e11] [cursor=pointer]
+    - button "安静柔和" [ref=e12] [cursor=pointer]
+    - button "有一点俏皮" [active] [ref=e13] [cursor=pointer]

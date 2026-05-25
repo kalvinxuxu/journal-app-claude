@@ -43,9 +43,15 @@ describe("createOnboardingService", () => {
     expect(result.reveal.systemDisplayName).toBeTruthy();
     expect(result.reveal.customName).toBeNull();
     expect(result.reveal.appearanceProfile.hairStyle).toBe("long_hair");
+    expect(result.reveal.appearanceProfile.fashionAura).toBe("stylish_refined");
     expect(result.reveal.personalityProfile.temperament).toBe("mature_steady");
+    expect(result.reveal.systemDisplayName).toBe("她");
     expect(result.reveal.tagline).not.toContain("交给你");
+    expect(result.reveal.tagline).not.toContain("知栀");
+    expect(result.reveal.appearancePrompt).toContain("minimal ivory camisole bodysuit");
     expect(result.reveal.portraitDescription.length).toBeGreaterThan(60);
+    expect(result.reveal.portraitDescription).not.toContain("知栀");
+    expect(result.reveal.portraitDescription).not.toContain("临川");
     expect(result.reveal.matchExplanation.length).toBeGreaterThan(40);
   });
 });

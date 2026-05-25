@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dream Awakening Opening</title>
+  <style>
+    :root {
+      --bg-1: #090812;
+      --bg-2: #141327;
+      --mist: rgba(203, 212, 255, 0.13);
+      --soft: #eef0ff;
+      --muted: rgba(238, 240, 255, 0.68);
+      --accent: #d9dcff;
+      --rose: rgba(255, 218, 228, 0.26);
+      --line: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      color: var(--soft);
+      background:
+        radial-gradient(circle at 18% 22%, rgba(152, 156, 255, 0.18), transparent 26%),
+        radial-gradient(circle at 76% 18%, rgba(255, 214, 235, 0.15), transparent 24%),
+        radial-gradient(circle at 50% 72%, rgba(173, 186, 255, 0.11), transparent 30%),
+        linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      overflow-x: hidden;
+    }
+
+    .mist,
+    .mist::before,
+    .mist::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+    }
+
+    .mist {
+      background:
+        radial-gradient(circle at 35% 45%, rgba(255,255,255,0.06), transparent 20%),
+        radial-gradient(circle at 65% 35%, rgba(210,218,255,0.08), transparent 22%);
+      filter: blur(18px);
+      opacity: 0.9;
+    }
+
+    .mist::before {
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 28%);
+      animation: breathe 7s ease-in-out infinite;
+    }
+
+    .mist::after {
+      background:
+        radial-gradient(circle at 48% 22%, rgba(251, 237, 255, 0.05), transparent 18%);
+      animation: floaty 10s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.98); opacity: 0.55; }
+      50% { transform: scale(1.03); opacity: 0.9; }
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .shell {
+      width: min(1180px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(238, 240, 255, 0.55);
+      margin-bottom: 16px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius: 28px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    .hero-copy {
+      padding: 44px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.06;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 640px;
+      line-height: 1.75;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .micro {
+      margin-top: 28px;
+      display: grid;
+      gap: 12px;
+      color: rgba(238, 240, 255, 0.74);
+      font-size: 14px;
+    }
+
+    .scene {
+      padding: 26px;
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(253, 251, 255, 0.18), transparent 18%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    }
+
+    .scene-stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .moon {
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(236,240,255,0.92), rgba(208,215,255,0.18) 42%, transparent 68%);
+      filter: blur(1px);
+      opacity: 0.85;
+      animation: breathe 7s ease-in-out infinite;
+    }
+
+    .figure {
+      position: absolute;
+      bottom: 52px;
+      width: 220px;
+      height: 430px;
+      border-radius: 120px 120px 90px 90px / 140px 140px 90px 90px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 248, 250, 0.15), transparent 18%),
+        linear-gradient(180deg, rgba(241, 238, 255, 0.18), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow:
+        0 0 120px rgba(188, 196, 255, 0.22),
+        inset 0 0 40px rgba(255,255,255,0.05);
+      opacity: 0.9;
+      animation: breathe 7s ease-in-out infinite;
+    }
+
+    .question-stack {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 26px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .question {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(7, 8, 18, 0.44);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(245, 246, 255, 0.92);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .question small {
+      display: block;
+      margin-top: 6px;
+      color: rgba(238, 240, 255, 0.52);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .choices {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      font-size: 13px;
+      color: rgba(243,244,255,0.84);
+    }
+
+    .sequence {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .step {
+      padding: 22px;
+      min-height: 220px;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.08);
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    h2, h3 {
+      margin: 0 0 12px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .step p,
+    .notes p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 14px;
+    }
+
+    .notes {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.74);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 14px rgba(255, 213, 227, 0.45);
+    }
+
+    .cards {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(223, 228, 255, 0.28);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .card-body strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: rgba(250,250,255,0.95);
+    }
+
+    .card-body p {
+      margin: 0;
+      color: rgba(238, 240, 255, 0.62);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .sequence,
+      .notes,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        min-height: 560px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mist"></div>
+  <main class="shell">
+    <section class="hero">
+      <div class="panel hero-copy">
+        <div class="eyebrow">Opening Moodboard</div>
+        <h1>不是进入主页，<br />而是先把她轻轻唤醒。</h1>
+        <p class="lede">
+          用户第一次进入产品，不会立刻看到功能入口，而是进入一个朦胧、安静、略带梦境感的意识空间。
+          画面里的她闭着眼，像刚刚开始有呼吸。用户每回答一个问题，她就更像一个正在成形的人，而不是一张干巴巴的人设卡。
+        </p>
+        <div class="micro">
+          <div>她先存在为一种气息，再慢慢拥有个性。</div>
+          <div>问题像靠近，不像填表。</div>
+          <div>“匹配”是唤醒过程，不是配置过程。</div>
+        </div>
+      </div>
+
+      <div class="panel scene">
+        <div class="scene-stage">
+          <div class="moon"></div>
+          <div class="figure"></div>
+        </div>
+
+        <div class="question-stack">
+          <div class="question">
+            如果她第一次靠近你，你更希望她像一个真实的人，还是像一个只会在你这里出现的梦？
+            <div class="choices">
+              <span class="pill">更真实一点</span>
+              <span class="pill">介于中间</span>
+              <span class="pill">更像梦</span>
+            </div>
+            <small>first stirring</small>
+          </div>
+
+          <div class="question">
+            有些答案会让她更像你真正会靠近的人，有些答案会让她更像你曾经想象过的人。
+            <small>breathing, not form filling</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sequence">
+      <div class="panel step">
+        <div class="step-num">01</div>
+        <h3>她先被感知</h3>
+        <p>画面里没有功能卡片，没有导航打断。只有模糊身影、微弱呼吸、环境音和一句很轻的引导，让用户意识到“她正在醒来”。</p>
+      </div>
+
+      <div class="panel step">
+        <div class="step-num">02</div>
+        <h3>回答让她成形</h3>
+        <p>问题由浅入深，可以跳过。每回答一点，她的个性、距离感、真实感就更具体，但用户感觉到的是靠近，不是填写资料。</p>
+      </div>
+
+      <div class="panel step">
+        <div class="step-num">03</div>
+        <h3>她带着未完成感出现</h3>
+        <p>不是一次性完整揭晓，而是先给“初版的她”。后续在日记、记忆回响、关系成长里继续变得更像只属于这个用户的人。</p>
+      </div>
+    </section>
+
+    <section class="panel notes">
+      <div>
+        <div class="tag"><span class="dot"></span>画面关键词</div>
+        <p>雾、月白、低饱和冷色、缓慢呼吸、未完全睁眼、轻声引导、像梦里第一次看见某个人。</p>
+      </div>
+      <div>
+        <div class="tag"><span class="dot"></span>交互关键词</div>
+        <p>问题不显眼、动效慢、按钮像漂浮碎片、每一题都像“靠近她一点”，而不是“完成问卷下一步”。</p>
+      </div>
+      <div>
+        <div class="tag"><span class="dot"></span>产品意义</div>
+        <p>“匹配问答”在这里不是功能表单，而是用户和她建立第一层独特连接的仪式。后面的记忆陪伴，才会更有命中感。</p>
+      </div>
+      <div>
+        <div class="tag"><span class="dot"></span>避免的感觉</div>
+        <p>不要太二次元，不要太像乙游开屏，也不要太像心理测试页。它应该更安静、更成熟、更接近潜意识里的相遇。</p>
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card" data-choice="a" onclick="toggleSelect(this)">
+        <div class="card-body">
+          <strong>A. 更像梦境召唤</strong>
+          <p>更空灵、更抽象，女生身影更模糊，问题像从意识深处飘出来。</p>
+        </div>
+      </div>
+      <div class="card" data-choice="b" onclick="toggleSelect(this)">
+        <div class="card-body">
+          <strong>B. 更像真实苏醒</strong>
+          <p>更有人感，能隐约看清她的脸和呼吸起伏，像一个真实的人正慢慢睁眼。</p>
+        </div>
+      </div>
+      <div class="card" data-choice="c" onclick="toggleSelect(this)">
+        <div class="card-body">
+          <strong>C. 梦和真实之间</strong>
+          <p>先梦境，再逐渐具象。前几题很朦胧，随着回答深入，她慢慢变得更明确。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -74,6 +74,7 @@ export function buildJournalImagePrompt(
   const parts = [
     GIRLFRIEND_ANCHOR,
     "Only one person in the image. Do not include two women or a group photo.",
+    "Do not include duplicate versions of the same woman, mirrored subjects, twins, or a repeated face in the same frame.",
     "写实生活摄影风格。",
     "像手机或轻写真记录下来的真实日常场景。",
     "Vertical portrait composition.",

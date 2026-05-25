@@ -3,7 +3,7 @@ import type { OnboardingAnswerInput } from "../store/onboardingAnswerStore";
 
 type Deps = {
   onboardingAnswerStore: {
-    insertMany: (userId: string, answers: OnboardingAnswerInput[], nowIso: string) => void;
+    insertMany: (userId: string, answers: OnboardingAnswerInput[], nowIso: string, answerPrefix?: string) => void;
   };
   companionProfileStore: {
     upsert: (record: CompanionProfileRecord) => void;
@@ -39,7 +39,7 @@ function buildAppearanceProfile(answers: OnboardingAnswerInput[]): {
   return {
     hairStyle,
     bodyPresence,
-    fashionAura: pickAnswer(answers, "fashion_aura", "clean_refined"),
+    fashionAura: pickAnswer(answers, "fashion_aura", "stylish_refined"),
     gazeStyle: pickAnswer(answers, "gaze_style", "steady_warm"),
     poseStyle: bodyPresence === "balanced_mature" ? "poised_shifted_weight" : "soft_forward_presence",
   };
@@ -131,8 +131,7 @@ export function createOnboardingService(deps: Deps) {
       deps.relationshipStateStore.upsert(relationship);
 
       // Build the richer reveal
-      const systemDisplayName = personalityProfile.temperament === "mature_steady" ? "临川" : "知栀";
-      const displayName = systemDisplayName;
+      const systemDisplayName = "她";
 
       const tagline =
         personalityProfile.temperament === "mature_steady"
@@ -145,6 +144,8 @@ export function createOnboardingService(deps: Deps) {
         "full body portrait",
         "japanese semi-realistic style",
         "dreamlike but grounded",
+        "minimal ivory camisole bodysuit",
+        "underwear-only styling, no outerwear",
         `hair: ${appearanceProfile.hairStyle}`,
         `presence: ${appearanceProfile.bodyPresence}`,
         `aura: ${appearanceProfile.fashionAura}`,
@@ -153,7 +154,7 @@ export function createOnboardingService(deps: Deps) {
         "visible full figure",
       ].filter(Boolean).join(", ");
 
-      const portraitDescription = `${displayName}给人的第一感觉并不锋利。她站着的时候很稳，像是先把自己的情绪收好，再把注意力轻轻落到你身上。她说话不会很急，可一旦真的看向你，目光里会有一种已经在认真分辨你的感觉。`;
+      const portraitDescription = "她给人的第一感觉并不锋利。她站着的时候很稳，像是先把自己的情绪收好，再把注意力轻轻落到你身上。她说话不会很急，可一旦真的看向你，目光里会有一种已经在认真分辨你的感觉。";
 
       const matchExplanation =
         socialEnergy === "slow_warm" && emotionalTexture === "sensitive_deep"
@@ -191,6 +192,7 @@ export function createOnboardingService(deps: Deps) {
           };
         };
         const presentationSeed = JSON.parse(profile.presentationSeedJson) as {
+          customName?: string;
           appearanceProfile?: {
             hairStyle: string;
             bodyPresence: string;
@@ -209,35 +211,35 @@ export function createOnboardingService(deps: Deps) {
         const appearanceProfile = presentationSeed.appearanceProfile ?? {
           hairStyle: "long_hair",
           bodyPresence: "balanced_mature",
-          fashionAura: "clean_refined",
+          fashionAura: "stylish_refined",
           gazeStyle: "steady_warm",
           poseStyle: "poised_shifted_weight",
         };
-        const systemDisplayName = personalityProfile.temperament === "mature_steady" ? "临川" : "知栀";
+        const systemDisplayName = "她";
         return {
           systemDisplayName,
-          customName: null,
+          customName: presentationSeed.customName ?? null,
           tagline: "她像夜色里慢慢靠近的人，安静，却不会让你觉得遥远。",
-          appearancePrompt: "full body portrait, japanese semi-realistic style",
+          appearancePrompt: "full body portrait, japanese semi-realistic style, minimal ivory camisole bodysuit, underwear-only styling, no outerwear",
           portraitImageUrl: readPortraitImageUrl(profile),
-          portraitDescription: `${systemDisplayName}给人的第一感觉并不锋利。`,
+          portraitDescription: "她给人的第一感觉并不锋利。",
           matchExplanation: "你们的气质在安静的默契中彼此呼应。",
           appearanceProfile,
           personalityProfile,
         };
       } catch {
         return {
-          systemDisplayName: "知栀",
+          systemDisplayName: "她",
           customName: null,
           tagline: "她像夜色里慢慢靠近的人，安静，却不会让你觉得遥远。",
-          appearancePrompt: "full body portrait, japanese semi-realistic style",
+          appearancePrompt: "full body portrait, japanese semi-realistic style, minimal ivory camisole bodysuit, underwear-only styling, no outerwear",
           portraitImageUrl: readPortraitImageUrl(profile),
           portraitDescription: "她给人的第一感觉并不锋利。",
           matchExplanation: "你们的气质在安静的默契中彼此呼应。",
           appearanceProfile: {
             hairStyle: "long_hair",
             bodyPresence: "balanced_mature",
-            fashionAura: "clean_refined",
+            fashionAura: "stylish_refined",
             gazeStyle: "steady_warm",
             poseStyle: "poised_shifted_weight",
           },

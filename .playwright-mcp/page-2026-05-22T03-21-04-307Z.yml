@@ -1,0 +1,5 @@
+- generic [ref=e3]:
+  - paragraph [ref=e4]: 如果我开始靠近你，你希望我更像真实的人，还是只会出现在你这里的梦？
+  - generic [ref=e5]:
+    - button "更真实一点" [ref=e6] [cursor=pointer]
+    - button "更像梦" [ref=e7] [cursor=pointer]

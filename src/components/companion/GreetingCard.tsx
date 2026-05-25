@@ -39,7 +39,7 @@ export function GreetingCard({ onOpen }: Props) {
   if (!pendingGreeting) {
     return (
       <div className="greeting-card card" style={{ textAlign: "center", padding: "24px" }}>
-        <p className="section-label">每日问候</p>
+        <p className="section-label">今日问候</p>
         <p style={{ color: "#757575", fontSize: "13px", marginBottom: "12px" }}>
           她会按时和你打招呼
         </p>

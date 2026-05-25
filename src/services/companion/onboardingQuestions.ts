@@ -101,4 +101,14 @@ export const ABOUT_HER_QUESTIONS = [
       { label: "舒展、放松的状态", value: "relaxed_expansive" },
     ],
   },
+  {
+    questionKey: "fashion_aura",
+    prompt: "你更想看她擅长哪种穿搭风格？",
+    options: [
+      { label: "老钱风", value: "old_money" },
+      { label: "松弛极简风", value: "relaxed_minimal" },
+      { label: "Y2K千禧风", value: "y2k_playful" },
+      { label: "甜妹风", value: "sweet_girly" },
+    ],
+  },
 ];

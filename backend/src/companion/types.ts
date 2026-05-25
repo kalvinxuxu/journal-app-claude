@@ -4,7 +4,8 @@ export type FeedbackKind =
   | "tone_preference"
   | "initiative_preference"
   | "recall_preference"
-  | "boundary_preference";
+  | "boundary_preference"
+  | "ootd_reaction";
 
 export type CompanionProfileRecord = {
   userId: string;

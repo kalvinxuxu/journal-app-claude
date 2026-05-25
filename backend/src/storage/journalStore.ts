@@ -115,6 +115,15 @@ export async function deleteJournal(id: string): Promise<void> {
 }
 
 /**
+ * Delete all journal entries for a given date.
+ */
+export async function deleteJournalByDate(date: string): Promise<void> {
+  const journals = await readJournalFile();
+  const filtered = journals.filter((j) => j.date !== date);
+  await writeJournalFile(filtered);
+}
+
+/**
  * Get a single journal by id. Returns null if not found.
  */
 export async function getJournalById(id: string): Promise<Journal | null> {

@@ -45,7 +45,7 @@ export function OotdCard({ date, onRefresh }: Props) {
   if (!ootd && !loading) {
     return (
       <div className="ootd-card card" style={{ textAlign: "center", padding: "24px" }}>
-        <p className="section-label">今日穿搭</p>
+        <p className="section-label">今日OOTD</p>
         <p style={{ color: "#757575", fontSize: "13px", marginBottom: "12px" }}>
           今天她有想推荐的衣服吗？
         </p>
@@ -63,7 +63,7 @@ export function OotdCard({ date, onRefresh }: Props) {
   if (loading) {
     return (
       <div className="ootd-card card" style={{ textAlign: "center", padding: "24px" }}>
-        <p className="section-label">今日穿搭</p>
+        <p className="section-label">今日OOTD</p>
         <p style={{ color: "#757575", fontSize: "13px" }}>loading...</p>
       </div>
     );
@@ -72,7 +72,7 @@ export function OotdCard({ date, onRefresh }: Props) {
   if (error) {
     return (
       <div className="ootd-card card" style={{ textAlign: "center", padding: "24px" }}>
-        <p className="section-label">今日穿搭</p>
+        <p className="section-label">今日OOTD</p>
         <p style={{ color: "#C62828", fontSize: "13px" }}>{error}</p>
         <button type="button" className="toggle-button" onClick={loadOotd}>
           重试
@@ -83,14 +83,14 @@ export function OotdCard({ date, onRefresh }: Props) {
 
   return (
     <div className="ootd-card card">
-      <p className="section-label">今日穿搭</p>
+      <p className="section-label">今日OOTD</p>
       <p className="ootd-title" style={{ fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
-        {ootd?.title ?? "今日穿搭"}
+        {ootd?.title ?? "今日OOTD"}
       </p>
 
       {ootd?.imageUrl ? (
         <div className="ootd-image-wrapper">
-          <img src={ootd.imageUrl} alt="今日穿搭" className="ootd-image" />
+          <img src={ootd.imageUrl} alt="今日OOTD" className="ootd-image" />
         </div>
       ) : (
         <div className="ootd-image-placeholder" style={{ width: "100%", height: "160px", background: "#F3E5F5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>

@@ -5,6 +5,7 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { DiaryWallPage } from "./pages/DiaryWallPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
+import { CompanionLandingPage } from "./pages/CompanionLandingPage";
 import { checkBackendHealth } from "./services/api/mediaClient";
 import { checkCompanionOnboardingStatus, persistCompanionRevealPortrait } from "./services/api/companionClient";
 import { generateRevealPortrait, loadCompanionReveal, saveCompanionReveal } from "./services/companion";
@@ -66,7 +67,7 @@ export function App() {
   const [preferences, setPreferences] = useState<Preferences>(() => loadPreferences());
   const [animKey, setAnimKey] = useState(0);
   const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">("checking");
-  const [showStaleTaskNotice, setShowStaleTaskNotice] = useState(false);
+  const [showLanding, setShowLanding] = useState(false);
   const [companionReady, setCompanionReady] = useState<boolean | null>(null);
   const [companionReveal, setCompanionReveal] = useState(() => loadCompanionReveal());
   const journalsInitRef = useRef(false);

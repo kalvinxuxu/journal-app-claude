@@ -8,11 +8,19 @@ type OnboardingPromptProps = {
 
 export function OnboardingPrompt({ prompt, options, onSelect }: OnboardingPromptProps) {
   return (
-    <section className="dream-prompt">
-      <p className="dream-prompt__text">{prompt}</p>
+    <section className="companion-onboarding companion-onboarding--question">
+      <div className="companion-onboarding__panel companion-onboarding__panel--question">
+        <p className="section-label">慢慢靠近</p>
+        <h2 className="dream-prompt__text">{prompt}</h2>
+      </div>
       <div className="dream-prompt__options">
         {options.map((option) => (
-          <button key={option.value} type="button" onClick={() => onSelect(option.value)}>
+          <button
+            key={option.value}
+            type="button"
+            className="onboarding-option"
+            onClick={() => onSelect(option.value)}
+          >
             {option.label}
           </button>
         ))}

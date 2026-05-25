@@ -20,6 +20,12 @@ type DiaryWallPageProps = {
 };
 
 const moods: Mood[] = ["开心", "想念", "感动", "平静", "调皮"];
+const OOTD_STYLE_OPTIONS = [
+  { label: "老钱风", value: "old_money" },
+  { label: "松弛极简风", value: "relaxed_minimal" },
+  { label: "Y2K千禧风", value: "y2k_playful" },
+  { label: "甜妹风", value: "sweet_girly" },
+] as const;
 
 export type DiaryWallPhase =
   | "idle"
@@ -51,6 +57,7 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
   const [ootd, setOotd] = useState<OotdItem | null>(null);
   const [ootdLoading, setOotdLoading] = useState(false);
   const [ootdError, setOotdError] = useState<string | null>(null);
+  const [ootdPickerOpen, setOotdPickerOpen] = useState(false);
   // Greeting reveal state — when an unread greeting is pending, allow it to be revealed inline
   const [pendingGreeting, setPendingGreeting] = useState<GreetingCardType | null>(null);
 
@@ -91,16 +98,17 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => [
     return () => { cancelled = true; };
   }, []);
 
-  async function handleOotdRefresh() {
+  async function handleOotdRefresh(style?: typeof OOTD_STYLE_OPTIONS[number]["value"]) {
     setOotdLoading(true);
     setOotdError(null);
     try {
-      const result = await regenerateOotd(getCurrentUserId(), today);
+      const result = await regenerateOotd(getCurrentUserId(), today, style);
       setOotd(result);
     } catch {
       setOotdError("刷新失败");
     } finally {
       setOotdLoading(false);
+      setOotdPickerOpen(false);
     }
   }
 
@@ -276,12 +284,43 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => [
         </label>
       </div>
 
+      {ootdPickerOpen ? (
+        <div className="modal-overlay" role="dialog" aria-modal="true" aria-label="选择今天的穿搭风格">
+          <div className="modal-content card ootd-style-modal">
+            <div className="modal-header">
+              <h3>今天想看她穿哪种风格？</h3>
+            </div>
+            <div className="ootd-style-modal__options">
+              {OOTD_STYLE_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className="onboarding-option"
+                  onClick={() => handleOotdRefresh(option.value)}
+                  disabled={ootdLoading}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <div className="modal-actions">
+              <button type="button" className="ghost-button" onClick={() => setOotdPickerOpen(false)} disabled={ootdLoading}>
+                先这样
+              </button>
+              <button type="button" className="primary-button" onClick={() => handleOotdRefresh()} disabled={ootdLoading}>
+                随她自己选
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {items.map((item) => (
         <WallItemRenderer
           key={item.kind}
           item={item}
           onJournalRefresh={handleRefresh}
-          onOotdRefresh={handleOotdRefresh}
+          onOotdRefresh={() => setOotdPickerOpen(true)}
           onGreetingRevealComplete={handleGreetingRevealComplete}
           isLoading={isLoading}
         />

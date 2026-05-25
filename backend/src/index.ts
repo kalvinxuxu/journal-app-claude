@@ -8,8 +8,8 @@ dotenv.config();
 // ---------------------------------------------------------------------------
 // App database with companion domain schema bootstrap
 // ---------------------------------------------------------------------------
-import { createAppDatabase } from "./db/database";
-import { ensureAppSchema } from "./db/schema";
+import { createAppDatabase } from "./db/database.js";
+import { ensureAppSchema } from "./db/schema.js";
 
 const appDb = createAppDatabase();
 ensureAppSchema(appDb);

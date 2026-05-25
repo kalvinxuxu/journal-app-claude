@@ -87,6 +87,7 @@ export function ensureAppSchema(db: Database.Database) {
       caption TEXT,
       rationale TEXT,
       style_tags TEXT,
+      cards_json TEXT,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL,
       UNIQUE(user_id, date),

@@ -124,15 +124,66 @@ export async function fetchOotdByDate(userId: string, date: string): Promise<Oot
   return data.ootd;
 }
 
-export async function regenerateOotd(userId: string, date: string): Promise<OotdItem> {
+export async function regenerateOotd(
+  userId: string,
+  date: string,
+  style?: "old_money" | "relaxed_minimal" | "y2k_playful" | "sweet_girly",
+): Promise<OotdItem> {
   const response = await fetch(`${getBackendUrl()}/api/companion/ootd/regenerate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, date }),
+    body: JSON.stringify({ userId, date, style }),
   });
   if (!response.ok) {
     throw new Error(`OOTD regenerate failed with ${response.status}`);
   }
   const data = await response.json() as { ootd: OotdItem };
   return data.ootd;
+}
+
+export type DailyJournalCheckResult = {
+  exists: boolean;
+  journalId: string | null;
+};
+
+export async function checkDailyJournal(userId: string, date: string): Promise<DailyJournalCheckResult> {
+  const response = await fetch(`${getBackendUrl()}/api/companion/daily-journal/check/${date}?userId=${userId}`);
+  if (!response.ok) {
+    throw new Error(`Daily journal check failed with ${response.status}`);
+  }
+  return response.json() as Promise<DailyJournalCheckResult>;
+}
+
+export type GenerateDailyJournalParams = {
+  userId: string;
+  date: string;
+  mood: "开心" | "想念" | "感动" | "平静" | "调皮";
+  voiceStyle?: "soft" | "warm" | "playful";
+  sceneHint?: string;
+  recalledMemory?: string;
+};
+
+export type GenerateDailyJournalResult = {
+  journal: {
+    id: string;
+    date: string;
+    weekday: string;
+    mood: string;
+    source: string;
+    content: string;
+    voiceMessages: Array<{ id: string; timing: string; transcript: string; duration: string }>;
+    voiceStyle?: string;
+  };
+};
+
+export async function generateDailyJournal(params: GenerateDailyJournalParams): Promise<GenerateDailyJournalResult> {
+  const response = await fetch(`${getBackendUrl()}/api/companion/daily-journal/generate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  if (!response.ok) {
+    throw new Error(`Daily journal generation failed with ${response.status}`);
+  }
+  return response.json() as Promise<GenerateDailyJournalResult>;
 }

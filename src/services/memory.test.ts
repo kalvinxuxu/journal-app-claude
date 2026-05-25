@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { loadJournals, loadJournalsWithSource, type JournalLoadResult } from "./memory";
+import { getCurrentUserId, loadJournals, loadJournalsWithSource, type JournalLoadResult } from "./memory";
 
 const mockDate = new Date("2026-05-14T12:00:00");
 vi.setSystemTime(mockDate);
@@ -89,6 +89,18 @@ describe("loadJournals (legacy)", () => {
     setupStorage(null);
     const journals = loadJournals();
     expect(journals.length).toBeGreaterThan(0);
+    restoreGlobal();
+  });
+});
+
+describe("getCurrentUserId", () => {
+  it("falls back to a stable local user id when storage is empty", () => {
+    setupStorage(null);
+
+    const userId = getCurrentUserId();
+
+    expect(userId).toBe("local-user");
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith("journal-app:userId", "local-user");
     restoreGlobal();
   });
 });

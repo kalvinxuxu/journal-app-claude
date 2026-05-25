@@ -30,7 +30,7 @@ export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemPr
   if (!ootd) return null;
 
   return (
-    <div className="detail-card card">
+    <div className="detail-card card ootd-card">
       <div className="detail-card__top">
         <div>
           <p className="section-label">今日OOTD</p>
@@ -39,8 +39,8 @@ export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemPr
         <button type="button" className="toggle-button" onClick={onRefresh}>换一套</button>
       </div>
       {ootd.imageUrl ? (
-        <div style={{ marginTop: "12px" }}>
-          <img src={ootd.imageUrl} alt="今日OOTD" style={{ width: "100%", maxWidth: "240px", borderRadius: "8px" }} />
+        <div className="ootd-image-wrapper">
+          <img src={ootd.imageUrl} alt="今日OOTD" className="ootd-image" />
         </div>
       ) : (
         <div style={{ width: "100%", height: "160px", background: "#F3E5F5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "12px" }}>

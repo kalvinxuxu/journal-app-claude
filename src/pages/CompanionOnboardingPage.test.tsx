@@ -1,8 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { CompanionOnboardingPage } from "./CompanionOnboardingPage";
-import { initializeCompanionOnboarding, persistCompanionRevealPortrait, saveCompanionCustomName } from "../services/api/companionClient";
-import { generateRevealPortrait } from "../services/companion";
 
 vi.mock("../services/api/companionClient", () => ({
   initializeCompanionOnboarding: vi.fn().mockResolvedValue({
@@ -19,7 +17,7 @@ vi.mock("../services/api/companionClient", () => ({
       appearanceProfile: {
         hairStyle: "long_hair",
         bodyPresence: "balanced_mature",
-        fashionAura: "clean_refined",
+        fashionAura: "old_money",
         gazeStyle: "steady_warm",
         poseStyle: "poised_shifted_weight",
       },
@@ -60,9 +58,12 @@ describe("CompanionOnboardingPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "偶尔有一点傲气" }));
     fireEvent.click(screen.getByRole("button", { name: "长发" }));
     fireEvent.click(screen.getByRole("button", { name: "匀称、成熟一点的存在感" }));
+    fireEvent.click(screen.getByRole("button", { name: "老钱风" }));
 
     expect(await screen.findByText("她正在慢慢成形")).toBeDefined();
-    expect(await screen.findByText("临川")).toBeDefined();
+    expect(await screen.findByRole("heading", { name: "她" })).toBeDefined();
+    expect(screen.getByAltText("她的立绘")).toBeDefined();
+    expect(screen.getByText("稳，不会轻易晃动")).toBeDefined();
 
     fireEvent.click(screen.getByRole("button", { name: "继续" }));
 
@@ -72,5 +73,28 @@ describe("CompanionOnboardingPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "就这样叫她" }));
 
     await waitFor(() => expect(onCompleted).toHaveBeenCalledTimes(1));
+  });
+
+  it("still reaches reveal when portrait generation fails", async () => {
+    const { generateRevealPortrait } = await import("../services/companion");
+    vi.mocked(generateRevealPortrait).mockRejectedValueOnce(new Error("image failed"));
+
+    render(<CompanionOnboardingPage onCompleted={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "更像真实世界里会遇见的人" }));
+    fireEvent.click(screen.getByRole("button", { name: "慢热，但熟了以后会很深" }));
+    fireEvent.click(screen.getByRole("button", { name: "感受会留得比较久" }));
+    fireEvent.click(screen.getByRole("button", { name: "先收着，不会立刻说很多" }));
+    fireEvent.click(screen.getByRole("button", { name: "稳一点，像很难被轻易晃动的人" }));
+    fireEvent.click(screen.getByRole("button", { name: "会照顾人，但不会用力过猛" }));
+    fireEvent.click(screen.getByRole("button", { name: "有边界，但不是冷" }));
+    fireEvent.click(screen.getByRole("button", { name: "会往前一步，但懂得停" }));
+    fireEvent.click(screen.getByRole("button", { name: "偶尔有一点傲气" }));
+    fireEvent.click(screen.getByRole("button", { name: "长发" }));
+    fireEvent.click(screen.getByRole("button", { name: "匀称、成熟一点的存在感" }));
+    fireEvent.click(screen.getByRole("button", { name: "老钱风" }));
+
+    expect(await screen.findByRole("heading", { name: "她" })).toBeDefined();
+    expect(screen.queryByText("在大多数关系里，你更像哪一种人？")).toBeNull();
   });
 });

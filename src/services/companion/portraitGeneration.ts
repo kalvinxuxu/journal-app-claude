@@ -15,8 +15,8 @@ export async function generateRevealPortrait(prompt: string) {
     throw new Error(`Reveal portrait generation failed with ${response.status}`);
   }
 
-  const result = await response.json() as { images?: string[]; image_urls?: string[] };
-  const url = result.images?.[0] ?? result.image_urls?.[0];
+  const result = await response.json() as { data?: { images?: string[]; image_urls?: string[] }; images?: string[]; image_urls?: string[] };
+  const url = result.data?.image_urls?.[0] ?? result.data?.images?.[0] ?? result.images?.[0] ?? result.image_urls?.[0];
   if (!url) {
     throw new Error("Reveal portrait generation returned no image");
   }

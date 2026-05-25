@@ -148,6 +148,7 @@ describe("minimax service", () => {
     expect(prompt).toContain("Full-body framing preferred");
     expect(prompt).toContain("Show the complete outfit");
     expect(prompt).toContain("Only one person in the image");
+    expect(prompt).toContain("Do not include duplicate versions of the same woman");
   });
 
   it("buildJournalImagePrompt no longer contains random tokens", () => {

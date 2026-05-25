@@ -1,0 +1,30 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: Project Showcase
+      - heading "一个正在持续打磨的 AI 数学课堂产品原型" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 支持讲解、互动练习与学习进度跟踪的数学课堂原型
+      - generic [ref=e9]:
+        - link "查看产品演示" [ref=e10] [cursor=pointer]:
+          - /url: "?view=classroom"
+        - link "了解当前进展" [ref=e11] [cursor=pointer]:
+          - /url: "#current-progress"
+    - generic [ref=e12]:
+      - heading "产品原型证明" [level=2] [ref=e13]
+      - paragraph [ref=e14]: 当前原型已支持课程讲解、互动练习、答题反馈与学习进度记录。
+      - generic [ref=e15]:
+        - article [ref=e16]: 课堂讲解流程
+        - article [ref=e17]: 互动练习界面
+        - article [ref=e18]: 学习进度记录
+    - generic [ref=e19]:
+      - heading "当前进展" [level=2] [ref=e20]
+      - list [ref=e21]:
+        - listitem [ref=e22]: 当前内容以五年级上册为起点
+        - listitem [ref=e23]: 已形成讲解、练习、反馈、进度记录的基础学习流程
+        - listitem [ref=e24]: 内容覆盖、课堂体验和交互细节仍在持续完善
+    - generic [ref=e25]:
+      - heading "扩展路径" [level=2] [ref=e26]
+      - list [ref=e27]:
+        - listitem [ref=e28]: 逐步扩展更多年级与知识点
+        - listitem [ref=e29]: 复用已有课程组织方式继续扩课
+        - listitem [ref=e30]: 持续增强讲解、互动、练习与反馈能力

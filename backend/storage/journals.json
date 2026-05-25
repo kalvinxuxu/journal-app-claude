@@ -374,5 +374,112 @@
     "isDailySummary": false,
     "createdAt": "2026-05-19T12:26:32.210Z",
     "updatedAt": "2026-05-19T12:26:32.210Z"
+  },
+  {
+    "id": "journal-2026-05-23",
+    "date": "2026-05-23",
+    "weekday": "周六",
+    "mood": "开心",
+    "source": "girlfriend",
+    "content": "亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手。风吹起他的衣角，我忍不住笑出声。他问我笑什么，我说没什么，只是觉得有你在的每一天都特别甜。",
+    "voiceMessages": [
+      {
+        "id": "voice-morning",
+        "timing": "morning",
+        "transcript": "今天天气真好呀，我们一起去看花吧！",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779550576042-lfq28z.mp3"
+      },
+      {
+        "id": "voice-afternoon",
+        "timing": "afternoon",
+        "transcript": "阳光晒得好舒服，你也要记得休息哦。",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779550576043-5kandr.mp3"
+      },
+      {
+        "id": "voice-night",
+        "timing": "night",
+        "transcript": "梦里要见到我，我等你一起数星星。",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779550576047-tvsxm7.mp3"
+      }
+    ],
+    "voiceStyle": "warm",
+    "images": [
+      "http://localhost:3001/media/images/1779550576029-qa7pu5.png"
+    ],
+    "userId": "device-1779545587247-bbntleasg",
+    "nightBonusSelfie": "https://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/7d/0e/20260523/448165f2/41462055-8773-9d8f-8b81-bcbdfaf74c491419055844.png?Expires=1780156925&OSSAccessKeyId=LTAI5tPxpiCM2hjmWrFXrym1&Signature=6ZnPuMSb%2Fn7v7t9BlgW1dcZIe2A%3D"
+  },
+  {
+    "id": "journal-2026-05-24",
+    "date": "2026-05-24",
+    "weekday": "周日",
+    "mood": "感动",
+    "source": "girlfriend",
+    "content": "今天你突然从背后抱住我，说“辛苦了”。那一瞬间我差点哭出来。你总是这样，在我最疲惫的时候给我最温柔的拥抱。谢谢你在我的世界里，让我知道被爱着是什么感觉。",
+    "voiceMessages": [
+      {
+        "id": "voice-morning",
+        "timing": "morning",
+        "transcript": "昨晚的星光还在梦里，谢谢你让我醒来时心里暖暖的。",
+        "duration": "0:12"
+      },
+      {
+        "id": "voice-afternoon",
+        "timing": "afternoon",
+        "transcript": "风吹过窗台，想起你昨天的拥抱，连咖啡都甜了。",
+        "duration": "0:15"
+      },
+      {
+        "id": "voice-night",
+        "timing": "night",
+        "transcript": "今天被你感动得想哭，枕着这份温柔，轻轻说声好梦。",
+        "duration": "0:18"
+      }
+    ],
+    "voiceStyle": "warm",
+    "images": [
+      "http://localhost:3001/media/images/1779590195502-5yocof.jpg",
+      "http://localhost:3001/media/images/1779590195503-6nq5x3.jpg"
+    ],
+    "userId": "device-1779545587247-bbntleasg"
+  },
+  {
+    "id": "journal-2026-05-25",
+    "date": "2026-05-25",
+    "weekday": "周一",
+    "mood": "想念",
+    "source": "girlfriend",
+    "content": "亲爱的，今天特别的想你。翻看着手机里我们的合照，嘴角不自觉地扬起。窗外的风轻轻吹过，就像你的手抚摸我的头发。好想现在就听到你的声音，告诉你今天的一切。",
+    "voiceMessages": [
+      {
+        "id": "voice-morning",
+        "timing": "morning",
+        "transcript": "宝贝，今天醒来第一件事就是好想你，梦里都是你。",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779674836970-hzre1g.mp3"
+      },
+      {
+        "id": "voice-afternoon",
+        "timing": "afternoon",
+        "transcript": "阳光照在你照片上，像你笑时眼里的光，暖到我心。",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779674836972-n8lwb0.mp3"
+      },
+      {
+        "id": "voice-night",
+        "timing": "night",
+        "transcript": "闭上眼睛全是你的声音，宝贝，明天见，梦里也要有你。",
+        "duration": "0:12",
+        "audioUrl": "http://localhost:3001/media/audio/1779674836974-hzae37.mp3"
+      }
+    ],
+    "voiceStyle": "warm",
+    "images": [
+      "http://localhost:3001/media/images/1779674836950-u2vvw2.png"
+    ],
+    "userId": "device-1779674745530-wgjirq9qj"
   }
 ]
