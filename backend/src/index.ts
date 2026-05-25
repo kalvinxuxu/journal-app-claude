@@ -408,6 +408,7 @@ import { createCompanionRoutes } from "./companion/routes/companionRoutes";
 import { createMemoryItemStore } from "./companion/store/memoryItemStore";
 import { createRelationshipStateStore } from "./companion/store/relationshipStateStore";
 import { createUnlockEventStore } from "./companion/store/unlockEventStore";
+import { createFeedbackStore } from "./companion/store/feedbackStore";
 import { createMemoryExtractionService } from "./companion/services/memoryExtractionService";
 import { createRelationshipProgressionService } from "./companion/services/relationshipProgressionService";
 import { createUnlockEventService } from "./companion/services/unlockEventService";
@@ -490,6 +491,7 @@ setTimeout(() => {
 const memoryItemStore = createMemoryItemStore(appDb);
 const relationshipStateStore = createRelationshipStateStore(appDb);
 const unlockEventStore = createUnlockEventStore(appDb);
+const feedbackStore = createFeedbackStore(appDb);
 
 const memoryExtractionService = createMemoryExtractionService();
 const relationshipProgressionService = createRelationshipProgressionService();
@@ -586,22 +588,32 @@ app.post("/api/journals", async (req: Request, res: Response) => {
     await saveJournal(journal);
 
     // -------------------------------------------------------------------------
-    // COMPANION POST-PROCESSING HOOK (pending userId availability on Journal):
-    //
-    // const userId = (journal as any).userId;
-    // if (userId) {
-    //   const previousRelationship = relationshipStateStore.findByUserId(userId);
-    //   if (previousRelationship) {
-    //     journalPostProcessor.process({
-    //       userId,
-    //       journalId: journal.id,
-    //       content: journal.content,
-    //       previousRelationship,
-    //       journalCount: ...,
-    //       feedbackCount: ...,
-    //     });
-    //   }
-    // }
+    // COMPANION POST-PROCESSING HOOK:
+    // Processes OOTD likes and relationship state after a journal is saved.
+    // Loads journals via JSON store to count user journals; counts OOTD
+    // reactions from the SQLite feedback store.
+    // -------------------------------------------------------------------------
+    const userId = (journal as { userId?: string }).userId;
+    if (userId) {
+      const previousRelationship = relationshipStateStore.findByUserId(userId);
+      if (previousRelationship) {
+        const allJournals = await loadJournals();
+        const journalCount = allJournals.filter((j) => {
+          if (j.userId) return j.userId === userId;
+          return userId === "local-user";
+        }).length;
+        const ootdLikeCount = feedbackStore.countOotdReactionsByUserId(userId);
+        journalPostProcessor.process({
+          userId,
+          journalId: journal.id,
+          content: journal.content,
+          previousRelationship,
+          journalCount,
+          feedbackCount: 0,
+          ootdLikeCount,
+        });
+      }
+    }
     // -------------------------------------------------------------------------
 
     res.status(201).json(journal);
