@@ -1,0 +1,367 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: ✿ Girlfriend Journal ✿
+      - heading "女友手账" [level=1] [ref=e7]
+      - paragraph [ref=e8]: 记录每一天的小温柔
+    - navigation "页面导航" [ref=e9]:
+      - button "首页" [ref=e10] [cursor=pointer]
+      - button "日记墙" [ref=e11] [cursor=pointer]
+      - button "照片墙" [ref=e12] [cursor=pointer]
+      - button "设置" [ref=e13] [cursor=pointer]
+  - main [ref=e14]:
+    - generic [ref=e16]:
+      - generic [ref=e18]:
+        - paragraph [ref=e19]: 她已经在这里了
+        - heading "她" [level=2] [ref=e20]
+        - paragraph [ref=e21]: 她像夜色里慢慢靠近的人，安静，却不会让你觉得遥远。
+        - paragraph [ref=e22]: 她会先读你今天留下来的东西，再慢慢学会怎么陪你。
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: 日记墙
+          - heading "5月" [level=2] [ref=e26]
+          - paragraph [ref=e27]: 数据来源：💾 本地存储
+        - generic [ref=e28]:
+          - button "卡片流" [ref=e29] [cursor=pointer]
+          - button "月历" [ref=e30] [cursor=pointer]
+      - generic [ref=e31]:
+        - article [ref=e32]:
+          - button "5月17日 周日 开心 手账 她写的 ❤️ 开心 亲爱的日记， 今天和他一起去看了日落，他偷偷在口袋里藏了我最爱吃的草莓糖。回家的路上，他牵着我的手，说我的眼睛比晚霞还好看。我的心跳得好快好快呀～ 播放日记内容" [ref=e33]:
+            - generic [ref=e34]:
+              - generic [ref=e35]:
+                - paragraph [ref=e36]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e37]
+              - generic [ref=e38]:
+                - generic [ref=e39]: 她写的
+                - generic [ref=e40]:
+                  - generic [ref=e41]: ❤️
+                  - generic [ref=e42]: 开心
+            - paragraph [ref=e43]: 亲爱的日记， 今天和他一起去看了日落，他偷偷在口袋里藏了我最爱吃的草莓糖。回家的路上，他牵着我的手，说我的眼睛比晚霞还好看。我的心跳得好快好快呀～
+            - button "播放日记内容" [ref=e44] [cursor=pointer]: ▶ 听日记
+        - article [ref=e45]:
+          - button "5月17日 周日 开心 手账 她写的 ❤️ 开心 今天和你一起在厨房做了草莓蛋糕，你笨手笨脚挤奶油的样子好可爱。最后你偷偷沾了一点抹在我鼻尖上，我假装生气追着你跑，整个房间都是我们的笑声。好想永远这样。 播放日记内容" [ref=e46]:
+            - generic [ref=e47]:
+              - generic [ref=e48]:
+                - paragraph [ref=e49]: 5月17日 周日
+                - heading "开心 手账" [level=3] [ref=e50]
+              - generic [ref=e51]:
+                - generic [ref=e52]: 她写的
+                - generic [ref=e53]:
+                  - generic [ref=e54]: ❤️
+                  - generic [ref=e55]: 开心
+            - paragraph [ref=e56]: 今天和你一起在厨房做了草莓蛋糕，你笨手笨脚挤奶油的样子好可爱。最后你偷偷沾了一点抹在我鼻尖上，我假装生气追着你跑，整个房间都是我们的笑声。好想永远这样。
+            - button "播放日记内容" [ref=e57] [cursor=pointer]: ▶ 听日记
+        - article [ref=e58]:
+          - button "5月14日 周四 调皮 手账 她写的 ✨ 调皮 某人昨天肯定又熬夜了对不对？。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。 播放日记内容 日记语音栏" [ref=e59]:
+            - generic [ref=e60]:
+              - generic [ref=e61]:
+                - paragraph [ref=e62]: 5月14日 周四
+                - heading "调皮 手账" [level=3] [ref=e63]
+              - generic [ref=e64]:
+                - generic [ref=e65]: 她写的
+                - generic [ref=e66]:
+                  - generic [ref=e67]: ✨
+                  - generic [ref=e68]: 调皮
+            - paragraph [ref=e69]: 某人昨天肯定又熬夜了对不对？。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+            - button "播放日记内容" [ref=e70] [cursor=pointer]: ▶ 听日记
+            - region "日记语音栏" [ref=e71]:
+              - generic [ref=e72]:
+                - button "早安" [ref=e73] [cursor=pointer]
+                - button "午后" [ref=e74] [cursor=pointer]
+                - button "晚安" [ref=e75] [cursor=pointer]
+              - generic [ref=e76]:
+                - generic [ref=e77]:
+                  - generic [ref=e78]:
+                    - paragraph [ref=e79]: 语音留言
+                    - strong [ref=e80]: 早安留言
+                  - button "展开" [ref=e81] [cursor=pointer]
+                - button "播放 0:12" [ref=e82] [cursor=pointer]:
+                  - generic [ref=e84]: 播放
+                  - generic [ref=e85]: 0:12
+                - paragraph [ref=e86]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e97]:
+          - button "5月18日 周一 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手，还买了棉花糖给我。看着他傻笑的样子，心里甜甜的。希望每天都这样简单又幸福。 播放日记内容 配图预览 日记语音栏" [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e100]:
+                - paragraph [ref=e101]: 5月18日 周一
+                - heading "开心 手账" [level=3] [ref=e102]
+              - generic [ref=e103]:
+                - generic [ref=e104]: 她写的
+                - generic [ref=e105]:
+                  - generic [ref=e106]: ❤️
+                  - generic [ref=e107]: 开心
+            - paragraph [ref=e108]: 亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手，还买了棉花糖给我。看着他傻笑的样子，心里甜甜的。希望每天都这样简单又幸福。
+            - button "播放日记内容" [ref=e109] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e110]:
+              - img "配图 1" [ref=e112]
+              - img "配图 2" [ref=e114]
+            - region "日记语音栏" [ref=e115]:
+              - generic [ref=e116]:
+                - button "早安" [ref=e117] [cursor=pointer]
+                - button "午后" [ref=e118] [cursor=pointer]
+                - button "晚安" [ref=e119] [cursor=pointer]
+              - generic [ref=e120]:
+                - generic [ref=e121]:
+                  - generic [ref=e122]:
+                    - paragraph [ref=e123]: 语音留言
+                    - strong [ref=e124]: 早安留言
+                  - button "展开" [ref=e125] [cursor=pointer]
+                - button "播放 0:00 / 0:04" [ref=e126] [cursor=pointer]:
+                  - generic [ref=e128]: 播放
+                  - generic [ref=e129]: 0:00 / 0:04
+        - article [ref=e140]:
+          - button "5月18日 周一 开心 手账 我写的 ❤️ 开心 亲爱的日记，今天他又给我惊喜了！早上醒来发现床头放着一束小雏菊，还有他手写的便条。晚上一起做饭时，他从背后抱住我，在我耳边说\"今天也是爱你的每一天\"。这个傻瓜，怎么越来越会撩人了呀~ 播放日记内容 配图预览 日记语音栏" [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - paragraph [ref=e144]: 5月18日 周一
+                - heading "开心 手账" [level=3] [ref=e145]
+              - generic [ref=e146]:
+                - generic [ref=e147]: 我写的
+                - generic [ref=e148]:
+                  - generic [ref=e149]: ❤️
+                  - generic [ref=e150]: 开心
+            - paragraph [ref=e151]: 亲爱的日记，今天他又给我惊喜了！早上醒来发现床头放着一束小雏菊，还有他手写的便条。晚上一起做饭时，他从背后抱住我，在我耳边说"今天也是爱你的每一天"。这个傻瓜，怎么越来越会撩人了呀~
+            - button "播放日记内容" [ref=e152] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e153]:
+              - img "配图 1" [ref=e155]
+              - img "配图 2" [ref=e157]
+            - region "日记语音栏" [ref=e158]:
+              - generic [ref=e159]:
+                - button "早安" [ref=e160] [cursor=pointer]
+                - button "午后" [ref=e161] [cursor=pointer]
+                - button "晚安" [ref=e162] [cursor=pointer]
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - paragraph [ref=e166]: 语音留言
+                    - strong [ref=e167]: 早安留言
+                  - button "展开" [ref=e168] [cursor=pointer]
+                - button "播放 0:00 / 0:03" [ref=e169] [cursor=pointer]:
+                  - generic [ref=e171]: 播放
+                  - generic [ref=e172]: 0:00 / 0:03
+        - article [ref=e183]:
+          - button "5月18日 周一 开心 手账 她写的 ❤️ 开心 今晚和你一起去看了《星际穿越》，诺兰的科幻大片。你偷偷准备了爆米花和可乐，还故意说是为了不浪费电影票才买的。我笑你嘴硬，其实心里特别感动。电影里库珀对女儿的爱让我们都哭了，你悄悄握住了我的手，暖暖的。我想，能和你一起看这样的电影，就是最浪漫的事呀。 播放日记内容 配图预览 日记语音栏" [ref=e184]:
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - paragraph [ref=e187]: 5月18日 周一
+                - heading "开心 手账" [level=3] [ref=e188]
+              - generic [ref=e189]:
+                - generic [ref=e190]: 她写的
+                - generic [ref=e191]:
+                  - generic [ref=e192]: ❤️
+                  - generic [ref=e193]: 开心
+            - paragraph [ref=e194]: 今晚和你一起去看了《星际穿越》，诺兰的科幻大片。你偷偷准备了爆米花和可乐，还故意说是为了不浪费电影票才买的。我笑你嘴硬，其实心里特别感动。电影里库珀对女儿的爱让我们都哭了，你悄悄握住了我的手，暖暖的。我想，能和你一起看这样的电影，就是最浪漫的事呀。
+            - button "播放日记内容" [ref=e195] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e196]:
+              - img "配图 1" [ref=e198]
+            - region "日记语音栏" [ref=e199]:
+              - generic [ref=e200]:
+                - button "早安" [ref=e201] [cursor=pointer]
+                - button "午后" [ref=e202] [cursor=pointer]
+                - button "晚安" [ref=e203] [cursor=pointer]
+              - generic [ref=e204]:
+                - generic [ref=e205]:
+                  - generic [ref=e206]:
+                    - paragraph [ref=e207]: 语音留言
+                    - strong [ref=e208]: 早安留言
+                  - button "展开" [ref=e209] [cursor=pointer]
+                - button "播放 0:00 / 0:04" [ref=e210] [cursor=pointer]:
+                  - generic [ref=e212]: 播放
+                  - generic [ref=e213]: 0:00 / 0:04
+        - article [ref=e224]:
+          - button "5月18日 周一 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天带她去买圣诞内衣，她试穿红色蕾丝款时害羞地问我好不好看。我笑着点头，心里却想着她比任何礼物都让我心动。回家的路上她靠在我肩头，说这个冬天有我真好。 播放日记内容 配图预览 日记语音栏" [ref=e225]:
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - paragraph [ref=e228]: 5月18日 周一
+                - heading "开心 手账" [level=3] [ref=e229]
+              - generic [ref=e230]:
+                - generic [ref=e231]: 她写的
+                - generic [ref=e232]:
+                  - generic [ref=e233]: ❤️
+                  - generic [ref=e234]: 开心
+            - paragraph [ref=e235]: 亲爱的日记，今天带她去买圣诞内衣，她试穿红色蕾丝款时害羞地问我好不好看。我笑着点头，心里却想着她比任何礼物都让我心动。回家的路上她靠在我肩头，说这个冬天有我真好。
+            - button "播放日记内容" [ref=e236] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e237]:
+              - img "配图 1" [ref=e239]
+              - img "配图 2" [ref=e241]
+            - region "日记语音栏" [ref=e242]:
+              - generic [ref=e243]:
+                - button "早安" [ref=e244] [cursor=pointer]
+                - button "午后" [ref=e245] [cursor=pointer]
+                - button "晚安" [ref=e246] [cursor=pointer]
+              - generic [ref=e247]:
+                - generic [ref=e248]:
+                  - generic [ref=e249]:
+                    - paragraph [ref=e250]: 语音留言
+                    - strong [ref=e251]: 早安留言
+                  - button "展开" [ref=e252] [cursor=pointer]
+                - button "播放 0:00 / 0:04" [ref=e253] [cursor=pointer]:
+                  - generic [ref=e255]: 播放
+                  - generic [ref=e256]: 0:00 / 0:04
+        - article [ref=e267]:
+          - button "5月19日 周二 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天他带我去看了海。潮汐声中，他忽然从口袋里掏出一个小小的贝壳项链，说是自己打磨的。我笑他手笨，却看到他指尖有细细的伤口。夕阳把我们的影子拉得好长，他轻吻我额头时，我听见海浪也在笑。 播放日记内容 女友自拍 夜间加餐 日记语音栏" [ref=e268]:
+            - generic [ref=e269]:
+              - generic [ref=e270]:
+                - paragraph [ref=e271]: 5月19日 周二
+                - heading "开心 手账" [level=3] [ref=e272]
+              - generic [ref=e273]:
+                - generic [ref=e274]: 她写的
+                - generic [ref=e275]:
+                  - generic [ref=e276]: ❤️
+                  - generic [ref=e277]: 开心
+            - paragraph [ref=e278]: 亲爱的日记，今天他带我去看了海。潮汐声中，他忽然从口袋里掏出一个小小的贝壳项链，说是自己打磨的。我笑他手笨，却看到他指尖有细细的伤口。夕阳把我们的影子拉得好长，他轻吻我额头时，我听见海浪也在笑。
+            - button "播放日记内容" [ref=e279] [cursor=pointer]: ▶ 听日记
+            - generic "女友自拍" [ref=e280]:
+              - paragraph [ref=e281]: 女友自拍
+              - img "女友自拍 1" [ref=e284]
+            - generic "夜间加餐" [ref=e285]:
+              - paragraph [ref=e286]: 夜间加餐
+              - img "夜间自拍" [ref=e287]
+            - region "日记语音栏" [ref=e288]:
+              - generic [ref=e289]:
+                - button "早安" [ref=e290] [cursor=pointer]
+                - button "午后" [ref=e291] [cursor=pointer]
+                - button "晚安" [ref=e292] [cursor=pointer]
+              - generic [ref=e293]:
+                - generic [ref=e294]:
+                  - generic [ref=e295]:
+                    - paragraph [ref=e296]: 语音留言
+                    - strong [ref=e297]: 早安留言
+                  - button "展开" [ref=e298] [cursor=pointer]
+                - button "播放 0:12" [ref=e299] [cursor=pointer]:
+                  - generic [ref=e301]: 播放
+                  - generic [ref=e302]: 0:12
+                - paragraph [ref=e303]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e314]:
+          - button "5月19日 周二 开心 手账 她写的 ❤️ 开心 今天和宝贝去逛街啦！试了好多漂亮裙子，你总说这件那件都好看。最后买了条淡蓝色的，你说像天空的颜色。回家的路上你一直牵着我的手，风都是甜的。 播放日记内容 配图预览 日记语音栏" [ref=e315]:
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - paragraph [ref=e318]: 5月19日 周二
+                - heading "开心 手账" [level=3] [ref=e319]
+              - generic [ref=e320]:
+                - generic [ref=e321]: 她写的
+                - generic [ref=e322]:
+                  - generic [ref=e323]: ❤️
+                  - generic [ref=e324]: 开心
+            - paragraph [ref=e325]: 今天和宝贝去逛街啦！试了好多漂亮裙子，你总说这件那件都好看。最后买了条淡蓝色的，你说像天空的颜色。回家的路上你一直牵着我的手，风都是甜的。
+            - button "播放日记内容" [ref=e326] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e327]:
+              - img "配图 1" [ref=e329]
+            - region "日记语音栏" [ref=e330]:
+              - generic [ref=e331]:
+                - button "早安" [ref=e332] [cursor=pointer]
+                - button "午后" [ref=e333] [cursor=pointer]
+                - button "晚安" [ref=e334] [cursor=pointer]
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - generic [ref=e337]:
+                    - paragraph [ref=e338]: 语音留言
+                    - strong [ref=e339]: 早安留言
+                  - button "展开" [ref=e340] [cursor=pointer]
+                - button "播放 0:00 / 0:04" [ref=e341] [cursor=pointer]:
+                  - generic [ref=e343]: 播放
+                  - generic [ref=e344]: 0:00 / 0:04
+        - article [ref=e355]:
+          - button "5月23日 周六 开心 手账 她写的 ❤️ 开心 亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手。风吹起他的衣角，我忍不住笑出声。他问我笑什么，我说没什么，只是觉得有你在的每一天都特别甜。 播放日记内容 配图预览 夜间加餐 日记语音栏" [ref=e356]:
+            - generic [ref=e357]:
+              - generic [ref=e358]:
+                - paragraph [ref=e359]: 5月23日 周六
+                - heading "开心 手账" [level=3] [ref=e360]
+              - generic [ref=e361]:
+                - generic [ref=e362]: 她写的
+                - generic [ref=e363]:
+                  - generic [ref=e364]: ❤️
+                  - generic [ref=e365]: 开心
+            - paragraph [ref=e366]: 亲爱的日记，今天和他一起去公园散步，阳光暖暖的，他偷偷牵我的手。风吹起他的衣角，我忍不住笑出声。他问我笑什么，我说没什么，只是觉得有你在的每一天都特别甜。
+            - button "播放日记内容" [ref=e367] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e368]:
+              - img "配图 1" [ref=e370]
+            - generic "夜间加餐" [ref=e371]:
+              - paragraph [ref=e372]: 夜间加餐
+              - img "夜间自拍" [ref=e373]
+            - region "日记语音栏" [ref=e374]:
+              - generic [ref=e375]:
+                - button "早安" [ref=e376] [cursor=pointer]
+                - button "午后" [ref=e377] [cursor=pointer]
+                - button "晚安" [ref=e378] [cursor=pointer]
+              - generic [ref=e379]:
+                - generic [ref=e380]:
+                  - generic [ref=e381]:
+                    - paragraph [ref=e382]: 语音留言
+                    - strong [ref=e383]: 早安留言
+                  - button "展开" [ref=e384] [cursor=pointer]
+                - button "播放 0:00 / 0:03" [ref=e385] [cursor=pointer]:
+                  - generic [ref=e387]: 播放
+                  - generic [ref=e388]: 0:00 / 0:03
+        - article [ref=e399]:
+          - button "5月24日 周日 感动 手账 她写的 💧 感动 今天你突然从背后抱住我，说“辛苦了”。那一瞬间我差点哭出来。你总是这样，在我最疲惫的时候给我最温柔的拥抱。谢谢你在我的世界里，让我知道被爱着是什么感觉。 播放日记内容 配图预览 日记语音栏" [ref=e400]:
+            - generic [ref=e401]:
+              - generic [ref=e402]:
+                - paragraph [ref=e403]: 5月24日 周日
+                - heading "感动 手账" [level=3] [ref=e404]
+              - generic [ref=e405]:
+                - generic [ref=e406]: 她写的
+                - generic [ref=e407]:
+                  - generic [ref=e408]: 💧
+                  - generic [ref=e409]: 感动
+            - paragraph [ref=e410]: 今天你突然从背后抱住我，说“辛苦了”。那一瞬间我差点哭出来。你总是这样，在我最疲惫的时候给我最温柔的拥抱。谢谢你在我的世界里，让我知道被爱着是什么感觉。
+            - button "播放日记内容" [ref=e411] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e412]:
+              - img "配图 1" [ref=e414]
+              - img "配图 2" [ref=e416]
+            - region "日记语音栏" [ref=e417]:
+              - generic [ref=e418]:
+                - button "早安" [ref=e419] [cursor=pointer]
+                - button "午后" [ref=e420] [cursor=pointer]
+                - button "晚安" [ref=e421] [cursor=pointer]
+              - generic [ref=e422]:
+                - generic [ref=e423]:
+                  - generic [ref=e424]:
+                    - paragraph [ref=e425]: 语音留言
+                    - strong [ref=e426]: 早安留言
+                  - button "展开" [ref=e427] [cursor=pointer]
+                - button "播放 0:12" [ref=e428] [cursor=pointer]:
+                  - generic [ref=e430]: 播放
+                  - generic [ref=e431]: 0:12
+                - paragraph [ref=e432]: ⚠️ 语音未生成（请在设置页配置 MiniMax API）
+        - article [ref=e443]:
+          - button "5月25日 周一 想念 手账 她写的 🌙 想念 亲爱的，今天特别的想你。翻看着手机里我们的合照，嘴角不自觉地扬起。窗外的风轻轻吹过，就像你的手抚摸我的头发。好想现在就听到你的声音，告诉你今天的一切。 播放日记内容 配图预览 日记语音栏" [ref=e444]:
+            - generic [ref=e445]:
+              - generic [ref=e446]:
+                - paragraph [ref=e447]: 5月25日 周一
+                - heading "想念 手账" [level=3] [ref=e448]
+              - generic [ref=e449]:
+                - generic [ref=e450]: 她写的
+                - generic [ref=e451]:
+                  - generic [ref=e452]: 🌙
+                  - generic [ref=e453]: 想念
+            - paragraph [ref=e454]: 亲爱的，今天特别的想你。翻看着手机里我们的合照，嘴角不自觉地扬起。窗外的风轻轻吹过，就像你的手抚摸我的头发。好想现在就听到你的声音，告诉你今天的一切。
+            - button "播放日记内容" [ref=e455] [cursor=pointer]: ▶ 听日记
+            - generic "配图预览" [ref=e456]:
+              - img "配图 1" [ref=e458]
+            - region "日记语音栏" [ref=e459]:
+              - generic [ref=e460]:
+                - button "早安" [ref=e461] [cursor=pointer]
+                - button "午后" [ref=e462] [cursor=pointer]
+                - button "晚安" [ref=e463] [cursor=pointer]
+              - generic [ref=e464]:
+                - generic [ref=e465]:
+                  - generic [ref=e466]:
+                    - paragraph [ref=e467]: 语音留言
+                    - strong [ref=e468]: 早安留言
+                  - button "展开" [ref=e469] [cursor=pointer]
+                - button "播放 0:00 / 0:04" [ref=e470] [cursor=pointer]:
+                  - generic [ref=e472]: 播放
+                  - generic [ref=e473]: 0:00 / 0:04
+      - generic [ref=e484]:
+        - paragraph [ref=e485]: 今日OOTD
+        - paragraph [ref=e486]: 今天她有想推荐的衣服吗？
+        - button "看看今天的穿搭" [ref=e487] [cursor=pointer]
+      - generic [ref=e488]:
+        - generic [ref=e490]:
+          - paragraph [ref=e491]: 5月17日 周日
+          - heading "当前选中的日记" [level=3] [ref=e492]
+        - paragraph [ref=e493]: 亲爱的日记， 今天和他一起去看了日落，他偷偷在口袋里藏了我最爱吃的草莓糖。回家的路上，他牵着我的手，说我的眼睛比晚霞还好看。我的心跳得好快好快呀～
+      - generic [ref=e494]:
+        - paragraph [ref=e495]: 她想起了你
+        - paragraph [ref=e496]: 她还记得你说过，下雨天总会让你想躲起来。

@@ -469,7 +469,6 @@ setInterval(() => {
 }, 1_000);
 
 app.use("/api/generation/tasks", createGenerationRoutes(generationTaskService));
-app.use("/api/companion", createCompanionRoutes());
 app.use("/api/greetings", createGreetingRoutes({
   settingsStore: greetingSettingsStore,
   taskService: generationTaskService,
@@ -507,6 +506,20 @@ const journalPostProcessor = createJournalPostProcessor({
 });
 
 console.log("[companion] Journal post-processor wired into journal save pipeline");
+
+// ---------------------------------------------------------------------------
+// Companion API routes — with post-processor wired for OOTD feedback
+// ---------------------------------------------------------------------------
+app.use("/api/companion", createCompanionRoutes(undefined, {
+  journalPostProcessor,
+  getJournalCount: async (userId: string) => {
+    const allJournals = await loadJournals();
+    return allJournals.filter((j) => {
+      if (j.userId) return j.userId === userId;
+      return userId === "local-user";
+    }).length;
+  },
+}));
 
 // ---------------------------------------------------------------------------
 // Media storage API endpoints

@@ -67,9 +67,10 @@ export function App() {
   const [preferences, setPreferences] = useState<Preferences>(() => loadPreferences());
   const [animKey, setAnimKey] = useState(0);
   const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">("checking");
-  const [showLanding, setShowLanding] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
   const [companionReady, setCompanionReady] = useState<boolean | null>(null);
   const [companionReveal, setCompanionReveal] = useState(() => loadCompanionReveal());
+  const [showStaleTaskNotice, setShowStaleTaskNotice] = useState(false);
   const journalsInitRef = useRef(false);
 
   // Companion onboarding gating: check localStorage flag first, then verify with backend
@@ -507,6 +508,14 @@ export function App() {
 
   if (companionReady === null) {
     return null;
+  }
+
+  if (companionReady === false && showLanding) {
+    return (
+      <CompanionLandingPage
+        onContinue={() => setShowLanding(false)}
+      />
+    );
   }
 
   if (companionReady === false) {

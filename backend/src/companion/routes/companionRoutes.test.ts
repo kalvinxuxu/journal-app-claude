@@ -269,4 +269,76 @@ describe("createCompanionRoutes", () => {
 
     expect(response.status).toBe(201);
   });
+
+  it("advances relationship when ootd_reaction feedback is posted", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+    const now = new Date().toISOString();
+
+    // Insert user
+    db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(
+      "ootd-user",
+      now,
+      now,
+    );
+
+    // Insert a relationship state for the user
+    db.prepare(`
+      INSERT INTO relationship_states (
+        user_id, stage, intimacy_score, initiative_score, recall_score,
+        boundary_fit_score, style_alignment_score, last_calibrated_at,
+        created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      "ootd-user",
+      "acquaintance",
+      30,
+      30,
+      20,
+      50,
+      40,
+      null,
+      now,
+      now,
+    );
+
+    const advanceRelationshipMock = vi.fn(() => ({
+      userId: "ootd-user",
+      stage: "familiar",
+      intimacyScore: 31,
+      initiativeScore: 30,
+      recallScore: 20,
+      boundaryFitScore: 50,
+      styleAlignmentScore: 44,
+      lastCalibratedAt: null,
+      createdAt: now,
+      updatedAt: now,
+    }));
+
+    const journalPostProcessor = {
+      process: vi.fn(),
+    };
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db, { journalPostProcessor }));
+
+    const response = await request(app)
+      .post("/api/companion/feedback")
+      .send({
+        userId: "ootd-user",
+        journalId: "ootd_1",
+        feedbackKind: "ootd_reaction",
+        feedbackValue: "like_fullbody",
+      });
+
+    expect(response.status).toBe(201);
+    expect(journalPostProcessor.process).toHaveBeenCalledTimes(1);
+    expect(journalPostProcessor.process).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: "ootd-user",
+        ootdLikeCount: 1,
+      }),
+    );
+  });
 });

@@ -18,7 +18,36 @@ import { loadJournals, saveJournal, deleteJournalByDate } from "../../storage/jo
 import { createTaskRepository } from "../../generation/taskRepository.js";
 import { createGenerationTaskService } from "../../generation/taskService.js";
 
-export function createCompanionRoutes(db?: Database.Database) {
+type JournalPostProcessor = {
+  process: (input: {
+    userId: string;
+    journalId: string;
+    content: string;
+    previousRelationship: {
+      userId: string;
+      stage: string;
+      intimacyScore: number;
+      initiativeScore: number;
+      recallScore: number;
+      boundaryFitScore: number;
+      styleAlignmentScore: number;
+      lastCalibratedAt: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+    journalCount: number;
+    feedbackCount: number;
+    ootdLikeCount?: number;
+  }) => void;
+};
+
+export function createCompanionRoutes(
+  db?: Database.Database,
+  deps?: {
+    journalPostProcessor?: JournalPostProcessor;
+    getJournalCount?: (userId: string) => Promise<number>;
+  },
+) {
   const database = db ?? createAppDatabase();
   const router = Router();
   const onboardingService = createOnboardingService({
@@ -29,6 +58,7 @@ export function createCompanionRoutes(db?: Database.Database) {
   const profileStore = createCompanionProfileStore(database);
   const feedbackStore = createFeedbackStore(database);
   const unlockEventStore = createUnlockEventStore(database);
+  const relationshipStateStore = createRelationshipStateStore(database);
 
   router.post("/onboarding/initialize", (req, res) => {
     const { userId, intake, userProfileAnswers, companionPreferenceAnswers } = req.body as {
@@ -114,7 +144,7 @@ export function createCompanionRoutes(db?: Database.Database) {
     res.json({ ok: true });
   });
 
-  router.post("/feedback", (req, res) => {
+  router.post("/feedback", async (req, res) => {
     const { userId, journalId, feedbackKind, feedbackValue } = req.body as {
       userId?: string;
       journalId?: string;
@@ -142,6 +172,24 @@ export function createCompanionRoutes(db?: Database.Database) {
       feedbackValue,
       createdAt: new Date().toISOString(),
     });
+
+    // Trigger relationship progression for OOTD reactions
+    if (feedbackKind === "ootd_reaction" && deps?.journalPostProcessor) {
+      const previousRelationship = relationshipStateStore.findByUserId(userId);
+      if (previousRelationship) {
+        const journalCount = (await deps?.getJournalCount?.(userId)) ?? 0;
+        const ootdLikeCount = feedbackStore.countOotdReactionsByUserId(userId);
+        deps.journalPostProcessor.process({
+          userId,
+          journalId: journalId ?? "",
+          content: "",
+          previousRelationship,
+          journalCount,
+          feedbackCount: 0,
+          ootdLikeCount,
+        });
+      }
+    }
 
     res.status(201).json({ ok: true });
   });
