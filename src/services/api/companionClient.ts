@@ -108,6 +108,7 @@ export type OotdItem = {
   caption: string | null;
   rationale: string | null;
   styleTags: string[];
+  cards?: Array<{ id: string; kind: string; imageUrl: string | null; caption: string | null; liked?: boolean }>;
   createdAt: string;
   updatedAt: string;
 };

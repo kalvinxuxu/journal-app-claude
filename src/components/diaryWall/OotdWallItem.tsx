@@ -29,27 +29,51 @@ export function OotdWallItem({ ootd, loading, error, onRefresh }: OotdWallItemPr
 
   if (!ootd) return null;
 
+  const cards = ootd.cards;
+  const showDualCards = cards && cards.length >= 2;
+
   return (
-    <div className="detail-card card ootd-card">
-      <div className="detail-card__top">
-        <div>
-          <p className="section-label">今日OOTD</p>
-          <h3>她今天想穿这套</h3>
+    <>
+      {/* Outfit card — always rendered */}
+      <div className="detail-card card ootd-card">
+        <div className="detail-card__top">
+          <div>
+            <p className="section-label">今日OOTD</p>
+            <h3>她今天想穿这套</h3>
+          </div>
+          <button type="button" className="toggle-button" onClick={onRefresh}>换一套</button>
         </div>
-        <button type="button" className="toggle-button" onClick={onRefresh}>换一套</button>
+        {ootd.imageUrl ? (
+          <div className="ootd-image-wrapper">
+            <img src={ootd.imageUrl} alt="今日OOTD" className="ootd-image" />
+          </div>
+        ) : (
+          <div style={{ width: "100%", height: "160px", background: "#F3E5F5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "12px" }}>
+            <span style={{ color: "#6A1B9A", fontSize: "13px" }}>这是她今天想穿的</span>
+          </div>
+        )}
+        {ootd.caption && (
+          <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{ootd.caption}</p>
+        )}
       </div>
-      {ootd.imageUrl ? (
-        <div className="ootd-image-wrapper">
-          <img src={ootd.imageUrl} alt="今日OOTD" className="ootd-image" />
-        </div>
-      ) : (
-        <div style={{ width: "100%", height: "160px", background: "#F3E5F5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "12px" }}>
-          <span style={{ color: "#6A1B9A", fontSize: "13px" }}>这是她今天想穿的</span>
+
+      {/* Second card — makeup closeup (rendered only when dual cards are available) */}
+      {showDualCards && cards[1].imageUrl && (
+        <div className="detail-card card ootd-card" style={{ marginTop: "16px" }}>
+          <div className="detail-card__top">
+            <div>
+              <p className="section-label">妆容特写</p>
+              <h3>近距离看看今天的妆</h3>
+            </div>
+          </div>
+          <div className="ootd-image-wrapper">
+            <img src={cards[1].imageUrl} alt="妆容特写" className="ootd-image" />
+          </div>
+          {cards[1].caption && (
+            <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{cards[1].caption}</p>
+          )}
         </div>
       )}
-      {ootd.caption && (
-        <p style={{ fontSize: "12px", color: "#757575", marginTop: "8px" }}>{ootd.caption}</p>
-      )}
-    </div>
+    </>
   );
 }
