@@ -1,5 +1,6 @@
 import { getBackendUrl } from "../config";
 import type { InitialCompanionResult, CompanionRevealSummary } from "../../types/companion";
+import type { HomeAvatarPromptRecord, HomeAvatarResultRecord } from "../../types/avatarChoiceLoop";
 
 export async function submitCompanionFeedback(payload: {
   userId: string;
@@ -187,4 +188,39 @@ export async function generateDailyJournal(params: GenerateDailyJournalParams): 
     throw new Error(`Daily journal generation failed with ${response.status}`);
   }
   return response.json() as Promise<GenerateDailyJournalResult>;
+}
+
+export async function fetchActiveAvatarPrompt(userId: string, now?: string) {
+  const search = new URLSearchParams({ userId });
+  if (now) search.set("now", now);
+  const response = await fetch(`${getBackendUrl()}/api/companion/avatar-prompts/active?${search.toString()}`);
+  if (!response.ok) {
+    throw new Error(`Avatar prompt fetch failed with ${response.status}`);
+  }
+  return response.json() as Promise<{ prompt: HomeAvatarPromptRecord | null }>;
+}
+
+export async function submitAvatarPromptChoice(payload: {
+  userId: string;
+  promptId: string;
+  selectedOptionId: string;
+  now?: string;
+}) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/avatar-prompts/respond`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error(`Avatar prompt submit failed with ${response.status}`);
+  }
+  return response.json() as Promise<{ ok: true; acknowledgement: string }>;
+}
+
+export async function fetchAvatarPromptResults(userId: string) {
+  const response = await fetch(`${getBackendUrl()}/api/companion/avatar-prompts/results?userId=${userId}`);
+  if (!response.ok) {
+    throw new Error(`Avatar prompt results fetch failed with ${response.status}`);
+  }
+  return response.json() as Promise<{ results: HomeAvatarResultRecord[] }>;
 }
