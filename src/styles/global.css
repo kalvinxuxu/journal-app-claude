@@ -592,14 +592,16 @@ h3 {
   border-radius: 16px;
   background: rgba(136, 178, 232, 0.1);
   border: 1px dashed rgba(136, 178, 232, 0.3);
+  width: min(100%, 220px);
 }
 
 .night-bonus-strip img {
   width: 100%;
-  max-width: 240px;
+  max-width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: 12px;
   object-fit: cover;
+  display: block;
 }
 
 .character-hint {
@@ -1245,13 +1247,15 @@ h3 {
   overflow: hidden;
   margin-top: 12px;
   width: min(100%, 320px);
+  aspect-ratio: 3 / 4;
   background: rgba(255, 255, 255, 0.68);
 }
 
 .ootd-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
 }
 
 .ootd-style-modal {
@@ -1501,6 +1505,18 @@ h3 {
   filter: saturate(0.92) brightness(0.78);
 }
 
+.companion-landing__scene--hero .companion-landing__image {
+  object-position: center 16%;
+}
+
+.companion-landing__scene--chat .companion-landing__image {
+  object-position: center 20%;
+}
+
+.companion-landing__scene--voice .companion-landing__image {
+  object-position: center 14%;
+}
+
 .companion-landing__scene::after {
   content: "";
   position: absolute;
@@ -1514,14 +1530,21 @@ h3 {
 .companion-landing__overlay {
   position: relative;
   z-index: 1;
-  max-width: 520px;
+  width: min(100% - 32px, 520px);
+  margin: 0 auto;
   padding: 24px 20px 40px;
   color: #f7f1e8;
   animation: landing-fade-up 700ms ease-out both;
 }
 
+.companion-landing__overlay--hero {
+  padding: 32px 20px 36px;
+  align-self: center;
+  text-align: center;
+}
+
 .companion-landing__heading {
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-size: clamp(2.1rem, 6vw, 3.1rem);
   font-weight: 700;
   color: #f7f1e8;
   margin: 0 0 12px;
@@ -1530,18 +1553,69 @@ h3 {
 }
 
 .companion-landing__body {
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: rgba(247, 241, 232, 0.78);
   margin: 0 0 24px;
   line-height: 1.6;
 }
 
 .companion-landing__typing {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   margin: 0 0 14px;
   min-height: 24px;
+  font-size: 0.96rem;
+  color: rgba(247, 241, 232, 0.92);
+  letter-spacing: 0.04em;
+}
+
+.companion-landing__cursor {
+  color: #fff7fb;
+}
+
+.companion-landing__message-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 20px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.76), rgba(255, 245, 237, 0.68));
+  color: #3f2d2d;
+  box-shadow: 0 24px 48px rgba(12, 9, 18, 0.24);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.companion-landing__message-card .companion-landing__heading {
+  color: #4b3137;
+  text-shadow: 0 10px 24px rgba(255,255,255,0.18);
+}
+
+.companion-landing__message-card .companion-landing__body {
+  color: rgba(75, 49, 55, 0.82);
+  margin: 0;
+}
+
+.companion-landing__message-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f6c1cf, #e29bb0);
+  color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 8px 18px rgba(226, 155, 176, 0.35);
+}
+
+.companion-landing__message-text {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #4b3741;
 }
 
 .companion-landing__cta {
@@ -1570,88 +1644,39 @@ h3 {
   transform: scale(0.97);
 }
 
-/* Chat bubble scene */
 .companion-landing__overlay--chat {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 440px;
+  gap: 14px;
+  align-self: end;
   padding-bottom: 60px;
 }
 
-.chat-bubble-row {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.chat-bubble {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-radius: 20px 20px 20px 4px;
-  background: rgba(255, 249, 240, 0.92);
-  color: #3d2e24;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  max-width: 85%;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  animation: landing-fade-up 600ms ease-out both;
-}
-
-.chat-bubble--incoming {
-  border-bottom-left-radius: 4px;
-}
-
-.chat-bubble__avatar {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-  color: #d4849a;
-}
-
-.chat-bubble__text {
-  white-space: pre-line;
-}
-
-/* Voice scene */
 .companion-landing__overlay--voice {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
+  gap: 14px;
   padding-bottom: 60px;
 }
 
-.companion-landing__whisper {
-  font-size: 1.05rem;
-  color: rgba(247, 241, 232, 0.88);
-  margin: 0 0 16px;
-  line-height: 1.6;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
-}
-
-.companion-landing__voice-btn {
-  margin-bottom: 20px;
-}
-
-.voice-bubble {
+.companion-landing__voice-trigger {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
   border-radius: 999px;
-  background: rgba(255, 249, 240, 0.92);
   border: none;
-  cursor: pointer;
+  background: rgba(246, 233, 238, 0.96);
   font-size: 0.95rem;
   color: #3d2e24;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 0 1px rgba(212, 132, 154, 0.14);
+  cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.voice-bubble:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+.companion-landing__voice-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px rgba(212, 132, 154, 0.18), 0 10px 20px rgba(40, 28, 34, 0.08);
 }
 
 .voice-bubble__play {
@@ -1683,23 +1708,24 @@ h3 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Staggered scene animations */
 .companion-landing__scene--hero .companion-landing__overlay { animation-delay: 200ms; }
 .companion-landing__scene--chat .companion-landing__overlay { animation-delay: 400ms; }
 .companion-landing__scene--voice .companion-landing__overlay { animation-delay: 300ms; }
-
-.companion-landing__scene--chat .chat-bubble-row:nth-child(1) { animation: landing-fade-up 500ms 600ms ease-out both; }
-.companion-landing__scene--chat .chat-bubble-row:nth-child(2) { animation: landing-fade-up 500ms 800ms ease-out both; }
 
 @media (max-width: 540px) {
   .companion-landing__overlay {
     padding: 20px 16px 48px;
   }
-  .chat-bubble {
-    max-width: 92%;
-    font-size: 0.9rem;
+  .companion-landing__overlay--hero {
+    padding: 28px 16px 32px;
   }
-  .voice-bubble {
+  .companion-landing__heading {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+  }
+  .companion-landing__message-card {
+    padding: 20px 18px;
+  }
+  .companion-landing__voice-trigger {
     flex-wrap: wrap;
     gap: 8px;
   }
@@ -1719,12 +1745,99 @@ h3 {
   background: radial-gradient(ellipse, rgba(255, 182, 193, 0.25), transparent 70%);
   pointer-events: none;
 }
+
+.home-avatar-prompt {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  z-index: 30;
+}
+
+.home-avatar-prompt__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(180deg, #ffe5f1 0%, #ffd6ea 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.home-avatar-prompt__dot {
   position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 120px;
-  background: radial-gradient(ellipse, rgba(255, 182, 193, 0.25), transparent 70%);
-  pointer-events: none;
+  top: 4px;
+  right: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff6b9d;
+}
+
+.home-avatar-prompt__face {
+  font-size: 20px;
+  color: #7a4e66;
+}
+
+.home-avatar-prompt__bubble,
+.home-avatar-prompt__panel {
+  position: absolute;
+  right: 72px;
+  bottom: 0;
+  border-radius: 18px;
+  background: #fff7fb;
+  box-shadow: 0 14px 32px rgba(120, 78, 102, 0.16);
+  padding: 14px;
+  max-width: 280px;
+  font-size: 14px;
+  color: #4a3a42;
+}
+
+.home-avatar-prompt__panel {
+  min-width: 240px;
+}
+
+.home-avatar-prompt__options {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.home-avatar-prompt__options button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e8d4e8;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  color: #4a3a42;
+  transition: all 0.15s ease;
+}
+
+.home-avatar-prompt__options button:hover {
+  background: #fdf0f7;
+}
+
+.home-avatar-prompt__options button.is-selected {
+  background: #ffe5f1;
+  border-color: #ff6b9d;
+  color: #7a4e66;
+  font-weight: 500;
+}
+
+.home-avatar-prompt__ack {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #7a4e66;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .home-avatar-prompt {
+    right: 12px;
+    bottom: 76px;
+  }
 }

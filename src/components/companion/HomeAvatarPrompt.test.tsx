@@ -33,6 +33,7 @@ describe("HomeAvatarPrompt", () => {
 
     expect(await screen.findByText("今晚要见朋友，我穿哪件比较好呀？")).toBeDefined();
 
+    await userEvent.click(screen.getByRole("button", { name: "打开她的消息" }));
     await userEvent.click(screen.getByRole("button", { name: "白裙子" }));
     await userEvent.click(screen.getByRole("button", { name: "发送选择" }));
 
@@ -44,5 +45,32 @@ describe("HomeAvatarPrompt", () => {
         }),
       ),
     );
+  });
+
+  it("shows a bubble state first, then opens the in-place chooser panel", async () => {
+    (fetchActiveAvatarPrompt as any).mockResolvedValue({
+      prompt: {
+        id: "avp_1",
+        promptType: "outfit_choice",
+        promptText: "今晚要见朋友，我穿哪件比较好呀？",
+        options: [
+          { id: "white_dress", label: "白裙子", consequenceTag: "soft_gentle" },
+          { id: "black_knit", label: "黑色针织", consequenceTag: "calm_polished" },
+          { id: "denim_jacket", label: "牛仔外套", consequenceTag: "casual_playful" },
+        ],
+        status: "active",
+        selectedOptionId: null,
+        acknowledgementText: null,
+      },
+    });
+
+    render(<HomeAvatarPrompt userId="local-user" onResolved={vi.fn()} />);
+
+    expect(await screen.findByText("今晚要见朋友，我穿哪件比较好呀？")).toBeDefined();
+
+    await userEvent.click(screen.getByRole("button", { name: "打开她的消息" }));
+
+    expect(screen.getByRole("button", { name: "白裙子" })).toBeDefined();
+    expect(screen.getByRole("button", { name: "发送选择" })).toBeDefined();
   });
 });
