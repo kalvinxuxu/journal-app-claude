@@ -10,6 +10,40 @@ describe("createCompanionRoutes", () => {
     vi.restoreAllMocks();
   });
 
+  it("returns an active avatar prompt and persists the selected choice", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+    db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(
+      "local-user",
+      "2026-05-27T08:00:00.000Z",
+      "2026-05-27T08:00:00.000Z",
+    );
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    const activeResponse = await request(app)
+      .get("/api/companion/avatar-prompts/active")
+      .query({ userId: "local-user", now: "2026-05-27T08:30:00.000Z" });
+
+    expect(activeResponse.status).toBe(200);
+    expect(activeResponse.body.prompt.promptType).toBe("outfit_choice");
+    expect(activeResponse.body.prompt.options).toHaveLength(3);
+
+    const respondResponse = await request(app)
+      .post("/api/companion/avatar-prompts/respond")
+      .send({
+        userId: "local-user",
+        promptId: activeResponse.body.prompt.id,
+        selectedOptionId: activeResponse.body.prompt.options[1].id,
+        now: "2026-05-27T08:31:00.000Z",
+      });
+
+    expect(respondResponse.status).toBe(201);
+    expect(respondResponse.body.acknowledgement).toContain("听你的");
+  });
+
   it("accepts lightweight feedback and returns unsurfaced unlock events", async () => {
     const db = new Database(":memory:");
     ensureAppSchema(db);

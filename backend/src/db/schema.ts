@@ -78,6 +78,37 @@ export function ensureAppSchema(db: Database.Database) {
       FOREIGN KEY(user_id) REFERENCES users(id)
     );
 
+    CREATE TABLE IF NOT EXISTS companion_avatar_prompts (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  prompt_type TEXT NOT NULL,
+  prompt_text TEXT NOT NULL,
+  options_json TEXT NOT NULL,
+  status TEXT NOT NULL,
+  scheduled_for TEXT NOT NULL,
+  responded_at TEXT,
+  selected_option_id TEXT,
+  acknowledgement_text TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS companion_avatar_results (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  prompt_id TEXT NOT NULL,
+  result_kind TEXT NOT NULL,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  image_url TEXT,
+  metadata_json TEXT NOT NULL,
+  surfaced_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
     CREATE TABLE IF NOT EXISTS daily_ootd (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL,
