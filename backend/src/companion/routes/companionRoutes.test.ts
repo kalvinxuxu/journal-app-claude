@@ -304,6 +304,42 @@ describe("createCompanionRoutes", () => {
     expect(response.status).toBe(201);
   });
 
+  it("returns a result callback after the user answers a prompt", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+    db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(
+      "local-user",
+      "2026-05-27T08:00:00.000Z",
+      "2026-05-27T08:00:00.000Z",
+    );
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    const prompt = await request(app)
+      .get("/api/companion/avatar-prompts/active")
+      .query({ userId: "local-user", now: "2026-05-27T08:30:00.000Z" });
+
+    await request(app)
+      .post("/api/companion/avatar-prompts/respond")
+      .send({
+        userId: "local-user",
+        promptId: prompt.body.prompt.id,
+        selectedOptionId: prompt.body.prompt.options[0].id,
+        now: "2026-05-27T08:31:00.000Z",
+      })
+      .expect(201);
+
+    const resultResponse = await request(app)
+      .get("/api/companion/avatar-prompts/results")
+      .query({ userId: "local-user" });
+
+    expect(resultResponse.status).toBe(200);
+    expect(resultResponse.body.results[0].title).toContain("你帮她选的");
+    expect(resultResponse.body.results[0].metadata.selectedOptionId).toBe(prompt.body.prompt.options[0].id);
+  });
+
   it("advances relationship when ootd_reaction feedback is posted", async () => {
     const db = new Database(":memory:");
     ensureAppSchema(db);

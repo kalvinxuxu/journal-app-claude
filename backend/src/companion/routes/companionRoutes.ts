@@ -10,6 +10,7 @@ import { createFeedbackStore } from "../store/feedbackStore.js";
 import { createUnlockEventStore } from "../store/unlockEventStore.js";
 import { createOotdStore } from "../store/ootdStore.js";
 import { createOotdGenerator } from "../services/ootdService.js";
+import { createAvatarPromptService } from "../services/avatarPromptService.js";
 import { createMemoryItemStore } from "../store/memoryItemStore.js";
 import { createJournalContextBuilder } from "../services/journalContextBuilder.js";
 import { createJournalPromptContextService } from "../services/journalPromptContextService.js";
@@ -530,6 +531,46 @@ export function createCompanionRoutes(
 
     ootdStore.upsert(ootdRecord);
     res.status(201).json({ ootd: ootdRecord });
+  });
+
+  const avatarPromptService = createAvatarPromptService({
+    db: database,
+    relationshipStateStore,
+  });
+
+  router.get("/avatar-prompts/active", (req, res) => {
+    const userId = String(req.query.userId ?? "");
+    const nowIso = String(req.query.now ?? new Date().toISOString());
+    if (!userId) {
+      res.status(400).json({ error: "userId is required" });
+      return;
+    }
+    const prompt = avatarPromptService.getOrCreateActivePrompt(userId, nowIso);
+    res.json({ prompt });
+  });
+
+  router.post("/avatar-prompts/respond", (req, res) => {
+    const { userId, promptId, selectedOptionId, now } = req.body as {
+      userId?: string;
+      promptId?: string;
+      selectedOptionId?: string;
+      now?: string;
+    };
+    if (!userId || !promptId || !selectedOptionId) {
+      res.status(400).json({ error: "userId, promptId, and selectedOptionId are required" });
+      return;
+    }
+    const result = avatarPromptService.answerPrompt(userId, promptId, selectedOptionId, now ?? new Date().toISOString());
+    res.status(201).json({ ok: true, acknowledgement: result.acknowledgementText });
+  });
+
+  router.get("/avatar-prompts/results", (req, res) => {
+    const userId = String(req.query.userId ?? "");
+    if (!userId) {
+      res.status(400).json({ error: "userId is required" });
+      return;
+    }
+    res.json({ results: avatarPromptService.listResults(userId) });
   });
 
   return router;
