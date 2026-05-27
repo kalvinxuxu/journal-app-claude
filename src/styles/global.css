@@ -1441,8 +1441,9 @@ h3 {
 
 /* ===== Companion Home Hero ===== */
 .companion-home-hero {
-  background: linear-gradient(135deg, rgba(255, 248, 242, 0.98), rgba(244, 233, 224, 0.94));
+  background: linear-gradient(135deg, #fff7fb 0%, #fdf0f7 100%);
   border: 1px solid rgba(170, 132, 104, 0.18);
+  border-left: 3px solid #ff6b9d;
 }
 
 .companion-home-hero__note {
@@ -1835,9 +1836,32 @@ h3 {
   font-style: italic;
 }
 
+/* AvatarChoiceResult wall item */
+.avatar-choice-result-wall-item {
+  overflow: hidden;
+  border-left: 3px solid #f3e5f5;
+}
+
 @media (max-width: 640px) {
   .home-avatar-prompt {
     right: 12px;
     bottom: 76px;
+  }
+
+  .home-avatar-prompt__avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .home-avatar-prompt__panel {
+    width: calc(100vw - 80px);
+    max-width: 320px;
+    right: 72px;
+  }
+
+  .home-avatar-prompt__bubble {
+    width: calc(100vw - 100px);
+    max-width: 280px;
+    right: 72px;
   }
 }

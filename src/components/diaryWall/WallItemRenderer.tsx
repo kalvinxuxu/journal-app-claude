@@ -61,10 +61,7 @@ export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGree
       );
     case "avatar_choice_result":
       return (
-        <AvatarChoiceResultWallItem
-          key={item.date + item.kind}
-          result={item.result}
-        />
+        <AvatarChoiceResultWallItem result={item.result} />
       );
   }
 }
