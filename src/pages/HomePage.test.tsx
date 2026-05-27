@@ -11,11 +11,44 @@ const mockFetchCompanionContext = vi.fn(async () => ({
   recalledMemory: "她记得你昨晚说过想早点睡。",
   initiativeScore: 42,
 }));
+const mockFetchActiveAvatarPrompt = vi.fn(async () => ({ prompt: null }));
 
 vi.mock("../services/api/companionClient", () => ({
   fetchCompanionUnlocks: (userId: string) => mockFetchCompanionUnlocks(userId),
   fetchCompanionContext: (userId: string) => mockFetchCompanionContext(userId),
+  fetchActiveAvatarPrompt: (userId: string) => mockFetchActiveAvatarPrompt(userId),
 }));
+
+describe("HomePage avatar prompt integration", () => {
+  it("renders the floating avatar prompt on the home page and keeps it in-place", async () => {
+    const mockPrompt = {
+      id: "p1",
+      promptType: "light_ping" as const,
+      promptText: "今天想穿什么呀？",
+      options: [
+        { id: "o1", label: "裙子", consequenceTag: "casual" },
+        { id: "o2", label: "裤子", consequenceTag: "sporty" },
+      ],
+      status: "active" as const,
+      selectedOptionId: null,
+      acknowledgementText: null,
+    };
+    mockFetchActiveAvatarPrompt.mockResolvedValueOnce({ prompt: mockPrompt });
+
+    render(
+      <HomePage
+        journals={[{ id: "j1", date: "2026-05-22", weekday: "周五", mood: "开心", source: "user", content: "第一篇", voiceMessages: [] }]}
+        dataSource="local"
+        selectedJournalId="j1"
+        onSelectJournal={vi.fn()}
+        companionReveal={null}
+      />,
+    );
+
+    expect(await screen.findByLabelText("首页女友头像互动")).toBeDefined();
+    expect(screen.queryByText("写日记页")).toBeNull();
+  });
+});
 
 describe("HomePage companion handoff", () => {
   it("shows the matched companion summary above the journal list", async () => {

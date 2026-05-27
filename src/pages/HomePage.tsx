@@ -7,6 +7,7 @@ import { CalendarGrid } from "../components/CalendarGrid";
 import { JournalList } from "../components/JournalList";
 import { CompanionEchoCard } from "../components/companion/CompanionEchoCard";
 import { OotdCard } from "../components/companion/OotdCard";
+import { HomeAvatarPrompt } from "../components/companion/HomeAvatarPrompt";
 import { fetchCompanionUnlocks, fetchCompanionContext } from "../services/api/companionClient";
 import { getCurrentUserId } from "../services/memory";
 
@@ -28,6 +29,11 @@ export function HomePage({
   const [viewMode, setViewMode] = useState<"timeline" | "calendar">("timeline");
   const [unlockEvents, setUnlockEvents] = useState<Array<{ id: string; eventSummary: string }>>([]);
   const [recalledMemory, setRecalledMemory] = useState<string>("");
+  const [latestAvatarResolution, setLatestAvatarResolution] = useState<{
+    promptId: string;
+    selectedOptionId: string;
+    acknowledgement: string;
+  } | null>(null);
   const isDev = import.meta.env.DEV;
   const selectedJournal = journals.find((journal) => journal.id === selectedJournalId) ?? journals[0];
   const anchorDate = selectedJournal?.date ?? journals[0]?.date ?? new Date().toISOString();
@@ -63,6 +69,20 @@ export function HomePage({
           </div>
         </div>
       ) : null}
+
+      {latestAvatarResolution ? (
+        <div className="card companion-home-hero">
+          <p className="section-label">她刚刚听你的了</p>
+          <p className="hero-copy">{latestAvatarResolution.acknowledgement}</p>
+        </div>
+      ) : null}
+
+      <HomeAvatarPrompt
+        userId={userId}
+        onResolved={(payload) => {
+          setLatestAvatarResolution(payload);
+        }}
+      />
 
       <div className="page-hero card">
         <div>
