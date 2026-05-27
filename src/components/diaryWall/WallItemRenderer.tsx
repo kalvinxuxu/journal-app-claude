@@ -3,6 +3,7 @@ import { JournalWallItem } from "./JournalWallItem";
 import { OotdWallItem } from "./OotdWallItem";
 import { OotdCardWallItem } from "./OotdCardWallItem";
 import { GreetingWallItem } from "./GreetingWallItem";
+import { AvatarChoiceResultWallItem } from "./AvatarChoiceResultWallItem";
 
 export type WallItemRendererProps = {
   item: DiaryWallRenderableItem;
@@ -56,6 +57,13 @@ export function WallItemRenderer({ item, onJournalRefresh, onOotdRefresh, onGree
           greeting={item.greeting}
           pending={item.pending}
           onRevealComplete={onGreetingRevealComplete}
+        />
+      );
+    case "avatar_choice_result":
+      return (
+        <AvatarChoiceResultWallItem
+          key={item.date + item.kind}
+          result={item.result}
         />
       );
   }

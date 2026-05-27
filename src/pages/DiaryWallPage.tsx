@@ -5,10 +5,11 @@ import { loadReferenceImage, replaceJournalOnBackend } from "../services/memory"
 import { MoodTag } from "../components/MoodTag";
 import { createGenerationTask } from "../services/generation/apiTaskClient";
 import { pollGenerationTask } from "../services/generation/taskPolling";
-import { generateDailyJournal, fetchOotdByDate, regenerateOotd, submitCompanionFeedback, type OotdItem } from "../services/api/companionClient";
+import { generateDailyJournal, fetchOotdByDate, regenerateOotd, submitCompanionFeedback, fetchAvatarPromptResults, type OotdItem } from "../services/api/companionClient";
 import { greetingStore, type GreetingCard as GreetingCardType } from "../services/greetingStore";
 import { getCurrentUserId } from "../services/memory";
 import type { DiaryWallRenderableItem } from "../types/diaryWall";
+import type { HomeAvatarResultRecord } from "../types/avatarChoiceLoop";
 import { WallItemRenderer } from "../components/diaryWall/WallItemRenderer";
 
 type DiaryWallPageProps = {
@@ -60,6 +61,8 @@ export function DiaryWallPage({ todayJournal, onJournalRefresh, onCancel, voiceS
   const [ootdPickerOpen, setOotdPickerOpen] = useState(false);
   // Greeting reveal state — when an unread greeting is pending, allow it to be revealed inline
   const [pendingGreeting, setPendingGreeting] = useState<GreetingCardType | null>(null);
+  // Avatar choice results
+  const [avatarResults, setAvatarResults] = useState<HomeAvatarResultRecord[]>([]);
 
   const isLoading = phase === "generating";
 
@@ -68,6 +71,12 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => {
     { kind: "journal" as const, date: today, journal: displayedJournal },
     { kind: "greeting" as const, date: today, greeting: null, pending: !!pendingGreeting },
   ];
+
+  const avatarItems = avatarResults.map((result) => ({
+    kind: "avatar_choice_result" as const,
+    date: today,
+    result,
+  }));
 
   // Normalize OOTD cards into separate wall items when available
   if (ootd?.cards && ootd.cards.length > 0) {
@@ -79,12 +88,12 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => {
       submitCompanionFeedback,
       userId: getCurrentUserId(),
     }));
-    return [...base, ...ootdCardItems];
+    return [...base, ...avatarItems, ...ootdCardItems];
   }
 
   // Fallback to single OOTD item (handles legacy ootd without cards, loading, error states)
-  return [...base, { kind: "ootd" as const, date: today, ootd, loading: ootdLoading, error: ootdError ?? undefined }];
-}, [today, displayedJournal, ootd, ootdLoading, ootdError, pendingGreeting, submitCompanionFeedback]);
+  return [...base, ...avatarItems, { kind: "ootd" as const, date: today, ootd, loading: ootdLoading, error: ootdError ?? undefined }];
+}, [today, displayedJournal, ootd, ootdLoading, ootdError, pendingGreeting, submitCompanionFeedback, avatarResults]);
 
   // Load latest unread greeting on mount — she left you a message
   useEffect(() => {
@@ -113,6 +122,13 @@ const items = useMemo<DiaryWallRenderableItem[]>(() => {
         }
       });
     return () => { cancelled = true; };
+  }, []);
+
+  // Fetch avatar choice results on mount
+  useEffect(() => {
+    fetchAvatarPromptResults(getCurrentUserId())
+      .then((response) => setAvatarResults(response.results))
+      .catch(() => {});
   }, []);
 
   async function handleOotdRefresh(style?: typeof OOTD_STYLE_OPTIONS[number]["value"]) {

@@ -24,6 +24,7 @@ vi.mock("../services/api/companionClient", () => ({
   fetchCompanionContext: vi.fn().mockResolvedValue({}),
   fetchOotdByDate: vi.fn().mockResolvedValue({ id: "ootd-0", title: "今日OOTD", imageUrl: "https://example.com/ootd.jpg", caption: "OOTD caption", date: "2026-05-23", userId: "local-user", rationale: null, styleTags: [], createdAt: "", updatedAt: "" }),
   regenerateOotd: vi.fn().mockResolvedValue({ id: "ootd-1", title: "今日OOTD", imageUrl: null, caption: null, date: "2026-05-23", userId: "local-user", rationale: null, styleTags: [], createdAt: "", updatedAt: "" }),
+  fetchAvatarPromptResults: vi.fn().mockResolvedValue({ results: [] }),
   generateDailyJournal: vi.fn(async ({ mood }: { mood: string }) => ({
     journal: {
       id: "journal-test-1",
@@ -450,5 +451,27 @@ describe("DiaryWallPage wall feed", () => {
     expect(submitCompanionFeedback).toHaveBeenLastCalledWith(
       expect.objectContaining({ feedbackValue: "like_makeup" }),
     );
+  });
+
+  it("renders returned avatar choice results in the wall feed", async () => {
+    const { fetchAvatarPromptResults } = await import("../services/api/companionClient");
+    vi.mocked(fetchAvatarPromptResults).mockResolvedValueOnce({
+      results: [
+        {
+          id: "avr_1",
+          promptId: "avp_1",
+          resultKind: "avatar_choice_result",
+          title: "你帮她选的结果回来了",
+          body: "她最后穿了你选的白裙子，朋友还夸她看起来很温柔。",
+          imageUrl: "https://example.com/outfit-result.jpg",
+          metadata: { selectedOptionId: "white_dress" },
+        },
+      ],
+    });
+
+    render(<DiaryWallPage todayJournal={null} onJournalRefresh={vi.fn()} onCancel={vi.fn()} />);
+
+    expect(await screen.findByText("你帮她选的结果回来了")).toBeDefined();
+    expect(screen.getByText("她最后穿了你选的白裙子，朋友还夸她看起来很温柔。")).toBeDefined();
   });
 });
