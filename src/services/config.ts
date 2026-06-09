@@ -3,7 +3,7 @@
  * All frontend services must use VITE_BACKEND_URL env var instead of hardcoding localhost.
  */
 
-const DEFAULT_BACKEND_URL = "http://localhost:3001";
+const DEFAULT_BACKEND_URL = "http://localhost:8003";
 
 export function getBackendUrl(): string {
   const env = import.meta.env as Record<string, string | undefined>;

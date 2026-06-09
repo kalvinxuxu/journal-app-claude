@@ -112,6 +112,10 @@ export type OotdItem = {
   cards?: Array<{ id: string; kind: string; imageUrl: string | null; caption: string | null; liked?: boolean }>;
   createdAt: string;
   updatedAt: string;
+  sceneTag?: string;
+  captureMode?: string;
+  message?: string;
+  items?: { top?: string; bottom?: string; shoes?: string; bag?: string; accessory?: string };
 };
 
 export async function fetchOotdByDate(userId: string, date: string): Promise<OotdItem | null> {
@@ -124,6 +128,15 @@ export async function fetchOotdByDate(userId: string, date: string): Promise<Oot
   }
   const data = await response.json() as { ootd: OotdItem };
   return data.ootd;
+}
+
+export async function fetchOotdHistory(userId: string): Promise<OotdItem[]> {
+  const response = await fetch(`${getBackendUrl()}/api/companion/ootd/history?userId=${userId}`);
+  if (!response.ok) {
+    throw new Error(`OOTD history fetch failed with ${response.status}`);
+  }
+  const data = await response.json() as { ootdList: OotdItem[] };
+  return data.ootdList;
 }
 
 export async function regenerateOotd(

@@ -6,6 +6,7 @@ import { DiaryWallPage } from "./pages/DiaryWallPage";
 import { PhotoWallPage } from "./pages/PhotoWallPage";
 import { CompanionOnboardingPage } from "./pages/CompanionOnboardingPage";
 import { CompanionLandingPage } from "./pages/CompanionLandingPage";
+import { OotdShowcasePage } from "./pages/OotdShowcasePage";
 import { checkBackendHealth } from "./services/api/mediaClient";
 import { checkCompanionOnboardingStatus, persistCompanionRevealPortrait } from "./services/api/companionClient";
 import { generateRevealPortrait, loadCompanionReveal, saveCompanionReveal } from "./services/companion";
@@ -600,6 +601,10 @@ export function App() {
               onCancel={() => handleNavigate("home")}
               voiceStyle={preferences.voiceStyle}
             />
+          ) : null}
+
+          {activePage === "ootd-showcase" ? (
+            <OotdShowcasePage journals={journals} companionReveal={companionReveal} />
           ) : null}
 
           {activePage === "photo-wall" ? (

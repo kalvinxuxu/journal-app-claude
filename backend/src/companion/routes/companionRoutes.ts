@@ -120,6 +120,40 @@ export function createCompanionRoutes(
     res.json({ completed: true, archetype: profile.archetype, reveal });
   });
 
+  // DELETE /api/companion/onboarding/reset/:userId — reset onboarding state for a user (dev/test helper)
+  router.delete("/onboarding/reset/:userId", (req, res) => {
+    const { userId } = req.params;
+    if (!userId) {
+      res.status(400).json({ error: "userId is required" });
+      return;
+    }
+    // Escape single quotes by doubling them (safe for dev helper)
+    const uid = userId.replace(/'/g, "''");
+    const db = database;
+    // Disable FK constraints temporarily to allow deletion
+    db.exec("PRAGMA foreign_keys = OFF");
+    const tables = [
+      "companion_avatar_prompts",
+      "companion_avatar_results",
+      "daily_ootd",
+      "interaction_feedback",
+      "memory_items",
+      "unlock_events",
+      "onboarding_answers",
+      "relationship_states",
+      "companion_profiles",
+    ];
+    const tx = db.transaction(() => {
+      for (const table of tables) {
+        db.exec(`DELETE FROM ${table} WHERE user_id = '${uid}'`);
+      }
+      db.exec(`DELETE FROM users WHERE id = '${uid}'`);
+    });
+    tx();
+    db.exec("PRAGMA foreign_keys = ON");
+    res.json({ ok: true, message: `Onboarding data cleared for user ${userId}` });
+  });
+
   router.post("/onboarding/portrait", (req, res) => {
     const { userId, portraitImageUrl } = req.body as {
       userId?: string;
@@ -447,6 +481,18 @@ export function createCompanionRoutes(
         return null;
       }
     },
+  });
+
+  // GET /api/companion/ootd/history
+  // Returns all OOTD records for a user
+  router.get("/ootd/history", async (req, res) => {
+    const userId = req.query.userId as string | undefined;
+    if (!userId) {
+      res.status(400).json({ error: "userId is required" });
+      return;
+    }
+    const ootdList = ootdStore.listByUserId(userId);
+    res.json({ ootdList });
   });
 
   // GET /api/companion/ootd/:date

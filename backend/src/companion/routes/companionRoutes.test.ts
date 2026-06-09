@@ -279,6 +279,22 @@ describe("createCompanionRoutes", () => {
     expect(body.prompt).toContain("sweet, pretty, softly feminine styling");
   });
 
+  it("returns all OOTD records for a user via /ootd/history", async () => {
+    const db = new Database(":memory:");
+    ensureAppSchema(db);
+
+    const app = express();
+    app.use(express.json());
+    app.use("/api/companion", createCompanionRoutes(db));
+
+    const listResponse = await request(app)
+      .get("/api/companion/ootd/history")
+      .query({ userId: "local-user" });
+
+    expect(listResponse.status).toBe(200);
+    expect(listResponse.body.ootdList).toBeInstanceOf(Array);
+  });
+
   it("accepts ootd like feedback for a specific card", async () => {
     const db = new Database(":memory:");
     ensureAppSchema(db);
