@@ -23,11 +23,20 @@ export function createAvatarPromptService(deps: {
 }) {
   const promptStore = createAvatarPromptStore(deps.db);
 
+  function ensureUserExists(userId: string) {
+    const existing = deps.db.prepare("SELECT id FROM users WHERE id = ?").get(userId);
+    if (!existing) {
+      const now = new Date().toISOString();
+      deps.db.prepare("INSERT INTO users (id, created_at, updated_at) VALUES (?, ?, ?)").run(userId, now, now);
+    }
+  }
+
   return {
     getOrCreateActivePrompt(userId: string, nowIso: string): AvatarPromptRecord {
       const existing = promptStore.findActivePrompt(userId, nowIso);
       if (existing) return existing;
 
+      ensureUserExists(userId);
       const template = MORNING_PROMPTS[0];
       const createdAt = nowIso;
       const prompt: AvatarPromptRecord = {
